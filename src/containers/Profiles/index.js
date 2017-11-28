@@ -8,16 +8,17 @@ class Profiles extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            jobTitle: '',
-            socialMedia: '',
-            optIn: '',
-            employer: '',
-            lengthOfEmp: 0,
-            industry: '',
-            sex: 0,
-            civilStatus: '',
-            citizenship: '',
-            address: ''
+            profiles: {}
+            // jobTitle: '',
+            // socialMedia: '',
+            // optIn: '',
+            // employer: '',
+            // lengthOfEmp: 0,
+            // industry: '',
+            // sex: 0,
+            // civilStatus: '',
+            // citizenship: '',
+            // address: ''
         }
 
         this.onChangeValue = this.onChangeValue.bind(this)
@@ -27,14 +28,21 @@ class Profiles extends Component {
     onChangeValue(e) {
         const name = e.target.name;
         const value = e.target.value;
-        this.setState({[name]: value})
+        this.setState(
+            {
+                profiles: {
+                    ...this.state.profiles,
+                    [name]: value
+                }
+            })
     }
 
     onSave() {
         const {state} = this;
         let data = {...state}
-        console.log(data)
-        this.props.dispatch(Actions.postProfile(data))
+        // console.log(data)
+        this.props.dispatch(Actions.putProfile(data))
+
     }
 
     componentDidMount() {
@@ -43,183 +51,226 @@ class Profiles extends Component {
     }
 
     renderUserProfile() {
-        if (this.props.data.role == 1)
+        if (this.props.user.role == 1)
             return (
                 <div className="">
                     <div className="form-group row">
-                        <label htmlFor="select1" className="col-md-2 col-form-label">What service do you
-                            provide?</label>
-                        <div className="col-md-4">
-                            <select className="custom-select" id="select1" style={{width: '100%'}}
-                                    name="services"
-                                    onChange={this.onChangeValue}>
-                                <option value="" defaultValue={''}></option>
-                                {
-                                    this.props.settings[0].services.map((service, key) => {
-                                        return <option value={service._id} key={key} type={key}>{service.name}</option>
-                                    })
-                                }
-                            </select>
+                        <div className="col-sm-6">
+                            <label htmlFor="" className="col-sm-4 col-form-label">What service do you
+                                provide? *</label>
+                            <div className="col-sm-8">
+                                <select className="custom-select"
+                                        name="services"
+                                        onChange={this.onChangeValue}>
+                                    <option value="" defaultValue={''}></option>
+                                    {
+                                        this.props.settings[0].services.map((service, key) => {
+                                            return <option value={service._id} key={key}
+                                                           type={key}>{service.name}</option>
+                                        })
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div className="col-sm-6">
+                            <label className="col-sm-4 col-form-label">Business Name *</label>
+                            <div className="col-sm-8">
+                                <input type="text"
+                                       className="form-control"
+                                       name="businessName"
+                                       onChange={this.onChangeValue}
+                                />
+                            </div>
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label className="col-md-2 col-form-label">Business Name</label>
-                        <div className="col-md-4">
-                            <input type="text"
-                                   className="form-control"
-                                   name="businessName"
-                                   onChange={this.onChangeValue}
-                            />
+                        <div className="col-sm-6">
+                            <label className="col-sm-4 col-form-label">Business Email Address *</label>
+                            <div className="col-sm-8">
+                                <input type="text"
+                                       className="form-control"
+                                       name="businessEmail"
+                                       onChange={this.onChangeValue}
+                                />
+                            </div>
                         </div>
-                        <label className="col-md-2 col-form-label">Business Address</label>
-                        <div className="col-md-4">
-                            <input type="text"
-                                   className="form-control"
-                                   name="businessAddress"
-                                   onChange={this.onChangeValue}
-                            />
+                        <div className="col-sm-6">
+                            <label className="col-sm-4 col-form-label">Business Address *</label>
+                            <div className="col-sm-8">
+                                <input type="text"
+                                       className="form-control"
+                                       name="businessAddress"
+                                       onChange={this.onChangeValue}
+                                />
+                            </div>
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label className="col-md-2 col-form-label">Website</label>
-                        <div className="col-md-4">
-                            <input type="text"
-                                   className="form-control"
-                                   name="website"
-                                   onChange={this.onChangeValue}
-                            />
+                        <div className="col-sm-6">
+                            <label className="col-sm-4 col-form-label">Business Phone Number *</label>
+                            <div className="col-sm-8">
+                                <input type="text"
+                                       className="form-control"
+                                       name="businessPhone"
+                                       onChange={this.onChangeValue}
+                                />
+                            </div>
                         </div>
-                        <label className="col-md-2 col-form-label">Business Email</label>
-                        <div className="col-md-4">
-                            <input type="text"
-                                   className="form-control"
-                                   name="businessEmail"
-                                   onChange={this.onChangeValue}
-                            />
+                        <div className="col-sm-6">
+                            <label className="col-sm-4 col-form-label">Website *</label>
+                            <div className="col-sm-8">
+                                <input type="text"
+                                       className="form-control"
+                                       name="website"
+                                       onChange={this.onChangeValue}
+                                />
+                            </div>
                         </div>
                     </div>
 
-                    <div className="form-group row">
-                        <label className="col-md-2 col-form-label">Business Phone Number</label>
-                        <div className="col-md-4">
-                            <input type="text"
-                                   className="form-control"
-                                   name="businessPhone"
-                                   onChange={this.onChangeValue}
-                            />
-                        </div>
-                    </div>
-                    {this.state.services == '5a08f3ac65d8ef000ea590f0' || this.state.services == '5a08f3bd65d8ef000ea590f2' ?
+                    <div className="profile-line"></div>
+
+                    {this.state.profiles.services == '5a08f3ac65d8ef000ea590f0' || this.state.profiles.services == '5a08f3bd65d8ef000ea590f2' ?
                         <div className="">
                             <div className="form-group row">
-                                <label className="col-md-2 col-form-label">Brokerage Name</label>
-                                <div className="col-md-4">
-                                    <input type="text"
-                                           className="form-control"
-                                           name="brokerageName"
-                                           onChange={this.onChangeValue}
-                                    />
+                                <div className="col-sm-6">
+                                    <label className="col-sm-4 col-form-label">Brokerage Name *</label>
+                                    <div className="col-sm-8">
+                                        <input type="text"
+                                               className="form-control"
+                                               name="brokerageName"
+                                               onChange={this.onChangeValue}
+                                        />
+                                    </div>
                                 </div>
-                                <label className="col-md-2 col-form-label">Brokerage Address</label>
-                                <div className="col-md-4">
-                                    <input type="text"
-                                           className="form-control"
-                                           name="brokerageAddress"
-                                           onChange={this.onChangeValue}
-                                    />
+                                <div className="col-sm-6">
+                                    <label className="col-sm-4 col-form-label">Brokerage Address *</label>
+                                    <div className="col-sm-8">
+                                        <input type="text"
+                                               className="form-control"
+                                               name="brokerageAddress"
+                                               onChange={this.onChangeValue}
+                                        />
+                                    </div>
                                 </div>
                             </div>
-
 
                             <div className="form-group row">
-                                <label className="col-md-2 col-form-label">Brokerage Phone Number</label>
-                                <div className="col-md-4">
-                                    <input type="text"
-                                           className="form-control"
-                                           name="brokeragePhone"
-                                           onChange={this.onChangeValue}
-                                    />
+                                <div className="col-sm-6">
+                                    <label className="col-sm-4 col-form-label">Brokerage Phone Number *</label>
+                                    <div className="col-sm-8">
+                                        <input type="text"
+                                               className="form-control"
+                                               name="brokeragePhone"
+                                               onChange={this.onChangeValue}
+                                        />
+                                    </div>
                                 </div>
                             </div>
+
+                            <div className="profile-line"></div>
+
                         </div> : <div></div>}
 
                     <div className="form-group">
-                        {this.state.services == '5a08f3b565d8ef000ea590f1' ?
+                        {this.state.profiles.services == '5a08f3b565d8ef000ea590f1' ?
                             <div className="row">
-                                <label className="col-md-2 col-form-label">Which Bank do you work for?</label>
-                                <div className="col-md-4">
-                                    <select className="custom-select" style={{width: '100%'}} name="banks" onChange={this.onChangeValue}>
-                                        <option value="" defaultValue={''}></option>
-                                        {
-                                            this.props.settings[0].banks.map((bank, key) => {
-                                                return <option value={bank._id} key={key}
-                                                               type={key}>{bank.name}</option>
-                                            })
-                                        }
-                                    </select>
+                                <div className="col-sm-6">
+                                    <label className="col-sm-4 col-form-label">Which Bank do you work for? *</label>
+                                    <div className="col-sm-8">
+                                        <select className="custom-select"
+                                                name="banks"
+                                                onChange={this.onChangeValue}>
+                                            <option value="" defaultValue={''}></option>
+                                            {
+                                                this.props.settings[0].banks.map((bank, key) => {
+                                                    return <option value={bank._id} key={key}
+                                                                   type={key}>{bank.name}</option>
+                                                })
+                                            }
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             : <div className=""></div>
                         }
-                        {this.state.services == '5a08f3ac65d8ef000ea590f0' ?
+                        {this.state.profiles.services == '5a08f3ac65d8ef000ea590f0' ?
                             <div className="row">
-                                <label className="col-md-2 col-form-label">Which Lenders do you work with</label>
-                                <div className="col-md-4">
-                                    <select className="custom-select"
-                                            style={{width: '100%'}}
-                                            name="lenders"
-                                    >
-                                        <option value="" defaultValue={''}></option>
-                                        {
-                                            this.props.settings[0].lenders.map((lender, key) => {
-                                                return <option value={lender._id} key={key}
-                                                               type={key}>{lender.name}</option>
-                                            })
-                                        }
-                                    </select>
+                                <div className="col-sm-6">
+                                    <label className="col-sm-4 col-form-label">Which Lenders do you work with *</label>
+                                    <div className="col-sm-8">
+                                        <select className="custom-select"
+                                                name="lenders"
+                                                onChange={this.onChangeValue}
+                                        >
+                                            <option value="" defaultValue={''}></option>
+                                            {
+                                                this.props.settings[0].lenders.map((lender, key) => {
+                                                    return <option value={lender._id} key={key}
+                                                                   type={key}>{lender.name}</option>
+                                                })
+                                            }
+                                        </select>
+                                    </div>
                                 </div>
+
                             </div>
                             : <div></div>
                         }
                     </div>
 
                     <div className="form-group row">
-                        <label className="col-md-2 col-form-label">Year of Experience</label>
-                        <div className="col-md-4">
-                            <input type="number"
-                                   className="form-control"
-                                   name="yearOfExp"
-                                   onChange={this.onChangeValue}
-                            />
+                        <div className="col-sm-6">
+                            <label className="col-sm-4 col-form-label">Year of Experience *</label>
+                            <div className="col-sm-8">
+                                <input type="number"
+                                       className="form-control"
+                                       name="yearOfExp"
+                                       onChange={this.onChangeValue}
+                                />
+                            </div>
                         </div>
-                        <label className="col-md-2 col-form-label">Licence #</label>
-                        <div className="col-md-4">
-                            <input type="text"
-                                   className="form-control"
-                                   name="licence"
-                                   onChange={this.onChangeValue}
-                            />
+
+                        <div className="col-sm-6">
+                            <label className="col-sm-4 col-form-label">Licence # *</label>
+                            <div className="col-sm-8">
+                                <input type="text"
+                                       className="form-control"
+                                       name="licence"
+                                       onChange={this.onChangeValue}
+                                />
+                            </div>
                         </div>
                     </div>
 
                     <div className="form-group row">
-                        <label className="col-md-2 col-form-label">Are you Mobile?</label>
-                        <div className="col-md-4">
-                            <select className="custom-select" style={{width: '100%'}} name="areMobile" onChange={this.onChangeValue}>
-                                <option value="" defaultValue={''}></option>
-                                <option value="1">I travel to my customers</option>
-                                <option value="2">My customers travel to me</option>
-                            </select>
+                        <div className="col-sm-6">
+                            <label className="col-sm-4 col-form-label">Are you Mobile? *</label>
+                            <div className="col-sm-8">
+                                <select className="custom-select"
+                                        name="areMobile"
+                                        onChange={this.onChangeValue}>
+                                    <option value="" defaultValue={''}></option>
+                                    <option value="1">I travel to my customers</option>
+                                    <option value="2">My customers travel to me</option>
+                                </select>
+                            </div>
                         </div>
-                        <label className="col-md-2 col-form-label">Do you provide services?</label>
-                        <div className="col-md-4">
-                            <select className="custom-select" style={{width: '100%'}} name="time" onChange={this.onChangeValue}>
-                                <option value="" defaultValue={''}></option>
-                                <option value="1">Full Time</option>
-                                <option value="2">Part Time</option>
-                                <option value="3">Seasonal</option>
-                            </select>
+
+                        <div className="col-sm-6">
+                            <label className="col-sm-4 col-form-label">Do you provide services? *</label>
+                            <div className="col-sm-8">
+                                <select className="custom-select" name="time"
+                                        onChange={this.onChangeValue}>
+                                    <option value="" defaultValue={''}></option>
+                                    <option value="1">Full Time</option>
+                                    <option value="2">Part Time</option>
+                                    <option value="3">Seasonal</option>
+                                </select>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             )
@@ -233,155 +284,213 @@ class Profiles extends Component {
         }
 
         return (
-            <div className="container">
-                <div className="form-group row">
-                    <label htmlFor="inputEmail3" className="col-md-2 col-form-label">First Name</label>
-                    <div className="col-md-4">
-                        <input type="text" className="form-control" value={this.props.data.firstName}
-                               disabled={true}/>
-                    </div>
+            <div className="container user-profile">
+                <div className="profile-header">
+                    <h1 className="row justify-content-center">Please fill in the form below to
+                        complete <br/> your profile as a {this.props.user.role == 0 ? 'customer' : 'service provider'}
+                    </h1>
                 </div>
-                <div className="form-group row">
-                    <label htmlFor="inputPassword3" className="col-md-2 col-form-label">Last Name</label>
-                    <div className="col-md-4">
-                        <input type="text" className="form-control" value={this.props.data.lastName}
-                               disabled={true}/>
-                    </div>
-                </div>
-                {this.renderUserProfile()}
-                <div className="form-group row">
-                    <label className="col-md-2 col-form-label">What languages do you speak?</label>
-                    <div className="col-md-4">
-                        <select className="custom-select" style={{width: '100%'}} name="languages" onChange={this.onChangeValue}>
-                            {
-                                this.props.settings[0].languages.map((language, key) => {
-                                    return <option value={language._id} key={key} type={key}>{language.name}</option>
-                                })
-                            }
-                        </select>
-                    </div>
-                    <label className="col-md-2 col-form-label">Opt In</label>
-                    <div className="col-md-4">
-                        <input type="text"
-                               className="form-control"
-                               name="optIn"
-                               value={this.state.optIn}
-                               onChange={this.onChangeValue}
-                        />
-                    </div>
-                </div>
+                <div className="login-form">
+                    <div className="form-group row">
+                        <div className="col-sm-6">
+                            <label className="col-sm-4 col-form-label">First Name *</label>
+                            <div className="col-sm-8">
+                                <input type="text" className="form-control" value={this.props.user.firstName}
+                                       disabled={true}/>
+                            </div>
+                        </div>
 
-                <div className="form-group row">
-                    <label className="col-md-2 col-form-label">Connect us via social media?</label>
-                    <div className="col-md-4">
-                        <select className="custom-select"
-                                style={{width: '100%'}}
-                                name="socialMedia"
-                                value={this.state.socialMedia}
-                                onChange={this.onChangeValue}
-                        >
-                            <option value="" defaultValue={''}></option>
-                            <option value="1">Facebook</option>
-                            <option value="2">Twitter</option>
-                            <option value="3">LinkedIn</option>
-                            <option value="3">Google</option>
-                            <option value="3">YouTube</option>
-                            <option value="3">Instagram</option>
+                        <div className="col-sm-6">
+                            <label className="col-sm-4 col-form-label">Last Name *</label>
+                            <div className="col-sm-8">
+                                <input type="text" className="form-control" value={this.props.user.lastName}
+                                       disabled={true}/>
+                            </div>
+                        </div>
 
-                        </select>
                     </div>
-                    <label className="col-md-2 col-form-label">Job Title</label>
-                    <div className="col-md-4">
-                        <input type="text"
-                               className="form-control"
-                               name="jobTitle"
-                               value={this.state.jobTitle}
-                               onChange={this.onChangeValue}
-                        />
-                    </div>
-                </div>
 
-                <div className="form-group row">
-                    <label className="col-md-2 col-form-label">Employer</label>
-                    <div className="col-md-4">
-                        <input type="text"
-                               className="form-control"
-                               name="employer"
-                               value={this.state.employer}
-                               onChange={this.onChangeValue}
-                        />
-                    </div>
-                    <label className="col-md-2 col-form-label">Length of Employer</label>
-                    <div className="col-md-4">
-                        <input type="text"
-                               className="form-control"
-                               name="lengthOfEmp"
-                               value={this.state.lengthOfEmp}
-                               onChange={this.onChangeValue}
-                        />
-                    </div>
-                </div>
+                    <div className="profile-line"></div>
 
-                <div className="form-group row">
-                    <label className="col-md-2 col-form-label">Industry</label>
-                    <div className="col-md-4">
-                        <input type="text"
-                               className="form-control"
-                               name="industry"
-                               value={this.state.industry}
-                               onChange={this.onChangeValue}
-                        />
-                    </div>
-                    <label className="col-md-2 col-form-label">DOB</label>
-                    <div className="col-md-4">
-                        <input type="text" className="form-control"/>
-                    </div>
-                </div>
-                <div className="form-group row">
-                    <label className="col-md-2 col-form-label">Sex</label>
-                    <div className="col-md-4">
-                        <input type="number"
-                               className="form-control"
-                               name="sex"
-                               value={this.state.sex}
-                               onChange={this.onChangeValue}
-                        />
-                    </div>
-                    <label className="col-md-2 col-form-label">Civil Status</label>
-                    <div className="col-md-4">
-                        <input type="text"
-                               className="form-control"
-                               name="civilStatus"
-                               value={this.state.civilStatus}
-                               onChange={this.onChangeValue}
-                        />
-                    </div>
-                </div>
+                    {this.renderUserProfile()}
+                    <div className="form-group row">
+                        <div className="col-sm-6">
+                            <label className="col-sm-4 col-form-label">What languages do you speak?</label>
+                            <div className="col-sm-8">
+                                <select className="custom-select" name="languages"
+                                        onChange={this.onChangeValue}>
+                                    {
+                                        this.props.settings[0].languages.map((language, key) => {
+                                            return <option value={language._id} key={key}
+                                                           type={key}>{language.name}</option>
+                                        })
+                                    }
+                                </select>
+                            </div>
+                        </div>
 
-                <div className="form-group row">
-                    <label className="col-md-2 col-form-label">Citizenship</label>
-                    <div className="col-md-4">
-                        <input type="text"
-                               className="form-control"
-                               name="citizenship"
-                               value={this.state.citizenship}
-                               onChange={this.onChangeValue}
-                        />
+                        <div className="col-sm-6">
+                            <label className="col-sm-4 col-form-label">Opt In</label>
+                            <div className="col-sm-8">
+                                <input type="text"
+                                       className="form-control"
+                                       name="optIn"
+                                       value={this.state.optIn}
+                                       onChange={this.onChangeValue}
+                                />
+                            </div>
+                        </div>
                     </div>
-                    <label className="col-md-2 col-form-label">Address</label>
-                    <div className="col-md-4">
-                        <input type="text"
-                               className="form-control"
-                               name="address"
-                               value={this.state.address}
-                               onChange={this.onChangeValue}
-                        />
-                    </div>
-                </div>
 
-                <div className="form-group row">
-                    <div className="offset-sm-2 col-sm-10">
-                        <button className="btn btn-primary" onClick={this.onSave}>Save</button>
+                    <div className="profile-line"></div>
+
+                    <div className="form-group row">
+                        <div className="col-sm-6">
+                            <label className="col-sm-4 col-form-label">Connect us via social media?</label>
+                            <div className="col-sm-8">
+                                <select className="custom-select"
+                                        name="socialMedia"
+                                        value={this.state.socialMedia}
+                                        onChange={this.onChangeValue}
+                                >
+                                    <option value="" defaultValue={''}></option>
+                                    <option value="1">Facebook</option>
+                                    <option value="2">Twitter</option>
+                                    <option value="3">LinkedIn</option>
+                                    <option value="3">Google</option>
+                                    <option value="3">YouTube</option>
+                                    <option value="3">Instagram</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div className="col-sm-6">
+                            <label className="col-sm-4 col-form-label">Job Title</label>
+                            <div className="col-sm-8">
+                                <input type="text"
+                                       className="form-control"
+                                       name="jobTitle"
+                                       value={this.state.jobTitle}
+                                       onChange={this.onChangeValue}
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="form-group row">
+                        <div className="col-sm-6">
+                            <label className="col-sm-4 col-form-label">Employer</label>
+                            <div className="col-sm-8">
+                                <input type="text"
+                                       className="form-control"
+                                       name="employer"
+                                       value={this.state.employer}
+                                       onChange={this.onChangeValue}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="col-sm-6">
+                            <label className="col-sm-4 col-form-label">Length of Employer</label>
+                            <div className="col-sm-8">
+                                <input type="text"
+                                       className="form-control"
+                                       name="lengthOfEmp"
+                                       value={this.state.lengthOfEmp}
+                                       onChange={this.onChangeValue}
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="form-group row">
+                        <div className="col-sm-6">
+                            <label className="col-sm-4 col-form-label">Industry</label>
+                            <div className="col-sm-8">
+                                <input type="text"
+                                       className="form-control"
+                                       name="industry"
+                                       value={this.state.industry}
+                                       onChange={this.onChangeValue}
+                                />
+                            </div>
+                        </div>
+                        <div className="col-sm-6">
+                            <label className="col-sm-4 col-form-label">DOB *</label>
+                            <div className="col-sm-8">
+                                <input type="text" className="form-control"
+                                       name="dayOfBirth"
+                                       value={this.state.dayOfBirth}
+                                       onChange={this.onChangeValue}
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="form-group row">
+                        <div className="col-sm-6">
+                            <label className="col-sm-4 col-form-label">Sex</label>
+                            <div className="col-sm-8">
+                                <select
+                                    className="custom-select"
+                                    name="sex"
+                                    value={this.state.sex}
+                                    onChange={this.onChangeValue}
+                                >
+                                    <option value=""></option>
+                                    <option value="0">Male</option>
+                                    <option value="1">Female</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div className="col-sm-6">
+                            <label className="col-sm-4 col-form-label">Civil Status</label>
+                            <div className="col-sm-8">
+                                <input type="text"
+                                       className="form-control"
+                                       name="civilStatus"
+                                       value={this.state.civilStatus}
+                                       onChange={this.onChangeValue}
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="form-group row">
+                        <div className="col-sm-6">
+                            <label className="col-sm-4 col-form-label">Citizenship</label>
+                            <div className="col-sm-8">
+                                <input type="text"
+                                       className="form-control"
+                                       name="citizenship"
+                                       value={this.state.citizenship}
+                                       onChange={this.onChangeValue}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="col-sm-6">
+                            <label className="col-sm-4 col-form-label">Address</label>
+                            <div className="col-sm-8">
+                                <input type="text"
+                                       className="form-control"
+                                       name="address"
+                                       value={this.state.address}
+                                       onChange={this.onChangeValue}
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="profile-line"></div>
+
+                    <div className="form-group row">
+                        <div className="col-sm-6">
+                            <div className="col-sm-4 offset-sm-4">
+                                <button className="btn btn-save" onClick={this.onSave}>Save</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -391,10 +500,12 @@ class Profiles extends Component {
 
 function mapStateToProps(state) {
     return {
-        auth: state.auth,
-        data: state.auth.data,
+        user: state.auth.data.data,
+        isLogged: state.auth.isLogged,
         settings: state.settings.data,
         isFetched: state.settings.isFetched,
+        // profiles: state.auth.data.data.profiles,
+        // role: state.auth.data.data.role
     }
 }
 

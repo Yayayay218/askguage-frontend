@@ -34,10 +34,10 @@ export default class Parse {
         }).then(response => response.json());
     }
 
-    postProfile(data) {
+    putProfile(data) {
         return this._fetch({
-            method: 'POST',
-            url: '/profiles',
+            method: 'PUT',
+            url: '/me',
             body: data,
             timeout: 10000
         }).then(response => response.json());
@@ -58,37 +58,23 @@ export default class Parse {
             timeout: 10000
         }).then(response => response.json());
     }
-    // getServices (data) {
-    //     return this._fetch({
-    //         method: 'GET',
-    //         url: '/settings/services',
-    //         timeout: 10000
-    //     }).then(response => response.json());
-    // }
-    //
-    // getBanks (data) {
-    //     return this._fetch({
-    //         method: 'GET',
-    //         url: '/settings/banks',
-    //         timeout: 10000
-    //     }).then(response => response.json());
-    // }
-    //
-    // getLenders (data) {
-    //     return this._fetch({
-    //         method: 'GET',
-    //         url: '/settings/lenders',
-    //         timeout: 10000
-    //     }).then(response => response.json());
-    // }
-    //
-    // getLanguages (data) {
-    //     return this._fetch({
-    //         method: 'GET',
-    //         url: '/settings/languages',
-    //         timeout: 10000
-    //     }).then(response => response.json());
-    // }
+
+    getQuestions(data) {
+        return this._fetch({
+            method: 'GET',
+            url: '/questions',
+            timeout: 10000
+        }).then(response => response.json());
+    }
+
+    postRequest(data) {
+        return this._fetch({
+            method: 'POST',
+            url: '/requests',
+            body: data,
+            timeout: 10000
+        }).then(response => response.json());
+    }
 
     _fetch(opts) {
         opts = _.extend({

@@ -9,6 +9,7 @@ export const INITIAL_STATE = Immutable({
     isLogin: false,
     token: null,
     role: null,
+    hasProfile: false
 });
 
 const signUp = (state, action) => {
@@ -38,7 +39,8 @@ const login = (state, action) =>
     state.merge({
         isLogged: false,
         isLogin: true,
-        error: null
+        error: null,
+        hasProfile: false
     });
 
 
@@ -47,7 +49,7 @@ const loginSuccess = (state, action) =>
         isLogged: true,
         isLogin: false,
         signInType: Types.LOG_IN,
-        token: action.response.token
+        token: action.response.token,
     });
 
 const loginFailure = (state, action) =>
@@ -67,10 +69,11 @@ const getUser = (state, action) =>
 
 const getUserSuccess = (state, action) =>
     state.merge({
-        data: {...state.data, ...action.response},
+        data: {...action.response},
         isLogged: true,
         isLogin: false,
         error: null,
+        hasProfile: !!action.response.data.profiles
     });
 
 const getUserFailure = (state, action) =>

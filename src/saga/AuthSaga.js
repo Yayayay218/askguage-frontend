@@ -1,9 +1,9 @@
-import {take, call, put, select} from 'redux-saga/effects';
+import {all, take, call, put, select} from 'redux-saga/effects';
 import Actions from '../actions/Creators'
 import Api from '../services/dataService'
 import createHistory from 'history/createBrowserHistory'
 
-const history = createHistory({forceRefresh:true});
+const history = createHistory({forceRefresh: true});
 
 
 export function* signUp({data}) {
@@ -35,7 +35,13 @@ export function* login({data}) {
         }
         else {
             yield put(Actions.loginSuccess(response))
-            history.push('/profile')
+            yield put(Actions.getUser(response))
+            const tmp = yield take('GET_USERS_SUCCESS');
+
+            if (tmp.response.data.profiles)
+                history.push('/my-requests')
+            else
+                history.push('/profile')
         }
         // }
     } catch (err) {
@@ -54,7 +60,6 @@ export function* getUser() {
         yield put(Actions.getUserSuccess(response))
 
     } catch (err) {
-        console.log(err)
         yield put(Actions.getUserFailure(err))
     }
 }

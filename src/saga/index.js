@@ -4,7 +4,9 @@ import Types from '../actions/Types';
 
 import {signUp, login, getUser} from "./AuthSaga"
 import {getSetting} from "./SettingSaga";
-import {postProfile} from "./ProfileSaga";
+import {putProfile} from "./ProfileSaga";
+import {getQuestions} from "./QuestionSaga"
+import {postRequest} from "./RequestSaga";
 
 export default function* root() {
     yield all([
@@ -12,6 +14,8 @@ export default function* root() {
         takeLatest(Types.LOG_IN, login),
         takeLatest(Types.GET_USERS, getUser),
         takeLatest(Types.GET_SETTINGS, getSetting),
-        takeLatest(Types.POST_PROFILES, postProfile)
+        takeLatest(Types.PUT_PROFILES, putProfile),
+        takeLatest(Types.GET_QUESTIONS, getQuestions),
+        takeLatest(Types.POST_REQUEST, postRequest),
     ])
 }

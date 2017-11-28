@@ -17,17 +17,21 @@ const getUser = (data) => createAction(Types.GET_USERS, {data});
 const getUserSuccess = (response) => createAction(Types.GET_USERS_SUCCESS, {response})
 const getUserFailure = (errCode) => createAction(Types.GET_USERS_FAILURE, {errCode})
 
-const postProfile = (data) => createAction(Types.POST_PROFILES, {data});
-const postProfileSuccess = (response) => createAction(Types.POST_PROFILES_SUCCESS, {response});
-const postProfileFailure = (errCode) => createAction(Types.POST_PROFILES_FAILURE, {errCode});
+const putProfile = (data) => createAction(Types.PUT_PROFILES, {data});
+const putProfileSuccess = (response) => createAction(Types.PUT_PROFILES_SUCCESS, {response});
+const putProfileFailure = (errCode) => createAction(Types.PUT_PROFILES_FAILURE, {errCode});
 
 const getSetting = (data) => createAction(Types.GET_SETTINGS, {data});
 const getSettingSuccess = (response) => createAction(Types.GET_SETTINGS_SUCCESS, {response});
 const getSettingFailure = (errCode) => createAction(Types.GET_SETTINGS_FAILURE, {errCode});
 
-// const getLanguages = (languages) => createAction(Types.GET_LANGUAGES, {languages});
-// const getLanguagesSuccess = (resLanguage) => createAction(Types.GET_LANGUAGES_SUCCESS, {resLanguage});
-// const getLanguagesFailure = (errCode) => createAction(Types.GET_LANGUAGES_FAILURE, {errCode});
+const getQuestions = (data) => createAction(Types.GET_QUESTIONS, {data});
+const getQuestionsSuccess = (response) => createAction(Types.GET_QUESTIONS_SUCCESS, {response});
+const getQuestionsFailure = (errCode) => createAction(Types.GET_QUESTIONS_FAILURE, {errCode});
+
+const postRequest = (data) => createAction(Types.POST_REQUEST, {data});
+const postRequestSuccess = (response) => createAction(Types.POST_REQUEST_SUCCESS, {response});
+const postRequestFailure = (errCode) => createAction(Types.POST_REQUEST_FAILURE, {errCode});
 
 export default {
     signUp,
@@ -42,19 +46,19 @@ export default {
     getUserSuccess,
     getUserFailure,
 
-    postProfile,
-    postProfileSuccess,
-    postProfileFailure,
+    putProfile,
+    putProfileSuccess,
+    putProfileFailure,
 
     getSetting,
     getSettingSuccess,
-    getSettingFailure
+    getSettingFailure,
 
-    // getServices,
-    // getServicesSuccess,
-    // getServicesFailure,
-    //
-    // getLanguages,
-    // getLanguagesSuccess,
-    // getLanguagesFailure
+    getQuestions,
+    getQuestionsSuccess,
+    getQuestionsFailure,
+
+    postRequest,
+    postRequestSuccess,
+    postRequestFailure,
 }

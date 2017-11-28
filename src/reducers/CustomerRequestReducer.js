@@ -48,21 +48,21 @@ const failure = (state, action) =>
         error: true,
     });
 
-const putProfile = (state, action) =>
+const postRequest = (state, action) =>
     state.merge({
         isPosting: true,
         isPosted: false,
         error: null,
     });
 
-const putProfileSuccess = (state, action) =>
+const postRequestSuccess = (state, action) =>
     state.merge({
         isPosting: false,
         isPosted: true,
         error: null,
     });
 
-const putProfileFailure = (state, action) =>
+const postRequestFailure = (state, action) =>
     state.merge({
         isPosting: false,
         isPosted: false,
@@ -70,9 +70,9 @@ const putProfileFailure = (state, action) =>
     });
 
 const ACTION_HANDLERS = {
-    [Types.PUT_PROFILES]: putProfile,
-    [Types.PUT_PROFILES_SUCCESS]: putProfileSuccess,
-    [Types.PUT_PROFILES_FAILURE]: putProfileFailure,
+    [Types.POST_REQUEST]: postRequest,
+    [Types.POST_REQUEST_SUCCESS]: postRequestSuccess,
+    [Types.POST_REQUEST_FAILURE]: postRequestFailure,
 };
 
 export default createReducer(INITIAL_STATE, ACTION_HANDLERS);
