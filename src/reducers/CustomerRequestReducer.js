@@ -11,6 +11,7 @@ export const INITIAL_STATE = Immutable({
     current: {},
     isFetching: false,
     isFull: false,
+    isFetched: false,
     error: null,
 });
 const request = (state, action) => {
@@ -26,6 +27,7 @@ const request = (state, action) => {
         data: action.data ? [] : [...state.data],
         isFull: false,
         isFetching: true,
+        isFetched: false,
         error: false
     });
 }
@@ -38,6 +40,7 @@ const success = (state, action) => {
         pages: action.response.pages,
         total: action.response.total,
         isFetching: false,
+        isFetched: true,
         error: null,
     });
 }
@@ -45,6 +48,7 @@ const success = (state, action) => {
 const failure = (state, action) =>
     state.merge({
         isFetching: false,
+        isFetched: false,
         error: true,
     });
 
@@ -57,6 +61,7 @@ const postRequest = (state, action) =>
 
 const postRequestSuccess = (state, action) =>
     state.merge({
+        current: action.response.data,
         isPosting: false,
         isPosted: true,
         error: null,
@@ -73,6 +78,15 @@ const ACTION_HANDLERS = {
     [Types.POST_REQUEST]: postRequest,
     [Types.POST_REQUEST_SUCCESS]: postRequestSuccess,
     [Types.POST_REQUEST_FAILURE]: postRequestFailure,
+
+    [Types.GET_REQUEST]: request,
+    [Types.GET_REQUEST_SUCCESS]: success,
+    [Types.GET_REQUEST_FAILURE]: failure,
+
+    [Types.PUT_REQUEST]: postRequest,
+    [Types.PUT_REQUEST_SUCCESS]: postRequestSuccess,
+    [Types.PUT_REQUEST_FAILURE]: postRequestFailure,
+
 };
 
 export default createReducer(INITIAL_STATE, ACTION_HANDLERS);

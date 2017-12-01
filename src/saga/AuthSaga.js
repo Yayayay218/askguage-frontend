@@ -5,7 +5,9 @@ import createHistory from 'history/createBrowserHistory'
 
 const history = createHistory({forceRefresh: true});
 
-
+export function* signOut() {
+    history.push('/login')
+}
 export function* signUp({data}) {
     try {
         const ParseApi = new Api(null)

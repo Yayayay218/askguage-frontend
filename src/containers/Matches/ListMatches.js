@@ -48,55 +48,6 @@ ListMatches.defaultProps = {
     matchType: '0'
 };
 
-// const Home = () => {
-//     return (
-//         <div className="album text-muted">
-//             <div className="container">
-//
-//                 <div className="row">
-//                     <div className="col-sm-4">
-//                         <div className="card">
-//                             <img
-//                                 src="https://cdn.vox-cdn.com/thumbor/HWOiS3cB4GWynA01A1Q7q3QY62g=/0x0:4136x2988/1200x800/filters:focal(2101x858:2761x1518)/cdn.vox-cdn.com/uploads/chorus_image/image/57429401/869096910.0.jpg"
-//                                 style={{height: '280px'}}
-//                             >
-//                             </img>
-//                             <p className="card-text">This is a wider card with supporting text below as a natural
-//                                 lead-in to
-//                                 additional content. This content is a little bit longer.</p>
-//                         </div>
-//                     </div>
-//                     <div className="col-sm-4">
-//                         <div className="card">
-//                             <img
-//                                 src="https://cdn.vox-cdn.com/thumbor/HWOiS3cB4GWynA01A1Q7q3QY62g=/0x0:4136x2988/1200x800/filters:focal(2101x858:2761x1518)/cdn.vox-cdn.com/uploads/chorus_image/image/57429401/869096910.0.jpg"
-//                                 style={{height: '280px'}}
-//                             >
-//                             </img>
-//                             <p className="card-text">This is a wider card with supporting text below as a natural
-//                                 lead-in to
-//                                 additional content. This content is a little bit longer.</p>
-//                         </div>
-//                     </div>
-//
-//                     <div className="col-sm-4">
-//                         <div className="card">
-//                             <img
-//                                 src="https://cdn.vox-cdn.com/thumbor/HWOiS3cB4GWynA01A1Q7q3QY62g=/0x0:4136x2988/1200x800/filters:focal(2101x858:2761x1518)/cdn.vox-cdn.com/uploads/chorus_image/image/57429401/869096910.0.jpg"
-//                                 style={{height: '280px'}}
-//                             >
-//                             </img>
-//                             <p className="card-text">This is a wider card with supporting text below as a natural
-//                                 lead-in to
-//                                 additional content. This content is a little bit longer.</p>
-//                         </div>
-//                     </div>
-//                 </div>
-//
-//             </div>
-//         </div>
-//     );
-// };
 // Maps state from store to props
 const mapStateToProps = (state, ownProps) => {
     return {

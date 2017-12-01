@@ -15,13 +15,12 @@ class SignUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
-            password: '',
-            confirmPassword: '',
-            firstName: '',
-            lastName: '',
-            phoneNumber: '',
-            role: '0'
+            role: '0',
+            emailValid: false,
+            passwordValid: false,
+            firstNameValid: false,
+            lastNameValid: false,
+            phoneValid: true,
         }
         this.onSignUp = this.onSignUp.bind(this)
         this.handleUserInput = this.handleUserInput.bind(this)
@@ -39,6 +38,7 @@ class SignUp extends Component {
 
     onSignUp() {
         const {state} = this
+
         this.props.dispatch(Actions.signUp(state));
     }
 
@@ -61,16 +61,16 @@ class SignUp extends Component {
                                        defaultChecked={true}
                                 />
                                 <span className="custom-control-indicator"></span>
-                                <span className="custom-control-description">As a customer</span>
+                                <span className="custom-control-description custom-label">As a customer</span>
                             </label>
-                            <label className="col-sm-6 custom-control custom-checkbox">
+                            <label className="col-sm-6 custom-control custom-checkbox" style={{marginLeft: '-23px'}}>
                                 <input type="radio" className="custom-control-input"
                                        name="role"
                                        value="1"
                                        onChange={this.handleUserInput}
                                 />
                                 <span className="custom-control-indicator"></span>
-                                <span className="custom-control-description">As service provider</span>
+                                <span className="custom-control-description custom-label">As service provider</span>
                             </label>
                         </div>
                     </div>

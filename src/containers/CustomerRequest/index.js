@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom'
 import Profile from './Profile'
 import Preference from './Preference'
 import Info from './Info'
+import Finance from './Finance'
 
 const Error = ({message}) => {
     return (
@@ -26,6 +27,7 @@ class CustomerRequest extends Component {
                 ...this.props.user.profiles
             },
             finance: {},
+            status: 0,
             formErrors: false,
             screen: 'profile',
             screenStatus: {
@@ -38,14 +40,20 @@ class CustomerRequest extends Component {
         this.handleProfileInput = this.handleProfileInput.bind(this)
         this.handleReferenceInput = this.handleReferenceInput.bind(this)
         this.handleInfoInput = this.handleInfoInput.bind(this)
+        this.handleFinanceInput = this.handleFinanceInput.bind(this)
         this.goPreference = this.goPreference.bind(this)
         this.goInfo = this.goInfo.bind(this)
+        this.goFinance = this.goFinance.bind(this)
         this.submitCustomerRequest = this.submitCustomerRequest.bind(this)
     }
 
     componentDidMount() {
     }
-
+    componentWillReceiveProps (newProps) {
+        this.setState({
+            requestId: newProps.request._id
+        })
+    }
     handleProfileInput(e) {
         const name = e.target.name;
         const value = e.target.value;
@@ -86,24 +94,35 @@ class CustomerRequest extends Component {
             })
     }
 
-    goPreference() {
-        let profile = this.state.profile
-        if (!profile.homeBuyer || !profile.lookingTo || !profile.ownership)
-            this.setState({
-                formErrors: true
-            })
-        else
-            this.setState({
-                screen: 'preference',
-                screenStatus: {
-                    ...this.state.screenStatus,
-                    profile: 'success',
-                    preference: 'active'
-                }
+    handleFinanceInput(e) {
+        const name = e.target.name;
+        const value = e.target.value;
+        this.setState(
+            {
+                finance:
+                    {
+                        ...this.state.finance,
+                        [name]: value
+                    }
             })
     }
 
+    goPreference() {
+        // const {state} = this
+        // this.props.dispatch(Actions.postRequest(state));
+        this.setState({
+            screen: 'preference',
+            screenStatus: {
+                ...this.state.screenStatus,
+                profile: 'success',
+                preference: 'active'
+            }
+        })
+    }
+
     goInfo() {
+        // const {state} = this
+        // this.props.dispatch(Actions.putRequest(state));
         this.setState(
             {
                 screen: 'info',
@@ -111,6 +130,19 @@ class CustomerRequest extends Component {
                     ...this.state.screenStatus,
                     preference: 'success',
                     info: 'active'
+                }
+            }
+        )
+    }
+
+    goFinance() {
+        this.setState(
+            {
+                screen: 'finance',
+                screenStatus: {
+                    ...this.state.screenStatus,
+                    info: 'success',
+                    finance: 'active'
                 }
             }
         )
@@ -135,7 +167,12 @@ class CustomerRequest extends Component {
 
         if (this.state.screen === 'info')
             return (
-                <Info source={this.state} onChangeValue={this.handleInfoInput} next={this.submitCustomerRequest}/>
+                <Info source={this.state} onChangeValue={this.handleInfoInput} next={this.goFinance}/>
+            )
+
+        if (this.state.screen === 'finance')
+            return (
+                <Finance source={this.state} onChangeValue={this.handleFinanceInput} next={this.submitCustomerRequest}/>
             )
     }
 
@@ -151,31 +188,42 @@ class CustomerRequest extends Component {
                 </div>
                 <div className="request-tab">
                     <div className="container">
-                        <div
-                            className={
-                                `item ${this.state.screenStatus.profile}`
-                            }
-                        >
-                            <label htmlFor="">profile</label>
-                        </div>
-                        <div className={
-                            `item ${this.state.screenStatus.preference}`
-                        }>
-                            <label htmlFor="">preference</label>
-                        </div>
-                        <div className={
-                            `item ${this.state.screenStatus.info}`
-                        }>
-                            <label htmlFor="">info</label>
-                        </div>
-                        <div className={
-                            `item ${this.state.screenStatus.finance}`
-                        }>
-                            <label htmlFor="">finance</label>
-
+                        <div className="d-flex flex-row">
+                            <div
+                                className={
+                                    `item ${this.state.screenStatus.profile}`
+                                }
+                            >
+                                <div className="item-content">
+                                    {/*<div className="circle"></div>*/}
+                                    <label htmlFor="">profile</label>
+                                </div>
+                            </div>
+                            <div className={
+                                `item ${this.state.screenStatus.preference}`
+                            }>
+                                <div className="item-content">
+                                    <label htmlFor="">preference</label>
+                                </div>
+                            </div>
+                            <div className={
+                                `item ${this.state.screenStatus.info}`
+                            }>
+                                <div className="item-content">
+                                    <label htmlFor="">info</label>
+                                </div>
+                            </div>
+                            <div className={
+                                `item ${this.state.screenStatus.finance}`
+                            }>
+                                <div className="item-content">
+                                    <label htmlFor="">finance</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 {
                     this.renderx()
                 }
@@ -187,6 +235,7 @@ class CustomerRequest extends Component {
 function mapStateToProps(state) {
     return {
         user: state.auth.data.data,
+        request: state.requests.current
     }
 }
 

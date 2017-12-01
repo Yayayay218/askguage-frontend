@@ -5,6 +5,7 @@ import Types from './Types';
 // const toggleMessage = (message) => createAction(Types.TOGGLE_MESSAGE, {message});
 // const setAppProps = (data) => createAction(Types.SET_APP_PROPS, {data});
 
+const signOut = (data) => createAction(Types.SIGN_OUT, {data});
 const signUp = (data) => createAction(Types.SIGN_UP, {data});
 const signUpSuccess = (response) => createAction(Types.SIGN_UP_SUCCESS, {response});
 const signUpFailure = (errCode) => createAction(Types.SIGN_UP_FAILURE, {errCode});
@@ -33,7 +34,16 @@ const postRequest = (data) => createAction(Types.POST_REQUEST, {data});
 const postRequestSuccess = (response) => createAction(Types.POST_REQUEST_SUCCESS, {response});
 const postRequestFailure = (errCode) => createAction(Types.POST_REQUEST_FAILURE, {errCode});
 
+const putRequest = (data) => createAction(Types.PUT_REQUEST, {data})
+const putRequestSuccess = (response) => createAction(Types.PUT_REQUEST_SUCCESS, {response})
+const putRequestFailure = (errCode) => createAction(Types.PUT_REQUEST_FAILURE, {errCode})
+
+const getRequest = (data) => createAction(Types.GET_REQUEST, {data});
+const getRequestSuccess = (response) => createAction(Types.GET_REQUEST_SUCCESS, {response});
+const getRequestFailure = (errCode) => createAction(Types.GET_REQUEST_FAILURE, {errCode});
+
 export default {
+    signOut,
     signUp,
     signUpSuccess,
     signUpFailure,
@@ -61,4 +71,12 @@ export default {
     postRequest,
     postRequestSuccess,
     postRequestFailure,
+
+    getRequest,
+    getRequestSuccess,
+    getRequestFailure,
+
+    putRequest,
+    putRequestSuccess,
+    putRequestFailure,
 }

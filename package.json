@@ -18,6 +18,7 @@
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^4.0.8",
     "react-scripts": "latest",
+    "react-validation": "^3.0.7",
     "redux": "latest",
     "redux-logger": "^3.0.6",
     "redux-persist": "^4.8.1",

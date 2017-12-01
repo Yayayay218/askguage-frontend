@@ -12,6 +12,18 @@ export const INITIAL_STATE = Immutable({
     hasProfile: false
 });
 
+const signOut = (state, action) => {
+    return state.merge({
+        data: {},
+        error: null,
+        isLogged: false,
+        isLogin: false,
+        token: null,
+        role: null,
+        hasProfile: false
+    })
+}
+
 const signUp = (state, action) => {
     return state.merge({
         error: null,
@@ -84,6 +96,7 @@ const getUserFailure = (state, action) =>
     });
 
 const ACTION_HANDLERS = {
+    [Types.SIGN_OUT]: signOut,
     [Types.SIGN_UP]: signUp,
     [Types.SIGN_UP_SUCCESS]: signUpSuccess,
     [Types.SIGN_UP_FAILURE]: signUpFailure,

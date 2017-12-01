@@ -129,7 +129,7 @@ class Login extends Component {
                             <label className="col-sm-6 custom-control custom-checkbox">
                                 <input type="checkbox" className="custom-control-input"/>
                                 <span className="custom-control-indicator"></span>
-                                <span className="custom-control-description">Remember me</span>
+                                <span className="custom-control-description custom-label">Remember me</span>
                             </label>
                             <a href="" className="col-sm-6">Forgot Password?</a>
                         </div>

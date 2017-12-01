@@ -12,6 +12,7 @@ const Profile = ({onChangeValue, next, source}) => {
                            name='homeBuyer'
                            value='1'
                            onChange={onChangeValue}
+                           required={true}
                     />
                     <span className="custom-control-indicator"></span>
                     <span className="custom-control-description">Yes</span>
@@ -21,6 +22,7 @@ const Profile = ({onChangeValue, next, source}) => {
                            name='homeBuyer'
                            value='0'
                            onChange={onChangeValue}
+                           required={true}
                     />
                     <span className="custom-control-indicator"></span>
                     <span className="custom-control-description">No</span>
@@ -37,6 +39,8 @@ const Profile = ({onChangeValue, next, source}) => {
                            name='currentlyRenting'
                            value='1'
                            onChange={onChangeValue}
+                           required={profile.homeBuyer == 1}
+
                     />
                     <span className="custom-control-indicator"></span>
                     <span className="custom-control-description">Yes</span>
@@ -46,6 +50,7 @@ const Profile = ({onChangeValue, next, source}) => {
                            name='currentlyRenting'
                            value='0'
                            onChange={onChangeValue}
+                           required={profile.homeBuyer == 1}
                     />
                     <span className="custom-control-indicator"></span>
                     <span className="custom-control-description">No</span>
@@ -60,6 +65,8 @@ const Profile = ({onChangeValue, next, source}) => {
                            name='lookingTo'
                            value='0'
                            onChange={onChangeValue}
+                           required={true}
+
                     />
                     <span className="custom-control-indicator"></span>
                     <span className="custom-control-description">Buy a new home</span>
@@ -69,6 +76,8 @@ const Profile = ({onChangeValue, next, source}) => {
                            name='lookingTo'
                            value='1'
                            onChange={onChangeValue}
+                           required={true}
+
                     />
                     <span className="custom-control-indicator"></span>
                     <span className="custom-control-description">Renew mortgage</span>
@@ -78,6 +87,8 @@ const Profile = ({onChangeValue, next, source}) => {
                            name='lookingTo'
                            value='2'
                            onChange={onChangeValue}
+                           required={true}
+
                     />
                     <span className="custom-control-indicator"></span>
                     <span className="custom-control-description">Refinance mortgage</span>
@@ -94,6 +105,8 @@ const Profile = ({onChangeValue, next, source}) => {
                            name='realtor'
                            value='1'
                            onChange={onChangeValue}
+                           required={true}
+
                     />
                     <span className="custom-control-indicator"></span>
                     <span className="custom-control-description">Yes</span>
@@ -104,6 +117,8 @@ const Profile = ({onChangeValue, next, source}) => {
                            name='realtor'
                            value='0'
                            onChange={onChangeValue}
+                           required={true}
+
                     />
                     <span className="custom-control-indicator"></span>
                     <span className="custom-control-description">No</span>
@@ -119,6 +134,8 @@ const Profile = ({onChangeValue, next, source}) => {
                            name='newHome'
                            value='1'
                            onChange={onChangeValue}
+                           required={true}
+
                     />
                     <span className="custom-control-indicator"></span>
                     <span className="custom-control-description">Yes</span>
@@ -128,6 +145,8 @@ const Profile = ({onChangeValue, next, source}) => {
                            name='newHome'
                            value='0'
                            onChange={onChangeValue}
+                           required={true}
+
                     />
                     <span className="custom-control-indicator"></span>
                     <span className="custom-control-description">No</span>
@@ -144,6 +163,8 @@ const Profile = ({onChangeValue, next, source}) => {
                            name='purchaseAgreement'
                            value='1'
                            onChange={onChangeValue}
+                           required={true}
+
                     />
                     <span className="custom-control-indicator"></span>
                     <span className="custom-control-description">Yes</span>
@@ -153,6 +174,8 @@ const Profile = ({onChangeValue, next, source}) => {
                            name='purchaseAgreement'
                            value='0'
                            onChange={onChangeValue}
+                           required={true}
+
                     />
                     <span className="custom-control-indicator"></span>
                     <span className="custom-control-description">No</span>
@@ -167,6 +190,8 @@ const Profile = ({onChangeValue, next, source}) => {
                            name='ownership'
                            value='1'
                            onChange={onChangeValue}
+                           required={true}
+
                     />
                     <span className="custom-control-indicator"></span>
                     <span className="custom-control-description">Single</span>
@@ -176,17 +201,16 @@ const Profile = ({onChangeValue, next, source}) => {
                            name='ownership'
                            value='0'
                            onChange={onChangeValue}
+                           required={true}
+
                     />
                     <span className="custom-control-indicator"></span>
                     <span className="custom-control-description">Joint</span>
                 </label>
             </div>
-            {
-                formErrors ? <div style={{color: 'red'}}>Please check all fields</div> : <div></div>
-            }
             <div className="form-group row">
                 <div className="col-sm-6">
-                    <button className="btn btn-primary" onClick={next}>Next</button>
+                    <button type="submit" className="btn btn-primary" onClick={next}>Next</button>
                 </div>
             </div>
         </div>

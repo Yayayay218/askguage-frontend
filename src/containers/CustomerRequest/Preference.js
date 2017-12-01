@@ -1,5 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import FormInput from '../../components/formInputs/FormInput'
+import CheckBoxInput from '../../components/formInputs/CheckBoxInput'
 
 const Preference = ({onChangeValue, next, source}) => {
     return (
@@ -177,62 +179,9 @@ const Preference = ({onChangeValue, next, source}) => {
                     </label>
 
                     <div className="col-sm-4">
-                        <label className="col-sm-12 custom-control custom-checkbox">
-                            <input type="checkbox" className="custom-control-input"
-                                   value="0"
-                                   disabled={true}
-                                   checked={true}
-                                   name="preferredLanguages[0]"
-                                   onChange={onChangeValue}
-                            />
-                                <span className="custom-control-indicator"></span>
-                                <span className="custom-control-description">English</span>
-                        </label>
-
-                        <label className="col-sm-12 custom-control custom-checkbox">
-                            <input type="checkbox" className="custom-control-input"
-                                   value="1"
-                                   name="preferredLanguages[1]"
-                                   onChange={onChangeValue}
-                            />
-                            <span className="custom-control-indicator"></span>
-                            <span className="custom-control-description">French</span>
-                        </label>
-
-                        <label className="col-sm-12 custom-control custom-checkbox">
-                            <input type="checkbox" className="custom-control-input"
-                                   value="2"
-                                   name="preferredLanguages[2]"
-                                   onChange={onChangeValue}
-                            />
-                            <span className="custom-control-indicator"></span>
-                            <span className="custom-control-description">Spanish</span>
-                        </label>
-                        {/*<div className="form-check form-check-inline disabled">*/}
-                            {/*<label className="form-check-label">*/}
-                                {/*<input type="checkbox" className="form-check-input" value="0" disabled*/}
-                                       {/*checked={true}*/}
-                                       {/*name="preferredLanguages[0]"*/}
-                                       {/*onChange={onChangeValue}*/}
-                                {/*/>English*/}
-                            {/*</label>*/}
-                        {/*</div>*/}
-                        {/*<div className="form-check form-check-inline">*/}
-                            {/*<label className="form-check-label">*/}
-                                {/*<input type="checkbox" className="form-check-input" value="1"*/}
-                                       {/*name="preferredLanguages[1]"*/}
-                                       {/*onChange={onChangeValue}*/}
-                                {/*/>French*/}
-                            {/*</label>*/}
-                        {/*</div>*/}
-                        {/*<div className="form-check form-check-inline">*/}
-                            {/*<label className="form-check-label">*/}
-                                {/*<input type="checkbox" className="form-check-input" value="2"*/}
-                                       {/*name="preferredLanguages[2]"*/}
-                                       {/*onChange={onChangeValue}*/}
-                                {/*/>Spanish*/}
-                            {/*</label>*/}
-                        {/*</div>*/}
+                        <CheckBoxInput name="preferredLanguages[0]" label="English" onChange={onChangeValue} disabled={true} checked={true} value="0"/>
+                        <CheckBoxInput name="preferredLanguages[1]" label="French" onChange={onChangeValue}  value="1"/>
+                        <CheckBoxInput name="preferredLanguages[2]" label="Spanish" onChange={onChangeValue}  value="2"/>
                     </div>
                 </div>
 
@@ -285,18 +234,8 @@ const Preference = ({onChangeValue, next, source}) => {
                         </select>
                     </div>
                 </div>
+                <FormInput label="Funds Required Date" name="requiredDate" onChange={onChangeValue} type="date"/>
 
-                <div className="form-group row">
-                    <label className="col-sm-4 custom-label" >
-                        Funds Required Date
-                    </label>
-                    <div className="col-sm-4">
-                        <input type="date" className="form-control"
-                               name="requiredDate"
-                               onChange={onChangeValue}
-                        />
-                    </div>
-                </div>
                 <button className="btn btn-primary" onClick={next}>Next</button>
             </div>
         </div>

@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
+import NameInput from '../../components/formInputs/NameInput'
+import FormInput from '../../components/formInputs/FormInput'
 
 const Info = ({onChangeValue, next, source}) => {
     let {profile, info} = source
@@ -13,92 +15,16 @@ const Info = ({onChangeValue, next, source}) => {
                     Name
                 </label>
                 <div className="info-name d-flex flex-row">
-                    <div className="col-sm-3">
-                        <input type="text" className="form-control"
-                               name="firstName"
-                               placeholder="First Name"
-                               value={info.firstName}
-                               onChange={onChangeValue}
-                        />
-                    </div>
-
-                    <div className="col-sm-3">
-                        <input type="text" className="form-control"
-                               name="middleName"
-                               placeholder="Middle Name"
-                               onChange={onChangeValue}
-                        />
-                    </div>
-
-                    <div className="col-sm-3">
-                        <input type="text" className="form-control"
-                               name="lastName"
-                               placeholder="Last Name"
-                               value={info.lastName}
-                               onChange={onChangeValue}
-                        />
-                    </div>
-                </div>
-
-
-                {/*<div className="col-sm-1">*/}
-                    {/*<input type="text" className="form-control"*/}
-                           {/*name="middleName"*/}
-                           {/*placeholder="middleName"*/}
-                           {/*onChange={onChangeValue}*/}
-                    {/*/>*/}
-                {/*</div>*/}
-                {/*<div className="col-sm-1">*/}
-                    {/*<input type="text" className="form-control"*/}
-                           {/*name="lastName"*/}
-                           {/*placeholder="Last Name"*/}
-                           {/*value={info.lastName}*/}
-                           {/*onChange={onChangeValue}*/}
-                    {/*/>*/}
-                {/*</div>*/}
-            </div>
-
-            <div className="form-group row">
-                <label className="col-sm-4 custom-label">
-                    Address
-                </label>
-
-                <div className="col-sm-4">
-                    <input type="text" className="form-control"
-                           name="address"
-                           value={info.address}
-                           onChange={onChangeValue}
-                    />
+                    <NameInput name="firstName" placeholder="First Name" value={info.firstName} onChange={onChangeValue}/>
+                    <NameInput name="middleName" placeholder="Middle Name" value="" onChange={onChangeValue}/>
+                    <NameInput name="lastName" placeholder="Last Name" value={info.lastName} onChange={onChangeValue}/>
                 </div>
             </div>
 
-            <div className="form-group row">
-                <label className="col-sm-4 custom-label">
-                    Email
-                </label>
+            <FormInput type="text" label="Address" name="address" value={info.address} onChange={onChangeValue}/>
+            <FormInput type="text" label="Email" name="email" value={info.email} onChange={onChangeValue}/>
+            <FormInput type="text" label="Phone Number" name="phoneNumber" value={info.phoneNumber} onChange={onChangeValue}/>
 
-                <div className="col-sm-4">
-                    <input type="text" className="form-control"
-                           name="email"
-                           value={info.email}
-                           onChange={onChangeValue}
-                    />
-                </div>
-            </div>
-
-            <div className="form-group row">
-                <label className="col-sm-4 custom-label">
-                    Phone Number
-                </label>
-
-                <div className="col-sm-4">
-                    <input type="text" className="form-control"
-                           name="phoneNumber"
-                           value={info.phoneNumber}
-                           onChange={onChangeValue}
-                    />
-                </div>
-            </div>
             <div className="profile-line"></div>
             <div style={profile.realtor == 1 ? {display: 'block'} : {display: 'none'}}>
                 <div className="description col-sm-4 offset-sm-4">
@@ -126,64 +52,15 @@ const Info = ({onChangeValue, next, source}) => {
                     </div>
                 </div>
 
-                <div className="form-group row">
-                    <label className="col-sm-4 custom-label">
-                        Job Title
-                    </label>
+                <FormInput type="text" label="Job Title" name="jobTitle" value={info.jobTitle} onChange={onChangeValue}/>
+                <FormInput type="number" label="Length of Employer" name="lengthOfEmp" value={info.lengthOfEmp} onChange={onChangeValue}/>
+                <FormInput type="text" label="Industry" name="industry" value={info.industry} onChange={onChangeValue}/>
 
-                    <div className="col-sm-4">
-                        <input type="text" className="form-control"
-                               name="jobTitle"
-                               value={info.jobTitle}
-                               onChange={onChangeValue}
-                        />
-                    </div>
-                </div>
-
-                <div className="form-group row">
-                    <label className="col-sm-4 custom-label">
-                        Length of Employer
-                    </label>
-
-                    <div className="col-sm-4">
-                        <input type="number" className="form-control"
-                               name="lengthOfEmp"
-                               value={info.lengthOfEmp}
-                               onChange={onChangeValue}
-                        />
-                    </div>
-                </div>
-
-                <div className="form-group row">
-                    <label className="col-sm-4 custom-label">
-                        Industry
-                    </label>
-
-                    <div className="col-sm-4">
-                        <input type="text" className="form-control"
-                               name="industry"
-                               value={info.industry}
-                               onChange={onChangeValue}
-                        />
-                    </div>
-                </div>
                 <div className="profile-line"></div>
                 <div className="description col-sm-4 offset-sm-4">
                     <label className="">Additional Info</label>
                 </div>
-                <div className="form-group row">
-                    <label className="col-sm-4 custom-label">
-                        Date of Birth
-                    </label>
-
-                    <div className="col-sm-4">
-                        <input type="date" className="form-control"
-                               name="dob"
-                               value={info.dob}
-                               onChange={onChangeValue}
-                        />
-                    </div>
-                </div>
+                <FormInput type="date" label="Date of Birth" name="dob" value={info.dob} onChange={onChangeValue}/>
 
                 <div className="form-group row">
                     <label className="col-sm-4 custom-label">
@@ -239,10 +116,8 @@ const Info = ({onChangeValue, next, source}) => {
                         </select>
                     </div>
                 </div>
-
             </div>
             <button className="btn btn-primary" onClick={next}>Next</button>
-
         </div>
     )
 }

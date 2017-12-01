@@ -76,6 +76,23 @@ export default class Parse {
         }).then(response => response.json());
     }
 
+    putRequest(data) {
+        return this._fetch({
+            method: 'PUT',
+            url: '/requests',
+            body: data,
+            timeout: 10000
+        }).then(response => response.json());
+    }
+
+    getRequest(data) {
+        return this._fetch({
+            method: 'GET',
+            url: '/requests?user='+data,
+            timeout: 10000
+        }).then(response => response.json());
+    }
+
     _fetch(opts) {
         opts = _.extend({
             method: 'GET',
