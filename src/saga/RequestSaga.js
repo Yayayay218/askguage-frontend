@@ -14,7 +14,7 @@ export function* postRequest({data}) {
             return
         }
         yield put(Actions.postRequestSuccess(response))
-        // history.push('/my-requests')
+        history.push('/my-requests')
         // }
     } catch (err) {
         yield put(Actions.postRequestFailure(err));
@@ -50,6 +50,22 @@ export function* getRequest({data}) {
         // history.push('/home')
         // }
     } catch (err) {
-        yield put(Actions.getRequestSuccess(err));
+        yield put(Actions.getRequestFailure(err));
+    }
+}
+
+export function* getRequestById({data}) {
+    try {
+        const ParseApi = new Api(null);
+        const response = yield call([ParseApi, ParseApi.getRequestById], data)
+        if (response && response.errors) {
+            yield put(Actions.getRequestByIdFailure(response))
+            return
+        }
+        yield put(Actions.getRequestByIdSuccess(response))
+        // history.push('/home')
+        // }
+    } catch (err) {
+        yield put(Actions.getRequestByIdFailure(err));
     }
 }

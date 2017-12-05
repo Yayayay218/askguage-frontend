@@ -10,7 +10,9 @@ const PropertyType = ({source}) => {
         source = 'Semi Detached'
     else if(source == TYPE.SINGLE_DETACHED)
         source = 'Single Detached'
-    else source = 'Townhouse'
+    else if(source==TYPE.TOWNHOUSE)
+        source = 'Townhouse'
+    else source = 'N/A'
     return <label className="label-header content">{source}</label>
 };
 

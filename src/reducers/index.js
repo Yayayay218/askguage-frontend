@@ -9,6 +9,5 @@ export default combineReducers({
     auth,
     settings,
     profiles,
-    questions,
     requests
 })

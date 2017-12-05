@@ -3,6 +3,13 @@ const config = {
     SECRET_KEY: 'peWseTYsjSLDzZBFYhJb2ouZUxPMAHbR'
 };
 
+export const STATUS = {
+    DRAFT: 0,
+    OPEN: 1,
+    CLOSED: 2,
+    BID_CLOSED: 3,
+}
+
 export const PROFILE = {
     YES: 1,
     NO: 0,
@@ -46,7 +53,7 @@ export const PREFERENCE = {
     }
 }
 
-export const info = {
+export const INFO = {
     OCCUPATION_TYPE: {
         FULL_TIME: 0,
         PART_TIME: 1,

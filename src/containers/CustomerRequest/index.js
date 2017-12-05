@@ -7,6 +7,7 @@ import Profile from './Profile'
 import Preference from './Preference'
 import Info from './Info'
 import Finance from './Finance'
+import moment from 'moment';
 
 const Error = ({message}) => {
     return (
@@ -21,7 +22,10 @@ class CustomerRequest extends Component {
         super(props);
         this.state = {
             profile: {},
-            preference: {},
+            preference: {
+                renewalDate: moment(),
+                requiredDate: moment()
+            },
             info: {
                 ...this.props.user,
                 ...this.props.user.profiles
@@ -45,6 +49,7 @@ class CustomerRequest extends Component {
         this.goInfo = this.goInfo.bind(this)
         this.goFinance = this.goFinance.bind(this)
         this.submitCustomerRequest = this.submitCustomerRequest.bind(this)
+        this.onChangeDate = this.onChangeDate.bind(this)
     }
 
     componentDidMount() {
@@ -54,6 +59,15 @@ class CustomerRequest extends Component {
             requestId: newProps.request._id
         })
     }
+    onChangeDate(date) {
+        this.setState({
+            preference: {
+                ...this.state.preference,
+                renewalDate: date
+            }
+        })
+    }
+
     handleProfileInput(e) {
         const name = e.target.name;
         const value = e.target.value;
@@ -161,7 +175,8 @@ class CustomerRequest extends Component {
             )
         if (this.state.screen === 'preference')
             return (
-                <Preference source={this.state.profile} onChangeValue={this.handleReferenceInput}
+                <Preference source={this.state} onChangeValue={this.handleReferenceInput}
+                            onChangeDate={this.onChangeDate}
                             next={this.goInfo}/>
             )
 

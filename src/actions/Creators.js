@@ -42,6 +42,11 @@ const getRequest = (data) => createAction(Types.GET_REQUEST, {data});
 const getRequestSuccess = (response) => createAction(Types.GET_REQUEST_SUCCESS, {response});
 const getRequestFailure = (errCode) => createAction(Types.GET_REQUEST_FAILURE, {errCode});
 
+const getRequestById = (data) => createAction(Types.GET_REQUEST_BY_ID, {data})
+const getRequestByIdSuccess = (response) => createAction(Types.GET_REQUEST_BY_ID_SUCCESS, {response})
+const getRequestByIdFailure = (errCode) => createAction(Types.GET_REQUEST_BY_ID_FAILURE, {errCode})
+
+
 export default {
     signOut,
     signUp,
@@ -79,4 +84,8 @@ export default {
     putRequest,
     putRequestSuccess,
     putRequestFailure,
+
+    getRequestById,
+    getRequestByIdSuccess,
+    getRequestByIdFailure,
 }

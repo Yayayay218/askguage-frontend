@@ -6,7 +6,7 @@ const REDUX_PERSIST = {
   reducerVersion: '2',
   storeConfig: {
     whitelist: ['auth'],
-    blacklist: ['app','nav'],
+    blacklist: ['app','requests'],
     transforms: [immutablePersistenceTransform]
   }
 }

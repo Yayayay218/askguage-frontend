@@ -2,14 +2,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import FormInput from '../../components/formInputs/FormInput'
 import CheckBoxInput from '../../components/formInputs/CheckBoxInput'
+import DatePicker from 'react-datepicker';
 
-const Preference = ({onChangeValue, next, source}) => {
+import 'react-datepicker/dist/react-datepicker.css';
+
+const Preference = ({onChangeValue, next, source, onChangeDate}) => {
     return (
         <div className="container preference-request">
             <div>
                 <div className="form-group row"
                      style={
-                         source.homeBuyer == 1 || source.lookingTo == 0
+                         source.profile.homeBuyer == 1 || source.profile.lookingTo == 0
                              ? {display: 'flex'}
                              : {display: 'none'}
                      }
@@ -60,7 +63,7 @@ const Preference = ({onChangeValue, next, source}) => {
 
                 <div className="form-group row"
                      style={
-                         source.homeBuyer == 1 || source.lookingTo == 0
+                         source.profile.homeBuyer == 1 || source.profile.lookingTo == 0
                              ? {display: 'flex'}
                              : {display: 'none'}
                      }
@@ -83,7 +86,7 @@ const Preference = ({onChangeValue, next, source}) => {
 
                 <div className="form-group row"
                      style={
-                         source.lookingTo == 1
+                         source.profile.lookingTo == 1
                              ? {display: 'flex'}
                              : {display: 'none'}
                      }
@@ -92,16 +95,22 @@ const Preference = ({onChangeValue, next, source}) => {
                         What is your Mortgage Renewal Date?
                     </label>
                     <div className="col-sm-4">
-                        <input type="date" className="form-control"
-                               name="renewalDate"
-                               onChange={onChangeValue}
+                        {/*<input type="date" className="form-control"*/}
+                               {/*name="renewalDate"*/}
+                               {/*onChange={onChangeDate}*/}
+                        {/*/>*/}
+                        <DatePicker
+                            dateFormat="YYYY/MM/DD"
+                            selected={source.preference.renewalDate}
+                            onChange={onChangeDate}
+                            className="form-control date"
                         />
                     </div>
                 </div>
 
                 <div className="form-group row"
                      style={
-                         source.lookingTo == 2
+                         source.profile.lookingTo == 2
                              ? {display: 'flex'}
                              : {display: 'none'}
                      }
@@ -155,7 +164,7 @@ const Preference = ({onChangeValue, next, source}) => {
 
                 <div className="form-group row"
                      style={
-                         source.lookingTo != 0
+                         source.profile.lookingTo != 0
                              ? {display: 'flex'}
                              : {display: 'none'}
                      }

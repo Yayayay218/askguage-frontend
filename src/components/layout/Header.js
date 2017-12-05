@@ -9,17 +9,19 @@ class Header extends Component {
         super(props)
         this.signOut = this.signOut.bind(this)
     }
-    signOut () {
+
+    signOut() {
         this.props.dispatch(Actions.signOut())
     }
+
     render() {
         return (
             <header>
                 <nav className="navbar navbar-expand-lg navbar-dark bg-base" style={{marginBottom: '2em'}}>
                     <div className="container-fluid">
-                        <Link className="navbar-brand" to="/">
+                        <a className="navbar-brand" href="/">
                             <img src={logo} alt="Logo"/>
-                        </Link>
+                        </a>
                         <button className="navbar-toggler" type="button" data-toggle="collapse"
                                 data-target="#navbarSupportedContent"
                                 aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -28,22 +30,31 @@ class Header extends Component {
                         </button>
 
                         <div
-                            className={!this.props.isLogged ? 'collapse navbar-collapse hidden-nav' : 'collapse navbar-collapse'}
+                            className={typeof this.props.user == 'undefined' ? 'collapse navbar-collapse hidden-nav' : 'collapse navbar-collapse'}
                             id="navbarSupportedContent"
                         >
-                            <ul className="navbar-nav mr-auto" style={{marginLeft: 'auto'}}>
-                                <li className="nav-item" style={{marginRight: '7rem'}}>
-                                    <a className="nav-link" href="/my-requests">Customer Request</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="#">How It Works</a>
-                                </li>
-                            </ul>
+                            {
+                                typeof this.props.user == 'undefined' ? <div></div> :
+                                    <ul className="navbar-nav mr-auto" style={{marginLeft: 'auto'}}>
+                                        <li className="nav-item" style={{marginRight: '7rem'}}>
+                                            {
+                                                this.props.user.role == 0 ?
+                                                    <a className="nav-link" href="/my-requests">My Request</a>
+                                                    : <a className="nav-link" href="/my-requests">Customer Request</a>
+                                            }
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link" href="#">How It Works</a>
+                                        </li>
+                                    </ul>
+
+                            }
                             <ul className="navbar-nav">
                                 {
                                     typeof this.props.user == 'undefined' ? <li></li>
                                         : <li className="nav-item dropdown">
-                                            <a className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                            <a className="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+                                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                                href="#">{this.props.user.firstName + ' ' + this.props.user.lastName}</a>
                                             <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                                 <a className="dropdown-item" href="#" onClick={this.signOut}>Sign Out</a>

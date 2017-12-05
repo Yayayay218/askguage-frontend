@@ -25,7 +25,7 @@ class MyRequest extends Component {
                 <div className="container">
                     {
                         this.props.isFetched ?
-                            <RequestBox {...this.props}/> : <div>Empty</div>
+                            <RequestBox {...this.props}/> : <div></div>
                     }
                 </div>
             </div>

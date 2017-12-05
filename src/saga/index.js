@@ -6,7 +6,7 @@ import {signUp, login, getUser, signOut} from "./AuthSaga"
 import {getSetting} from "./SettingSaga";
 import {putProfile} from "./ProfileSaga";
 import {getQuestions} from "./QuestionSaga"
-import {postRequest, getRequest, putRequest} from "./RequestSaga";
+import {postRequest, getRequest, putRequest, getRequestById} from "./RequestSaga";
 
 export default function* root() {
     yield all([
@@ -19,6 +19,7 @@ export default function* root() {
         takeLatest(Types.GET_QUESTIONS, getQuestions),
         takeLatest(Types.POST_REQUEST, postRequest),
         takeLatest(Types.GET_REQUEST, getRequest),
-        takeLatest(Types.PUT_REQUEST, putRequest)
+        takeLatest(Types.PUT_REQUEST, putRequest),
+        takeLatest(Types.GET_REQUEST_BY_ID, getRequestById),
     ])
 }
