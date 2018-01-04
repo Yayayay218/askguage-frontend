@@ -88,7 +88,7 @@ export default class Parse {
     getRequest(data) {
         return this._fetch({
             method: 'GET',
-            url: '/requests?user='+data,
+            url: '/requests',
             timeout: 10000
         }).then(response => response.json());
     }

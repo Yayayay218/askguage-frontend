@@ -14,6 +14,8 @@ export function* putProfile({data}) {
             return
         }
         yield put(Actions.putProfileSuccess(response))
+        yield put(Actions.getUser(response))
+        yield take('GET_USERS_SUCCESS');
         history.push('/home')
         // }
     } catch (err) {

@@ -3,8 +3,9 @@ import Immutable from 'seamless-immutable';
 import createReducer from './CreateReducer';
 
 export const INITIAL_STATE = Immutable({
-    message: '',
-    active: false
+    // message: '',
+    // active: false,
+    requestType: -1
 });
 
 const startUp = (state, action) => {
@@ -28,10 +29,17 @@ const setAppProps = (state, action) => {
     });
 }
 
+const setRequestType = (state, action) => {
+    return state.merge({
+        requestType: action.data
+    });
+}
+
 const ACTION_HANDLERS = {
-    [Types.STARTUP]: startUp,
-    [Types.TOGGLE_MESSAGE]: toggleMessage,
-    [Types.SET_APP_PROPS]: setAppProps,
+    // [Types.STARTUP]: startUp,
+    // [Types.TOGGLE_MESSAGE]: toggleMessage,
+    // [Types.SET_APP_PROPS]: setAppProps,
+    [Types.SET_REQUEST_TYPE]: setRequestType,
 };
 
 export default createReducer(INITIAL_STATE, ACTION_HANDLERS);

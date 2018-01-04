@@ -12,5 +12,15 @@ const HomeBuyer = ({source}) => {
     return <h2>{source}</h2>
 };
 
+export const Home = ({source}) => {
+    if(source == PROFILE.BUY_NEW_HOME)
+        source = 'Buy a new house'
+    else if(source == PROFILE.RENEW_MORTGAGE)
+        source = 'Renew Mortgage'
+    else
+        source = 'Refinance Mortgage'
+    return <strong className="user-name">{source}</strong>
+}
+
 
 export default HomeBuyer;

@@ -15,6 +15,7 @@
     "react": "^16.0.0",
     "react-datepicker": "^0.61.0",
     "react-dom": "^16.0.0",
+    "react-google-autocomplete": "^1.0.15",
     "react-intl": "^2.4.0",
     "react-redux": "latest",
     "react-router": "^4.2.0",

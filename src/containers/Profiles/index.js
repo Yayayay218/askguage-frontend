@@ -3,12 +3,18 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux';
 import Actions from '../../actions/Creators'
 import Api from '../../services/dataService'
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import Autocomplete from 'react-google-autocomplete'
 
 class Profiles extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            profiles: {}
+            profiles: {
+                languages: 0,
+                dayOfBirth: moment()
+            },
             // jobTitle: '',
             // socialMedia: '',
             // optIn: '',
@@ -22,7 +28,18 @@ class Profiles extends Component {
         }
 
         this.onChangeValue = this.onChangeValue.bind(this)
+        this.onChangeDate = this.onChangeDate.bind(this)
         this.onSave = this.onSave.bind(this)
+        this.onChangeAddress = this.onChangeAddress.bind(this)
+    }
+
+    onChangeAddress(addr, field) {
+        this.setState({
+            profiles: {
+                ...this.state.profiles,
+                [field]: addr
+            }
+        })
     }
 
     onChangeValue(e) {
@@ -35,6 +52,15 @@ class Profiles extends Component {
                     [name]: value
                 }
             })
+    }
+
+    onChangeDate(date) {
+        this.setState({
+            profiles: {
+                ...this.state.profiles,
+                dayOfBirth: date
+            }
+        })
     }
 
     onSave() {
@@ -98,10 +124,18 @@ class Profiles extends Component {
                         <div className="col-sm-6">
                             <label className="col-sm-4 col-form-label">Business Address *</label>
                             <div className="col-sm-8">
-                                <input type="text"
-                                       className="form-control"
-                                       name="businessAddress"
-                                       onChange={this.onChangeValue}
+                                {/*<input type="text"*/}
+                                       {/*className="form-control"*/}
+                                       {/*name="businessAddress"*/}
+                                       {/*onChange={this.onChangeValue}*/}
+                                {/*/>*/}
+                                <Autocomplete
+                                    className="form-control"
+                                    onPlaceSelected={(place) => {
+                                        // console.log(place);
+                                        this.onChangeAddress(place.formatted_address, 'businessAddress')
+                                    }}
+                                    types={['(regions)']}
                                 />
                             </div>
                         </div>
@@ -147,10 +181,18 @@ class Profiles extends Component {
                                 <div className="col-sm-6">
                                     <label className="col-sm-4 col-form-label">Brokerage Address *</label>
                                     <div className="col-sm-8">
-                                        <input type="text"
-                                               className="form-control"
-                                               name="brokerageAddress"
-                                               onChange={this.onChangeValue}
+                                        {/*<input type="text"*/}
+                                               {/*className="form-control"*/}
+                                               {/*name="brokerageAddress"*/}
+                                               {/*onChange={this.onChangeValue}*/}
+                                        {/*/>*/}
+                                        <Autocomplete
+                                            className="form-control"
+                                            onPlaceSelected={(place) => {
+                                                // console.log(place);
+                                                this.onChangeAddress(place.formatted_address, 'brokerageAddress')
+                                            }}
+                                            types={['(regions)']}
                                         />
                                     </div>
                                 </div>
@@ -279,6 +321,7 @@ class Profiles extends Component {
     }
 
     render() {
+        console.log(this)
         if (!this.props.isFetched) {
             return <div>Loading...</div>
         }
@@ -319,12 +362,15 @@ class Profiles extends Component {
                             <div className="col-sm-8">
                                 <select className="custom-select" name="languages"
                                         onChange={this.onChangeValue}>
-                                    {
-                                        this.props.settings[0].languages.map((language, key) => {
-                                            return <option value={language._id} key={key}
-                                                           type={key}>{language.name}</option>
-                                        })
-                                    }
+                                    {/*{*/}
+                                    {/*this.props.settings[0].languages.map((language, key) => {*/}
+                                    {/*return <option value={language._id} key={key}*/}
+                                    {/*type={key}>{language.name}</option>*/}
+                                    {/*})*/}
+                                    {/*}*/}
+                                    <option value="0">English</option>
+                                    <option value="1">French</option>
+                                    <option value="2">Spanish</option>
                                 </select>
                             </div>
                         </div>
@@ -418,10 +464,16 @@ class Profiles extends Component {
                         <div className="col-sm-6">
                             <label className="col-sm-4 col-form-label">DOB *</label>
                             <div className="col-sm-8">
-                                <input type="text" className="form-control"
-                                       name="dayOfBirth"
-                                       value={this.state.dayOfBirth}
-                                       onChange={this.onChangeValue}
+                                {/*<input type="text" className="form-control"*/}
+                                {/*name="dayOfBirth"*/}
+                                {/*value={this.state.dayOfBirth}*/}
+                                {/*onChange={this.onChangeValue}*/}
+                                {/*/>*/}
+                                <DatePicker
+                                    dateFormat="YYYY/MM/DD"
+                                    selected={this.state.profiles.dayOfBirth}
+                                    onChange={this.onChangeDate}
+                                    className="form-control date"
                                 />
                             </div>
                         </div>
@@ -473,11 +525,19 @@ class Profiles extends Component {
                         <div className="col-sm-6">
                             <label className="col-sm-4 col-form-label">Address</label>
                             <div className="col-sm-8">
-                                <input type="text"
-                                       className="form-control"
-                                       name="address"
-                                       value={this.state.address}
-                                       onChange={this.onChangeValue}
+                                {/*<input type="text"*/}
+                                       {/*className="form-control"*/}
+                                       {/*name="address"*/}
+                                       {/*value={this.state.address}*/}
+                                       {/*onChange={this.onChangeValue}*/}
+                                {/*/>*/}
+                                <Autocomplete
+                                    className="form-control"
+                                    onPlaceSelected={(place) => {
+                                        // console.log(place);
+                                        this.onChangeAddress(place.formatted_address, 'address')
+                                    }}
+                                    types={['(regions)']}
                                 />
                             </div>
                         </div>

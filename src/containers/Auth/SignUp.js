@@ -3,24 +3,26 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux';
 import Actions from '../../actions/Creators'
 
-const Error = ({message}) => {
-    return (
-        <div className="alert alert-danger" role="alert">
-            {message}
-        </div>
-    )
+const Error = ({message, field}) => {
+    if (message && message.message)
+        return (
+            <p className="error-text">
+                {message.message}
+            </p>
+        )
+    else return (<div></div>)
 }
 
 class SignUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            role: '0',
-            emailValid: false,
-            passwordValid: false,
-            firstNameValid: false,
-            lastNameValid: false,
-            phoneValid: true,
+            email: '',
+            password: '',
+            firstName: '',
+            lastName: '',
+            confirmPassword: '',
+            role: '0'
         }
         this.onSignUp = this.onSignUp.bind(this)
         this.handleUserInput = this.handleUserInput.bind(this)
@@ -28,6 +30,15 @@ class SignUp extends Component {
 
     componentDidMount() {
 
+    }
+
+    componentWillReceiveProps(newProps) {
+        console.log(newProps)
+        if (!this.props.errors && newProps.errors)
+            this.setState({
+                errors: newProps.errors,
+                errorField: newProps.errors.param
+            })
     }
 
     handleUserInput(e) {
@@ -38,11 +49,11 @@ class SignUp extends Component {
 
     onSignUp() {
         const {state} = this
-
         this.props.dispatch(Actions.signUp(state));
     }
 
     render() {
+        console.log(this)
         return (
             <div className="container">
                 <div className="login-header">
@@ -80,7 +91,8 @@ class SignUp extends Component {
                             First Name *
                         </label>
                         <div className="col-sm-4 col-8">
-                            <input type="text" className="form-control"
+                            <input type="text"
+                                   className={this.state.errorField === 'firstName' ? 'form-control error' : 'form-control'}
                                    name="firstName"
                                    onChange={this.handleUserInput}
                             />
@@ -92,7 +104,8 @@ class SignUp extends Component {
                             Last Name *
                         </label>
                         <div className="col-sm-4 col-8">
-                            <input type="text" className="form-control"
+                            <input type="text"
+                                   className={this.state.errorField === 'lastName' ? 'form-control error' : 'form-control'}
                                    name="lastName"
                                    onChange={this.handleUserInput}
                             />
@@ -104,7 +117,8 @@ class SignUp extends Component {
                             Email *
                         </label>
                         <div className="col-sm-4 col-8">
-                            <input type="text" className="form-control"
+                            <input type="text"
+                                   className={this.state.errorField === 'email' ? 'form-control error' : 'form-control'}
                                    name="email"
                                    onChange={this.handleUserInput}
                             />
@@ -113,7 +127,7 @@ class SignUp extends Component {
 
                     <div className="form-group row">
                         <label className="col-sm-4 col-3 col-form-label">
-                            Phone
+                            Phone {this.state.role == 0 ? '' : '*'}
                         </label>
                         <div className="col-sm-4 col-8">
                             <input type="text" className="form-control"
@@ -128,7 +142,8 @@ class SignUp extends Component {
                             Password *
                         </label>
                         <div className="col-sm-4 col-8">
-                            <input type="password" className="form-control"
+                            <input type="password"
+                                   className={this.state.errorField === 'password' ? 'form-control error' : 'form-control'}
                                    name="password"
                                    onChange={this.handleUserInput}
                             />
@@ -140,20 +155,36 @@ class SignUp extends Component {
                             Confirm Password *
                         </label>
                         <div className="col-sm-4 col-8">
-                            <input type="password" className="form-control"
+                            <input type="password"
+                                   className={this.state.errorField === 'confirmPassword' ? 'form-control error' : 'form-control'}
                                    name="confirmPassword"
                                    onChange={this.handleUserInput}
                             />
                         </div>
                     </div>
 
+                    <div className="row">
+                        <div className="col-sm-4 offset-sm-4">
+                            {<Error message={this.state.errors}/>}
+                        </div>
+                    </div>
+
                     <div className="form-group row" style={{marginTop: '30px'}}>
                         <div className="col-sm-4 offset-sm-4 center-align">
-                            <button className="btn btn-login"
-                                    onClick={this.onSignUp}
-                            >
-                                Sign Up
-                            </button>
+                            {
+                                !this.props.isSignup ?
+                                    <button className="btn btn-login"
+                                            onClick={this.onSignUp}
+                                    >
+                                        Sign Up
+                                    </button>
+                                    :
+                                    <button className="btn btn-login m-progress"
+                                    >
+                                        Sign Up
+                                    </button>
+                            }
+
                         </div>
                     </div>
 
@@ -192,7 +223,10 @@ class SignUp extends Component {
 }
 
 function mapStateToProps(state) {
-    return {error: state.auth.error}
+    return {
+        errors: state.auth.error,
+        isSignup: state.auth.isSignup
+    }
 }
 
 export default connect(mapStateToProps)(SignUp)

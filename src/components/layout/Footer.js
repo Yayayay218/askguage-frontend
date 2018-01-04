@@ -1,7 +1,9 @@
 import React from 'react';
 
-const Footer = () => {
-    return (
+const Footer = ({isLanding}) => {
+    if (isLanding)
+        return (<div></div>)
+    else return (
         <footer>
             <div className="container">
                 <div className="row footer-content">

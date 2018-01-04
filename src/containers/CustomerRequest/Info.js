@@ -2,8 +2,9 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import NameInput from '../../components/formInputs/NameInput'
 import FormInput from '../../components/formInputs/FormInput'
+import Autocomplete from 'react-google-autocomplete';
 
-const Info = ({onChangeValue, next, source}) => {
+const Info = ({onChangeValue, next, source, onChangeAddress}) => {
     let {profile, info} = source
     return (
         <div className="container preference-request" style={{marginTop: '-17px'}}>
@@ -15,15 +16,33 @@ const Info = ({onChangeValue, next, source}) => {
                     Name
                 </label>
                 <div className="info-name d-flex flex-row">
-                    <NameInput name="firstName" placeholder="First Name" value={info.firstName} onChange={onChangeValue}/>
+                    <NameInput name="firstName" placeholder="First Name" value={info.firstName}
+                               onChange={onChangeValue}/>
                     <NameInput name="middleName" placeholder="Middle Name" value="" onChange={onChangeValue}/>
                     <NameInput name="lastName" placeholder="Last Name" value={info.lastName} onChange={onChangeValue}/>
                 </div>
             </div>
 
-            <FormInput type="text" label="Address" name="address" value={info.address} onChange={onChangeValue}/>
+            {/*<FormInput type="text" label="Address" name="address" value={info.address} onChange={onChangeValue}/>*/}
+            <div className="form-group row">
+                <label className="col-sm-4 custom-label">
+                    Address
+                </label>
+                <div className="col-sm-4">
+                    <Autocomplete
+                        className="form-control"
+                        onPlaceSelected={(place) => {
+                            console.log(place);
+                            onChangeAddress(place.formatted_address, 'address')
+                        }}
+                        types={['(regions)']}
+                        defaultValue={info.address}
+                    />
+                </div>
+            </div>
             <FormInput type="text" label="Email" name="email" value={info.email} onChange={onChangeValue}/>
-            <FormInput type="text" label="Phone Number" name="phoneNumber" value={info.phoneNumber} onChange={onChangeValue}/>
+            <FormInput type="text" label="Phone Number" name="phoneNumber" value={info.phoneNumber}
+                       onChange={onChangeValue}/>
 
             <div className="profile-line"></div>
             <div style={profile.realtor == 1 ? {display: 'block'} : {display: 'none'}}>
@@ -52,8 +71,10 @@ const Info = ({onChangeValue, next, source}) => {
                     </div>
                 </div>
 
-                <FormInput type="text" label="Job Title" name="jobTitle" value={info.jobTitle} onChange={onChangeValue}/>
-                <FormInput type="number" label="Length of Employer" name="lengthOfEmp" value={info.lengthOfEmp} onChange={onChangeValue}/>
+                <FormInput type="text" label="Job Title" name="jobTitle" value={info.jobTitle}
+                           onChange={onChangeValue}/>
+                <FormInput type="number" label="Length of Employer" name="lengthOfEmp" value={info.lengthOfEmp}
+                           onChange={onChangeValue}/>
                 <FormInput type="text" label="Industry" name="industry" value={info.industry} onChange={onChangeValue}/>
 
                 <div className="profile-line"></div>

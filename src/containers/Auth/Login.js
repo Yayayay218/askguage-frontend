@@ -3,24 +3,14 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux';
 import Actions from '../../actions/Creators'
 
-const FormErrors = ({formErrors, name}) => {
-    return (
-        <div>
-            {
-                formErrors[name].length > 0 ? <div className="alert alert-danger" role="alert">
-                    {name} {formErrors[name]}
-                </div> : <div></div>
-            }
-        </div>
-    )
-}
-
-const Error = ({message}) => {
-    return (
-        <div className="alert alert-danger" role="alert">
-            {message}
-        </div>
-    )
+const Error = ({message, field}) => {
+    if (message && message.message)
+        return (
+            <p className="error-text">
+                {message.message}
+            </p>
+        )
+    else return (<div></div>)
 }
 
 class Login extends Component {
@@ -32,7 +22,8 @@ class Login extends Component {
             formErrors: {email: '', password: ''},
             emailValid: false,
             passwordValid: false,
-            formValid: false
+            formValid: false,
+            errorField: ''
         }
         this.onLogin = this.onLogin.bind(this)
         this.handleUserInput = this.handleUserInput.bind(this)
@@ -42,59 +33,72 @@ class Login extends Component {
 
     }
 
+    componentWillReceiveProps(newProps) {
+        console.log(newProps)
+        if (!this.props.errors && newProps.errors)
+            this.setState({
+                errors: newProps.errors,
+                errorField: newProps.errors.param
+            })
+    }
+
     handleUserInput = (e) => {
         const name = e.target.name;
         const value = e.target.value;
         this.setState(
             {
                 [name]: value
-            },
-            () => {
-                this.validateField(name, value)
             }
         )
     }
 
-    validateField(fieldName, value) {
-        let fieldValidationErrors = this.state.formErrors;
-        let emailValid = this.state.emailValid;
-        let passwordValid = this.state.passwordValid;
+    // validateField(fieldName, value) {
+    //     let fieldValidationErrors = this.state.formErrors;
+    //     let emailValid = this.state.emailValid;
+    //     let passwordValid = this.state.passwordValid;
+    //
+    //     switch (fieldName) {
+    //         case 'email':
+    //             emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+    //             fieldValidationErrors.email = emailValid ? '' : ' is invalid';
+    //             break;
+    //         case 'password':
+    //             passwordValid = value.length >= 6;
+    //             fieldValidationErrors.password = passwordValid ? '' : ' is too short';
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    //     this.setState({
+    //         formErrors: fieldValidationErrors,
+    //         emailValid: emailValid,
+    //         passwordValid: passwordValid
+    //     }, this.validateForm);
+    // }
+    //
+    // validateForm() {
+    //     this.setState({formValid: this.state.emailValid && this.state.passwordValid});
+    // }
 
-        switch (fieldName) {
-            case 'email':
-                emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-                fieldValidationErrors.email = emailValid ? '' : ' is invalid';
-                break;
-            case 'password':
-                passwordValid = value.length >= 6;
-                fieldValidationErrors.password = passwordValid ? '' : ' is too short';
-                break;
-            default:
-                break;
-        }
-        this.setState({
-            formErrors: fieldValidationErrors,
-            emailValid: emailValid,
-            passwordValid: passwordValid
-        }, this.validateForm);
-    }
-
-    validateForm() {
-        this.setState({formValid: this.state.emailValid && this.state.passwordValid});
+    validateForm(email, password) {
+        if (email === '' || password === '')
+            return false
+        else
+            return true
     }
 
     onLogin() {
         const {state} = this;
-        this.props.dispatch(Actions.login(state));
+        this.props.dispatch(Actions.login(state))
     }
 
     render() {
-        // console.log(this)
         return (
             <div className="container">
                 <div className="login-header">
                     <h1 className="row justify-content-center">Log In</h1>
-                    <p className="row justify-content-center">Don't have an account?&nbsp;<a href="/signup">Sign up</a></p>
+                    <p className="row justify-content-center">Don't have an account?&nbsp;<a href="/signup">Sign up</a>
+                    </p>
                 </div>
 
                 <div className="login-form">
@@ -103,7 +107,7 @@ class Login extends Component {
                             Email
                         </label>
                         <div className="col-sm-4 col-8">
-                            <input type="email" className="form-control"
+                            <input type="email" className={this.state.errorField === 'email' ? 'form-control error' : 'form-control'}
                                    name="email"
                                    value={this.state.email}
                                    onChange={this.handleUserInput}
@@ -116,11 +120,16 @@ class Login extends Component {
                             Password
                         </label>
                         <div className="col-sm-4 col-8">
-                            <input type="password" className="form-control"
+                            <input type="password" className={this.state.errorField === 'password' ? 'form-control error' : 'form-control'}
                                    name="password"
                                    value={this.state.password}
                                    onChange={this.handleUserInput}
                             />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-sm-4 offset-sm-4">
+                            {<Error message={this.state.errors}/>}
                         </div>
                     </div>
 
@@ -137,11 +146,20 @@ class Login extends Component {
 
                     <div className="form-group row">
                         <div className="col-sm-4 offset-sm-4 center-align">
-                            <button className="btn btn-login"
-                                    onClick={this.onLogin}
-                            >
-                                Log In
-                            </button>
+                            {
+                                this.props.isLogin ?
+                                    <button className="btn btn-login m-progress"
+                                    >
+                                        Log In
+                                    </button>
+                                    :
+                                    <button className="btn btn-login"
+                                            onClick={this.onLogin}
+                                    >
+                                        Log In
+                                    </button>
+                            }
+
                         </div>
                     </div>
 
@@ -172,7 +190,11 @@ class Login extends Component {
 }
 
 function mapStateToProps(state) {
-    return {error: state.auth.error, isLogged: state.auth.isLogged}
+    return {
+        errors: state.auth.error,
+        isLogged: state.auth.isLogged,
+        isLogin: state.auth.isLogin
+    }
 
 }
 

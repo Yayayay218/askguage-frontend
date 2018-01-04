@@ -24,14 +24,15 @@ class CustomerRequest extends Component {
             profile: {},
             preference: {
                 renewalDate: moment(),
-                requiredDate: moment()
+                requiredDate: moment(),
+                preferredLanguages: 0
             },
             info: {
                 ...this.props.user,
                 ...this.props.user.profiles
             },
             finance: {},
-            status: 0,
+            status: 1,
             formErrors: false,
             screen: 'profile',
             screenStatus: {
@@ -50,20 +51,43 @@ class CustomerRequest extends Component {
         this.goFinance = this.goFinance.bind(this)
         this.submitCustomerRequest = this.submitCustomerRequest.bind(this)
         this.onChangeDate = this.onChangeDate.bind(this)
+        this.onChangeRequiredDate = this.onChangeRequiredDate.bind(this)
+        this.onChangeAddress = this.onChangeAddress.bind(this)
     }
 
     componentDidMount() {
+        // this.props.dispatch(Actions.getUser());
     }
-    componentWillReceiveProps (newProps) {
+
+    componentWillReceiveProps(newProps) {
         this.setState({
             requestId: newProps.request._id
         })
     }
+
     onChangeDate(date) {
         this.setState({
             preference: {
                 ...this.state.preference,
                 renewalDate: date
+            }
+        })
+    }
+
+    onChangeAddress(addr, field) {
+        this.setState({
+            preference: {
+                ...this.state.preference,
+                [field]: addr
+            }
+        })
+    }
+
+    onChangeRequiredDate(date) {
+        this.setState({
+            preference: {
+                ...this.state.preference,
+                requiredDate: date
             }
         })
     }
@@ -90,7 +114,6 @@ class CustomerRequest extends Component {
                     {
                         ...this.state.preference,
                         [name]: value,
-                        'preferredLanguages[0]': 0
                     }
             })
     }
@@ -177,12 +200,16 @@ class CustomerRequest extends Component {
             return (
                 <Preference source={this.state} onChangeValue={this.handleReferenceInput}
                             onChangeDate={this.onChangeDate}
+                            onChangeRequiredDate={this.onChangeRequiredDate}
+                            onChangeAddress={this.onChangeAddress}
                             next={this.goInfo}/>
             )
 
         if (this.state.screen === 'info')
             return (
-                <Info source={this.state} onChangeValue={this.handleInfoInput} next={this.goFinance}/>
+                <Info source={this.state} onChangeValue={this.handleInfoInput} next={this.goFinance}
+                      onChangeAddress={this.onChangeAddress}
+                />
             )
 
         if (this.state.screen === 'finance')

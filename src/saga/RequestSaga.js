@@ -40,8 +40,9 @@ export function* putRequest({data}) {
 
 export function* getRequest({data}) {
     try {
-        const ParseApi = new Api(null);
-        const response = yield call([ParseApi, ParseApi.getRequest], data.user._id)
+        const {token} = yield select((state) => state.auth);
+        const ParseApi = new Api(token);
+        const response = yield call([ParseApi, ParseApi.getRequest])
         if (response && !response.success) {
             yield put(Actions.getRequestFailure(response.message))
             return

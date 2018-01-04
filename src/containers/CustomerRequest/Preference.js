@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import FormInput from '../../components/formInputs/FormInput'
 import CheckBoxInput from '../../components/formInputs/CheckBoxInput'
 import DatePicker from 'react-datepicker';
-
+import Autocomplete from 'react-google-autocomplete';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const Preference = ({onChangeValue, next, source, onChangeDate}) => {
+const Preference = ({onChangeValue, next, source, onChangeDate, onChangeRequiredDate, onChangeAddress}) => {
     return (
         <div className="container preference-request">
             <div>
@@ -23,9 +23,17 @@ const Preference = ({onChangeValue, next, source, onChangeDate}) => {
                         <p className="sub-label">(Neighborhood, City, Province, Postal Code)</p>
                     </label>
                     <div className="col-sm-4">
-                        <input type="text" className="form-control"
-                               name="whereBuy"
-                               onChange={onChangeValue}
+                        {/*<input type="text" className="form-control"*/}
+                               {/*name="whereBuy"*/}
+                               {/*onChange={onChangeValue}*/}
+                        {/*/>*/}
+                        <Autocomplete
+                            className="form-control"
+                            onPlaceSelected={(place) => {
+                                console.log(place);
+                                onChangeAddress(place.formatted_address, 'whereBuy')
+                            }}
+                            types={['(regions)']}
                         />
                     </div>
                 </div>
@@ -243,8 +251,25 @@ const Preference = ({onChangeValue, next, source, onChangeDate}) => {
                         </select>
                     </div>
                 </div>
-                <FormInput label="Funds Required Date" name="requiredDate" onChange={onChangeValue} type="date"/>
-
+                {/*<FormInput label="Funds Required Date" name="requiredDate" onChange={onChangeValue} type="date"/>*/}
+                <div className="form-group row"
+                >
+                    <label className="col-sm-4 custom-label">
+                        Funds Required Date
+                    </label>
+                    <div className="col-sm-4">
+                        {/*<input type="date" className="form-control"*/}
+                        {/*name="renewalDate"*/}
+                        {/*onChange={onChangeDate}*/}
+                        {/*/>*/}
+                        <DatePicker
+                            dateFormat="YYYY/MM/DD"
+                            selected={source.preference.requiredDate}
+                            onChange={onChangeRequiredDate}
+                            className="form-control date"
+                        />
+                    </div>
+                </div>
                 <button className="btn btn-primary" onClick={next}>Next</button>
             </div>
         </div>

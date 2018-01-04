@@ -92,15 +92,23 @@ class RequestDetails extends Component {
 
     render() {
         console.log(this)
+        const {profile} = this.props.requests
+        if (!this.props.isFetched)
+            return (<div></div>)
         return (
             <div className="request-details">
                 <div className="container-fluid">
                     <div className="d-flex justify-content-end top-wrapper">
                         <label className="label-header">My Request</label>
                         <div className="divider"></div>
-                        <label className="mr-auto label-detail">Buy a new house, #233512</label>
-                        <label className="status">Status: <strong>Draft</strong></label>
-                        <button className="btn btn-submit">Submit Request</button>
+                        <label className="mr-auto label-detail">
+                            {
+                                profile.lookingTo == 0 ? 'Buy a new house' : profile.lookingTo == 1
+                                    ? 'Renew Mortgage' : 'Refinance Mortgage'
+                            }
+                        </label>
+                        <label className="status">Status: <strong>Open to receive bids</strong></label>
+                        <button className="btn btn-cancel">Cancel This Request</button>
                     </div>
                     <div className="container menu-wrapper">
                         <div className="d-flex" style={{marginLeft: '-15px'}}>
@@ -163,8 +171,7 @@ class RequestDetails extends Component {
                         </div>
                         <div className="col-sm-8 col-12">
                             {
-                                this.props.isFetched ?
-                                    this.renderRequestDetail() : <div></div>
+                                this.renderRequestDetail()
                             }
                         </div>
                     </div>

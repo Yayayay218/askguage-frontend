@@ -9,7 +9,8 @@ export const INITIAL_STATE = Immutable({
     isLogin: false,
     token: null,
     role: null,
-    hasProfile: false
+    hasProfile: false,
+    isSignup: false,
 });
 
 const signOut = (state, action) => {
@@ -20,7 +21,8 @@ const signOut = (state, action) => {
         isLogin: false,
         token: null,
         role: null,
-        hasProfile: false
+        hasProfile: false,
+        isSignup: false,
     })
 }
 
@@ -30,6 +32,7 @@ const signUp = (state, action) => {
         signInType: null,
         fbToken: null,
         isLogin: false,
+        isSignup: true
     });
 }
 
@@ -37,6 +40,7 @@ const signUpSuccess = (state, action) =>
     state.merge({
         isLogged: false,
         isLogin: false,
+        isSignup: true
     });
 
 const signUpFailure = (state, action) =>
@@ -44,7 +48,8 @@ const signUpFailure = (state, action) =>
         isLogged: false,
         isLogin: false,
         editing: false,
-        error: action.errCode.message
+        isSignup: false,
+        error: action.errCode.errors
     });
 
 const login = (state, action) =>
@@ -68,7 +73,7 @@ const loginFailure = (state, action) =>
     state.merge({
         isLogged: false,
         isLogin: false,
-        error: action.errCode.message,
+        error: action.errCode.errors,
         editing: false,
     });
 

@@ -6,9 +6,9 @@ class App extends Component {
     render() {
         return (
             <div>
-                <Header/>
+                <Header {...this.props}/>
                 {this.props.children}
-                <Footer/>
+                <Footer {...this.props}/>
             </div>
         )
     }
