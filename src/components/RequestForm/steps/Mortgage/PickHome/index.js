@@ -4,61 +4,67 @@ import StepLayout from '../../StepLayout'
 class PickHome extends Component {
     constructor(props) {
         super(props)
+        const {_request} = props
         this.state = {
-            detached: false,
-            semi: false,
-            condo: false,
-            other: false
+            detached: _request.kindOfHome === 0,
+            semi: _request.kindOfHome === 1,
+            condo: _request.kindOfHome === 2,
+            other: _request.kindOfHome === 3
         }
     }
 
     render() {
-        const {onGoNext, onGoBack} = this.props
+        const {onGoNext, onGoBack, _request, onChange, isValid} = this.props
         const {detached, semi, condo, other} = this.state
         const bedRooms = [
             {
-                id: 0,
+                id: '1',
                 value: '1'
             },
             {
-                id: 1,
+                id: '2',
                 value: '2'
             },
             {
-                id: 2,
+                id: '3',
                 value: '3'
             },
             {
-                id: 3,
+                id: '4',
                 value: '4'
             },
             {
-                id: 4,
+                id: '5+',
                 value: '5+'
             },
         ]
         const squareFTs = [
             {
-                id: 0,
+                id: '100-500',
                 value: '100-500'
             },
             {
-                id: 1,
+                id: '500-1000',
                 value: '500-1000'
             },
             {
-                id: 2,
+                id: '1000-2000',
                 value: '1000-2000'
             },
             {
-                id: 3,
+                id: '2000-5000',
                 value: '2000-5000'
             },
             {
-                id: 4,
+                id: '5000+',
                 value: '5000+'
             }
         ]
+
+        const bind = (field) => ({
+            value: _request[field],
+            onChange: (e) => onChange({..._request, [field]: e.target.value}),
+        });
 
         return (
             <div>
@@ -76,7 +82,17 @@ class PickHome extends Component {
                                         </div>
                                     ) : (
                                         <div className="service-box detached"
-                                            onClick={()=>{this.setState({detached: true, semi: false, condo: false, other: false})}}
+                                             onClick={
+                                                 () => {
+                                                     this.setState({
+                                                         detached: true,
+                                                         semi: false,
+                                                         condo: false,
+                                                         other: false
+                                                     })
+                                                     onChange({..._request, kindOfHome: 0})
+                                                 }
+                                             }
                                         >
                                             <label htmlFor="">Detached House</label>
                                         </div>
@@ -92,7 +108,16 @@ class PickHome extends Component {
                                         </div>
                                     ) : (
                                         <div className="service-box semi"
-                                             onClick={()=>{this.setState({detached: false, semi: true, condo: false, other: false})}}
+                                             onClick={() => {
+                                                 this.setState({
+                                                     detached: false,
+                                                     semi: true,
+                                                     condo: false,
+                                                     other: false
+                                                 })
+                                                 onChange({..._request, kindOfHome: 1})
+
+                                             }}
                                         >
                                             <label htmlFor="">Semi TownHouse</label>
                                         </div>
@@ -108,7 +133,16 @@ class PickHome extends Component {
                                         </div>
                                     ) : (
                                         <div className="service-box condo"
-                                             onClick={()=>{this.setState({detached: false, semi: false, condo: true, other: false})}}
+                                             onClick={() => {
+                                                 this.setState({
+                                                     detached: false,
+                                                     semi: false,
+                                                     condo: true,
+                                                     other: false
+                                                 })
+                                                 onChange({..._request, kindOfHome: 2})
+
+                                             }}
                                         >
                                             <label htmlFor="">Condo Apartment</label>
                                         </div>
@@ -124,7 +158,16 @@ class PickHome extends Component {
                                         </div>
                                     ) : (
                                         <div className="service-box other"
-                                             onClick={()=>{this.setState({detached: false, semi: false, condo: false, other: true})}}
+                                             onClick={() => {
+                                                 this.setState({
+                                                     detached: false,
+                                                     semi: false,
+                                                     condo: false,
+                                                     other: true
+                                                 })
+                                                 onChange({..._request, kindOfHome: 3})
+
+                                             }}
                                         >
                                             <label htmlFor="">Other Type</label>
                                         </div>
@@ -141,9 +184,9 @@ class PickHome extends Component {
                         </label>
                         <div className="col-md-12 no-padding">
                             <select type="select" className="custom-select"
-                                    name="numberOfBedRoom"
+                                    {...bind("numberOfBedRoom")}
                             >
-                                <option value=""></option>
+                                <option value="-1"></option>
                                 {
                                     bedRooms.map(bedRoom => (
                                         <option value={bedRoom.id} key={bedRoom.id}>{bedRoom.value}</option>
@@ -159,9 +202,10 @@ class PickHome extends Component {
 
                         <div className="col-md-12 no-padding">
                             <select type="select" className="custom-select"
-                                    name="numberOfBedRoom"
+                                    {...bind("squareFT")}
+
                             >
-                                <option value=""></option>
+                                <option value="-1"></option>
                                 {
                                     squareFTs.map(square => (
                                         <option value={square.id} key={square.id}>{square.value}</option>
@@ -174,6 +218,7 @@ class PickHome extends Component {
                 <StepLayout
                     onGoBack={onGoBack}
                     onGoNext={onGoNext}
+                    isValid={isValid}
                 />
             </div>
         )

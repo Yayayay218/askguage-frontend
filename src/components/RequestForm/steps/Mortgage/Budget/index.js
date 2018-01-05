@@ -8,7 +8,12 @@ class Income extends Component {
     }
 
     render() {
-        const {onGoNext} = this.props
+        const {onGoNext, _request, onChange, isValid} = this.props
+
+        const bind = (field) => ({
+            value: _request[field],
+            onChange: (e) => onChange({..._request, [field]: e.target.value})
+        })
 
         return (
             <div>
@@ -20,7 +25,9 @@ class Income extends Component {
                                 Current mortgage amount
                             </label>
                             <div className="col-md-12">
-                                <input type="text" className="form-control"/>
+                                <input type="text" className="form-control"
+                                       {...bind("mortgageAmount")}
+                                />
                             </div>
                         </div>
                     </div>
@@ -30,7 +37,10 @@ class Income extends Component {
                                 How much more do you need.
                             </label>
                             <div className="col-md-12">
-                                <input type="text" className="form-control"/>
+                                <input type="text" className="form-control"
+                                       {...bind("needMore")}
+
+                                />
                             </div>
                         </div>
                     </div>
@@ -42,7 +52,9 @@ class Income extends Component {
                                 Whats the Value of your home?
                             </label>
                             <div className="col-md-12">
-                                <input type="text" className="form-control"/>
+                                <input type="text" className="form-control"
+                                       {...bind("homeValue")}
+                                />
                             </div>
                         </div>
                     </div>
@@ -52,7 +64,13 @@ class Income extends Component {
                                 Renewing or Refinance
                             </label>
                             <div className="col-md-12">
-                                <input type="text" className="form-control"/>
+                                <select type="select" className="custom-select"
+                                        {...bind("mortgageType")}
+                                >
+                                    <option value=""></option>
+                                    <option value="0">Renew</option>
+                                    <option value="1">Refinance</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -60,6 +78,7 @@ class Income extends Component {
 
                 <StepLayout
                     onGoNext={onGoNext}
+                    isValid={isValid}
                 />
             </div>
         )

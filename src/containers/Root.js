@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import {Provider} from 'react-redux'
+import {connect} from 'react-redux';
+
 import Home from '../containers/Home'
 import SignUp from './Auth/SignUp'
 import Login from './Auth/Login'
@@ -12,8 +14,8 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import configureStore from '../store/Store';
 
 class Root extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             isLoading: true,
             active: false,
@@ -41,8 +43,25 @@ class Root extends Component {
         )
     }
 }
+function redirect(location) {
+    return class RedirectRoute extends Component {
+        constructor(props, context) {
+            super(props, context);
 
+            props.history.push(location);
+        }
+        render() {
+            return null;
+        }
+    }
+}
 
 Root.propTypes = {}
 
+function mapStateToProps(state) {
+    return {
+        app: state.app
+    }
+
+}
 export default Root

@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 
 class StepLayout extends Component {
     render() {
-        const {onGoNext, onGoBack, done} = this.props
+        const {onGoNext, onGoBack, done, isValid} = this.props
         if (onGoBack)
             return (
                 <div>
@@ -17,7 +17,7 @@ class StepLayout extends Component {
                         <div className="col-md-6 col-6">
                             <button
                                 className="btn btn-next"
-                                disabled={done}
+                                disabled={done || !isValid}
                                 onClick={onGoNext}
                             >Next
                             </button>
@@ -28,6 +28,7 @@ class StepLayout extends Component {
         return (
             <button
                 className="btn btn-next"
+                disabled={!isValid}
                 onClick={onGoNext}
             >Next
             </button>

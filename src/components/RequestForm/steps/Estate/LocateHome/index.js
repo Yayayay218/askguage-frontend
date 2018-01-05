@@ -9,7 +9,7 @@ class LocateHome extends Component {
     }
 
     render() {
-        const {onGoNext, onGoBack} = this.props
+        const {onGoNext, onGoBack, _request, onChange, isValid} = this.props
 
         return (
             <div>
@@ -20,13 +20,25 @@ class LocateHome extends Component {
                     <div className="col-md-12">
                         <Autocomplete
                             className="form-control"
+                            onPlaceSelected={(place) => {
+                                onChange({
+                                    ..._request,
+                                    homeAddress: {
+                                        address: place.formatted_address,
+                                        lat: place.geometry.location.lat(),
+                                        lng: place.geometry.location.lng()
+                                    }
+                                })
+                            }}
                             types={['(regions)']}
+                            defaultValue={_request['homeAddress']['address']}
                         />
                     </div>
                 </div>
                 <StepLayout
                     onGoBack={onGoBack}
                     onGoNext={onGoNext}
+                    isValid={isValid}
                 />
 
             </div>

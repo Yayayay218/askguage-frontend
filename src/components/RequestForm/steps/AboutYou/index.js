@@ -9,10 +9,14 @@ class AboutYou extends Component {
         super(props)
         this.state = {}
     }
-
     render() {
-        const {onGoNext, onGoBack} = this.props
-        console.log(this.props)
+        const {onGoNext, onGoBack, _request, onChange, isValid} = this.props
+
+        const bind = (field) => ({
+            value: _request[field],
+            onChange: (e) => onChange({..._request, [field]: e.target.value}),
+        });
+
         return (
             <div>
                 <h2>Just bit more about you?</h2>
@@ -26,6 +30,8 @@ class AboutYou extends Component {
                                 <DatePicker
                                     dateFormat="YYYY/MM/DD"
                                     className="form-control date"
+                                    selected={_request["birthDay"]}
+                                    onChange={(e) => onChange({..._request, birthDay: e})}
                                 />
                             </div>
                         </div>
@@ -36,7 +42,9 @@ class AboutYou extends Component {
                                 Occupation type
                             </label>
                             <div className="col-md-12">
-                                <input type="text" className="form-control"/>
+                                <input type="text" className="form-control"
+                                       {...bind("occupationType")}
+                                />
                             </div>
                         </div>
                     </div>
@@ -46,13 +54,16 @@ class AboutYou extends Component {
                         Citizen Type
                     </label>
                     <div className="col-md-12">
-                        <input type="text" className="form-control"/>
+                        <input type="text" className="form-control"
+                               {...bind("citizenType")}
+                        />
                     </div>
                 </div>
 
                 <StepLayout
                     onGoBack={onGoBack}
                     onGoNext={onGoNext}
+                    isValid={isValid}
                     done={true}
                 />
             </div>

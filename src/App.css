@@ -1111,6 +1111,10 @@ a:hover {
   text-transform: uppercase;
   margin-top: 15px;
 }
+.create-request-form .btn-next:disabled {
+  background-color: #dddddd !important;
+  cursor: not-allowed;
+}
 .create-request-form .btn-back {
   border-radius: 5px;
   border: solid 1px #3d4d65;

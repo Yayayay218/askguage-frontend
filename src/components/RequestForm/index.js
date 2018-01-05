@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux';
+import moment from 'moment';
 
+import 'react-datepicker/dist/react-datepicker.css';
 import FlipWizard from '../FlipPanel/index'
 import Layout from '../../containers/App'
 import PickHome from './steps/Estate/PickHome'
@@ -17,16 +19,54 @@ class CreateRequest extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isLanding: false
+            isLanding: false,
+            _request: {
+                isEstate: props.app.requestType.estate === true,
+                kindOfHome: -1,
+                numberOfBedRoom: -1,
+                squareFT: -1,
+                homeAddress: {
+                    address: '',
+                    lat: '',
+                    lng: ''
+                },
+                budget: {
+                    min: '',
+                    max: ''
+                },
+                areQualified: '',
+                ownership: '',
+                houseHold: '',
+                monthlyLiability: '',
+                downPayment: '',
+                netAsset: '',
+                birthDay: moment(),
+                occupationType: '',
+                citizenType: '',
+                homeValue: '',
+                mortgageAmount: '',
+                needMore: '',
+                mortgageType: ''
+            }
         }
+        if (props.app.requestType === -1)
+            props.history.push('/')
     }
 
     render() {
+        const {app} = this.props
+
+        const {_request} = this.state
         const estateSteps = [
             {
                 render: ({onGoNext}) => (
                     <PickHome
                         onGoNext={onGoNext}
+                        _request={_request}
+                        onChange={(_request) => {
+                            this.setState({_request})
+                        }}
+                        isValid={_request.kindOfHome != -1 && _request.numberOfBedRoom != -1 && _request.squareFT != -1}
                     />
                 )
             },
@@ -35,6 +75,11 @@ class CreateRequest extends Component {
                     <LocateHome
                         onGoNext={onGoNext}
                         onGoBack={onGoBack}
+                        _request={_request}
+                        onChange={(_request) => {
+                            this.setState({_request})
+                        }}
+                        isValid={_request.homeAddress.address !== ''}
                     />
                 )
             },
@@ -43,6 +88,11 @@ class CreateRequest extends Component {
                     <Budget
                         onGoNext={onGoNext}
                         onGoBack={onGoBack}
+                        _request={_request}
+                        onChange={(_request) => {
+                            this.setState({_request})
+                        }}
+                        isValid={_request.budget.min !== '' && _request.budget.max !== '' && _request.areQualified !== ''}
                     />
                 )
             },
@@ -51,6 +101,11 @@ class CreateRequest extends Component {
                     <OwnerShip
                         onGoNext={onGoNext}
                         onGoBack={onGoBack}
+                        _request={_request}
+                        onChange={(_request) => {
+                            this.setState({_request})
+                        }}
+                        isValid={_request.ownership !== ''}
                     />
                 )
             },
@@ -59,6 +114,11 @@ class CreateRequest extends Component {
                     <InCome
                         onGoNext={onGoNext}
                         onGoBack={onGoBack}
+                        _request={_request}
+                        onChange={(_request) => {
+                            this.setState({_request})
+                        }}
+                        isValid={_request.houseHold !== '' && _request.downPayment !== '' && _request.monthlyLiability !== '' && _request.netAsset !== ''}
                     />
                 )
             },
@@ -67,6 +127,11 @@ class CreateRequest extends Component {
                     <AboutYou
                         onGoNext={onGoNext}
                         onGoBack={onGoBack}
+                        _request={_request}
+                        onChange={(_request) => {
+                            this.setState({_request})
+                        }}
+                        isValid={_request.birthDay !== '' && _request.citizenType !== '' && _request.occupationType}
                     />
                 )
             }
@@ -76,6 +141,11 @@ class CreateRequest extends Component {
                 render: ({onGoNext}) => (
                     <MortgageBudget
                         onGoNext={onGoNext}
+                        _request={_request}
+                        onChange={(_request) => {
+                            this.setState({_request})
+                        }}
+                        isValid={_request.homeValue !== '' && _request.mortgageAmount !== '' && _request.mortgageType !== '' && _request.needMore !== ''}
                     />
                 )
             },
@@ -84,6 +154,11 @@ class CreateRequest extends Component {
                     <MortgagePickHome
                         onGoNext={onGoNext}
                         onGoBack={onGoBack}
+                        _request={_request}
+                        onChange={(_request) => {
+                            this.setState({_request})
+                        }}
+                        isValid={_request.kindOfHome != -1 && _request.numberOfBedRoom != -1 && _request.squareFT != -1}
                     />
                 )
             },
@@ -92,6 +167,11 @@ class CreateRequest extends Component {
                     <MortgageLocateHome
                         onGoNext={onGoNext}
                         onGoBack={onGoBack}
+                        _request={_request}
+                        onChange={(_request) => {
+                            this.setState({_request})
+                        }}
+                        isValid={_request.homeAddress.address !== ''}
                     />
                 )
             },
@@ -100,6 +180,11 @@ class CreateRequest extends Component {
                     <OwnerShip
                         onGoNext={onGoNext}
                         onGoBack={onGoBack}
+                        _request={_request}
+                        onChange={(_request) => {
+                            this.setState({_request})
+                        }}
+                        isValid={_request.ownership !== ''}
                     />
                 )
             },
@@ -108,6 +193,11 @@ class CreateRequest extends Component {
                     <InCome
                         onGoNext={onGoNext}
                         onGoBack={onGoBack}
+                        _request={_request}
+                        onChange={(_request) => {
+                            this.setState({_request})
+                        }}
+                        isValid={_request.houseHold !== '' && _request.downPayment !== '' && _request.monthlyLiability !== '' && _request.netAsset !== ''}
                     />
                 )
             },
@@ -116,13 +206,18 @@ class CreateRequest extends Component {
                     <AboutYou
                         onGoNext={onGoNext}
                         onGoBack={onGoBack}
+                        _request={_request}
+                        onChange={(_request) => {
+                            this.setState({_request})
+                        }}
+                        isValid={_request.birthDay !== '' && _request.citizenType !== '' && _request.occupationType}
                     />
                 )
             }
         ]
-        const {app} = this.props
 
         let steps = app.requestType.estate ? estateSteps : mortgageSteps
+        console.log(this)
         return (
             <Layout {...this.state}>
                 <div className="container create-request-form">
@@ -147,10 +242,12 @@ class CreateRequest extends Component {
         );
     }
 }
+
 function mapStateToProps(state) {
     return {
         app: state.app
     }
 
 }
+
 export default connect(mapStateToProps)(CreateRequest)

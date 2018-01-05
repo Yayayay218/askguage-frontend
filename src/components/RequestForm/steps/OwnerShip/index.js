@@ -8,83 +8,7 @@ class OwnerShip extends Component {
     }
 
     render() {
-        const min = [
-            {
-                id: 0,
-                value: '100000'
-            },
-            {
-                id: 1,
-                value: '200000'
-            },
-            {
-                id: 2,
-                value: '300000'
-            },
-            {
-                id: 3,
-                value: '400000'
-            },
-            {
-                id: 4,
-                value: '500000'
-            },
-            {
-                id: 5,
-                value: '600000'
-            },
-            {
-                id: 6,
-                value: '1000000'
-            },
-            {
-                id: 7,
-                value: '1500000'
-            },
-        ]
-        const max = [
-            {
-                id: 0,
-                value: '200000'
-            },
-            {
-                id: 1,
-                value: '300000'
-            },
-            {
-                id: 2,
-                value: '400000'
-            },
-            {
-                id: 3,
-                value: '500000'
-            },
-            {
-                id: 4,
-                value: '600000'
-            },
-            {
-                id: 5,
-                value: '1000000'
-            },
-            {
-                id: 6,
-                value: '1500000'
-            },
-            {
-                id: 7,
-                value: '2000000'
-            },
-            {
-                id: 8,
-                value: '3000000'
-            },
-            {
-                id: 9,
-                value: '5000000+'
-            },
-        ]
-        const {onGoNext, onGoBack} = this.props
+        const {onGoNext, onGoBack, _request, onChange, isValid} = this.props
 
         return (
             <div>
@@ -97,6 +21,8 @@ class OwnerShip extends Component {
                             <input type="radio" className="custom-control-input"
                                    value='1'
                                    name='ownership'
+                                   defaultChecked={_request["ownership"] === 1}
+                                   onChange={(e) => onChange({..._request, ownership: 1})}
                             />
                             <span className="custom-control-indicator"></span>
                             <span className="custom-control-description custom-label">Yes</span>
@@ -105,6 +31,8 @@ class OwnerShip extends Component {
                             <input type="radio" className="custom-control-input"
                                    value='0'
                                    name='ownership'
+                                   defaultChecked={_request["ownership"] === 0}
+                                   onChange={(e) => onChange({..._request, ownership: 0})}
                             />
                             <span className="custom-control-indicator"></span>
                             <span className="custom-control-description custom-label">No</span>
@@ -114,6 +42,7 @@ class OwnerShip extends Component {
                 <StepLayout
                     onGoBack={onGoBack}
                     onGoNext={onGoNext}
+                    isValid={isValid}
                 />
             </div>
         )
