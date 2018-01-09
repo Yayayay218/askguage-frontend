@@ -19,7 +19,7 @@ export default class Parse {
     signUp(data) {
         return this._fetch({
             method: 'POST',
-            url: '/auth/register',
+            url: '/users',
             body: data,
             timeout: 10000
         }).then(response => response.json());
@@ -28,8 +28,15 @@ export default class Parse {
     login(data) {
         return this._fetch({
             method: 'POST',
-            url: '/auth/login',
+            url: '/users/login?include=user',
             body: data,
+            timeout: 10000
+        }).then(response => response.json());
+    }
+    logout(token) {
+        return this._fetch({
+            method: 'POST',
+            url: `/users/logout?accessToken=${token}`,
             timeout: 10000
         }).then(response => response.json());
     }
@@ -70,7 +77,7 @@ export default class Parse {
     postRequest(data) {
         return this._fetch({
             method: 'POST',
-            url: '/requests',
+            url: '/customerRequests',
             body: data,
             timeout: 10000
         }).then(response => response.json());
@@ -85,10 +92,10 @@ export default class Parse {
         }).then(response => response.json());
     }
 
-    getRequest(data) {
+    getRequest(query) {
         return this._fetch({
             method: 'GET',
-            url: '/requests',
+            url: `/customerRequests?${query}`,
             timeout: 10000
         }).then(response => response.json());
     }

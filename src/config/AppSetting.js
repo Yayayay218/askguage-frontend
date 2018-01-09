@@ -1,5 +1,5 @@
 const config = {
-    URL: 'http://138.197.143.187:3000/api',
+    URL: 'http://138.197.143.187:3000/api/v1',
     SECRET_KEY: 'peWseTYsjSLDzZBFYhJb2ouZUxPMAHbR'
 };
 

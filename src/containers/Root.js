@@ -4,11 +4,11 @@ import {connect} from 'react-redux';
 
 import Home from '../containers/Home'
 import SignUp from './Auth/SignUp'
-import Login from './Auth/Login'
+import Login from './Auth/SignIn'
 import Profiles from './Profiles/index'
-import CustomerRequest from '../containers/CustomerRequest'
-import MyRequest from '../containers/MyRequests'
+import MyRequest from '../components/MyRequests'
 import RequestDetails from '../containers/MyRequests/RequestDetails'
+import SignUpCustomer from '../containers/Auth/SignUpCustomer'
 import CreateRequest from '../components/RequestForm'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import configureStore from '../store/Store';
@@ -30,13 +30,14 @@ class Root extends Component {
                 <Router>
                     <Switch>
                         <Route exact path="/" component={Home}/>
-                        <Route path="/signup" component={SignUp}/>
+                        <Route exact path="/signup" component={SignUp}/>
                         <Route path="/login" component={Login}/>
                         <Route path="/profile" component={Profiles}/>
                         <Route path="/create-request" component={CreateRequest}/>
                         <Route path="/my-requests" component={MyRequest}/>
                         <Route path="/customer-requests" component={MyRequest}/>
                         <Route path="/view/:id" component={RequestDetails}/>
+                        <Route path="/signup/customer" component={SignUpCustomer}/>
                     </Switch>
                 </Router>
             </Provider>

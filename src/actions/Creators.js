@@ -47,9 +47,13 @@ const getRequestByIdSuccess = (response) => createAction(Types.GET_REQUEST_BY_ID
 const getRequestByIdFailure = (errCode) => createAction(Types.GET_REQUEST_BY_ID_FAILURE, {errCode})
 
 const setRequestType = (data) => createAction(Types.SET_REQUEST_TYPE, {data})
+const setRequestTmp = (data) => createAction(Types.SET_REQUEST_TMP, {data})
+const removeRequestTmp = () => createAction(Types.REMOVE_REQUEST_TMP)
 
 export default {
     setRequestType,
+    setRequestTmp,
+    removeRequestTmp,
     signOut,
     signUp,
     signUpSuccess,

@@ -15,6 +15,7 @@ class Header extends Component {
     }
 
     render() {
+        const {user, token} = this.props
         return (
             <header>
                 {
@@ -47,10 +48,10 @@ class Header extends Component {
                                     </ul>
                                     <ul className="navbar-nav">
                                         <li className="nav-item">
-                                            <a className="nav-link" href="#">Login</a>
+                                            <a className="nav-link" href="/login">Login</a>
                                         </li>
                                         <li className="nav-item sign-up">
-                                            <a className="nav-link" href="#">Sign up</a>
+                                            <a className="nav-link" href="/signup/customer">Sign up</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -69,15 +70,15 @@ class Header extends Component {
                                 </button>
 
                                 <div
-                                    className={typeof this.props.user == 'undefined' ? 'collapse navbar-collapse hidden-nav' : 'collapse navbar-collapse'}
+                                    className={!token ? 'collapse navbar-collapse hidden-nav' : 'collapse navbar-collapse'}
                                     id="navbarSupportedContent"
                                 >
                                     {
-                                        typeof this.props.user == 'undefined' ? <div></div> :
+                                        !token ? <div></div> :
                                             <ul className="navbar-nav mr-auto" style={{marginLeft: 'auto'}}>
                                                 <li className="nav-item" style={{marginRight: '7rem'}}>
                                                     {
-                                                        this.props.user.role == 0 ?
+                                                        user.role === 0 ?
                                                             <a className="nav-link" href="/my-requests">My Request</a>
                                                             :
                                                             <a className="nav-link" href="/my-requests">Customer Request</a>
@@ -91,13 +92,13 @@ class Header extends Component {
                                     }
                                     <ul className="navbar-nav">
                                         {
-                                            typeof this.props.user == 'undefined' ? <li></li>
+                                            !token ? <li></li>
                                                 : <li className="nav-item dropdown">
                                                     <a className="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
                                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                       href="#">{this.props.user.firstName + ' ' + this.props.user.lastName}</a>
+                                                       href="">{this.props.user.firstName}</a>
                                                     <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                                        <a className="dropdown-item" href="#" onClick={this.signOut}>Sign
+                                                        <a className="dropdown-item" href="" onClick={()=>{this.props.dispatch(Actions.signOut(token))}}>Sign
                                                             Out</a>
                                                     </div>
                                                 </li>
@@ -115,8 +116,9 @@ class Header extends Component {
 // Maps state from store to props
 const mapStateToProps = (state, ownProps) => {
     return {
-        user: state.auth.data.data,
-        isLogged: state.auth.isLogged
+        user: state.auth.data,
+        isLogged: state.auth.isLogged,
+        token: state.auth.token
     }
 };
 

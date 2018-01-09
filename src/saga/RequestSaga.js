@@ -9,12 +9,12 @@ export function* postRequest({data}) {
         const {token} = yield select((state) => state.auth);
         const ParseApi = new Api(token);
         const response = yield call([ParseApi, ParseApi.postRequest], data)
-        if (response && !response.success) {
-            yield put(Actions.postRequestFailure(response.message))
+        if (response && response.error) {
+            yield put(Actions.postRequestFailure(response.error))
             return
         }
         yield put(Actions.postRequestSuccess(response))
-        history.push('/my-requests')
+        // history.push('/my-requests')
         // }
     } catch (err) {
         yield put(Actions.postRequestFailure(err));
@@ -42,9 +42,9 @@ export function* getRequest({data}) {
     try {
         const {token} = yield select((state) => state.auth);
         const ParseApi = new Api(token);
-        const response = yield call([ParseApi, ParseApi.getRequest])
-        if (response && !response.success) {
-            yield put(Actions.getRequestFailure(response.message))
+        const response = yield call([ParseApi, ParseApi.getRequest], data)
+        if (response && response.error) {
+            yield put(Actions.getRequestFailure(response.error))
             return
         }
         yield put(Actions.getRequestSuccess(response))

@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import StepLayout from '../StepLayout'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -10,13 +11,12 @@ class AboutYou extends Component {
         this.state = {}
     }
     render() {
-        const {onGoNext, onGoBack, _request, onChange, isValid} = this.props
+        const {onGoNext, onGoBack, _request, onChange, isValid, history} = this.props
 
         const bind = (field) => ({
             value: _request[field],
             onChange: (e) => onChange({..._request, [field]: e.target.value}),
         });
-
         return (
             <div>
                 <h2>Just bit more about you?</h2>
@@ -61,14 +61,25 @@ class AboutYou extends Component {
                 </div>
 
                 <StepLayout
+                    {...this.props}
                     onGoBack={onGoBack}
                     onGoNext={onGoNext}
                     isValid={isValid}
                     done={true}
+                    data={_request}
+                    history={history}
                 />
             </div>
         )
     }
 }
 
-export default AboutYou
+// Maps state from store to props
+const mapStateToProps = (state) => {
+    return {
+        user: state.auth.data,
+        token: state.auth.token,
+    }
+};
+
+export default connect(mapStateToProps)(AboutYou)

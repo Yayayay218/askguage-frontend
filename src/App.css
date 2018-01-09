@@ -757,6 +757,9 @@ footer .footer-bottom .copyright {
   font-weight: 300;
   text-align: left;
   color: #54657e;
+  background: none;
+  width: auto;
+  height: auto;
 }
 .request-item .bid {
   margin: auto 0;
@@ -1161,6 +1164,10 @@ a:hover {
   text-align: left;
   color: #374355;
 }
+.create-request-form .flip-panel .request-intro a {
+  font-weight: bold;
+  color: #007ebb;
+}
 .create-request-form .detached {
   background: url(assets/images/icons/estate-normal.svg) center 26px no-repeat;
 }
@@ -1251,6 +1258,50 @@ a:hover {
   /* position: relative; */
   display: block;
 }
+.create-request-form .sign-up {
+  margin-top: 14px;
+}
+.create-request-form .pending {
+  cursor: wait;
+}
+.create-request-form .first-row {
+  margin-bottom: 0;
+}
+.create-request-form .line {
+  display: block;
+  position: relative;
+  text-align: center;
+  margin-top: 30px;
+}
+.create-request-form .line:before {
+  content: '';
+  position: absolute;
+  border-bottom: 1px solid #adb9ca;
+  width: 65%;
+  left: 17%;
+  top: 50%;
+}
+.create-request-form .line .text {
+  background-color: white;
+  position: relative;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: #adb9ca;
+  padding: 0 15px;
+}
+.create-request-form .social-box {
+  width: 100%;
+  height: 45px;
+  cursor: pointer;
+}
+.create-request-form .facebook {
+  background: #4460a0 url(assets/images/icons/shape-copy-2.svg) center no-repeat;
+  border-radius: 5px;
+}
+.create-request-form .linkedin {
+  background: #007ebb url(assets/images/icons/linked-in.svg) center no-repeat;
+  border-radius: 5px;
+}
 @media (min-width: 768px) {
   .create-request-form .custom-select {
     height: 60px;
@@ -1270,5 +1321,14 @@ a:hover {
   }
   .create-request-form .flip-panel p {
     margin-bottom: 55px;
+  }
+  .create-request-form .sign-up {
+    margin-top: 14px;
+  }
+  .create-request-form .first-row {
+    margin-bottom: 45px;
+  }
+  .create-request-form .social-box {
+    height: 60px;
   }
 }

@@ -5,7 +5,6 @@ import Actions from '../../actions/Creators'
 import {Link} from 'react-router-dom'
 import Layout from '../App'
 
-
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -15,8 +14,13 @@ class Home extends Component {
             mortgage: false
         }
     }
+    componentWillReceiveProps(newProps) {
 
+    }
     componentDidMount() {
+        const {history} = this.props
+        if(this.props.token && this.props.user.role === 0)
+            history.push('/my-requests')
     }
 
     render() {
@@ -117,8 +121,10 @@ class Home extends Component {
 }
 
 function mapStateToProps(state) {
-    return {}
-
+    return {
+        user: state.auth.data,
+        token: state.auth.token,
+    }
 }
 
 export default connect(mapStateToProps)(Home)

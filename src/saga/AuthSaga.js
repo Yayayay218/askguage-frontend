@@ -5,22 +5,21 @@ import createHistory from 'history/createBrowserHistory'
 
 const history = createHistory({forceRefresh: true});
 
-export function* signOut() {
-    history.push('/login')
-}
+// export function* signOut() {
+//     history.push('/login')
+// }
 
 export function* signUp({data}) {
     try {
         const ParseApi = new Api(null)
         const response = yield call([ParseApi, ParseApi.signUp], data)
 
-        if (response && response.errors) {
+        if (response && response.error) {
             yield put(Actions.signUpFailure(response));
             return;
         }
         else {
             yield put(Actions.signUpSuccess(response))
-            history.push('/login')
         }
         // }
     } catch (err) {
@@ -32,23 +31,23 @@ export function* login({data}) {
     try {
         const ParseApi = new Api(null)
         const response = yield call([ParseApi, ParseApi.login], data)
-        if (response && response.errors) {
+        if (response && response.error) {
             yield put(Actions.loginFailure(response));
             return;
         }
         else {
             yield put(Actions.loginSuccess(response))
-            yield put(Actions.getUser(response))
-            const tmp = yield take('GET_USERS_SUCCESS');
+            // yield put(Actions.getUser(response))
+            // const tmp = yield take('GET_USERS_SUCCESS');
 
-            if (tmp.response.data.profiles) {
-                if (tmp.response.data.role == 0)
-                    history.push('/my-requests')
-                if (tmp.response.data.role == 1)
-                    history.push('/customer-requests')
-            }
-            else
-                history.push('/profile')
+            // if (tmp.response.data.profiles) {
+            //     if (tmp.response.data.role == 0)
+            //         history.push('/my-requests')
+            //     if (tmp.response.data.role == 1)
+            //         history.push('/customer-requests')
+            // }
+            // else
+            //     history.push('/profile')
         }
         // }
     } catch (err) {

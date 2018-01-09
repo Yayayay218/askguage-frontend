@@ -33,7 +33,6 @@ class SignUp extends Component {
     }
 
     componentWillReceiveProps(newProps) {
-        console.log(newProps)
         if (!this.props.errors && newProps.errors)
             this.setState({
                 errors: newProps.errors,
@@ -53,7 +52,6 @@ class SignUp extends Component {
     }
 
     render() {
-        console.log(this)
         return (
             <div className="container">
                 <div className="login-header">

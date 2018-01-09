@@ -1,8 +1,44 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import Actions from '../../../../actions/Creators'
+import moment from 'moment'
+
+// import createHistory from 'history/createBrowserHistory'
+//
+// const history = createHistory({
+//     forceRefresh: true
+// });
 
 class StepLayout extends Component {
+    constructor(props, context) {
+        super(props, context)
+
+        this.doNext = this.doNext.bind(this)
+    }
+
+    doNext() {
+        const {done, token, _request, history, user, onGoNext, data} = this.props
+        if (done && token) {
+            this.props.dispatch(Actions.postRequest({
+                ..._request,
+                userId: user.id,
+                birthDay: moment.utc(_request.birthDay).format()
+            }))
+            history.push('/my-requests')
+        }
+
+        if (done && !token) {
+            this.props.dispatch(Actions.setRequestTmp(data))
+            history.push('/signup/customer')
+        }
+
+        if (!done)
+            onGoNext()
+    }
+
     render() {
-        const {onGoNext, onGoBack, done, isValid} = this.props
+        const {onGoNext, onGoBack, done, isValid, data, history} = this.props
+        console.log(this)
         if (onGoBack)
             return (
                 <div>
@@ -17,8 +53,8 @@ class StepLayout extends Component {
                         <div className="col-md-6 col-6">
                             <button
                                 className="btn btn-next"
-                                disabled={done || !isValid}
-                                onClick={onGoNext}
+                                disabled={!isValid}
+                                onClick={this.doNext}
                             >Next
                             </button>
                         </div>
@@ -36,4 +72,4 @@ class StepLayout extends Component {
     }
 }
 
-export default StepLayout
+export default connect()(StepLayout)

@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux';
 import moment from 'moment';
+import {withRouter} from 'react-router'
 
 import 'react-datepicker/dist/react-datepicker.css';
 import FlipWizard from '../FlipPanel/index'
@@ -40,7 +41,7 @@ class CreateRequest extends Component {
                 monthlyLiability: '',
                 downPayment: '',
                 netAsset: '',
-                birthDay: moment(),
+                birthDay: moment.utc(),
                 occupationType: '',
                 citizenType: '',
                 homeValue: '',
@@ -54,7 +55,7 @@ class CreateRequest extends Component {
     }
 
     render() {
-        const {app} = this.props
+        const {app, history} = this.props
 
         const {_request} = this.state
         const estateSteps = [
@@ -132,6 +133,7 @@ class CreateRequest extends Component {
                             this.setState({_request})
                         }}
                         isValid={_request.birthDay !== '' && _request.citizenType !== '' && _request.occupationType}
+                        history={history}
                     />
                 )
             }
@@ -211,6 +213,7 @@ class CreateRequest extends Component {
                             this.setState({_request})
                         }}
                         isValid={_request.birthDay !== '' && _request.citizenType !== '' && _request.occupationType}
+                        history={history}
                     />
                 )
             }
@@ -229,10 +232,14 @@ class CreateRequest extends Component {
                             />
                         </div>
                         <div className="col-md-4">
-                            <div className="flip-panel">
-                                <div className="request-intro">
-                                    <h3>Need helps</h3>
-                                    <p>You need the potential to <br/> design something completely new and fresh.</p>
+                            <div className="d-none d-md-block">
+
+                                <div className="flip-panel">
+                                    <div className="request-intro">
+                                        <h3>Need helps</h3>
+                                        <p>You need the potential to <br/> design something completely new and fresh.
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -250,4 +257,4 @@ function mapStateToProps(state) {
 
 }
 
-export default connect(mapStateToProps)(CreateRequest)
+export default withRouter(connect(mapStateToProps)(CreateRequest))
