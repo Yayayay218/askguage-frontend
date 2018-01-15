@@ -54,7 +54,7 @@ body {
   }
 }
 .content {
-  background: url(assets/images/landing/landing.jpg) no-repeat;
+  background: url(Assets/images/landing/landing.jpg) no-repeat;
   height: 1024px;
   width: 100%;
   background-size: 100% 100%;
@@ -170,13 +170,13 @@ body {
   letter-spacing: normal;
 }
 .content .right-wrapper .estate {
-  background: url(assets/images/icons/estate-normal.svg) center 26px no-repeat;
+  background: url(Assets/images/icons/estate-normal.svg) center 26px no-repeat;
 }
 .content .right-wrapper .estate label {
   color: #8493A8;
 }
 .content .right-wrapper .estate-active {
-  background: url(assets/images/icons/estate.svg) center 26px no-repeat;
+  background: url(Assets/images/icons/estate.svg) center 26px no-repeat;
   border-radius: 5px;
   border: solid 2px #0082d5 !important;
 }
@@ -184,13 +184,13 @@ body {
   color: #374355;
 }
 .content .right-wrapper .mortgage {
-  background: url(assets/images/icons/mortgage.svg) center 26px no-repeat;
+  background: url(Assets/images/icons/mortgage.svg) center 26px no-repeat;
 }
 .content .right-wrapper .mortgage label {
   color: #8493A8;
 }
 .content .right-wrapper .mortgage-active {
-  background: url(assets/images/icons/mortgage-normal.svg) center 26px no-repeat;
+  background: url(Assets/images/icons/mortgage-normal.svg) center 26px no-repeat;
   border-radius: 5px;
   border: solid 2px #0082d5 !important;
 }
@@ -406,7 +406,6 @@ footer .footer-bottom .copyright {
   .login-form .form-control {
     width: 310px;
     height: 45px;
-    margin: 0 auto;
   }
 }
 .login-form input:focus {
@@ -493,7 +492,7 @@ footer .footer-bottom .copyright {
   width: 16px;
   height: 16px;
   background-size: 100%;
-  background-image: url(assets/images/icons/facebook.svg);
+  background-image: url(Assets/images/icons/facebook.svg);
   display: block;
   margin: 14px auto;
 }
@@ -501,7 +500,7 @@ footer .footer-bottom .copyright {
   width: 16px;
   height: 16px;
   background-size: 100%;
-  background-image: url(assets/images/icons/linkedin.svg);
+  background-image: url(Assets/images/icons/linkedin.svg);
   display: block;
   margin: 14px auto;
 }
@@ -523,34 +522,45 @@ footer .footer-bottom .copyright {
 .user-profile .login-form .date {
   margin-left: 16px;
 }
-.user-profile .login-form .col-sm-6 {
-  display: inline-flex;
-}
 .user-profile .login-form .custom-select {
-  width: 310px;
-  height: 45px;
-  margin-left: 16px;
+  width: 100%;
   font-size: 0.9375rem;
   font-weight: 300;
   color: #54657e;
-  background: #fff url(assets/images/icons/arrow-down.svg) no-repeat right 1rem center;
+  background: #fff url(Assets/images/icons/arrow-down.svg) no-repeat right 1rem center;
   background-size: 14px 6px;
 }
 .user-profile .login-form .custom-select:focus {
   box-shadow: none;
   border: solid 1px #54657e;
 }
+@media (min-width: 768px) {
+  .user-profile .login-form .custom-select {
+    width: 310px;
+    height: 45px;
+  }
+}
 .user-profile .btn-save {
   width: 155px;
   height: 45px;
   border-radius: 5px;
-  background-color: #cad3df;
-  margin-left: 20px;
+  background-color: #ff5600;
   color: #fff;
   font-size: 1rem;
   font-weight: bold;
   letter-spacing: 0.2px;
   text-align: center;
+}
+.user-profile .group-check-boxes {
+  display: inline-flex;
+}
+@media (min-width: 768px) {
+  .user-profile .col-form-label {
+    float: right;
+  }
+  .user-profile .group-check-boxes {
+    margin-top: 7px;
+  }
 }
 .my-request .top-wrapper {
   margin-top: -8px;
@@ -573,7 +583,7 @@ footer .footer-bottom .copyright {
   font-weight: bold;
   line-height: 1.36;
   color: #ffffff;
-  background: #ff5600 url(assets/images/icons/add.svg) no-repeat left 1rem center;
+  background: #ff5600 url(Assets/images/icons/add.svg) no-repeat left 1rem center;
   background-size: 10px 10px;
   padding-left: 34px;
 }
@@ -644,7 +654,7 @@ footer .footer-bottom .copyright {
   margin: 17px auto;
   width: 19px;
   height: 19px;
-  background-image: url(assets/images/icons/tab-success.svg);
+  background-image: url(Assets/images/icons/tab-success.svg);
   background-size: 19px 19px;
   display: block;
 }
@@ -688,7 +698,7 @@ footer .footer-bottom .copyright {
   font-size: 0.9375rem;
   font-weight: 300;
   color: #54657e;
-  background: #fff url(assets/images/icons/arrow-down.svg) no-repeat right 1rem center;
+  background: #fff url(Assets/images/icons/arrow-down.svg) no-repeat right 1rem center;
   background-size: 14px 6px;
 }
 .preference-request .custom-select:focus {
@@ -942,7 +952,7 @@ a:hover {
 }
 .request-details .menu-wrapper .menu-item {
   position: relative;
-  margin-right: 43px;
+  margin-right: 30px;
 }
 .request-details .menu-wrapper .menu-item label {
   font-size: 0.9375rem;
@@ -982,7 +992,6 @@ a:hover {
   text-transform: uppercase;
 }
 .request-details .navigate {
-  width: 270px;
   background-color: rgba(132, 147, 168, 0.05);
   height: 250px;
 }
@@ -1012,9 +1021,19 @@ a:hover {
   margin-top: 10px;
   margin-bottom: 30px;
 }
+.request-details .intake-details .profile-line {
+  width: 100%;
+  height: 1px;
+  opacity: 0.1;
+  background-color: #374355;
+  margin: 10px auto;
+}
 @media (min-width: 768px) {
   .request-details {
     padding-left: 0;
+  }
+  .request-details .menu-wrapper .menu-item {
+    margin-right: 43px;
   }
 }
 .hidden-btn {
@@ -1076,7 +1095,7 @@ a:hover {
 }
 .create-request-form .custom-select {
   width: 100%;
-  background: #fff url(assets/images/icons/arrow-down.svg) no-repeat right 1rem center;
+  background: #fff url(Assets/images/icons/arrow-down.svg) no-repeat right 1rem center;
   background-size: 14px 6px;
 }
 .create-request-form .custom-select:focus {
@@ -1169,31 +1188,31 @@ a:hover {
   color: #007ebb;
 }
 .create-request-form .detached {
-  background: url(assets/images/icons/estate-normal.svg) center 26px no-repeat;
+  background: url(Assets/images/icons/estate-normal.svg) center 26px no-repeat;
 }
 .create-request-form .detached label {
   color: #8493A8;
 }
 .create-request-form .semi {
-  background: url(assets/images/icons/semi-normal.svg) center 26px no-repeat;
+  background: url(Assets/images/icons/semi-normal.svg) center 26px no-repeat;
 }
 .create-request-form .semi label {
   color: #8493A8;
 }
 .create-request-form .condo {
-  background: url(assets/images/icons/condo-normal.svg) center 26px no-repeat;
+  background: url(Assets/images/icons/condo-normal.svg) center 26px no-repeat;
 }
 .create-request-form .condo label {
   color: #8493A8;
 }
 .create-request-form .other {
-  background: url(assets/images/icons/mortgage.svg) center 26px no-repeat;
+  background: url(Assets/images/icons/mortgage.svg) center 26px no-repeat;
 }
 .create-request-form .other label {
   color: #8493A8;
 }
 .create-request-form .detached-active {
-  background: url(assets/images/icons/estate.svg) center 26px no-repeat;
+  background: url(Assets/images/icons/estate.svg) center 26px no-repeat;
   border-radius: 5px;
   border: solid 2px #0082d5 !important;
 }
@@ -1201,7 +1220,7 @@ a:hover {
   color: #374355;
 }
 .create-request-form .semi-active {
-  background: url(assets/images/icons/semi.svg) center 26px no-repeat;
+  background: url(Assets/images/icons/semi.svg) center 26px no-repeat;
   border-radius: 5px;
   border: solid 2px #0082d5 !important;
 }
@@ -1209,7 +1228,7 @@ a:hover {
   color: #374355;
 }
 .create-request-form .condo-active {
-  background: url(assets/images/icons/condo.svg) center 26px no-repeat;
+  background: url(Assets/images/icons/condo.svg) center 26px no-repeat;
   border-radius: 5px;
   border: solid 2px #0082d5 !important;
 }
@@ -1217,7 +1236,7 @@ a:hover {
   color: #374355;
 }
 .create-request-form .other-active {
-  background: url(assets/images/icons/mortgage-normal.svg) center 26px no-repeat;
+  background: url(Assets/images/icons/mortgage-normal.svg) center 26px no-repeat;
   border-radius: 5px;
   border: solid 2px #0082d5 !important;
 }
@@ -1295,11 +1314,11 @@ a:hover {
   cursor: pointer;
 }
 .create-request-form .facebook {
-  background: #4460a0 url(assets/images/icons/shape-copy-2.svg) center no-repeat;
+  background: #4460a0 url(Assets/images/icons/shape-copy-2.svg) center no-repeat;
   border-radius: 5px;
 }
 .create-request-form .linkedin {
-  background: #007ebb url(assets/images/icons/linked-in.svg) center no-repeat;
+  background: #007ebb url(Assets/images/icons/linked-in.svg) center no-repeat;
   border-radius: 5px;
 }
 @media (min-width: 768px) {
