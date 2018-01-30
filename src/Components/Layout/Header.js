@@ -81,7 +81,8 @@ class Header extends Component {
                                                         user.role === 0 ?
                                                             <a className="nav-link" href="/my-requests">My Request</a>
                                                             :
-                                                            <a className="nav-link" href="/my-requests">Customer Request</a>
+                                                            <a className="nav-link" href="/customer-requests">Customer
+                                                                Request</a>
                                                     }
                                                 </li>
                                                 <li className="nav-item">
@@ -98,7 +99,12 @@ class Header extends Component {
                                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                                        href="">{this.props.user.firstName}</a>
                                                     <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                                        <a className="dropdown-item" href="" onClick={()=>{this.props.dispatch(Actions.signOut(token))}}>Sign
+                                                        <a className="dropdown-item" href="/my-profiles"
+                                                        >My Profile</a>
+                                                        <a className="dropdown-item"
+                                                           onClick={() => {
+                                                               this.props.dispatch(Actions.signOut(token))
+                                                           }}>Sign
                                                             Out</a>
                                                     </div>
                                                 </li>

@@ -98,7 +98,7 @@ const getUserFailure = (state, action) =>
         error: action.errCode.error,
     });
 
-const putProfile = (state, action) =>
+const putProfile = (state) =>
     state.merge({
         isPosting: true,
         isPosted: false,
@@ -107,6 +107,7 @@ const putProfile = (state, action) =>
 
 const putProfileSuccess = (state, action) =>
     state.merge({
+        data: action.response,
         isPosting: false,
         isPosted: true,
         error: null,

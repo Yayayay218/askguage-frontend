@@ -42,6 +42,10 @@ const getRequest = (data) => createAction(Types.GET_REQUEST, {data});
 const getRequestSuccess = (response) => createAction(Types.GET_REQUEST_SUCCESS, {response});
 const getRequestFailure = (errCode) => createAction(Types.GET_REQUEST_FAILURE, {errCode});
 
+const matchRequest = (data) => createAction(Types.MATCH_REQUEST, {data});
+const matchRequestSuccess = (response) => createAction(Types.MATCH_REQUEST_SUCCESS, {response});
+const matchRequestFailure = (errCode) => createAction(Types.MATCH_REQUEST_FAILURE, {errCode});
+
 const getRequestById = (data) => createAction(Types.GET_REQUEST_BY_ID, {data})
 const getRequestByIdSuccess = (response) => createAction(Types.GET_REQUEST_BY_ID_SUCCESS, {response})
 const getRequestByIdFailure = (errCode) => createAction(Types.GET_REQUEST_BY_ID_FAILURE, {errCode})
@@ -49,6 +53,18 @@ const getRequestByIdFailure = (errCode) => createAction(Types.GET_REQUEST_BY_ID_
 const setRequestType = (data) => createAction(Types.SET_REQUEST_TYPE, {data})
 const setRequestTmp = (data) => createAction(Types.SET_REQUEST_TMP, {data})
 const removeRequestTmp = () => createAction(Types.REMOVE_REQUEST_TMP)
+
+const bidRequest = (data) => createAction(Types.BID_REQUEST, {data})
+const bidRequestSuccess = (response) => createAction(Types.BID_REQUEST_SUCCESS, {response})
+const bidRequestFailure = (errCode) => createAction(Types.BID_REQUEST_FAILURE, {errCode})
+
+const getBidRequest = (data) => createAction(Types.GET_BID_REQUEST, {data})
+const getBidRequestSuccess = (response) => createAction(Types.GET_BID_REQUEST_SUCCESS, {response})
+const getBidRequestFailure = (errCode) => createAction(Types.GET_BID_REQUEST_FAILURE, {errCode})
+
+// const removeMatchingRequest = (data) => createAction(Types.REMOVE_MATCHING_REQUEST, {data})
+// const removeMatchingRequestSuccess = (response) => createAction(Types.REMOVE_MATCHING_REQUEST_SUCCESS, {response})
+// const removeMatchingRequestFailure = (errCode) => createAction(Types.REMOVE_MATCHING_REQUEST_FAILURE, {errCode})
 
 export default {
     setRequestType,
@@ -94,4 +110,16 @@ export default {
     getRequestById,
     getRequestByIdSuccess,
     getRequestByIdFailure,
+
+    matchRequest,
+    matchRequestSuccess,
+    matchRequestFailure,
+
+    bidRequest,
+    bidRequestSuccess,
+    bidRequestFailure,
+
+    getBidRequest,
+    getBidRequestSuccess,
+    getBidRequestFailure,
 }

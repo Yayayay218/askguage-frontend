@@ -3,12 +3,6 @@ import {connect} from 'react-redux'
 import Actions from '../../../../Actions/Creators'
 import moment from 'moment'
 
-// import createHistory from 'history/createBrowserHistory'
-//
-// const history = createHistory({
-//     forceRefresh: true
-// });
-
 class StepLayout extends Component {
     constructor(props, context) {
         super(props, context)
@@ -24,7 +18,7 @@ class StepLayout extends Component {
                 userId: user.id,
                 birthDay: moment.utc(_request.birthDay).format()
             }))
-            history.push('/my-requests')
+            history.push('/my-requests', {isPosted: true})
         }
 
         if (done && !token) {
@@ -37,8 +31,7 @@ class StepLayout extends Component {
     }
 
     render() {
-        const {onGoNext, onGoBack, done, isValid, data, history} = this.props
-        console.log(this)
+        const {onGoNext, onGoBack, isValid} = this.props
         if (onGoBack)
             return (
                 <div>

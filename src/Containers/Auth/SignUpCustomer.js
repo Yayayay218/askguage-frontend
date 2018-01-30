@@ -38,7 +38,11 @@ class SignUp extends Component {
         const {history, requestTmp} = this.props
         if (newProps.signUpDone) {
             if (requestTmp.isDone) {
-                this.props.dispatch(Actions.postRequest({...requestTmp.data, userId: newProps.userId, birthDay: moment.utc(requestTmp.birthDay).format()}))
+                this.props.dispatch(Actions.postRequest({
+                    ...requestTmp.data,
+                    userId: newProps.userId,
+                    birthDay: moment.utc(requestTmp.birthDay).format()
+                }))
                 history.push('/login', {signup: true})
             }
             else
@@ -63,6 +67,7 @@ class SignUp extends Component {
     }
 
     render() {
+        // console.log(this)
         const {history, error, isSignup} = this.props
         const bind = (field) => ({
             value: this.state[field],
@@ -82,6 +87,31 @@ class SignUp extends Component {
                                     }}>Sign in</a></p>
                                 </div>
                             </div>
+                            {!this.props.requestTmp.isDone && (<div className="form-group row">
+                                <div className="col-md-12">
+                                    <div className="d-flex flex-row">
+                                        <label className="col-md-6 custom-control custom-checkbox">
+                                            <input type="radio" className="custom-control-input"
+                                                   value='0'
+                                                   name='role'
+                                                   defaultChecked={true}
+                                                   onChange={() => this.setState({role: 0})}
+                                            />
+                                            <span className="custom-control-indicator"></span>
+                                            <span className="custom-control-description custom-label-signup">As a customer</span>
+                                        </label>
+                                        <label className="col-md-6 custom-control custom-checkbox">
+                                            <input type="radio" className="custom-control-input"
+                                                   value='1'
+                                                   name='role'
+                                                   onChange={() => this.setState({role: 1})}
+                                            />
+                                            <span className="custom-control-indicator"></span>
+                                            <span className="custom-control-description custom-label-signup">As service provider</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>)}
                             <div className="form-group row first-row">
                                 <div className="col-md-6">
                                     <div className="row">

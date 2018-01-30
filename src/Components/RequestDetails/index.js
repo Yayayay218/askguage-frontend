@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import Actions from '../../Actions/Creators'
 import Navigates from './Navigates'
 import Intake from './Steps/Intake'
+import ExpertsContainer from './Steps/Experts'
 
 class RequestDetails extends Component {
     constructor(props) {
@@ -13,8 +14,21 @@ class RequestDetails extends Component {
         this.props.dispatch(Actions.getRequestById(params.id))
     }
 
+    componentWillReceiveProps(newProps) {
+        const {history} = this.props
+
+        if (!newProps.token)
+            history.push('/')
+    }
+
+    componentDidMount() {
+        const {params} = this.props.match
+        let query = `filter[where][requestId]=${params.id}&filter[include]=provider&filter[include]=request`
+        this.props.dispatch(Actions.getBidRequest(query))
+    }
+
     render() {
-        const {request, detailFetched} = this.props
+        const {request, detailFetched, bids} = this.props
         console.log(this)
         const steps = [
             {
@@ -32,7 +46,9 @@ class RequestDetails extends Component {
             },
             {
                 render: () => (
-                    <div>c</div>
+                    <ExpertsContainer
+                        bids={bids}
+                    />
                 )
             },
             {
@@ -55,7 +71,8 @@ function mapStateToProps(state) {
     return {
         request: state.requests.current,
         detailFetched: state.requests.detailFetched,
-        token: state.auth.token
+        token: state.auth.token,
+        bids: state.bids.data
     }
 }
 

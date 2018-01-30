@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux';
 import Actions from '../../Actions/Creators'
 import Layout from '../App'
@@ -8,7 +7,7 @@ const Error = ({message, field}) => {
     if (message && message.message)
         return (
             <div className="alert alert-danger">
-                Incorrect email or password
+                Invalid email or password
             </div>
 
         )
@@ -23,7 +22,6 @@ class SignIn extends Component {
             password: ''
         }
         this.doLogin = this.doLogin.bind(this)
-        // this.handleUserInput = this.handleUserInput.bind(this)
     }
 
     componentDidMount() {
@@ -35,6 +33,11 @@ class SignIn extends Component {
         if (newProps.isLogged && newProps.user.role === 0) {
             history.push('/my-requests')
         }
+
+        if (newProps.isLogged && newProps.user.role === 1) {
+            history.push('/customer-requests')
+        }
+
         if (!this.props.error && newProps.error)
             this.setState({
                 error: newProps.error,

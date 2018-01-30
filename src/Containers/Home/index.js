@@ -19,8 +19,10 @@ class Home extends Component {
     }
     componentDidMount() {
         const {history} = this.props
-        if(this.props.token && this.props.user.role === 0)
+        if (this.props.token && this.props.user.role === 0)
             history.push('/my-requests')
+        if (this.props.token && this.props.user.role === 1)
+            history.push('/customer-requests')
     }
 
     render() {

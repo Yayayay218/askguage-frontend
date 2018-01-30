@@ -37,6 +37,7 @@ export default class AdvanceInfo extends Component {
                                         <input type="checkbox" className="custom-control-input"
                                                value='1'
                                                name='languages'
+                                               defaultChecked={user.profiles.languages.indexOf(1) !== -1}
                                                onChange={onChangeLanguage}
                                         />
                                         <span className="custom-control-indicator"></span>
@@ -47,6 +48,7 @@ export default class AdvanceInfo extends Component {
                                         <input type="checkbox" className="custom-control-input"
                                                value='2'
                                                name='languages'
+                                               defaultChecked={user.profiles.languages.indexOf(2) !== -1}
                                                onChange={onChangeLanguage}
 
                                         />
@@ -70,7 +72,7 @@ export default class AdvanceInfo extends Component {
                                         <input type="radio" className="custom-control-input"
                                                value='1'
                                                name='optIn'
-                                               defaultChecked={user["optIn"] === 1}
+                                               defaultChecked={user["profiles"]["optIn"] === 1}
                                                onChange={(e) => onChange({
                                                    ...user,
                                                    profiles: {...user.profiles, optIn: 1}
@@ -83,7 +85,7 @@ export default class AdvanceInfo extends Component {
                                         <input type="radio" className="custom-control-input"
                                                value='0'
                                                name='optIn'
-                                               defaultChecked={user["optIn"] === 0}
+                                               defaultChecked={user["profiles"]["optIn"] === 0}
                                                onChange={(e) => onChange({
                                                    ...user,
                                                    profiles: {...user.profiles, optIn: 0}

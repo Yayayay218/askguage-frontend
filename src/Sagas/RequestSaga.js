@@ -1,9 +1,7 @@
-import {take, call, put, select} from 'redux-saga/effects';
+import {call, put, select} from 'redux-saga/effects';
 import Actions from '../Actions/Creators'
 import Api from '../Services/dataService'
-import createHistory from 'history/createBrowserHistory'
-//
-const history = createHistory({forceRefresh: true});
+
 export function* postRequest({data}) {
     try {
         const {token} = yield select((state) => state.auth);
@@ -68,5 +66,20 @@ export function* getRequestById({data}) {
         // }
     } catch (err) {
         yield put(Actions.getRequestByIdFailure(err));
+    }
+}
+
+export function* matchRequest({data}) {
+    try {
+        const {token} = yield select((state) => state.auth);
+        const ParseApi = new Api(token);
+        const response = yield call([ParseApi, ParseApi.matchRequest], data)
+        if (response && response.error) {
+            yield put(Actions.matchRequestFailure(response.error))
+            return
+        }
+        yield put(Actions.matchRequestSuccess(response))
+    } catch (err) {
+        yield put(Actions.matchRequestFailure(err));
     }
 }

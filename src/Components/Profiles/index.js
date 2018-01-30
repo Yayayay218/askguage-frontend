@@ -4,6 +4,7 @@ import Actions from '../../Actions/Creators'
 import Layout from '../../Containers/App'
 import BasicInfo from './BasicInfo'
 import AdvanceInfo from './AdvanceInfo'
+import ProviderInfo from './ProviderInfo'
 import UploadImage from '../UploadImage'
 import {uploadFile} from '../../Services/UploadService'
 import moment from 'moment'
@@ -12,7 +13,7 @@ class Profiles extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            user: props.user.profiles ? props.user : {
+            user: props.user.profiles ? props.user : props.user.role === 0 ? {
                 ...props.user,
                 lastName: '',
                 profiles: {
@@ -32,28 +33,79 @@ class Profiles extends Component {
                         lng: ''
                     }
                 },
+            } : {
+                ...props.user,
+                lastName: '',
+                profiles: {
+                    languages: [0],
+                    optIn: '',
+                    jobTitle: '',
+                    employer: '',
+                    lengthOfEmployment: '',
+                    industry: '',
+                    dob: moment(),
+                    sex: '',
+                    civilStatus: '',
+                    citizenship: '',
+                    userAddress: {
+                        address: '',
+                        lat: '',
+                        lng: ''
+                    },
+                    kindOfService: '',
+                    businessName: '',
+                    website: '',
+                    businessAddress: {
+                        address: '',
+                        lat: '',
+                        lng: ''
+                    },
+                    businessEmail: '',
+                    businessPhoneNumber: '',
+                    brokerageName: '',
+                    brokerageAddress: {
+                        address: '',
+                        lat: '',
+                        lng: ''
+                    },
+                    brokeragePhoneNumber: '',
+                    bank: '',
+                    lenders: '',
+                    yearOfExperience: '',
+                    licence: '',
+                    areMobile: '',
+                    provideService: '',
+                },
             },
-            file: []
+            file: [],
+            isUploading: false
         }
         this.doSave = this.doSave.bind(this)
         this.onChangeImage = this.onChangeImage.bind(this)
         if (!props.token)
             props.history.push('/')
-        // else
-        //     this.props.dispatch(Actions.getUser(props.user.id))
+    }
+
+    componentDidMount() {
+        // this.props.dispatch(Actions.getUser(this.props.user.id))
     }
 
     componentWillReceiveProps(newProps) {
-        if (newProps.isPosted) {
+        if (newProps.isPosted && this.props.user.role === 0) {
             this.props.history.push('/my-requests')
+        }
+
+        if (newProps.isPosted && this.props.user.role === 1) {
+            this.props.history.push('/customer-requests')
         }
     }
 
     doSave() {
+        this.setState({isUploading: true})
         uploadFile(this.state.file)
             .then(params => {
                 this.props.dispatch(Actions.putProfile({
-                    id: this.state.user.id,
+                    id: this.props.user.id,
                     user: {
                         firstName: this.state.user.firstName,
                         lastName: this.state.user.lastName,
@@ -74,12 +126,19 @@ class Profiles extends Component {
     }
 
     render() {
-        console.log(this)
         const {user, isPosting} = this.state
         let onChangeLanguage = (e) => {
             if (user.profiles.languages.indexOf(e.target.value) === -1) {
-                user.profiles.languages.push(e.target.value)
-                this.setState({user})
+                let newLanguages = user.profiles.languages.concat([e.target.value])
+                this.setState({
+                    user: {
+                        ...user,
+                        profiles: {
+                            ...user.profiles,
+                            languages: [...newLanguages]
+                        }
+                    }
+                })
             }
             else {
                 user.profiles.languages = user.profiles.languages.filter(item => item !== e.target.value)
@@ -105,6 +164,7 @@ class Profiles extends Component {
                                         <UploadImage
                                             file={this.state.file}
                                             onChange={this.onChangeImage}
+                                            fileName={user.avatarUrl}
                                         />
                                     </div>
                                 </div>
@@ -114,6 +174,12 @@ class Profiles extends Component {
                             user={user}
                             onChange={(user) => this.setState({user})}
                         />
+                        {user.role === 1 && (
+                            <ProviderInfo
+                                user={user}
+                                onChange={(user) => this.setState({user})}
+                            />
+                        )}
 
                         <AdvanceInfo
                             user={user}
@@ -138,7 +204,7 @@ class Profiles extends Component {
                         </div>
                     </div>
                 </div>
-
+                {this.state.isUploading && <div className="loading">Loading&#8230;</div>}
             </Layout>
         )
     }

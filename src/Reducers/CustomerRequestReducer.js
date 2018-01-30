@@ -10,7 +10,7 @@ export const INITIAL_STATE = Immutable({
     detailFetched: false,
     error: null,
 });
-const request = (state, action) => {
+const request = (state) => {
     return state.merge({
         isFetching: true,
         isFetched: false,
@@ -29,7 +29,7 @@ const success = (state, action) => {
     });
 }
 
-const failure = (state, action) =>
+const failure = (state) =>
     state.merge({
         isFetching: false,
         isFetched: false,
@@ -37,7 +37,7 @@ const failure = (state, action) =>
         error: true,
     });
 
-const postRequest = (state, action) =>
+const postRequest = (state) =>
     state.merge({
         isPosting: true,
         isPosted: false,
@@ -77,6 +77,10 @@ const ACTION_HANDLERS = {
     [Types.GET_REQUEST]: request,
     [Types.GET_REQUEST_SUCCESS]: success,
     [Types.GET_REQUEST_FAILURE]: failure,
+
+    [Types.MATCH_REQUEST]: request,
+    [Types.MATCH_REQUEST_SUCCESS]: success,
+    [Types.MATCH_REQUEST_FAILURE]: failure,
 
     [Types.PUT_REQUEST]: postRequest,
     [Types.PUT_REQUEST_SUCCESS]: postRequestSuccess,

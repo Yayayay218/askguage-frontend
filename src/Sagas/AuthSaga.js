@@ -58,3 +58,18 @@ export function* getUser({data}) {
         yield put(Actions.getUserFailure(err))
     }
 }
+
+export function* putProfile({data}) {
+    try {
+        const {token} = yield select((state) => state.auth);
+        const ParseApi = new Api(token);
+        const response = yield call([ParseApi, ParseApi.patchUser], data)
+        if(response && response.error) {
+            yield put(Actions.putProfileFailure(response.error))
+            return
+        }
+        yield put(Actions.putProfileSuccess(response))
+    } catch (err) {
+        yield put(Actions.putProfileFailure(err));
+    }
+}

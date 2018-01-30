@@ -35,6 +35,10 @@ class CreateRequest extends Component {
                     min: '',
                     max: ''
                 },
+                bidCount: {
+                    fromMortgage: 0,
+                    fromEstate: 0
+                },
                 areQualified: '',
                 ownership: '',
                 houseHold: '',
@@ -220,7 +224,6 @@ class CreateRequest extends Component {
         ]
 
         let steps = app.requestType.estate ? estateSteps : mortgageSteps
-        console.log(this)
         return (
             <Layout {...this.state}>
                 <div className="container create-request-form">

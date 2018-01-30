@@ -10,6 +10,7 @@ import MyRequest from '../Components/MyRequests'
 import RequestDetails from '../Components/RequestDetails'
 import SignUpCustomer from './Auth/SignUpCustomer'
 import CreateRequest from '../Components/RequestForm'
+import CustomerRequests from '../Components/CustomerRequests'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import configureStore from '../Store/Store';
 
@@ -35,7 +36,8 @@ class Root extends Component {
                         <Route path="/my-profiles" component={Profiles}/>
                         <Route path="/create-request" component={CreateRequest}/>
                         <Route exact path="/my-requests" component={MyRequest}/>
-                        <Route path="/customer-requests" component={MyRequest}/>
+                        <Route exact path="/customer-requests" component={MyRequest}/>
+                        <Route path="/customer-requests/:id" component={CustomerRequests}/>
                         <Route path="/my-requests/:id" component={RequestDetails}/>
                         <Route path="/signup/customer" component={SignUpCustomer}/>
                     </Switch>

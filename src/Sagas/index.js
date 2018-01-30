@@ -2,11 +2,12 @@ import {takeLatest, all, fork} from 'redux-saga/effects';
 import Types from '../Actions/Types';
 
 
-import {signUp, login, getUser} from "./AuthSaga"
+import {signUp, login, getUser, putProfile} from "./AuthSaga"
 import {getSetting} from "./SettingSaga";
-import {putProfile} from "./ProfileSaga";
+// import {putProfile} from "./ProfileSaga";
 import {getQuestions} from "./QuestionSaga"
-import {postRequest, getRequest, putRequest, getRequestById} from "./RequestSaga";
+import {postRequest, getRequest, putRequest, getRequestById, matchRequest} from "./RequestSaga";
+import {bidRequest, getBidRequest} from "./BidSaga";
 
 export default function* root() {
     yield all([
@@ -19,7 +20,10 @@ export default function* root() {
         takeLatest(Types.GET_QUESTIONS, getQuestions),
         takeLatest(Types.POST_REQUEST, postRequest),
         takeLatest(Types.GET_REQUEST, getRequest),
+        takeLatest(Types.MATCH_REQUEST, matchRequest),
         takeLatest(Types.PUT_REQUEST, putRequest),
         takeLatest(Types.GET_REQUEST_BY_ID, getRequestById),
+        takeLatest(Types.BID_REQUEST, bidRequest),
+        takeLatest(Types.GET_BID_REQUEST, getBidRequest),
     ])
 }

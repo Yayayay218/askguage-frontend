@@ -100,10 +100,35 @@ export default class Parse {
         }).then(response => response.json());
     }
 
+    matchRequest(data) {
+        return this._fetch({
+            method: 'GET',
+            url: `/customerRequests/matches?${data}`,
+            timeout: 10000
+        }).then(response => response.json());
+    }
+
     getRequestById(data) {
         return this._fetch({
             method: 'GET',
-            url: '/customerRequests/'+data,
+            url: '/customerRequests/'+data+'?filter[include]=user',
+            timeout: 10000
+        }).then(response => response.json());
+    }
+
+    bidRequest(data) {
+        return this._fetch({
+            method: 'POST',
+            url: '/bids',
+            body: data,
+            timeout: 10000
+        }).then(response => response.json());
+    }
+
+    getBidRequest(data) {
+        return this._fetch({
+            method: 'GET',
+            url: '/bids?'+data,
             timeout: 10000
         }).then(response => response.json());
     }
@@ -138,6 +163,10 @@ export default class Parse {
 
         if (opts.body) {
             reqOpts.body = JSON.stringify(opts.body);
+        }
+
+        if (opts.params) {
+            reqOpts.params = opts.params;
         }
 
         if (opts.timeout) {
