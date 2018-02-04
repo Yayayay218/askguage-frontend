@@ -10,6 +10,7 @@ import AdditionalInfos from './Steps/AdditionalInfos'
 import StatedInfo from './Steps/StatedInfo'
 import CalculateValue from './Steps/CalculateValue'
 import YourBid from './Steps/YourBid'
+import Callback from './Steps/Callback'
 
 class CustomerRequest extends Component {
     constructor(props) {
@@ -37,6 +38,7 @@ class CustomerRequest extends Component {
                 render: () => (
                     <ContactInfos
                         user={user}
+                        history={this.props.history}
                     />
                 )
             },
@@ -86,6 +88,13 @@ class CustomerRequest extends Component {
                         user={user}
                         request={request}
                         history={this.props.history}
+                    />
+                )
+            },
+            {
+                render: () => (
+                    <Callback
+                        request={history.location.state._bid}
                     />
                 )
             }

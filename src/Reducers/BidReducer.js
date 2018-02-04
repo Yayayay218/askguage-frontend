@@ -32,7 +32,7 @@ const failure = (state, action) =>
         isFetching: false,
         isFetched: false,
         detailFetched: false,
-        error: action.errCode.error,
+        error: action.errCode.error || action.errCode,
     });
 
 const ACTION_HANDLERS = {

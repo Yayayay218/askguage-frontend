@@ -21,9 +21,10 @@ class YourBid extends Component {
                     squareFT: '',
                     price: ''
                 }],
-                commissionFee: _bid.commissionFee || '',
+                commissionFee: _bid.bidCommission || '',
                 comment: ''
-            }
+            },
+            error: false
         }
         this.addMoreOption = this.addMoreOption.bind(this)
         this.bindOption = this.bindOption.bind(this)
@@ -34,6 +35,8 @@ class YourBid extends Component {
     componentWillReceiveProps(newProps) {
         if (newProps.bids.isFetched)
             this.props.history.push('/')
+        if (newProps.bids.error)
+            this.setState({error: true})
     }
 
     addMoreOption() {
@@ -97,7 +100,6 @@ class YourBid extends Component {
     }
 
     render() {
-        console.log(this)
         const {user} = this.props
         const {state} = this.props.history.location
         const {bid} = this.state
@@ -143,6 +145,11 @@ class YourBid extends Component {
                     })
                 }
                 {
+                    this.state.error && <div className="col-12 offset-md-3">
+                        <p style={{color: 'red'}}>Cannot Bid</p>
+                    </div>
+                }
+                {
                     typeof state === 'undefined' || !state._bid.isBid && <div className="form-group row">
                         <div className="col-md-9 offset-md-3">
                             <button className="btn btn-add" onClick={this.addMoreOption}>Add more options</button>
@@ -163,28 +170,6 @@ function RenderOption({item, index, bid, bindOption, serviceType, bindAddress}) 
             <div>
                 <h3 style={{marginLeft: '-2px'}}>Option {index + 1}</h3>
 
-                <div className="form-group row">
-                    <div className="col-12">
-                        <div className="row">
-                            <div className="col-md-3 m-auto">
-                                <label htmlFor="" className="col-form-label">Area</label>
-                            </div>
-                            <div className="col-md-9">
-                                {/*<Autocomplete className="form-control"*/}
-                                {/*onPlaceSelected={(place) => {*/}
-                                {/*bindAddress(index, 'area', 'A')*/}
-                                {/*}}*/}
-                                {/*types={['(regions)']}*/}
-                                {/*>*/}
-                                {/*</Autocomplete>*/}
-                                <input type="text" className="form-control"
-                                       onChange={bindOption(index, 'area')}
-                                       value={bid.options[index].area}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div className="form-group row">
                     <div className="col-12">
                         <div className="row">

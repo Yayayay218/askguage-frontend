@@ -772,10 +772,24 @@ footer .footer-bottom .copyright {
   font-size: 0.9375rem;
   font-weight: 300;
   text-align: left;
-  color: #54657e;
   background: none;
   width: auto;
   height: auto;
+}
+.request-item .open {
+  color: #0082d5 !important;
+}
+.request-item .enoughMortgage {
+  color: #ff9948 !important;
+}
+.request-item .enoughEstate {
+  color: #d2335c !important;
+}
+.request-item .enough {
+  color: #a93aba !important;
+}
+.request-item .completed {
+  color: #04be5b !important;
 }
 .request-item .bid {
   margin: auto 0;
@@ -832,6 +846,19 @@ footer .footer-bottom .copyright {
   font-size: 0.9375rem;
   font-weight: bold;
   color: #0082d5;
+}
+.request-item .request-content .request-status {
+  font-size: 0.9375rem;
+  font-weight: bold;
+}
+.request-item .request-content .sent {
+  color: #ff9948;
+}
+.request-item .request-content .rejected {
+  color: #d2335c;
+}
+.request-item .request-content .selected {
+  color: #04be5b;
 }
 .request-item .dummy-title {
   width: 165px;
@@ -1550,6 +1577,13 @@ a:hover {
     height: 45px;
   }
 }
+.experts-view .line {
+  width: 100%;
+  height: 1px;
+  opacity: 0.1;
+  background-color: #374355;
+  margin: 30px 0;
+}
 .experts-view .provider-avatar {
   width: 100%;
   height: 170px;
@@ -1661,6 +1695,10 @@ a:hover {
   color: #ffffff;
   background-color: #ff5600;
   margin-top: 30px;
+}
+.experts-view .callback .btn-submit:disabled {
+  background-color: #dddddd !important;
+  cursor: not-allowed;
 }
 .experts-view .callback .btn-reject {
   color: #54657e;

@@ -8,10 +8,22 @@ import ExpertsContainer from './Steps/Experts'
 class RequestDetails extends Component {
     constructor(props) {
         super(props)
-        if(!props.token)
+        if (!props.token)
             props.history.push('/')
         const {params} = props.match
         this.props.dispatch(Actions.getRequestById(params.id))
+
+        this.state = {
+            myBid: {
+                callback: {
+                    availableDate: '',
+                    availableTime: ''
+                },
+                status: 0
+            },
+            initStepIndex: 0,
+            isBid: false
+        }
     }
 
     componentWillReceiveProps(newProps) {
@@ -27,9 +39,16 @@ class RequestDetails extends Component {
         this.props.dispatch(Actions.getBidRequest(query))
     }
 
+    componentWillUpdate(nextProps, nextState) {
+        const {params} = this.props.match
+        let query = `filter[where][requestId]=${params.id}&filter[include]=provider&filter[include]=request`
+        if (nextState.isBid && !this.state.isBid) {
+            this.props.dispatch(Actions.getBidRequest(query))
+        }
+    }
+
     render() {
         const {request, detailFetched, bids} = this.props
-        console.log(this)
         const steps = [
             {
                 render: () => (
@@ -48,6 +67,8 @@ class RequestDetails extends Component {
                 render: () => (
                     <ExpertsContainer
                         bids={bids}
+                        bidFetched={this.props.bidFetched}
+                        isBid={(isBid) => this.setState({isBid})}
                     />
                 )
             },
@@ -60,7 +81,9 @@ class RequestDetails extends Component {
         return (
             <Navigates
                 steps={steps}
-                initStepIndex={0}
+                initStepIndex={this.state.initStepIndex}
+                request={request}
+                isFetched={detailFetched}
             >
             </Navigates>
         )
@@ -72,7 +95,8 @@ function mapStateToProps(state) {
         request: state.requests.current,
         detailFetched: state.requests.detailFetched,
         token: state.auth.token,
-        bids: state.bids.data
+        bids: state.bids.data,
+        bidFetched: state.bids.isFetched
     }
 }
 

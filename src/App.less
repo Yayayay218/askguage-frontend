@@ -897,17 +897,33 @@ footer {
     color: #adb9ca;
   }
 
-  .property {
-  }
-
   .content {
     font-size: 0.9375rem;
     font-weight: 300;
     text-align: left;
-    color: #54657e;
     background: none;
     width: auto;
     height: auto;
+  }
+
+  .open {
+    color: #0082d5 !important;
+  }
+
+  .enoughMortgage {
+    color: #ff9948 !important;
+  }
+
+  .enoughEstate {
+    color: #d2335c !important;
+  }
+
+  .enough {
+    color: #a93aba !important;
+  }
+
+  .completed {
+    color: #04be5b !important;
   }
 
   .bid {
@@ -972,9 +988,24 @@ footer {
 
   .request-content {
     .request-status-open {
-      font-size: 0.9375rem;
+      font-size: @font-15;
       font-weight: bold;
       color: #0082d5;
+    }
+    .request-status {
+      font-size: @font-15;
+      font-weight: bold;
+    }
+    .sent {
+      color: #ff9948;
+    }
+
+    .rejected {
+      color: #d2335c;
+    }
+
+    .selected {
+      color: #04be5b;
     }
   }
   .dummy-title {
@@ -1798,6 +1829,13 @@ a:hover {
 }
 
 .experts-view {
+  .line {
+    width: 100%;
+    height: 1px;
+    opacity: 0.1;
+    background-color: #374355;
+    margin: 30px 0;
+  }
   .provider-avatar {
     width: 100%;
     height: 170px;
@@ -1921,6 +1959,10 @@ a:hover {
       color: #ffffff;
       background-color: #ff5600;
       margin-top: 30px;
+      &:disabled {
+        background-color: #dddddd !important;
+        cursor: not-allowed;
+      }
     }
 
     .btn-reject {

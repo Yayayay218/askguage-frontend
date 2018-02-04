@@ -11,9 +11,11 @@ class FlipWizard extends Component {
     }
 
     render() {
-        const {steps} = this.props;
+        const {steps, request, isFetched} = this.props;
         const {currentStepIndex} = this.state;
         let currentStep = steps[currentStepIndex];
+
+        if(!isFetched) return null
         return (
             <Layout isLanding={false}>
                 <div className="request-details">
@@ -21,9 +23,9 @@ class FlipWizard extends Component {
                         <div className="d-flex justify-content-end top-wrapper">
                             <label className="label-header">My Request</label>
                             <div className="divider"></div>
-                            <label className="mr-auto label-detail">
-                                Buy a new house
-                            </label>
+                            <RenderStatus
+                                status={request.isEstate ? 0 : request.mortgageType === 0 ? 1 : 2}
+                            />
                             <label className="status">Status: <strong>Open to receive bids</strong></label>
                             <button className="btn btn-cancel">Cancel This Request</button>
                         </div>
@@ -71,5 +73,18 @@ class FlipWizard extends Component {
         );
     }
 }
+
+function RenderStatus({status}) {
+    if (status === 0)
+        status = 'Buy a new house'
+    if (status === 1)
+        status = 'Renew Mortgage'
+    if (status === 2)
+        status = 'Refinance Mortgage'
+    return <label className="mr-auto label-detail">
+        {status}
+    </label>
+}
+
 
 export default FlipWizard

@@ -13,15 +13,17 @@ class ExpertsContainer extends Component {
     }
 
     render() {
-        const {bids} = this.props
+        const {bids, bidFetched, isBid} = this.props
         return (
             <div className="experts-view">
                 {
                     bids.map(item =>
                         (
                             <BidInfo
+                                bidFetched={bidFetched}
                                 item={item}
                                 key={item.id}
+                                isBid={isBid}
                             />
                         )
                     )

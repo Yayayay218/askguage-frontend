@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import Modal from 'react-modal'
+
 import {confirmAlert} from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 import Axios from 'axios'
@@ -6,11 +8,17 @@ import Config from '../../Configs/AppSetting'
 
 import {Link} from 'react-router-dom'
 import moment from 'moment'
+import Actions from "../../Actions/Creators";
+
 
 class RequestBox extends Component {
-    // constructor(props) {
-    //     super(props)
-    // }
+    constructor(props) {
+        super(props)
+    }
+
+    componentDidMount() {
+        // let query = `filter[where][requestId]=${params.id}&filter[include]=provider&filter[include]=request`
+    }
 
     displayTitle(requests) {
         if (requests.isEstate)
@@ -70,6 +78,7 @@ class RequestBox extends Component {
     };
 
     render() {
+        console.log(this)
         const {user, requests} = this.props
         return (
             <div>
@@ -101,7 +110,10 @@ class RequestBox extends Component {
                                                             </div>
                                                             <div className="d-flex flex-column col-4">
                                                                 <label className="label-header">Status</label>
-                                                                <label className="label-header content">Open</label>
+                                                                <RequestStatus
+                                                                    status={item.status}
+                                                                    role={user.role}
+                                                                />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -126,6 +138,7 @@ class RequestBox extends Component {
                             return (
                                 <div className='row provider' key={key}>
                                     <div className="col-sm-12">
+
                                         <div className="request-item" style={{marginBottom: '0'}}>
                                             <div className="row">
                                                 <div className="col-sm-8 request-content">
@@ -142,36 +155,36 @@ class RequestBox extends Component {
                                                         }
                                                     </p>
                                                     <label className="label-header">Status</label>
-                                                    <p className="request-status-open">{item.isBid ? 'Your bid was sent to customer' : 'Open to receive bids'}</p>
+                                                    {
+                                                        item.isBid
+                                                            ?
+                                                            <StatusDetails
+                                                                status={item.bidStatus}
+                                                            />
+                                                            :
+                                                            <RequestStatus
+                                                                status={item.status}
+                                                                role={user.role}
+                                                            />
+                                                    }
                                                 </div>
 
                                                 <div className="col-sm-4 request-btn" style={{margin: 'auto 0'}}>
                                                     {
                                                         item.isBid ?
-                                                            <button className="btn btn-remove"
-                                                                    onClick={() => this.props.history.push(`/customer-requests/${item.id}`, {_bid: item})}
-                                                            >View your bid
-                                                            </button>
-                                                            : <div>
-                                                                <button className="btn btn-place-bid"
-                                                                        onClick={() => this.props.history.push(`/customer-requests/${item.id}`, {_bid: item})}
-                                                                >Place a bid
-                                                                </button>
-                                                                <button className="btn btn-remove"
-                                                                        onClick={this.doRemove.bind(this, item.id)}
-                                                                >Remove
-                                                                </button>
-                                                            </div>
-
+                                                            <ActionWrapped
+                                                                status={item.bidStatus}
+                                                                viewBid={() => this.props.history.push(`/customer-requests/${item.id}`, {_bid: item, isCallback: false})}
+                                                                viewCallback={() => this.props.history.push(`/customer-requests/${item.id}`, {_bid: item, isCallback: true})}
+                                                            />
+                                                            :
+                                                            <BidActionWrapped
+                                                                bid={() => this.props.history.push(`/customer-requests/${item.id}`, {_bid: item})}
+                                                                remove={this.doRemove.bind(this, item.id)}
+                                                                role={user.profiles.kindOfService}
+                                                                status={item.status}
+                                                            />
                                                     }
-                                                    {/*<button className="btn btn-place-bid"*/}
-                                                    {/*onClick={() => this.props.history.push(`/customer-requests/${item.id}`)}*/}
-                                                    {/*>Place a bid*/}
-                                                    {/*</button>*/}
-                                                    {/*<button className="btn btn-remove"*/}
-                                                    {/*onClick={this.doRemove.bind(this, item.id)}*/}
-                                                    {/*>Remove*/}
-                                                    {/*</button>*/}
                                                 </div>
                                             </div>
                                         </div>
@@ -184,6 +197,119 @@ class RequestBox extends Component {
             </div>
         )
     }
+}
+
+function StatusDetails({status}) {
+    let statusClass = 'sent'
+    if (status == 0)
+        status = 'Your bid was sent to customer'
+    if (status == 1) {
+        status = 'Your bid was rejected'
+        statusClass = 'rejected'
+    }
+    if (status == 2) {
+        status = 'Your bid was selected'
+        statusClass = 'selected'
+    }
+    return <p className={`request-status ${statusClass}`}>{status}</p>
+}
+
+function RequestStatus({status, role}) {
+    let statusClass = 'open'
+    if (status == 0)
+        status = 'Open to received bids'
+    if (status == 1) {
+        status = 'Bids received enough from Mortgage Agents'
+        statusClass = 'enoughMortgage'
+    }
+    if (status == 2) {
+        status = 'Bids received enough from Real Estate Agents'
+        statusClass = 'enoughEstate'
+    }
+    if (status == 3) {
+        status = 'Bids received enough'
+        statusClass = 'enough'
+    }
+    if (status == 4) {
+        status = 'Completed'
+        statusClass = 'completed'
+    }
+    if (role === 0)
+        return <label className={`label-header content ${statusClass}`}>{status}</label>
+    else
+        return <p className={`label-header content ${statusClass}`} style={{fontWeight: 'bold'}}>{status}</p>
+
+}
+
+function BidActionWrapped({bid, remove, role, status}) {
+    if (status === 3 || status === 4 || status === 5)
+        return (
+            <div>
+                <button className="btn btn-remove"
+                        onClick={remove}
+                >Remove
+                </button>
+            </div>
+        )
+    if (role == 0 && status === 2)
+        return (
+            <div>
+                <button className="btn btn-remove"
+                        onClick={remove}
+                >Remove
+                </button>
+            </div>
+        )
+    else if (role == 1 && status === 1)
+        return (
+            <div>
+                <button className="btn btn-remove"
+                        onClick={remove}
+                >Remove
+                </button>
+            </div>
+        )
+    return (
+        <div>
+            <button className="btn btn-place-bid"
+                    onClick={bid}
+            >Place a bid
+            </button>
+            <button className="btn btn-remove"
+                    onClick={remove}
+            >Remove
+            </button>
+        </div>
+    )
+}
+
+function ActionWrapped({viewBid, doComplete, status, remove, viewCallback}) {
+    if (status == 2)
+        return (
+            <div>
+                <button className="btn btn-place-bid"
+                        onClick={viewCallback}
+                >View Callback
+                </button>
+                <button className="btn btn-remove"
+                        onClick={doComplete}
+                >Mark as complete
+                </button>
+            </div>
+        )
+    if (status == 0)
+        return (
+            <button className="btn btn-remove"
+                    onClick={viewBid}
+            >View your bid
+            </button>
+        )
+    return (
+        <button className="btn btn-remove"
+                onClick={remove}
+        >Remove
+        </button>
+    )
 }
 
 export default RequestBox

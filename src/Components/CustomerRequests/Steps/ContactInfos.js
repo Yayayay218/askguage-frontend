@@ -4,6 +4,7 @@ import Intake from '../../RequestDetails/Intake'
 class ContactInfos extends Component {
     render() {
         const {user} = this.props
+        const {isCallback} = this.props.history.location.state
         return (
             <div>
                <Intake
@@ -13,17 +14,17 @@ class ContactInfos extends Component {
 
                 <Intake
                     question="Last Name"
-                    answer="hidden"
+                    answer={isCallback ? user.lastName : 'hidden'}
                 />
 
                 <Intake
                     question="Email"
-                    answer="hidden"
+                    answer={isCallback ? user.email : 'hidden'}
                 />
 
                 <Intake
                     question="Phone Number"
-                    answer="hidden"
+                    answer={isCallback ? user.phoneNumber : 'hidden'}
                 />
             </div>
         )

@@ -185,12 +185,12 @@ class SignUp extends Component {
                                 </div>
                             </div>
                             <div className="form-group row">
-                                <div className="col-md-6 col-6">
+                                <div className="col-md-12 col-12">
                                     <div className="social-box facebook"></div>
                                 </div>
-                                <div className="col-md-6 col-6">
-                                    <div className="social-box linkedin"></div>
-                                </div>
+                                {/*<div className="col-md-6 col-6">*/}
+                                    {/*<div className="social-box linkedin"></div>*/}
+                                {/*</div>*/}
                             </div>
                         </div>
                     </div>
