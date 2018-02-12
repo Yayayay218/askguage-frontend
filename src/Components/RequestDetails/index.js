@@ -4,6 +4,7 @@ import Actions from '../../Actions/Creators'
 import Navigates from './Navigates'
 import Intake from './Steps/Intake'
 import ExpertsContainer from './Steps/Experts'
+import ReviewContainer from './Steps/ReviewClose'
 
 class RequestDetails extends Component {
     constructor(props) {
@@ -60,7 +61,7 @@ class RequestDetails extends Component {
             },
             {
                 render: () => (
-                    <div>b</div>
+                    <div></div>
                 )
             },
             {
@@ -74,7 +75,12 @@ class RequestDetails extends Component {
             },
             {
                 render: () => (
-                    <div>d</div>
+                    <ReviewContainer
+                        bids={bids}
+                        bidFetched={this.props.bidFetched}
+                        isBid={(isBid) => this.setState({isBid})}
+                        user={this.props.user}
+                    />
                 )
             },
         ]
@@ -96,7 +102,8 @@ function mapStateToProps(state) {
         detailFetched: state.requests.detailFetched,
         token: state.auth.token,
         bids: state.bids.data,
-        bidFetched: state.bids.isFetched
+        bidFetched: state.bids.isFetched,
+        user: state.auth.data,
     }
 }
 

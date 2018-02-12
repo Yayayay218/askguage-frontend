@@ -68,9 +68,13 @@ class PickHome extends Component {
 
         return (
             <div>
+                <div className="request-intro">
+                    <h3>Let’s find your dream home!</h3>
+                    <p>Share your preferences with Ask Gauge <br/> and we can help you make informed decisions.</p>
+                </div>
                 <div className="form-group row">
                     <div className="col-md-12">
-                        <label htmlFor="">What Kind of home are you looking for?</label>
+                        <label htmlFor="">What type of home are you looking for?</label>
                     </div>
                     <div className="col-md-12">
                         <div className="row">
@@ -183,7 +187,7 @@ class PickHome extends Component {
                             Number of Bedroom
                         </label>
                         <div className="col-md-12 no-padding">
-                            <select type="select" className="custom-select"
+                            <select className="custom-select"
                                     {...bind("numberOfBedRoom")}
                             >
                                 <option value="-1"></option>

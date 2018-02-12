@@ -32,20 +32,23 @@ class Header extends Component {
                                     <span className="navbar-toggler-icon"></span>
                                 </button>
                                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                                    <ul className="navbar-nav mr-auto">
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="#">Design</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="#">CMS</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="#">Cases</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="#">More</a>
-                                        </li>
+                                    <ul className="mr-auto">
+
                                     </ul>
+                                    {/*<ul className="navbar-nav mr-auto">*/}
+                                        {/*<li className="nav-item">*/}
+                                            {/*<a className="nav-link" href="#">Design</a>*/}
+                                        {/*</li>*/}
+                                        {/*<li className="nav-item">*/}
+                                            {/*<a className="nav-link" href="#">CMS</a>*/}
+                                        {/*</li>*/}
+                                        {/*<li className="nav-item">*/}
+                                            {/*<a className="nav-link" href="#">Cases</a>*/}
+                                        {/*</li>*/}
+                                        {/*<li className="nav-item">*/}
+                                            {/*<a className="nav-link" href="#">More</a>*/}
+                                        {/*</li>*/}
+                                    {/*</ul>*/}
                                     <ul className="navbar-nav">
                                         <li className="nav-item">
                                             <a className="nav-link" href="/login">Login</a>

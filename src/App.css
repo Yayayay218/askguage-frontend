@@ -1626,6 +1626,21 @@ a:hover {
 .experts-view .provider-info .details p {
   margin-bottom: 0;
 }
+.experts-view .provider-info .details .completed-bid {
+  width: 82px;
+  height: 24px;
+  border-radius: 4px;
+  background-color: #1bb934;
+  font-size: 0.75rem;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+  text-transform: uppercase;
+}
 .experts-view .bid-details {
   margin-top: 15px;
   font-size: 0.9375rem;
@@ -1705,4 +1720,59 @@ a:hover {
   background-color: #ffffff;
   border: solid 1px #54657e;
   margin-top: 15px;
+}
+.experts-view .callback .review-comment {
+  font-size: 0.9375rem;
+  font-weight: 300;
+  font-style: italic;
+  font-stretch: normal;
+  line-height: 1.87;
+  letter-spacing: normal;
+  text-align: left;
+  color: #54657e;
+}
+.review-box .provider-avatar {
+  width: 85px;
+  height: 85px;
+  margin-bottom: 5px;
+}
+.review-box .btn {
+  width: 150px;
+  height: 45px;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.2px;
+  text-align: center;
+  color: #ffffff;
+}
+.review-box .btn-reject {
+  background-color: #cad3df;
+  margin-right: 10px;
+}
+.review-box .btn-submit {
+  background-color: #ff5600;
+}
+.review-box label {
+  font-size: 1.125rem;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.06;
+  letter-spacing: normal;
+  text-align: left;
+  color: #54657e;
+}
+.review-box .x-icon {
+  width: 18px;
+  height: 18px;
+  background-size: 100%;
+  background-image: url(Assets/images/icons/access-denied.svg);
+  display: block;
+  position: absolute;
+  right: 15px;
+  cursor: pointer;
 }

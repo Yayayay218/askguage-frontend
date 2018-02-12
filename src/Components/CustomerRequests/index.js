@@ -15,14 +15,14 @@ import Callback from './Steps/Callback'
 class CustomerRequest extends Component {
     constructor(props) {
         super(props)
-        if(!props.token)
+        if (!props.token)
             props.history.push('/')
     }
 
     componentWillReceiveProps(newProps) {
         const {history} = this.props
 
-        if (this.props.token !== newProps.token)
+        if (!newProps.token)
             history.push('/')
     }
 
@@ -116,12 +116,12 @@ class CustomerRequest extends Component {
                     <div className="menu-line"></div>
 
                     <div className="container">
-                        <Navigate
+                        {this.props.token && <Navigate
                             initStepIndex={0}
                             steps={steps}
                             user={user}
                             history={history}
-                        />
+                        />}
                     </div>
                 </div>
             </Layout>

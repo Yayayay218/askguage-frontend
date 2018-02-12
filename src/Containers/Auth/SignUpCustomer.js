@@ -81,7 +81,9 @@ class SignUp extends Component {
                         <div className="col-md-8">
                             <div className="flip-panel">
                                 <div className="request-intro">
-                                    <h3>Sign up an account!</h3>
+                                    <h3>Join Ask Gauge!</h3>
+                                    <p>Let us simplify your home buying journey and help you make smarter, faster, and
+                                        informed decisions.</p>
                                     <p>Already have an account? <a style={{cursor: 'pointer'}} onClick={() => {
                                         history.push('/login')
                                     }}>Sign in</a></p>
@@ -189,7 +191,7 @@ class SignUp extends Component {
                                     <div className="social-box facebook"></div>
                                 </div>
                                 {/*<div className="col-md-6 col-6">*/}
-                                    {/*<div className="social-box linkedin"></div>*/}
+                                {/*<div className="social-box linkedin"></div>*/}
                                 {/*</div>*/}
                             </div>
                         </div>

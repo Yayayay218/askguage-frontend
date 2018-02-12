@@ -9,6 +9,11 @@ class FlipWizard extends Component {
         };
     }
 
+    // componentWillReceiveProps(newProps) {
+    //     if(!newProps.token)
+    //         this.props.history.push('/')
+    // }
+
     render() {
         const {steps, user, history} = this.props;
         const {currentStepIndex} = this.state;

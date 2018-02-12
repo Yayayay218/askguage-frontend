@@ -56,7 +56,7 @@ class FlipWizard extends Component {
                                         <div className="menu-item">
                                             <label className={this.state.currentStepIndex === 3 ? 'active' : ''}
                                                    onClick={() => this.setState({currentStepIndex: 3})}
-                                            >Review Close
+                                            >Review & Close
                                             </label>
                                         </div>
                                     </div>

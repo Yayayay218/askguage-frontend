@@ -19,7 +19,11 @@ class AboutYou extends Component {
         });
         return (
             <div>
-                <h2>Just bit more about you?</h2>
+                <div className="request-intro">
+                    <h3>About you</h3>
+                    <p>Tell us a bit more about yourself so that we can provide you with better estimates.</p>
+                </div>
+                <h2>Let’s get to know you better.</h2>
                 <div className="form-group row">
                     <div className="col-md-6">
                         <div className="row">
@@ -45,21 +49,39 @@ class AboutYou extends Component {
                                 Occupation type
                             </label>
                             <div className="col-md-12">
-                                <input type="text" className="form-control"
-                                       {...bind("occupationType")}
-                                />
+                                {/*<input type="text" className="form-control"*/}
+                                       {/*{...bind("occupationType")}*/}
+                                {/*/>*/}
+                                <select className="custom-select"
+                                        {...bind("occupationType")}
+                                >
+                                    <option value=''></option>
+                                    <option value='0'>Full Time</option>
+                                    <option value='1'>Part Time</option>
+                                    <option value='2'>Contract</option>
+                                    <option value='2'>Seasonal</option>
+                                    <option value='2'>Self Employed</option>
+                                    <option value='2'>Retired</option>
+                                </select>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="form-group row">
                     <label className="col-md-12 custom-label">
-                        Citizen Type
+                        Are you a Canadian Citizen?
                     </label>
                     <div className="col-md-12">
-                        <input type="text" className="form-control"
-                               {...bind("citizenType")}
-                        />
+                        {/*<input type="text" className="form-control"*/}
+                               {/*{...bind("citizenType")}*/}
+                        {/*/>*/}
+                        <select className="custom-select"
+                                {...bind("citizenType")}
+                        >
+                            <option value=''></option>
+                            <option value='0'>No</option>
+                            <option value='1'>Yes</option>
+                        </select>
                     </div>
                 </div>
 

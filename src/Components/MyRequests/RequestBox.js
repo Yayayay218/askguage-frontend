@@ -17,22 +17,36 @@ class RequestBox extends Component {
     }
 
     componentDidMount() {
-        // let query = `filter[where][requestId]=${params.id}&filter[include]=provider&filter[include]=request`
     }
 
-    displayTitle(requests) {
-        if (requests.isEstate)
+    displayTitle(requests, role) {
+        if (role === 0)
+            if (requests.isEstate)
+                return (
+                    <h2>Buy a new home</h2>
+                )
+            else {
+                if (requests.mortgageType === 0)
+                    return (
+                        <h2>Renew Mortgage</h2>
+                    )
+                else
+                    return (
+                        <h2>Refinance Mortgage</h2>
+                    )
+            }
+        else if (requests.isEstate)
             return (
-                <h2>Buy a new home</h2>
+                <h2>Buy a new home - {requests.user.firstName}</h2>
             )
         else {
             if (requests.mortgageType === 0)
                 return (
-                    <h2>Renew Mortgage</h2>
+                    <h2>Renew Mortgage - {requests.user.firstName}</h2>
                 )
             else
                 return (
-                    <h2>Refinance Mortgage</h2>
+                    <h2>Refinance Mortgage - {requests.user.firstName}</h2>
                 )
         }
     }
@@ -77,8 +91,14 @@ class RequestBox extends Component {
         })
     };
 
+    doComplete = (bidId) => {
+        const {history} = this.props
+        Axios.patch(Config.URL + `/bids/${bidId}`, {status: 3})
+            .then(() => history.push('/'))
+    }
+
     render() {
-        console.log(this)
+        // console.log(this)
         const {user, requests} = this.props
         return (
             <div>
@@ -94,7 +114,7 @@ class RequestBox extends Component {
                                                 <div className="row">
                                                     <div className="col-sm-8">
                                                         {
-                                                            this.displayTitle(item)
+                                                            this.displayTitle(item, user.role)
                                                         }
                                                         <label className="label-header">Posted
                                                             on {moment(item.createdAt).format("MMM Do YY")}</label>
@@ -123,7 +143,7 @@ class RequestBox extends Component {
                                                         && <div className="col-sm-4 bid">
                                                             <button className="btn btn-bid" style={{cursor: 'pointer'}}>
                                                                 {item.bidCount.fromMortgage + item.bidCount.fromEstate}
-                                                                &nbsp;bids received
+                                                                &nbsp;quotes received
                                                             </button>
                                                         </div>
                                                     }
@@ -174,8 +194,15 @@ class RequestBox extends Component {
                                                         item.isBid ?
                                                             <ActionWrapped
                                                                 status={item.bidStatus}
-                                                                viewBid={() => this.props.history.push(`/customer-requests/${item.id}`, {_bid: item, isCallback: false})}
-                                                                viewCallback={() => this.props.history.push(`/customer-requests/${item.id}`, {_bid: item, isCallback: true})}
+                                                                viewBid={() => this.props.history.push(`/customer-requests/${item.id}`, {
+                                                                    _bid: item,
+                                                                    isCallback: false
+                                                                })}
+                                                                viewCallback={() => this.props.history.push(`/customer-requests/${item.id}`, {
+                                                                    _bid: item,
+                                                                    isCallback: true
+                                                                })}
+                                                                doComplete={this.doComplete.bind(this, item.bidId)}
                                                             />
                                                             :
                                                             <BidActionWrapped
@@ -202,32 +229,37 @@ class RequestBox extends Component {
 function StatusDetails({status}) {
     let statusClass = 'sent'
     if (status == 0)
-        status = 'Your bid was sent to customer'
+        status = 'Your quote was sent to customer'
     if (status == 1) {
-        status = 'Your bid was rejected'
+        status = 'Your quote was rejected'
         statusClass = 'rejected'
     }
     if (status == 2) {
-        status = 'Your bid was selected'
+        status = 'Your quote was selected'
+        statusClass = 'selected'
+    }
+    if (status == 3) {
+        status = 'Your quote was completed'
         statusClass = 'selected'
     }
     return <p className={`request-status ${statusClass}`}>{status}</p>
 }
 
+
 function RequestStatus({status, role}) {
     let statusClass = 'open'
     if (status == 0)
-        status = 'Open to received bids'
+        status = 'Open to received quotes'
     if (status == 1) {
-        status = 'Bids received enough from Mortgage Agents'
+        status = 'Quotes received enough from Mortgage Agents'
         statusClass = 'enoughMortgage'
     }
     if (status == 2) {
-        status = 'Bids received enough from Real Estate Agents'
+        status = 'Quotes received enough from Real Estate Agents'
         statusClass = 'enoughEstate'
     }
     if (status == 3) {
-        status = 'Bids received enough'
+        status = 'Quotes received enough'
         statusClass = 'enough'
     }
     if (status == 4) {
@@ -273,7 +305,7 @@ function BidActionWrapped({bid, remove, role, status}) {
         <div>
             <button className="btn btn-place-bid"
                     onClick={bid}
-            >Place a bid
+            >Place a Quote
             </button>
             <button className="btn btn-remove"
                     onClick={remove}
@@ -301,7 +333,7 @@ function ActionWrapped({viewBid, doComplete, status, remove, viewCallback}) {
         return (
             <button className="btn btn-remove"
                     onClick={viewBid}
-            >View your bid
+            >View Your Quote
             </button>
         )
     return (

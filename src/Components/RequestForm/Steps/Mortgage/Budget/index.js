@@ -17,6 +17,11 @@ class Income extends Component {
 
         return (
             <div>
+                <div className="request-intro">
+                    <h3>Let’s Renew/Refinance your Mortgage</h3>
+                    <p>Let us know your mortgage details, so that we can get you the best mortgage rates in the
+                        market.</p>
+                </div>
                 <h2>How much are you looking for?</h2>
                 <div className="form-group row">
                     <div className="col-md-6">

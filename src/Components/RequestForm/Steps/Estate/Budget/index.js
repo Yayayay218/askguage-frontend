@@ -93,6 +93,10 @@ class Budget extends Component {
 
         return (
             <div>
+                <div className="request-intro">
+                    <h3>Budget</h3>
+                    <p>Let’s make sure your home fits your wallet.</p>
+                </div>
                 <div className="form-group row">
                     <div className="col-md-12">
                         <label htmlFor="">Whats your budget?</label>

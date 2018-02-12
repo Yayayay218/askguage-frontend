@@ -13,9 +13,13 @@ class LocateHome extends Component {
 
         return (
             <div>
+                <div className="request-intro">
+                    <h3>Location</h3>
+                    <p>Which city would you prefer? <br/> Quiet suburbs or a walk downtown.</p>
+                </div>
                 <div className="form-group row">
                     <div className="col-md-12">
-                        <label htmlFor="">Where are you looking for a home?</label>
+                        <label htmlFor="">Where are you looking to buy a home?</label>
                     </div>
                     <div className="col-md-12">
                         <Autocomplete

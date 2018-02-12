@@ -117,6 +117,7 @@ class CreateRequest extends Component {
             {
                 render: ({onGoNext, onGoBack}) => (
                     <InCome
+                        requestType={0}
                         onGoNext={onGoNext}
                         onGoBack={onGoBack}
                         _request={_request}
@@ -151,7 +152,7 @@ class CreateRequest extends Component {
                         onChange={(_request) => {
                             this.setState({_request})
                         }}
-                        isValid={_request.homeValue !== '' && _request.mortgageAmount !== '' && _request.mortgageType !== '' && _request.needMore !== ''}
+                        isValid={_request.homeValue !== '' && _request.mortgageAmount !== '' && _request.mortgageType !== ''}
                     />
                 )
             },
@@ -197,13 +198,14 @@ class CreateRequest extends Component {
             {
                 render: ({onGoNext, onGoBack}) => (
                     <InCome
+                        requestType={1}
                         onGoNext={onGoNext}
                         onGoBack={onGoBack}
                         _request={_request}
                         onChange={(_request) => {
                             this.setState({_request})
                         }}
-                        isValid={_request.houseHold !== '' && _request.downPayment !== '' && _request.monthlyLiability !== '' && _request.netAsset !== ''}
+                        isValid={_request.houseHold !== '' && _request.monthlyLiability !== '' && _request.netAsset !== ''}
                     />
                 )
             },
@@ -239,8 +241,9 @@ class CreateRequest extends Component {
 
                                 <div className="flip-panel">
                                     <div className="request-intro">
-                                        <h3>Need helps</h3>
-                                        <p>You need the potential to <br/> design something completely new and fresh.
+                                        <h3>Need help</h3>
+                                        <p>If you are having trouble or have some question, please contact us at
+                                            support@askguage.com
                                         </p>
                                     </div>
                                 </div>

@@ -66,6 +66,7 @@ const loginSuccess = (state, action) =>
         isLogin: false,
         signInType: Types.LOG_IN,
         token: action.response.id,
+        userId: action.response.userId
     });
 
 const loginFailure = (state, action) =>

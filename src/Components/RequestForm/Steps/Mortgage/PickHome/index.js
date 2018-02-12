@@ -68,6 +68,10 @@ class PickHome extends Component {
 
         return (
             <div>
+                <div className="request-intro">
+                    <h3>Property Details</h3>
+                    <p>Tell us bit more about your property, so that we can get you better estimates.</p>
+                </div>
                 <div className="form-group row">
                     <div className="col-md-12">
                         <label htmlFor="">What Kind of home do you live in?</label>

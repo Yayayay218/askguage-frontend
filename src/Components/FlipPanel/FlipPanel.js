@@ -12,10 +12,7 @@ class FlipPanel extends Component {
             <div
                 className="flip-panel"
             >
-                <div className="request-intro">
-                    <h3>The Best Answers</h3>
-                    <p>You need the potential to design something <br/> completely new and fresh.</p>
-                </div>
+
                 <div
                     className="flip-card"
                     key={selectedIndex}

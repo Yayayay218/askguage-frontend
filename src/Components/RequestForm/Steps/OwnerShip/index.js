@@ -12,6 +12,10 @@ class OwnerShip extends Component {
 
         return (
             <div>
+                <div className="request-intro">
+                    <h3>Ownership</h3>
+                    <p>Let us know the type of ownership you prefer for your home.</p>
+                </div>
                 <div className="form-group row">
                     <div className="col-md-12">
                         <label htmlFor="">Is this a single or joint ownership?</label>
@@ -25,7 +29,7 @@ class OwnerShip extends Component {
                                    onChange={(e) => onChange({..._request, ownership: 1})}
                             />
                             <span className="custom-control-indicator"></span>
-                            <span className="custom-control-description custom-label">Yes</span>
+                            <span className="custom-control-description custom-label">Single</span>
                         </label>
                         <label className="col-md-6 custom-control custom-radio">
                             <input type="radio" className="custom-control-input"
@@ -35,7 +39,7 @@ class OwnerShip extends Component {
                                    onChange={(e) => onChange({..._request, ownership: 0})}
                             />
                             <span className="custom-control-indicator"></span>
-                            <span className="custom-control-description custom-label">No</span>
+                            <span className="custom-control-description custom-label">Joint</span>
                         </label>
                     </div>
                 </div>

@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Actions from '../../Actions/Creators'
 import Layout from '../App'
+import moment from 'moment';
+
 
 const Error = ({message, field}) => {
     if (message && message.message)
@@ -29,9 +31,18 @@ class SignIn extends Component {
     }
 
     componentWillReceiveProps(newProps) {
-        const {history} = this.props
+        const {history, requestTmp} = this.props
         if (newProps.isLogged && newProps.user.role === 0) {
-            history.push('/my-requests')
+            if (requestTmp.isDone) {
+                this.props.dispatch(Actions.postRequest({
+                    ...requestTmp.data,
+                    userId: newProps.userId,
+                    birthDay: moment.utc(requestTmp.birthDay).format()
+                }))
+                history.push('/my-requests')
+            }
+            else
+                history.push('/my-requests')
         }
 
         if (newProps.isLogged && newProps.user.role === 1) {
@@ -50,6 +61,7 @@ class SignIn extends Component {
     }
 
     render() {
+        // console.log(this)
         const {history, error, isLogin, location} = this.props
         const bind = (field) => ({
             value: this.state[field],
@@ -63,10 +75,16 @@ class SignIn extends Component {
                         <div className="col-md-8">
                             <div className="flip-panel">
                                 <div className="request-intro">
-                                    <h3>Sign in</h3>
-                                    <p>Don’t have an account? <a style={{cursor: 'pointer'}} onClick={() => {
+                                    <h3>Sign Into Ask Gauge!</h3>
+                                    <p>
+                                        Let us simplify your home buying journey and help you make smarter, faster, and
+                                        informed decisions.
+                                    </p>
+                                    <p>Don’t have an Ask Gauge account? <a style={{cursor: 'pointer'}} onClick={() => {
                                         history.push('/signup/customer')
-                                    }}>Sign Up</a></p>
+                                    }}>Sign Up</a> or <a style={{cursor: 'pointer'}} onClick={() => {
+                                        history.push('/')
+                                    }}>Start your Journey</a></p>
                                     {
                                         location.state ?
                                             <div className="alert alert-success" role="alert">
@@ -93,6 +111,9 @@ class SignIn extends Component {
                                            {...bind("password")}
                                     />
                                 </div>
+                            </div>
+                            <div className="form-group row">
+                                <a href="" className="col-sm-6">Forgot Password?</a>
                             </div>
                             <div className="form-group row">
                                 <div className="col-md-12">
@@ -124,7 +145,7 @@ class SignIn extends Component {
                                     <div className="social-box facebook"></div>
                                 </div>
                                 {/*<div className="col-md-6 col-6">*/}
-                                    {/*<div className="social-box linkedin"></div>*/}
+                                {/*<div className="social-box linkedin"></div>*/}
                                 {/*</div>*/}
                             </div>
                         </div>
@@ -141,7 +162,9 @@ function mapStateToProps(state) {
         isLogged: state.auth.isLogged,
         isLogin: state.auth.isLogin,
         role: state.auth.role,
-        user: state.auth.data
+        user: state.auth.data,
+        requestTmp: state.requestTmp,
+        userId: state.auth.userId,
     }
 }
 

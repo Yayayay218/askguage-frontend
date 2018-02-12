@@ -98,6 +98,9 @@ class Profiles extends Component {
         if (newProps.isPosted && this.props.user.role === 1) {
             this.props.history.push('/customer-requests')
         }
+
+        if (!newProps.token)
+            this.props.history.push('/')
     }
 
     doSave() {

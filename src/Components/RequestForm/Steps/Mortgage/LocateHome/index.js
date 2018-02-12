@@ -13,6 +13,10 @@ class LocateHome extends Component {
 
         return (
             <div>
+                <div className="request-intro">
+                    <h3>Location</h3>
+                    <p>Let us know where you currently live, so that we can serve you better.</p>
+                </div>
                 <div className="form-group row">
                     <div className="col-md-12">
                         <label htmlFor="">Whats your current address?</label>

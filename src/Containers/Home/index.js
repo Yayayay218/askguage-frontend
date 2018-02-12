@@ -14,9 +14,11 @@ class Home extends Component {
             mortgage: false
         }
     }
+
     componentWillReceiveProps(newProps) {
 
     }
+
     componentDidMount() {
         const {history} = this.props
         if (this.props.token && this.props.user.role === 0)
@@ -52,10 +54,11 @@ class Home extends Component {
                             <div className="col-md-5" style={{height: '80vh'}}>
                                 <div className="right-wrapper">
                                     <div className="txt-1">
-                                        Get A Quote
+                                        Start your Journey.
                                     </div>
                                     <div className="txt-2">
-                                        You need the potential to design something <br/> completely new and fresh.
+                                        We will analyze your request, connect you with real estate experts in the area
+                                        with their quotes while providing you valuable insights.
                                     </div>
                                     <div className="txt-3">
                                         i’m looking to
