@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import NumberFormat from 'react-number-format';
 
 import Config from '../../../../Configs/AppSetting'
 import Rating from 'react-rating'
@@ -19,7 +20,14 @@ function MortgageView({item}) {
                         <p className="title">Mortgage Amount:</p>
                     </div>
                     <div className="col-md-9 col-6">
-                        <p className="description">${item.mortgageAmount}</p>
+                        <p className="description">
+                            <NumberFormat
+                                displayType={'text'}
+                                thousandSeparator={true}
+                                prefix={'$'}
+                                value={item.mortgageAmount}
+                            />
+                        </p>
                     </div>
                 </div>
 
@@ -105,7 +113,14 @@ function EstateView({item}) {
                     <div className="col-md-9 col-6">
                         {
                             item.options.map((opt, i) => (
-                                <p className="description" key={i}>{opt.price}</p>
+                                <p className="description" key={i}>
+                                    <NumberFormat
+                                        displayType={'text'}
+                                        thousandSeparator={true}
+                                        prefix={'$'}
+                                        value={opt.price}
+                                    />
+                                </p>
                             ))
                         }
                     </div>

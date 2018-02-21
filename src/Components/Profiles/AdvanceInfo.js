@@ -72,7 +72,7 @@ export default class AdvanceInfo extends Component {
                                         <input type="radio" className="custom-control-input"
                                                value='1'
                                                name='optIn'
-                                               defaultChecked={user["profiles"]["optIn"] === 1}
+                                               defaultChecked={user["profiles"]["optIn"] === 1 ? true : user["profiles"]["optIn"] !== 0}
                                                onChange={(e) => onChange({
                                                    ...user,
                                                    profiles: {...user.profiles, optIn: 1}
@@ -176,7 +176,7 @@ export default class AdvanceInfo extends Component {
                     <div className="col-md-6 col-12">
                         <div className="row">
                             <div className="col-md-4 m-auto">
-                                <label className="col-form-label">Sex</label>
+                                <label className="col-form-label">Gender</label>
                             </div>
                             <div className="col-md-8">
                                 <select className="custom-select"
@@ -194,15 +194,19 @@ export default class AdvanceInfo extends Component {
                     <div className="col-md-6 col-12">
                         <div className="row">
                             <div className="col-md-4 m-auto">
-                                <label className="col-form-label">Civil Status</label>
+                                <label className="col-form-label">Marital Status</label>
                             </div>
                             <div className="col-md-8">
                                 <select className="custom-select"
                                         {...bind("civilStatus")}
                                 >
                                     <option value=""></option>
-                                    <option value="0">0</option>
-                                    <option value="1">1</option>
+                                    <option value="0">Married</option>
+                                    <option value="1">Common Law</option>
+                                    <option value="2">Single</option>
+                                    <option value="3">Separated</option>
+                                    <option value="4">Divorced</option>
+                                    <option value="5">Widowed</option>
                                 </select>
                             </div>
                         </div>
@@ -211,15 +215,15 @@ export default class AdvanceInfo extends Component {
                     <div className="col-md-6 col-12">
                         <div className="row">
                             <div className="col-md-4 m-auto">
-                                <label className="col-form-label">Citizenship</label>
+                                <label className="col-form-label">Canadian Citizen</label>
                             </div>
                             <div className="col-md-8">
                                 <select className="custom-select"
                                         {...bind("citizenship")}
                                 >
                                     <option value=""></option>
-                                    <option value="0">0</option>
-                                    <option value="1">1</option>
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
                                 </select>
                             </div>
                         </div>

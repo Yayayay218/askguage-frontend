@@ -9,11 +9,6 @@ class FlipWizard extends Component {
         };
     }
 
-    // componentWillReceiveProps(newProps) {
-    //     if(!newProps.token)
-    //         this.props.history.push('/')
-    // }
-
     render() {
         const {steps, user, history} = this.props;
         const {currentStepIndex} = this.state;
@@ -27,57 +22,49 @@ class FlipWizard extends Component {
                                 <div
                                     className={currentStepIndex === 0 ? 'navigate-item active' : 'navigate-item'}
                                     onClick={() => this.setState({currentStepIndex: 0})}
-                                >Contact Info
+                                >Profile
                                 </div>
                                 <div
                                     className={currentStepIndex === 1 ? 'navigate-item active' : 'navigate-item'}
                                     onClick={() => this.setState({currentStepIndex: 1})}
                                 >Preference
                                 </div>
+                                {/*{*/}
+                                    {/*user.profiles.kindOfService == 1 &&*/}
+                                    {/*<div*/}
+                                        {/*className={currentStepIndex === 2 ? 'navigate-item active' : 'navigate-item'}*/}
+                                        {/*onClick={() => this.setState({currentStepIndex: 2})}*/}
+                                    {/*>Occupation Info*/}
+                                    {/*</div>*/}
+                                {/*}*/}
                                 {
-                                    user.profiles.kindOfService == 1 &&
+                                    user.profiles.kindOfService &&
                                     <div
                                         className={currentStepIndex === 2 ? 'navigate-item active' : 'navigate-item'}
                                         onClick={() => this.setState({currentStepIndex: 2})}
-                                    >Occupation Info
+                                    >Info
                                     </div>
                                 }
+
                                 {
-                                    user.profiles.kindOfService == 1 &&
+                                    user.profiles.kindOfService &&
                                     <div
                                         className={currentStepIndex === 3 ? 'navigate-item active' : 'navigate-item'}
                                         onClick={() => this.setState({currentStepIndex: 3})}
-                                    >Additional Info
+                                    >Finance
                                     </div>
                                 }
 
-                                {
-                                    user.profiles.kindOfService == 1 &&
-                                    <div
-                                        className={currentStepIndex === 4 ? 'navigate-item active' : 'navigate-item'}
-                                        onClick={() => this.setState({currentStepIndex: 4})}
-                                    >Stated Financial Info
-                                    </div>
-                                }
-
-                                {
-                                    user.profiles.kindOfService == 1 &&
-                                    <div
-                                        className={currentStepIndex === 5 ? 'navigate-item active' : 'navigate-item'}
-                                        onClick={() => this.setState({currentStepIndex: 5})}
-                                    >Calculated Values
-                                    </div>
-                                }
                                 <div
-                                    className={currentStepIndex === 6 ? 'navigate-item active' : 'navigate-item'}
-                                    onClick={() => this.setState({currentStepIndex: 6})}
-                                >Your Bid
+                                    className={currentStepIndex === 4 ? 'navigate-item active' : 'navigate-item'}
+                                    onClick={() => this.setState({currentStepIndex: 4})}
+                                >Provide a Quote
                                 </div>
                                 {
                                     history.location.state.isCallback &&
                                     <div
-                                        className={currentStepIndex === 7 ? 'navigate-item active' : 'navigate-item'}
-                                        onClick={() => this.setState({currentStepIndex: 7})}
+                                        className={currentStepIndex === 5 ? 'navigate-item active' : 'navigate-item'}
+                                        onClick={() => this.setState({currentStepIndex: 5})}
                                     >Callback
                                     </div>
                                 }

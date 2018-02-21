@@ -7,6 +7,13 @@ class ContactInfos extends Component {
         const {isCallback} = this.props.history.location.state
         return (
             <div>
+               <div className="row">
+                   <div className="col-12">
+                       <h4 style={{marginLeft: '-15px', marginBottom: '20px'}}>
+                           The contact info will be visible when customer request for call back.
+                       </h4>
+                   </div>
+               </div>
                <Intake
                    question="First Name"
                    answer={user.firstName}

@@ -10,18 +10,18 @@ class AdditionalInfos extends Component {
         return (
             <div>
                 <Intake
-                    question="DOB"
+                    question="Ownership Type"
+                    answer={request.ownership == 1 ? 'single' : 'joint'}
+                />
+
+                <Intake
+                    question="Birth Day"
                     answer={moment(request.user.profiles.dob).format('LL')}
                 />
 
                 <Intake
-                    question="Civil Status"
-                    answer={request.user.profiles.civilStatus}
-                />
-
-                <Intake
                     question="Canadian Citizen"
-                    answer={request.user.profiles.citizenship}
+                    answer={request.user.profiles.citizenship == 1 ? 'yes' : 'no'}
                 />
             </div>
         )

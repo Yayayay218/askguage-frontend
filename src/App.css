@@ -46,12 +46,16 @@ html,
 body {
   height: 100vh;
   font-family: 'Roboto', sans-serif;
+  position: relative;
 }
 @media (max-width: 767px) {
   html,
   body {
     font-size: 14px;
   }
+}
+.page-wrapper {
+  min-height: calc(40vh);
 }
 .content {
   background: url(Assets/images/landing/landing.jpg) no-repeat;
@@ -286,6 +290,9 @@ header .navbar-dark .navbar-nav .nav-link {
   }
   header .navbar-dark .navbar-nav .sign-up {
     width: 115px;
+  }
+  header .navbar-dark .navbar-brand img {
+    width: 175px;
   }
 }
 footer {
@@ -795,7 +802,7 @@ footer .footer-bottom .copyright {
   margin: auto 0;
 }
 .request-item .btn-bid {
-  width: 135px;
+  width: 160px;
   height: 36px;
   border-radius: 4px;
   border: solid 1px #d2335c;
@@ -1775,4 +1782,13 @@ a:hover {
   position: absolute;
   right: 15px;
   cursor: pointer;
+}
+.question-mark-icon {
+  width: 18px;
+  height: 18px;
+  background-size: 100%;
+  background-image: url(Assets/images/icons/question-mark.svg);
+  position: absolute;
+  top: 9px;
+  margin-left: 9px;
 }

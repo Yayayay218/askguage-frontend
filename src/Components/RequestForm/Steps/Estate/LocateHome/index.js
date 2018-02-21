@@ -15,7 +15,7 @@ class LocateHome extends Component {
             <div>
                 <div className="request-intro">
                     <h3>Location</h3>
-                    <p>Which city would you prefer? <br/> Quiet suburbs or a walk downtown.</p>
+                    <p>Which city would you prefer? Quiet suburbs or a walk downtown.</p>
                 </div>
                 <div className="form-group row">
                     <div className="col-md-12">

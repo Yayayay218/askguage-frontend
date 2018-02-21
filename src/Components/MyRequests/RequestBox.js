@@ -305,7 +305,7 @@ function BidActionWrapped({bid, remove, role, status}) {
         <div>
             <button className="btn btn-place-bid"
                     onClick={bid}
-            >Place a Quote
+            >Provide a Quote
             </button>
             <button className="btn btn-remove"
                     onClick={remove}

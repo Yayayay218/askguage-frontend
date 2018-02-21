@@ -2,33 +2,13 @@ import React, {Component} from 'react'
 import Actions from '../../../Actions/Creators'
 import {connect} from 'react-redux'
 import Autocomplete from 'react-google-autocomplete'
+import NumberFormat from 'react-number-format';
 
 class YourBid extends Component {
     constructor(props) {
         super(props)
-        const {_bid} = props.history.location.state
-        this.state = {
-            bid: {
-                mortgageAmount: _bid.bidAmount || '',
-                options: _bid.bidOptions ? _bid.bidOptions : props.user.profiles.kindOfService == 1 ? [{
-                    mortgageType: 0,
-                    mortgageTerm: '',
-                    interestRate: '',
-                    amortization: ''
-                }] : [{
-                    area: '',
-                    propertyType: '',
-                    squareFT: '',
-                    price: ''
-                }],
-                commissionFee: _bid.bidCommission || '',
-                comment: ''
-            },
-            error: false
-        }
         this.addMoreOption = this.addMoreOption.bind(this)
         this.bindOption = this.bindOption.bind(this)
-        this.bindAddress = this.bindAddress.bind(this)
         this.doBid = this.doBid.bind(this)
     }
 
@@ -40,9 +20,8 @@ class YourBid extends Component {
     }
 
     addMoreOption() {
-        const {user} = this.props
-        const {bid} = this.state
-        let _options = this.state.bid.options.push(user.profiles.kindOfService == 1 ?
+        const {user, _bid, onChange} = this.props
+        let _options = _bid.options.push(user.profiles.kindOfService == 1 ?
             {
                 mortgageType: '',
                 mortgageTerm: '',
@@ -55,44 +34,24 @@ class YourBid extends Component {
                 price: ''
             }
         )
-        this.setState({
-            bid: {
-                ...bid,
-                _options
-            }
+        onChange({
+            ..._bid,
+            _options
         })
     }
 
     bindOption = (index, field) => (e) => {
-        const {options} = this.state.bid
+        const {onChange} = this.props
+        const {options} = this.props._bid
         options[index][field] = e.target.value
-
-        this.setState({
-            bid: {
-                ...this.state.bid,
-                options
-            }
-        });
-    }
-
-    bindAddress = (index, field, place) => (e) => {
-        console.log(place)
-        const {options} = this.state.bid
-        options[index][field] = place
-
-        this.setState({
-            bid: {
-                ...this.state.bid,
-                options
-            }
-        });
+        onChange({...this.props._bid, options})
     }
 
     doBid = () => {
-        const {user, request} = this.props
-        const {bid} = this.state
+        const {user, request, _bid} = this.props
+        // const {bid} = this.state
         let data = {
-            ...bid,
+            ..._bid,
             providerId: user.id,
             requestId: request.id
         }
@@ -100,52 +59,64 @@ class YourBid extends Component {
     }
 
     render() {
-        const {user} = this.props
+        const {user, _bid, onChange} = this.props
         const {state} = this.props.history.location
-        const {bid} = this.state
         const bind = (field) => ({
-            value: bid[field],
-            onChange: (e) => this.setState({
-                bid: {
-                    ...bid,
-                    [field]: e.target.value
-                }
-            })
+            value: _bid[field],
+            onChange: (e) => onChange({..._bid, [field]: e.target.value})
         })
         return (
             <div className="bid-form">
+                <div className="row">
+                    <div className="col-12">
+                        <h4 style={{marginBottom: '30px'}}>
+                            Based on customer's request, please provide your recommendation.
+                        </h4>
+                    </div>
+                </div>
                 <div className="form-group row">
                     <div className="col-12">
                         <div className="row">
                             <div className="col-md-3 m-auto">
                                 <label htmlFor=""
-                                       className="col-form-label">{user.profiles.kindOfService == 0 ? 'Commission Fee' : 'Mortgage Amount'}</label>
+                                       className="col-form-label">{user.profiles.kindOfService == 0 ? 'Realtor Commission Fee' : 'Mortgage Amount'}</label>
                             </div>
                             <div className="col-md-9">
-                                <input type="text" className="form-control"
-                                       {...bind(user.profiles.kindOfService == 0 ? 'commissionFee' : 'mortgageAmount')}
-                                />
+                                {
+                                    user.profiles.kindOfService == 0 ?
+                                        <NumberFormat
+                                            thousandSeparator={true}
+                                            suffix={'%'}
+                                            value={2.5}
+                                            className="form-control"
+                                            disabled={true}
+                                        />
+                                        : <input type="text" className="form-control"
+                                                 {...bind('mortgageAmount')}
+                                        />
+                                }
+
                             </div>
                         </div>
                     </div>
                 </div>
                 {
-                    bid.options.map((item, index) => {
+                    _bid.options.map((item, index) => {
                         return (
                             <RenderOption
                                 serviceType={user.profiles.kindOfService}
                                 item={item}
                                 index={index}
-                                bid={bid}
+                                bid={_bid}
                                 key={index}
                                 bindOption={this.bindOption}
-                                bindAddress={this.bindAddress}
+                                _this={this}
                             />
                         )
                     })
                 }
                 {
-                    this.state.error && <div className="col-12 offset-md-3">
+                    _bid.error && <div className="col-12 offset-md-3">
                         <p style={{color: 'red'}}>Cannot Bid</p>
                     </div>
                 }
@@ -164,7 +135,7 @@ class YourBid extends Component {
     }
 }
 
-function RenderOption({item, index, bid, bindOption, serviceType, bindAddress}) {
+function RenderOption({item, index, bid, bindOption, serviceType, _this}) {
     if (serviceType == 0)
         return (
             <div>
@@ -215,9 +186,19 @@ function RenderOption({item, index, bid, bindOption, serviceType, bindAddress}) 
                                 <label htmlFor="" className="col-form-label">Price</label>
                             </div>
                             <div className="col-md-9">
-                                <input type="text" className="form-control"
-                                       onChange={bindOption(index, 'price')}
-                                       value={bid.options[index].price}
+                                <NumberFormat
+                                    thousandSeparator={true}
+                                    prefix={'$'}
+                                    className="form-control"
+                                    value={bid.options[index].price}
+                                    onValueChange={(values) => {
+                                        const {options} = _this.props._bid
+                                        options[index]["price"] = values.value
+                                        _this.props.onChange({
+                                            ..._this.props._bid,
+                                            options
+                                        })
+                                    }}
                                 />
                             </div>
                         </div>
@@ -241,7 +222,7 @@ function RenderOption({item, index, bid, bindOption, serviceType, bindAddress}) 
                                     <input type="radio" className="custom-control-input"
                                            value='0'
                                            name={index}
-                                           defaultChecked={item.mortgageType === 0}
+                                           defaultChecked={item.mortgageType == 0}
                                            onClick={bindOption(index, 'mortgageType')}
                                     />
                                     <span className="custom-control-indicator"></span>
@@ -251,7 +232,7 @@ function RenderOption({item, index, bid, bindOption, serviceType, bindAddress}) 
                                     <input type="radio" className="custom-control-input"
                                            value='1'
                                            name={index}
-                                           defaultChecked={item.mortgageType === 1}
+                                           defaultChecked={item.mortgageType == 1}
                                            onClick={bindOption(index, 'mortgageType')}
                                     />
                                     <span className="custom-control-indicator"></span>

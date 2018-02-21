@@ -86,18 +86,22 @@ class Intake extends Component {
                                     <IntakeDetails
                                         question="Household Income"
                                         answer={request.houseHold}
+                                        isCurrency={true}
                                     />
                                     <IntakeDetails
                                         question="Monthly Liability"
                                         answer={request.monthlyLiability}
+                                        isCurrency={true}
                                     />
                                     <IntakeDetails
                                         question="Down Payment Amount"
                                         answer={request.downPayment}
+                                        isCurrency={true}
                                     />
                                     <IntakeDetails
                                         question="Net Assets"
                                         answer={request.netAsset}
+                                        isCurrency={true}
                                     />
                                 </div>
                                 : null

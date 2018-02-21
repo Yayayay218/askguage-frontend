@@ -63,6 +63,8 @@ html,
 body {
   height: 100vh;
   font-family: 'Roboto', sans-serif;
+  position: relative;
+  //font-size: 18px
 }
 
 @media (max-width: 767px) {
@@ -70,6 +72,10 @@ body {
   body {
     font-size: 14px;
   }
+}
+
+.page-wrapper {
+  min-height: calc(100vh - 60px);
 }
 
 .content {
@@ -330,11 +336,19 @@ header {
           width: 115px;
         }
       }
+
+      .navbar-brand {
+        img {
+          width: 175px;
+        }
+      }
     }
   }
 }
 
 footer {
+  //position: absolute;
+  //bottom: 0;
   background-color: #f8f8f8;
   width: 100%;
   margin-top: 94px;
@@ -931,7 +945,8 @@ footer {
   }
 
   .btn-bid {
-    width: 135px;
+    //width: 135px;
+    width: 160px;
     height: 36px;
     border-radius: 4px;
     border: solid 1px #d2335c;
@@ -2053,4 +2068,14 @@ a:hover {
     right: 15px;
     cursor: pointer;
   }
+}
+
+.question-mark-icon {
+  width: 18px;
+  height: 18px;
+  background-size: 100%;
+  background-image: url(Assets/images/icons/question-mark.svg);
+  position: absolute;
+  top: 9px;
+  margin-left: 9px;
 }

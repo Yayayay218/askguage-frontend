@@ -11,73 +11,73 @@ class Budget extends Component {
         const min = [
             {
                 id: '100000',
-                value: '100000'
+                value: 100000
             },
             {
                 id: '200000',
-                value: '200000'
+                value: 200000
             },
             {
                 id: '300000',
-                value: '300000'
+                value: 300000
             },
             {
                 id: '400000',
-                value: '400000'
+                value: 400000
             },
             {
                 id: '500000',
-                value: '500000'
+                value: 500000
             },
             {
                 id: '600000',
-                value: '600000'
+                value: 600000
             },
             {
                 id: '1000000',
-                value: '1000000'
+                value: 1000000
             },
             {
                 id: '1500000',
-                value: '1500000'
+                value: 1500000
             },
         ]
         const max = [
             {
                 id: '200000',
-                value: '200000'
+                value: 200000
             },
             {
                 id: '300000',
-                value: '300000'
+                value: 300000
             },
             {
                 id: '400000',
-                value: '400000'
+                value: 400000
             },
             {
                 id: '500000',
-                value: '500000'
+                value: 500000
             },
             {
                 id: '600000',
-                value: '600000'
+                value: 600000
             },
             {
                 id: '1000000',
-                value: '1000000'
+                value: 1000000
             },
             {
                 id: '1500000',
-                value: '1500000'
+                value: 1500000
             },
             {
                 id: '2000000',
-                value: '2000000'
+                value: 2000000
             },
             {
                 id: '3000000',
-                value: '3000000'
+                value: 3000000
             },
             {
                 id: '5000000+',
@@ -88,7 +88,7 @@ class Budget extends Component {
 
         const bind = (field, nested) => ({
             value: _request[field][nested],
-            onChange: (e) => onChange({..._request, [field]: {..._request[field], [nested]:e.target.value}})
+            onChange: (e) => onChange({..._request, [field]: {..._request[field], [nested]: e.target.value}})
         })
 
         return (
@@ -108,12 +108,18 @@ class Budget extends Component {
                             </div>
                             <div className="col-md-12">
                                 <select type="select" className="custom-select"
-                                        {...bind("budget","min")}
+                                        {...bind("budget", "min")}
                                 >
                                     <option value=""></option>
                                     {
                                         min.map(item => (
-                                            <option value={item.id} key={item.id}>{item.value}</option>
+                                            <option
+                                                value={item.id}
+                                                key={item.id}
+                                                disabled={_request["budget"]["max"] !== '' && item.value >= _request["budget"]["max"]}
+                                            >
+                                                {item.value}
+                                            </option>
                                         ))
                                     }
                                 </select>
@@ -133,7 +139,13 @@ class Budget extends Component {
                                     <option value=""></option>
                                     {
                                         max.map(item => (
-                                            <option value={item.id} key={item.id}>{item.value}</option>
+                                            <option
+                                                value={item.id}
+                                                key={item.id}
+                                                disabled={item.value <= _request["budget"]["min"]}
+                                            >
+                                                {item.value}
+                                            </option>
                                         ))
                                     }
                                 </select>

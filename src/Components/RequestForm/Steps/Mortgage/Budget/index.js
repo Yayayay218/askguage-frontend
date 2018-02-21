@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import StepLayout from '../../StepLayout'
+import NumberFormat from 'react-number-format';
 
 class Income extends Component {
     constructor(props) {
@@ -30,9 +31,16 @@ class Income extends Component {
                                 Current mortgage amount
                             </label>
                             <div className="col-md-12">
-                                <input type="text" className="form-control"
-                                       {...bind("mortgageAmount")}
+                                <NumberFormat
+                                    thousandSeparator={true}
+                                    prefix={'$'}
+                                    className="form-control"
+                                    value={_request["mortgageAmount"]}
+                                    onValueChange={(values) => onChange({..._request, mortgageAmount: values.value})}
                                 />
+                                {/*<input type="text" className="form-control"*/}
+                                       {/*{...bind("mortgageAmount")}*/}
+                                {/*/>*/}
                             </div>
                         </div>
                     </div>
@@ -42,10 +50,17 @@ class Income extends Component {
                                 How much more do you need.
                             </label>
                             <div className="col-md-12">
-                                <input type="text" className="form-control"
-                                       {...bind("needMore")}
-
+                                <NumberFormat
+                                    thousandSeparator={true}
+                                    prefix={'$'}
+                                    className="form-control"
+                                    value={_request["needMore"]}
+                                    onValueChange={(values) => onChange({..._request, needMore: values.value})}
                                 />
+                                {/*<input type="text" className="form-control"*/}
+                                       {/*{...bind("needMore")}*/}
+
+                                {/*/>*/}
                             </div>
                         </div>
                     </div>
@@ -57,9 +72,16 @@ class Income extends Component {
                                 Whats the Value of your home?
                             </label>
                             <div className="col-md-12">
-                                <input type="text" className="form-control"
-                                       {...bind("homeValue")}
+                                <NumberFormat
+                                    thousandSeparator={true}
+                                    prefix={'$'}
+                                    className="form-control"
+                                    value={_request["homeValue"]}
+                                    onValueChange={(values) => onChange({..._request, homeValue: values.value})}
                                 />
+                                {/*<input type="text" className="form-control"*/}
+                                       {/*{...bind("homeValue")}*/}
+                                {/*/>*/}
                             </div>
                         </div>
                     </div>

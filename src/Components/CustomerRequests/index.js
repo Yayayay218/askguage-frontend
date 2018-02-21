@@ -17,6 +17,26 @@ class CustomerRequest extends Component {
         super(props)
         if (!props.token)
             props.history.push('/')
+        const {_bid} = props.history.location.state
+        this.state = {
+            bid: {
+                mortgageAmount: _bid.bidAmount || '',
+                options: _bid.bidOptions ? _bid.bidOptions : props.user.profiles.kindOfService == 1 ? [{
+                    mortgageType: 0,
+                    mortgageTerm: '',
+                    interestRate: '',
+                    amortization: ''
+                }] : [{
+                    area: '',
+                    propertyType: '',
+                    squareFT: '',
+                    price: ''
+                }],
+                commissionFee: 2.5,
+                comment: ''
+            },
+            error: false
+        }
     }
 
     componentWillReceiveProps(newProps) {
@@ -52,14 +72,6 @@ class CustomerRequest extends Component {
             },
             {
                 render: () => (
-                    <OccupationInfos
-                        user={user}
-                        request={request}
-                    />
-                )
-            },
-            {
-                render: () => (
                     <AdditionalInfos
                         user={user}
                         request={request}
@@ -76,18 +88,12 @@ class CustomerRequest extends Component {
             },
             {
                 render: () => (
-                    <CalculateValue
-                        user={user}
-                        request={request}
-                    />
-                )
-            },
-            {
-                render: () => (
                     <YourBid
                         user={user}
                         request={request}
                         history={this.props.history}
+                        _bid={this.state.bid}
+                        onChange={(bid) => this.setState({bid})}
                     />
                 )
             },
@@ -110,7 +116,7 @@ class CustomerRequest extends Component {
                                 Buy a new house
                             </label>
                             <label className="status" style={{marginRight: '0'}}>Status: <strong>Open to receive
-                                bids</strong></label>
+                                quotes</strong></label>
                         </div>
                     </div>
                     <div className="menu-line"></div>

@@ -7,7 +7,9 @@ class App extends Component {
         return (
             <div>
                 <Header {...this.props}/>
-                {this.props.children}
+                <div className="page-wrapper">
+                    {this.props.children}
+                </div>
                 <Footer {...this.props}/>
             </div>
         )

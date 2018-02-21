@@ -70,7 +70,7 @@ class PickHome extends Component {
             <div>
                 <div className="request-intro">
                     <h3>Let’s find your dream home!</h3>
-                    <p>Share your preferences with Ask Gauge <br/> and we can help you make informed decisions.</p>
+                    <p>Share your preferences with Ask Gauge and we can help you make informed decisions.</p>
                 </div>
                 <div className="form-group row">
                     <div className="col-md-12">
@@ -108,7 +108,7 @@ class PickHome extends Component {
                                 {
                                     semi ? (
                                         <div className="service-box semi semi-active">
-                                            <label htmlFor="">Semi TownHouse</label>
+                                            <label htmlFor="">Semi Detached</label>
                                         </div>
                                     ) : (
                                         <div className="service-box semi"
@@ -123,7 +123,7 @@ class PickHome extends Component {
 
                                              }}
                                         >
-                                            <label htmlFor="">Semi TownHouse</label>
+                                            <label htmlFor="">Semi Detached</label>
                                         </div>
                                     )
                                 }

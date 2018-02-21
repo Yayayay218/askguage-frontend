@@ -108,7 +108,7 @@ class PickHome extends Component {
                                 {
                                     semi ? (
                                         <div className="service-box semi semi-active">
-                                            <label htmlFor="">Semi TownHouse</label>
+                                            <label htmlFor="">Semi Detached</label>
                                         </div>
                                     ) : (
                                         <div className="service-box semi"
@@ -123,7 +123,7 @@ class PickHome extends Component {
 
                                              }}
                                         >
-                                            <label htmlFor="">Semi TownHouse</label>
+                                            <label htmlFor="">Semi Detached</label>
                                         </div>
                                     )
                                 }

@@ -9,41 +9,41 @@ class Preferences extends Component {
         return (
             <div>
                 <Intake
-                    question="What Kind of home are you looking for?"
+                    question="Property Type"
                     answer={KindOfHome(request.kindOfHome)}
                 />
 
                 <Intake
-                    question="Number of Bedroom (new home)"
+                    question="Number of Bedroom"
                     answer={request.numberOfBedRoom}
                 />
 
                 <Intake
-                    question="Square ft (new home)"
+                    question="Square Feet"
                     answer={request.squareFT}
                 />
 
                 <Intake
-                    question="Where are you looking for a home?"
+                    question="City"
                     answer={request.homeAddress.address}
                 />
 
-                <Intake
-                    question="Whats your budget? (min)"
-                    answer={request.budget.min}
-                />
-                <Intake
-                    question="Whats your budget? (max)"
-                    answer={request.budget.max}
-                />
-                <Intake
-                    question="Do you know if you are qualified for the amount above?"
-                    answer={BooleanType(request.areQualified)}
-                />
-                <Intake
-                    question="Is this a single or joint ownership?"
-                    answer={BooleanType(request.ownership)}
-                />
+                {/*<Intake*/}
+                    {/*question="Whats your budget? (min)"*/}
+                    {/*answer={request.budget.min}*/}
+                {/*/>*/}
+                {/*<Intake*/}
+                    {/*question="Whats your budget? (max)"*/}
+                    {/*answer={request.budget.max}*/}
+                {/*/>*/}
+                {/*<Intake*/}
+                    {/*question="Do you know if you are qualified for the amount above?"*/}
+                    {/*answer={BooleanType(request.areQualified)}*/}
+                {/*/>*/}
+                {/*<Intake*/}
+                    {/*question="Is this a single or joint ownership?"*/}
+                    {/*answer={BooleanType(request.ownership)}*/}
+                {/*/>*/}
 
             </div>
         )

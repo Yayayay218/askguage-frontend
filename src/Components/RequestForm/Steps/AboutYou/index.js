@@ -67,21 +67,45 @@ class AboutYou extends Component {
                         </div>
                     </div>
                 </div>
+                {/*<div className="form-group row">*/}
+                    {/*<label className="col-md-12 custom-label">*/}
+                        {/*Are you a Canadian Citizen?*/}
+                    {/*</label>*/}
+                    {/*<div className="col-md-12">*/}
+                        {/*<select className="custom-select"*/}
+                                {/*{...bind("citizenType")}*/}
+                        {/*>*/}
+                            {/*<option value=''></option>*/}
+                            {/*<option value='0'>No</option>*/}
+                            {/*<option value='1'>Yes</option>*/}
+                        {/*</select>*/}
+                    {/*</div>*/}
+                {/*</div>*/}
                 <div className="form-group row">
-                    <label className="col-md-12 custom-label">
-                        Are you a Canadian Citizen?
-                    </label>
                     <div className="col-md-12">
-                        {/*<input type="text" className="form-control"*/}
-                               {/*{...bind("citizenType")}*/}
-                        {/*/>*/}
-                        <select className="custom-select"
-                                {...bind("citizenType")}
-                        >
-                            <option value=''></option>
-                            <option value='0'>No</option>
-                            <option value='1'>Yes</option>
-                        </select>
+                        <label htmlFor="">Are you a Canadian Citizen?</label>
+                    </div>
+                    <div className="group-check-boxes">
+                        <label className="col-md-6 custom-control custom-radio">
+                            <input type="radio" className="custom-control-input"
+                                   value='1'
+                                   name='citizenType'
+                                   defaultChecked={_request["citizenType"] === 1}
+                                   onChange={(e) => onChange({..._request, citizenType: 1})}
+                            />
+                            <span className="custom-control-indicator"></span>
+                            <span className="custom-control-description custom-label">Yes</span>
+                        </label>
+                        <label className="col-md-6 custom-control custom-radio">
+                            <input type="radio" className="custom-control-input"
+                                   value='0'
+                                   name='citizenType'
+                                   defaultChecked={_request["citizenType"] === 0}
+                                   onChange={(e) => onChange({..._request, citizenType: 0})}
+                            />
+                            <span className="custom-control-indicator"></span>
+                            <span className="custom-control-description custom-label">No</span>
+                        </label>
                     </div>
                 </div>
 

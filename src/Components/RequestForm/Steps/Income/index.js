@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import StepLayout from '../StepLayout'
+import NumberFormat from 'react-number-format';
 
 class Income extends Component {
     constructor(props) {
@@ -10,10 +11,10 @@ class Income extends Component {
     render() {
         const {onGoNext, onGoBack, _request, onChange, isValid, requestType} = this.props
 
-        const bind = (field) => ({
-            value: _request[field],
-            onChange: (e) => onChange({..._request, [field]: e.target.value})
-        })
+        // const bind = (field) => ({
+        //     value: _request[field],
+        //     onChange: (e) => onChange({..._request, [field]: e.target.value})
+        // })
         return (
             <div>
                 <div className="request-intro">
@@ -28,19 +29,15 @@ class Income extends Component {
                                 {requestType === 0 ? 'Your / Household Income' : 'Gross Household Income'}
                             </label>
                             <div className="col-md-12">
-                                <input type="text" className="form-control"
-                                       data-toggle="tooltip"
-                                       title="Your /household income includes: Borrowers, Co-Borrowers and other Incomes"
-                                       {...bind("houseHold")}
+                                <NumberFormat
+                                    thousandSeparator={true}
+                                    prefix={'$'}
+                                    className="form-control"
+                                    data-toggle="tooltip"
+                                    title="Your yearly household income before taxes, including any bonuses and supplementary income. Your /household income includes: Borrowers, Co-Borrowers and other Incomes"
+                                    value={_request["houseHold"]}
+                                    onValueChange={(values) => onChange({..._request, houseHold: values.value})}
                                 />
-                                {/*<select className="custom-select"*/}
-                                {/*{...bind("houseHold")}*/}
-                                {/*>*/}
-                                {/*<option value=''></option>*/}
-                                {/*<option value='0'>Borrowers</option>*/}
-                                {/*<option value='1'>Co-Borrowers</option>*/}
-                                {/*<option value='2'>Other Incomes</option>*/}
-                                {/*</select>*/}
                             </div>
                         </div>
                     </div>
@@ -50,19 +47,20 @@ class Income extends Component {
                                 Monthly Liability
                             </label>
                             <div className="col-md-12">
-                                <input type="text" className="form-control"
-                                       data-toggle="tooltip"
-                                       title="Monthly Liabilities includes: Car Payments, Monthly (Credit Card, Line of Credit, Home Equity Line of Credit, Student Loan) Payments, Monthly Alimony or Child Support Payments, Any outstanding monthly payments"
-                                       {...bind("monthlyLiability")}
+                                <NumberFormat
+                                    thousandSeparator={true}
+                                    prefix={'$'}
+                                    className="form-control"
+                                    data-toggle="tooltip"
+                                    title="Monthly liabilities includes:  average monthly interest owed on credit card,  monthly leasing or financing payment for car(s), monthly loan expenses, such as line of credit,  student loans, alimony or child support."
+                                    value={_request["monthlyLiability"]}
+                                    onValueChange={(values) => onChange({..._request, monthlyLiability: values.value})}
                                 />
-                                {/*<select className="custom-select"*/}
+                                {/*<input type="text" className="form-control"*/}
+                                {/*data-toggle="tooltip"*/}
+                                {/*title="Monthly liabilities includes:  average monthly interest owed on credit card,  monthly leasing or financing payment for car(s), monthly loan expenses, such as line of credit,  student loans, alimony or child support."*/}
                                 {/*{...bind("monthlyLiability")}*/}
-                                {/*>*/}
-                                {/*<option value=''></option>*/}
-                                {/*<option value='0'>Car Payments</option>*/}
-                                {/*<option value='1'>Monthly Payments</option>*/}
-                                {/*<option value='2'>Any Outstanding Monthly Payments</option>*/}
-                                {/*</select>*/}
+                                {/*/>*/}
                             </div>
 
                         </div>
@@ -76,11 +74,20 @@ class Income extends Component {
                                     Down Payment Amount
                                 </label>
                                 <div className="col-md-12">
-                                    <input type="text" className="form-control"
-                                           data-toggle="tooltip"
-                                           title="The minimum down payment in Canada is 5%. For down payments of less than 20%, home buyers are required to purchase mortgage default insurance, commonly referred to as CMHC insurance."
-                                           {...bind("downPayment")}
+                                    <NumberFormat
+                                        thousandSeparator={true}
+                                        prefix={'$'}
+                                        className="form-control"
+                                        data-toggle="tooltip"
+                                        title="The minimum down payment in Canada is 5%. For down payments of less than 20%, home buyers are required to purchase mortgage default insurance, commonly referred to as CMHC insurance."
+                                        value={_request["downPayment"]}
+                                        onValueChange={(values) => onChange({..._request, downPayment: values.value})}
                                     />
+                                    {/*<input type="text" className="form-control"*/}
+                                           {/*data-toggle="tooltip"*/}
+                                           {/*title="The minimum down payment in Canada is 5%. For down payments of less than 20%, home buyers are required to purchase mortgage default insurance, commonly referred to as CMHC insurance."*/}
+                                           {/*{...bind("downPayment")}*/}
+                                    {/*/>*/}
                                 </div>
                             </div>
                         </div>
@@ -92,23 +99,20 @@ class Income extends Component {
                                 Net Assets
                             </label>
                             <div className="col-md-12">
-                                <input type="text" className="form-control"
-                                       data-toggle="tooltip"
-                                       title="Net Assets includes: CHQ, Saving, Stocks, Investments, RRSP and RIF"
-
-                                       {...bind("netAsset")}
+                                <NumberFormat
+                                    thousandSeparator={true}
+                                    prefix={'$'}
+                                    className="form-control"
+                                    data-toggle="tooltip"
+                                    title="Net Assets includes: CHQ, Saving, Stocks, Investments, RRSP and RIF"
+                                    value={_request["netAsset"]}
+                                    onValueChange={(values) => onChange({..._request, netAsset: values.value})}
                                 />
-                                {/*<select className="custom-select"*/}
-                                {/*{...bind("netAsset")}*/}
-                                {/*>*/}
-                                {/*<option value=''></option>*/}
-                                {/*<option value='0'>CHQ</option>*/}
-                                {/*<option value='1'>Saving</option>*/}
-                                {/*<option value='2'>Stocks</option>*/}
-                                {/*<option value='2'>Investments</option>*/}
-                                {/*<option value='2'>RRSP</option>*/}
-                                {/*<option value='2'>RIF</option>*/}
-                                {/*</select>*/}
+                                {/*<input type="text" className="form-control"*/}
+                                       {/*data-toggle="tooltip"*/}
+                                       {/*title="Net Assets includes: CHQ, Saving, Stocks, Investments, RRSP and RIF"*/}
+                                       {/*{...bind("netAsset")}*/}
+                                {/*/>*/}
                             </div>
                         </div>
                     </div>
