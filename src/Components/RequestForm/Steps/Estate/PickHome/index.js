@@ -133,7 +133,7 @@ class PickHome extends Component {
                                 {
                                     condo ? (
                                         <div className="service-box condo condo-active">
-                                            <label htmlFor="">Condo Apartment</label>
+                                            <label htmlFor="">Town House</label>
                                         </div>
                                     ) : (
                                         <div className="service-box condo"
@@ -148,7 +148,7 @@ class PickHome extends Component {
 
                                              }}
                                         >
-                                            <label htmlFor="">Condo Apartment</label>
+                                            <label htmlFor="">Town House</label>
                                         </div>
                                     )
                                 }
@@ -157,11 +157,11 @@ class PickHome extends Component {
                             <div className="col-md-3 col-12">
                                 {
                                     other ? (
-                                        <div className="service-box condo other-active">
-                                            <label htmlFor="">Other Type</label>
+                                        <div className="service-box condo condo-active">
+                                            <label htmlFor="">Condo</label>
                                         </div>
                                     ) : (
-                                        <div className="service-box other"
+                                        <div className="service-box condo"
                                              onClick={() => {
                                                  this.setState({
                                                      detached: false,
@@ -173,7 +173,7 @@ class PickHome extends Component {
 
                                              }}
                                         >
-                                            <label htmlFor="">Other Type</label>
+                                            <label htmlFor="">Condo</label>
                                         </div>
                                     )
                                 }

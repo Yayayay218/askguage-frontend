@@ -6,7 +6,6 @@ import NumberFormat from 'react-number-format';
 class StatedInfo extends Component {
     render() {
         const {request} = this.props
-        console.log(request)
         return (
             <div>
                 {

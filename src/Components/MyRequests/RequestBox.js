@@ -121,7 +121,9 @@ class RequestBox extends Component {
                                                         <div className="d-flex flex-row property">
                                                             <div className="d-flex flex-column col-4">
                                                                 <label className="label-header">Property type</label>
-                                                                <label className="label-header content">N/A</label>
+                                                                <PropertyTypes
+                                                                    type={item.kindOfHome}
+                                                                />
                                                             </div>
                                                             <div className="d-flex flex-column col-4">
                                                                 <label className="label-header">Location</label>
@@ -224,6 +226,19 @@ class RequestBox extends Component {
             </div>
         )
     }
+}
+
+function PropertyTypes({type}) {
+    if (type == 0)
+        type = 'Detached House'
+    if (type == 1)
+        type = 'Semi Detached'
+    if (type == 2)
+        type = 'Town House'
+    if (type == 3)
+        type = 'Condo'
+    return <label className="label-header content">{type}</label>
+
 }
 
 function StatusDetails({status}) {

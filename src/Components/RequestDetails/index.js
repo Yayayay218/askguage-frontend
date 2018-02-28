@@ -56,6 +56,7 @@ class RequestDetails extends Component {
                     <Intake
                         request={request}
                         isFetched={detailFetched}
+                        user={this.props.user}
                     />
                 )
             },

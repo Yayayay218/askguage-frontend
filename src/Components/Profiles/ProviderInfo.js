@@ -20,9 +20,14 @@ export default class ProviderInfo extends Component {
                                 <select className="custom-select"
                                         {...bind("kindOfService")}
                                 >
-                                    <option value=""></option>
-                                    <option value="0">Estate</option>
-                                    <option value="1">Mortgage</option>
+                                    <option value="-1"></option>
+                                    {/*<option value="0">Estate</option>*/}
+                                    {/*<option value="1">Mortgage</option>*/}
+                                    <option value="1">Mortgage Agent</option>
+                                    <option value="4">Mobile Mortgage Advisor</option>
+                                    <option value="0">Real Estate Agent</option>
+                                    <option value="3">Real Estate Lawyer</option>
+                                    <option value="2">Home Inspector</option>
                                 </select>
                             </div>
                         </div>
@@ -109,97 +114,116 @@ export default class ProviderInfo extends Component {
                         </div>
                     </div>
                 </div>
+                {
+                    (user.profiles.kindOfService == 0 || user.profiles.kindOfService == 1)
+                    &&
+                    <div className="form-group row">
+                        <div className="col-md-6 col-12">
+                            <div className="row">
+                                <div className="col-md-4 m-auto">
+                                    <label className="col-form-label">Brokerage Name</label>
+                                </div>
+                                <div className="col-md-8">
+                                    <input type="text" className="form-control"
+                                           {...bind("brokerageName")}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-6 col-12">
+                            <div className="row">
+                                <div className="col-md-4 m-auto">
+                                    <label className="col-form-label">Brokerage Address</label>
+                                </div>
+                                <div className="col-md-8">
+                                    <Autocomplete
+                                        className="form-control"
+                                        onPlaceSelected={(place) => {
+                                            onChange({
+                                                ...user,
+                                                profiles: {
+                                                    ...user.profiles,
+                                                    brokerageAddress: {
+                                                        address: place.formatted_address,
+                                                        lat: place.geometry.location.lat(),
+                                                        lng: place.geometry.location.lng()
+                                                    }
+                                                },
+                                            })
+                                        }}
+                                        types={['(regions)']}
+                                        defaultValue={user['profiles']['brokerageAddress']['address']}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
 
                 <div className="form-group row">
-                    <div className="col-md-6 col-12">
-                        <div className="row">
-                            <div className="col-md-4 m-auto">
-                                <label className="col-form-label">Brokerage Name</label>
-                            </div>
-                            <div className="col-md-8">
-                                <input type="text" className="form-control"
-                                       {...bind("brokerageName")}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-6 col-12">
-                        <div className="row">
-                            <div className="col-md-4 m-auto">
-                                <label className="col-form-label">Brokerage Address</label>
-                            </div>
-                            <div className="col-md-8">
-                                <Autocomplete
-                                    className="form-control"
-                                    onPlaceSelected={(place) => {
-                                        onChange({
-                                            ...user,
-                                            profiles: {
-                                                ...user.profiles,
-                                                brokerageAddress: {
-                                                    address: place.formatted_address,
-                                                    lat: place.geometry.location.lat(),
-                                                    lng: place.geometry.location.lng()
-                                                }
-                                            },
-                                        })
-                                    }}
-                                    types={['(regions)']}
-                                    defaultValue={user['profiles']['brokerageAddress']['address']}
-                                />
+                    {
+                        (user.profiles.kindOfService == 0 || user.profiles.kindOfService == 1)
+                        && <div className="col-md-6 col-12">
+                            <div className="row">
+                                <div className="col-md-4 m-auto">
+                                    <label className="col-form-label">Brokerage Phone Number</label>
+                                </div>
+                                <div className="col-md-8">
+                                    <input type="text" className="form-control"
+                                           {...bind("brokeragePhoneNumber")}
+                                    />
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    }
+                    {
+                        user.profiles.kindOfService == 4
+                        && <div className="col-md-6 col-12">
+                            <div className="row">
+                                <div className="col-md-4 m-auto">
+                                    <label className="col-form-label">Which Bank do you work for?</label>
+                                </div>
+                                <div className="col-md-8">
+                                    <select className="custom-select"
+                                            {...bind("bank")}
+                                    >
+                                        <option value=""></option>
+                                        <option value="0">Royal Bank of Canada (RBC)</option>
+                                        <option value="1">Toronto-Dominion Bank (TD)</option>
+                                        <option value="2">Bank of Nova Scotia (Scotiabank)</option>
+                                        <option value="3">Bank of Montreal (BMO)</option>
+                                        <option value="4">Canadian Imperial Bank of Commerce (CIBC)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
                 </div>
 
                 <div className="form-group row">
-                    <div className="col-md-6 col-12">
-                        <div className="row">
-                            <div className="col-md-4 m-auto">
-                                <label className="col-form-label">Brokerage Phone Number</label>
-                            </div>
-                            <div className="col-md-8">
-                                <input type="text" className="form-control"
-                                       {...bind("brokeragePhoneNumber")}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-6 col-12">
-                        <div className="row">
-                            <div className="col-md-4 m-auto">
-                                <label className="col-form-label">Which Bank do you work for?</label>
-                            </div>
-                            <div className="col-md-8">
-                                <select className="custom-select"
-                                        {...bind("bank")}
-                                >
-                                    <option value=""></option>
-                                    <option value="0">Bank A</option>
-                                    <option value="1">Bank B</option>
-                                </select>
+                    {
+                        user.profiles.kindOfService == 1
+                        && <div className="col-md-6 col-12">
+                            <div className="row">
+                                <div className="col-md-4 m-auto">
+                                    <label className="col-form-label">Which Lenders do you work with?</label>
+                                </div>
+                                <div className="col-md-8">
+                                    <select className="custom-select"
+                                            {...bind("lenders")}
+                                    >
+                                        <option value=""></option>
+                                        <option value="0">A Lenders</option>
+                                        <option value="1">B Lenders</option>
+                                        <option value="2">C Lenders</option>
+                                        <option value="3">Private Investors</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    }
 
-                <div className="form-group row">
-                    <div className="col-md-6 col-12">
-                        <div className="row">
-                            <div className="col-md-4 m-auto">
-                                <label className="col-form-label">Which Lenders do you work with?</label>
-                            </div>
-                            <div className="col-md-8">
-                                <select className="custom-select"
-                                        {...bind("lenders")}
-                                >
-                                    <option value=""></option>
-                                    <option value="0">Lender A</option>
-                                    <option value="1">Lender B</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
                     <div className="col-md-6 col-12">
                         <div className="row">
                             <div className="col-md-4 m-auto">
@@ -258,6 +282,7 @@ export default class ProviderInfo extends Component {
                                     <option value=""></option>
                                     <option value="0">Full Time</option>
                                     <option value="1">Part Time</option>
+                                    <option value="3">Seasonal</option>
                                 </select>
                             </div>
                         </div>

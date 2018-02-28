@@ -37,18 +37,24 @@ class Home extends Component {
                         <div className="row">
                             <div className="col-md-7" style={{height: '80vh'}}>
                                 <div className="left-wrapper">
-                                    <div className="txt-1">
-                                        growing old
-                                    </div>
                                     <div className="txt-2">
-                                        The Store Where Generous <br/> Matter More
+                                        HOME BUYING MADE SIMPLE.
                                     </div>
                                     <div className="txt-3">
-                                        The store where generous deeds buys
+                                        Looking to buy a new home? Make faster, smarter and informed decisions.
                                     </div>
-                                    <button className="btn btn-learn">
-                                        Learn more
-                                    </button>
+                                    {/*<div className="txt-1">*/}
+                                        {/*growing old*/}
+                                    {/*</div>*/}
+                                    {/*<div className="txt-2">*/}
+                                        {/*The Store Where Generous <br/> Matter More*/}
+                                    {/*</div>*/}
+                                    {/*<div className="txt-3">*/}
+                                        {/*The store where generous deeds buys*/}
+                                    {/*</div>*/}
+                                    {/*<button className="btn btn-learn">*/}
+                                        {/*Learn more*/}
+                                    {/*</button>*/}
                                 </div>
                             </div>
                             <div className="col-md-5" style={{height: '80vh'}}>

@@ -6,13 +6,13 @@ export const KindOfHome = (type) => {
             return 'Detached House'
             break
         case 1:
-            return 'Semi TownHouse'
+            return 'Semi Detached'
             break
         case 2:
-            return 'Condo Apartment'
+            return 'Town House'
             break
         case 3:
-            return 'Other Type'
+            return 'Condo'
             break
     }
 }

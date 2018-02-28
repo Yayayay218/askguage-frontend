@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import Layout from '../../../Containers/App'
 
 class FlipWizard extends Component {
     constructor(props, context) {

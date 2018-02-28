@@ -1,113 +1,147 @@
 import React, {Component} from 'react'
-import IntakeDetails from '../../Intake'
-import moment from 'moment'
-import {KindOfHome, BooleanType} from "../../Intake/TransferType"
+import Navigate from './Navigates'
+import Profile from './Steps/Profile'
+import Preference from './Steps/Preference'
+import Info from './Steps/Info'
+import Finance from './Steps/Finance'
 
 class Intake extends Component {
 
     render() {
         // console.log(this)
         const {request, isFetched} = this.props
+        const steps = [
+            {
+                render: () => (
+                    <Profile
+                        user={this.props.user}
+                    />
+                )
+            },
+            {
+                render: () => (
+                    <Preference
+                        request={request}
+                    />
+                )
+            },
+            {
+                render: () => (
+                    <Info
+                        user={this.props.user}
+                        request={request}
+                    />
+                )
+            },
+            {
+                render: () => (
+                    <Finance
+                        request={request}
+                    />
+                )
+            }
+        ]
+
         return (
-            <div className="row">
-                <div className="col-md-3 col-12">
-                    <div className="d-none d-md-block">
-                        <div className="navigate">
-                            <div className="d-flex flex-column">
-                                <div
-                                    className="navigate-item"
-                                    // onClick={this.goProfile}
-                                >Profile
-                                </div>
-                                <div
-                                    className="navigate-item"
-                                    // onClick={this.goPreference}
-                                >Preference
-                                </div>
-                                <div
-                                    className="navigate-item"
-                                    // onClick={this.goInfo}
-                                >Info
-                                </div>
-                                <div
-                                    className="navigate-item"
-                                    // onClick={this.goFinance}
-                                >Finance
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-md-8 col-12">
-                    <div style={{marginLeft: '-5px'}}>
-                        {
-                            isFetched ?
-                                <div>
-                                    <IntakeDetails
-                                        question="What Kind of home are you looking for?"
-                                        answer={KindOfHome(request.kindOfHome)}
-                                    />
-                                    <IntakeDetails
-                                        question="Number of Bedroom"
-                                        answer={request.numberOfBedRoom}
-                                    />
-                                    <IntakeDetails
-                                        question="Square ft"
-                                        answer={request.squareFT}
-                                    />
-                                    <IntakeDetails
-                                        question="Where are you looking for a home?"
-                                        answer={request.homeAddress.address}
-                                    />
-                                    <IntakeDetails
-                                        question="Whats your budget?"
-                                        answer={request.budget.min + '-' + request.budget.max}
-                                    />
-                                    <IntakeDetails
-                                        question="Do you know if you are qualified for the amount above?"
-                                        answer={BooleanType(request.areQualified)}
-                                    />
-                                    <IntakeDetails
-                                        question="Is this a single or joint ownership?"
-                                        answer={BooleanType(request.ownership)}
-                                    />
-                                    <IntakeDetails
-                                        question="Occupation Type "
-                                        answer={request.occupationType}
-                                    />
-                                    <IntakeDetails
-                                        question="DOB"
-                                        answer={moment.utc(request.birthDay).format('MMM Do YY')}
-                                    />
-                                    <IntakeDetails
-                                        question="Canadian Citizen"
-                                        answer={BooleanType(request.citizenType)}
-                                    />
-                                    <IntakeDetails
-                                        question="Household Income"
-                                        answer={request.houseHold}
-                                        isCurrency={true}
-                                    />
-                                    <IntakeDetails
-                                        question="Monthly Liability"
-                                        answer={request.monthlyLiability}
-                                        isCurrency={true}
-                                    />
-                                    <IntakeDetails
-                                        question="Down Payment Amount"
-                                        answer={request.downPayment}
-                                        isCurrency={true}
-                                    />
-                                    <IntakeDetails
-                                        question="Net Assets"
-                                        answer={request.netAsset}
-                                        isCurrency={true}
-                                    />
-                                </div>
-                                : null
-                        }
-                    </div>
-                </div>
+            <div className="">
+                <Navigate
+                    initStepIndex={0}
+                    steps={steps}
+                />
+                {/*<div className="col-md-3 col-12">*/}
+                {/*<div className="d-none d-md-block">*/}
+                {/*<div className="navigate">*/}
+                {/*<div className="d-flex flex-column">*/}
+                {/*<div*/}
+                {/*className="navigate-item"*/}
+                {/*>Profile*/}
+                {/*</div>*/}
+                {/*<div*/}
+                {/*className="navigate-item"*/}
+                {/*>Preference*/}
+                {/*</div>*/}
+                {/*<div*/}
+                {/*className="navigate-item"*/}
+                {/*>Info*/}
+                {/*</div>*/}
+                {/*<div*/}
+                {/*className="navigate-item"*/}
+                {/*>Finance*/}
+                {/*</div>*/}
+                {/*</div>*/}
+                {/*</div>*/}
+                {/*</div>*/}
+                {/*</div>*/}
+                {/*<div className="col-md-8 col-12">*/}
+                {/*<div style={{marginLeft: '-5px'}}>*/}
+                {/*{*/}
+                {/*isFetched ?*/}
+                {/*<div>*/}
+                {/*<IntakeDetails*/}
+                {/*question="What Kind of home are you looking for?"*/}
+                {/*answer={KindOfHome(request.kindOfHome)}*/}
+                {/*/>*/}
+                {/*<IntakeDetails*/}
+                {/*question="Number of Bedroom"*/}
+                {/*answer={request.numberOfBedRoom}*/}
+                {/*/>*/}
+                {/*<IntakeDetails*/}
+                {/*question="Square ft"*/}
+                {/*answer={request.squareFT}*/}
+                {/*/>*/}
+                {/*<IntakeDetails*/}
+                {/*question="Where are you looking for a home?"*/}
+                {/*answer={request.homeAddress.address}*/}
+                {/*/>*/}
+                {/*<IntakeDetails*/}
+                {/*question="Whats your budget?"*/}
+                {/*answer={request.budget.min + '-' + request.budget.max}*/}
+                {/*/>*/}
+                {/*<IntakeDetails*/}
+                {/*question="Do you know if you are qualified for the amount above?"*/}
+                {/*answer={BooleanType(request.areQualified)}*/}
+                {/*/>*/}
+                {/*<IntakeDetails*/}
+                {/*question="Is this a single or joint ownership?"*/}
+                {/*answer={BooleanType(request.ownership)}*/}
+                {/*/>*/}
+                {/*<IntakeDetails*/}
+                {/*question="Occupation Type "*/}
+                {/*answer={request.occupationType}*/}
+                {/*/>*/}
+                {/*<IntakeDetails*/}
+                {/*question="DOB"*/}
+                {/*answer={moment.utc(request.birthDay).format('MMM Do YY')}*/}
+                {/*/>*/}
+                {/*<IntakeDetails*/}
+                {/*question="Canadian Citizen"*/}
+                {/*answer={BooleanType(request.citizenType)}*/}
+                {/*/>*/}
+                {/*<IntakeDetails*/}
+                {/*question="Household Income"*/}
+                {/*answer={request.houseHold}*/}
+                {/*isCurrency={true}*/}
+                {/*/>*/}
+                {/*<IntakeDetails*/}
+                {/*question="Monthly Liability"*/}
+                {/*answer={request.monthlyLiability}*/}
+                {/*isCurrency={true}*/}
+                {/*/>*/}
+                {/*<IntakeDetails*/}
+                {/*question="Down Payment Amount"*/}
+                {/*answer={request.downPayment}*/}
+                {/*isCurrency={true}*/}
+                {/*/>*/}
+                {/*<IntakeDetails*/}
+                {/*question="Net Assets"*/}
+                {/*answer={request.netAsset}*/}
+                {/*isCurrency={true}*/}
+                {/*/>*/}
+                {/*</div>*/}
+                {/*: null*/}
+                {/*}*/}
+                {/*</div>*/}
+                {/*</div>*/}
             </div>
         )
     }

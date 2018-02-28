@@ -59,9 +59,9 @@ class AboutYou extends Component {
                                     <option value='0'>Full Time</option>
                                     <option value='1'>Part Time</option>
                                     <option value='2'>Contract</option>
-                                    <option value='2'>Seasonal</option>
-                                    <option value='2'>Self Employed</option>
-                                    <option value='2'>Retired</option>
+                                    <option value='3'>Seasonal</option>
+                                    <option value='4'>Self Employed</option>
+                                    <option value='5'>Retired</option>
                                 </select>
                             </div>
                         </div>

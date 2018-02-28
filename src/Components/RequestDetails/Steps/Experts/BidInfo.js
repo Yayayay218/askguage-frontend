@@ -76,7 +76,7 @@ function EstateView({item}) {
                         <p className="title">Commission Fee:</p>
                     </div>
                     <div className="col-md-9 col-6">
-                        <p className="description">${item.commissionFee}</p>
+                        <p className="description">{item.commissionFee}%</p>
                     </div>
                 </div>
 
@@ -134,11 +134,11 @@ function CheckPropertyType({item}) {
     if (item == 0)
         item = 'Detached House'
     if (item == 1)
-        item = 'Semi TownHouse'
+        item = 'Semi Detached'
     if (item == 2)
-        item = 'Condo'
+        item = 'Town House'
     if (item == 3)
-        item = 'other'
+        item = 'Condo'
     return <span>{item}</span>
 }
 

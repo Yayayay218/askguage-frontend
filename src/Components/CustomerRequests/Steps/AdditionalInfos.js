@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import Intake from '../../RequestDetails/Intake'
-import {KindOfHome, BooleanType} from "../../RequestDetails/Intake/TransferType"
 import moment from 'moment'
 
 class AdditionalInfos extends Component {

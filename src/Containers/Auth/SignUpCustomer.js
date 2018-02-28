@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux';
 import Actions from '../../Actions/Creators'
 import Layout from '../App'
 import moment from 'moment';
-
+import NumberFormat from 'react-number-format'
 
 const Error = ({message, field}) => {
     if (message && message.message)
@@ -16,22 +15,55 @@ const Error = ({message, field}) => {
     else return (<div></div>)
 }
 
+function Input(props) {
+    return (
+        <div className="col-md-6">
+            <div className="row">
+                <label className="col-md-12 custom-label">
+                    {props.label}
+                </label>
+                <div className="col-md-12">
+                    {props.children}
+                </div>
+            </div>
+        </div>
+    )
+}
+
+function FormErrors({formErrors}) {
+    return (
+        <div className='formErrors'>
+            {Object.keys(formErrors).map((fieldName, i) => {
+                if(formErrors[fieldName].length > 0){
+                    return (
+                        <p key={i} className="error-text">{formErrors[fieldName]}</p>
+                    )
+                } else {
+                    return '';
+                }
+            })}
+        </div>
+    )
+}
+
 class SignUp extends Component {
-    constructor(props, context) {
+    constructor(props) {
         super(props);
         this.state = {
             email: '',
             password: '',
             firstName: '',
             phoneNumber: '',
-            role: '0'
+            role: '0',
+            emailValid: false,
+            passwordValid: false,
+            firstNameValid: false,
+            phoneValid: false,
+            formValid: false,
+            formErrors: {email: '', password: '', firstName: '', phoneNumber: ''},
         }
         this.doSignUp = this.doSignUp.bind(this)
         this.handleUserInput = this.handleUserInput.bind(this)
-    }
-
-    componentDidMount() {
-
     }
 
     componentWillReceiveProps(newProps) {
@@ -66,12 +98,54 @@ class SignUp extends Component {
         this.props.dispatch(Actions.signUp(state));
     }
 
+    validateField(fieldName, value) {
+        let fieldValidationErrors = this.state.formErrors;
+        let emailValid = this.state.emailValid;
+        let passwordValid = this.state.passwordValid;
+        let firstNameValid = this.state.firstNameValid;
+        let phoneValid = this.state.phoneValid;
+
+        switch (fieldName) {
+            case 'email':
+                emailValid = (
+                    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test(value);
+                fieldValidationErrors.email = emailValid ? '' : 'Email is invalid'
+                break;
+            case 'password':
+                passwordValid = value.length >= 6;
+                fieldValidationErrors.password = passwordValid ? '' : 'Password must be more than 6 characters'
+                break;
+            case 'firstName':
+                firstNameValid = value.length !== 0;
+                fieldValidationErrors.firstName = firstNameValid ? '' : 'Name is required'
+                break;
+            case 'phone':
+                phoneValid = (/^\d{10}$/).test(value);
+                fieldValidationErrors.phoneNumber = phoneValid ? '' : 'Phone Number is invalid'
+                break;
+            default:
+                break;
+        }
+        this.setState({
+            formErrors: fieldValidationErrors,
+            emailValid: emailValid,
+            passwordValid: passwordValid,
+            firstNameValid: firstNameValid,
+            phoneValid: phoneValid
+        }, this.validateForm);
+    }
+
+    validateForm() {
+        this.setState({formValid: this.state.emailValid && this.state.passwordValid && this.state.firstNameValid && this.state.phoneValid});
+    }
+
     render() {
-        // console.log(this)
-        const {history, error, isSignup} = this.props
+        const {history, isSignup} = this.props
         const bind = (field) => ({
             value: this.state[field],
-            onChange: (e) => this.setState({[field]: e.target.value})
+            onChange: (e) => this.setState({[field]: e.target.value},
+                this.validateField(field, e.target.value)
+            )
         })
 
         return (
@@ -115,56 +189,53 @@ class SignUp extends Component {
                                 </div>
                             </div>)}
                             <div className="form-group row first-row">
-                                <div className="col-md-6">
-                                    <div className="row">
-                                        <label className="col-md-12 custom-label">
-                                            name
-                                        </label>
-                                        <div className="col-md-12">
-                                            <input type="text" className="form-control"
-                                                   {...bind("firstName")}
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-md-6">
-                                    <div className="row">
-                                        <label className="col-md-12 custom-label">
-                                            email
-                                        </label>
-                                        <div className="col-md-12">
-                                            <input type="text" className="form-control"
-                                                   {...bind("email")}
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
+                                <Input
+                                    label="name *"
+                                >
+                                    <input type="text" className="form-control"
+                                           {...bind("firstName")}
+                                    />
+                                    {
+                                        this.state.formErrors.firstName !== '' && <p className="error-text">{this.state.formErrors.firstName}</p>
+                                    }
+                                </Input>
+                                <Input
+                                    label="email *"
+                                >
+                                    <input type="text" className="form-control"
+                                           {...bind("email")}
+                                    />
+                                    {
+                                        this.state.formErrors.email !== '' && <p className="error-text">{this.state.formErrors.email}</p>
+                                    }
+                                </Input>
                             </div>
                             <div className="form-group row">
-                                <div className="col-md-6">
-                                    <div className="row">
-                                        <label className="col-md-12 custom-label">
-                                            phone
-                                        </label>
-                                        <div className="col-md-12">
-                                            <input type="text" className="form-control"
-                                                   {...bind("phoneNumber")}
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-md-6">
-                                    <div className="row">
-                                        <label className="col-md-12 custom-label">
-                                            password
-                                        </label>
-                                        <div className="col-md-12">
-                                            <input type="password" className="form-control"
-                                                   {...bind("password")}
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
+                                <Input
+                                    label="phone *"
+                                >
+                                    <NumberFormat
+                                        format="##########"
+                                        mask="_"
+                                        className="form-control"
+                                        onValueChange={(values) => this.setState({
+                                            phoneNumber: values.value
+                                        }, this.validateField('phone', values.value))}
+                                    />
+                                    {
+                                        this.state.formErrors.phoneNumber !== '' && <p className="error-text">{this.state.formErrors.phoneNumber}</p>
+                                    }
+                                </Input>
+                                <Input
+                                    label="password *"
+                                >
+                                    <input type="password" className="form-control"
+                                           {...bind("password")}
+                                    />
+                                    {
+                                        this.state.formErrors.password !== '' && <p className="error-text">{this.state.formErrors.password}</p>
+                                    }
+                                </Input>
                             </div>
                             {
                                 isSignup ?
@@ -175,6 +246,7 @@ class SignUp extends Component {
                                     :
                                     <button className="btn btn-next sign-up"
                                             onClick={this.doSignUp}
+                                            disabled={!this.state.formValid}
                                     >sign up
                                     </button>
                             }

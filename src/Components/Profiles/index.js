@@ -52,7 +52,7 @@ class Profiles extends Component {
                         lat: '',
                         lng: ''
                     },
-                    kindOfService: '',
+                    kindOfService: -1,
                     businessName: '',
                     website: '',
                     businessAddress: {

@@ -154,9 +154,9 @@ function RenderOption({item, index, bid, bindOption, serviceType, _this}) {
                                 >
                                     <option value=""></option>
                                     <option value="0">Detached House</option>
-                                    <option value="1">Semi TownHouse</option>
-                                    <option value="2">Condo Apartment</option>
-                                    <option value="3">Other</option>
+                                    <option value="1">Semi Detached</option>
+                                    <option value="2">Town House</option>
+                                    <option value="3">Condo</option>
                                 </select>
                             </div>
                         </div>
@@ -306,7 +306,6 @@ function RenderOption({item, index, bid, bindOption, serviceType, _this}) {
         </div>
     )
 }
-
 
 function mapStateToProps(state) {
     return {
