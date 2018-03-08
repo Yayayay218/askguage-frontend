@@ -15,7 +15,7 @@ class Profiles extends Component {
         this.state = {
             user: props.user.profiles ? props.user : props.user.role === 0 ? {
                 ...props.user,
-                lastName: '',
+                lastName: props.user.lastName || '',
                 profiles: {
                     languages: [0],
                     optIn: '',
@@ -78,7 +78,13 @@ class Profiles extends Component {
                 },
             },
             file: [],
-            isUploading: false
+            isUploading: false,
+            lastNameValid: false,
+            passwordValid: false,
+            firstNameValid: false,
+            phoneValid: false,
+            formValid: false,
+            formErrors: {lastName: '', password: '', firstName: '', phoneNumber: ''},
         }
         this.doSave = this.doSave.bind(this)
         this.onChangeImage = this.onChangeImage.bind(this)
@@ -86,8 +92,35 @@ class Profiles extends Component {
             props.history.push('/')
     }
 
+    validateField(fieldName, value) {
+        let fieldValidationErrors = this.state.formErrors;
+        let lastNameValid = this.state.lastNameValid;
+
+        switch (fieldName) {
+            case 'lastName':
+                lastNameValid = value.length !== 0;
+                fieldValidationErrors.lastName = lastNameValid ? '' : 'Required'
+                break;
+
+            default:
+                break;
+        }
+        this.setState({
+            formErrors: fieldValidationErrors,
+            lastNameValid: lastNameValid
+        }, this.validateForm);
+    }
+
+    validateForm() {
+        this.setState({formValid: this.state.lastNameValid});
+    }
+
     componentDidMount() {
         // this.props.dispatch(Actions.getUser(this.props.user.id))
+    }
+
+    responseFacebook = (response) => {
+        this.props.dispatch(Actions.loginFacebook({accessToken: response.accessToken}))
     }
 
     componentWillReceiveProps(newProps) {
@@ -148,7 +181,7 @@ class Profiles extends Component {
                 this.setState({user})
             }
         }
-
+        console.log(this)
         return (
             <Layout islanding={false}>
                 <div className="container user-profile">
@@ -175,7 +208,10 @@ class Profiles extends Component {
                         </div>
                         <BasicInfo
                             user={user}
-                            onChange={(user) => this.setState({user})}
+                            onChange={(user) => this.setState({user},
+                                this.setState({formValid: this.state.user.lastName !== ''})
+                            )}
+
                         />
                         {user.role === 1 && (
                             <ProviderInfo
@@ -199,7 +235,7 @@ class Profiles extends Component {
                                             isPosting ?
                                                 <button className="btn btn-save m-progress">Save</button>
                                                 :
-                                                <button className="btn btn-save" onClick={this.doSave}>Save</button>
+                                                <button className="btn btn-save" onClick={this.doSave} disabled={!this.state.formValid}>Save</button>
                                         }
                                     </div>
                                 </div>

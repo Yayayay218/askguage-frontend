@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import NumberFormat from 'react-number-format';
-
+import Icon from '../../../../Assets/images/tmp-icon.png'
 import Config from '../../../../Configs/AppSetting'
 import Rating from 'react-rating'
 import StarEmpty from '../../../../Assets/images/icons/star-empty.svg'
@@ -67,8 +67,8 @@ function EstateView({item}) {
     return (
         <div className="bid-details">
             <p>
-                Based on your stated Income and liabilities,
-                <b> {item.provider.firstName}</b> provided the following quote:
+                <b> {item.provider.firstName}</b> has recommended you the following neighbourhood(s), property type,
+                square feet and average home price for you to consider based on your preference and situation
             </p>
             <div className="options">
                 <div className="row">
@@ -227,14 +227,14 @@ class BidInfo extends Component {
                     !this.props.bidFetched && <div className="loading">Loading&#8230;</div>
                 }
                 <div className="col-md-2">
-                    <img src={Config.URL + `/containers/images/download/${item.provider.avatarUrl}`}
+                    <img src={item.provider.avatarUrl ? Config.URL + `/containers/images/download/${item.provider.avatarUrl}`: Icon}
                          alt=""
                          className="provider-avatar"
                     />
                 </div>
                 <div className="col-md-7">
                     <div className="provider-info">
-                        <p className="intro">Bid from <b>{item.provider.firstName}</b></p>
+                        <p className="intro">Quote from <b>{item.provider.firstName}</b></p>
                         <div className="details">
                             <div style={{display: 'inline'}}>
                                                 <span className="rating-count">
@@ -256,7 +256,7 @@ class BidInfo extends Component {
                                     }}>({item.provider.profiles.yearOfExperience}
                                     &nbsp;years of experience)</span>
                             </div>
-                            <p>{item.provider.profiles.kindOfService == 0 ? 'Estate Agent' : 'Mortgage Advisor'}</p>
+                            <p>{item.provider.profiles.kindOfService == 0 ? 'Real Estate Agent' : 'Mortgage Advisor'}</p>
                         </div>
                     </div>
                     {

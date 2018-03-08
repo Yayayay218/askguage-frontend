@@ -9,9 +9,8 @@ export default class UploadImage extends Component {
     }
 
     render() {
-        // console.log(this)
         const {file, onChange, fileName} = this.props
-        let imageUrl = Config.URL+'/containers/images/download/'+fileName
+        let imageUrl = fileName && fileName.indexOf('https') !== -1 ? fileName : Config.URL+'/containers/images/download/'+fileName
         return (
             <section>
                 <div className="dropzone">

@@ -33,6 +33,14 @@ export default class Parse {
             timeout: 10000
         }).then(response => response.json());
     }
+    loginFacebook(data) {
+        return this._fetch({
+            method: 'POST',
+            url: '/users/loginFacebook',
+            body: data,
+            timeout: 10000
+        }).then(response => response.json());
+    }
     logout(token) {
         return this._fetch({
             method: 'POST',
@@ -131,6 +139,15 @@ export default class Parse {
             url: '/bids?'+data,
             timeout: 10000
         }).then(response => response.json());
+    }
+
+    changePassword(data) {
+        return this._fetch({
+            method: 'POST',
+            url: '/users/change-password',
+            body: data,
+            timeout: 10000
+        }).then(response => response.json()); //204
     }
 
     _fetch(opts) {

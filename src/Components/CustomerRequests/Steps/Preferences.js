@@ -5,6 +5,7 @@ import {KindOfHome, BooleanType} from "../../RequestDetails/Intake/TransferType"
 class Preferences extends Component {
     render() {
         const {request} = this.props
+        const address = request.homeAddress.address.split(',')
 
         return (
             <div>
@@ -25,26 +26,8 @@ class Preferences extends Component {
 
                 <Intake
                     question="City"
-                    answer={request.homeAddress.address}
+                    answer={address[0]}
                 />
-
-                {/*<Intake*/}
-                    {/*question="Whats your budget? (min)"*/}
-                    {/*answer={request.budget.min}*/}
-                {/*/>*/}
-                {/*<Intake*/}
-                    {/*question="Whats your budget? (max)"*/}
-                    {/*answer={request.budget.max}*/}
-                {/*/>*/}
-                {/*<Intake*/}
-                    {/*question="Do you know if you are qualified for the amount above?"*/}
-                    {/*answer={BooleanType(request.areQualified)}*/}
-                {/*/>*/}
-                {/*<Intake*/}
-                    {/*question="Is this a single or joint ownership?"*/}
-                    {/*answer={BooleanType(request.ownership)}*/}
-                {/*/>*/}
-
             </div>
         )
     }

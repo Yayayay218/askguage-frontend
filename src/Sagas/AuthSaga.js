@@ -44,6 +44,23 @@ export function* login({data}) {
     }
 }
 
+export function* loginFacebook({data}) {
+    try {
+        const ParseApi = new Api(null)
+        const response = yield call([ParseApi, ParseApi.loginFacebook], data)
+        if (response && response.error) {
+            yield put(Actions.loginFailure(response));
+            return;
+        }
+        else {
+            yield put(Actions.loginFacebookSuccess(response))
+        }
+        // }
+    } catch (err) {
+        yield put(Actions.loginFailure(err));
+    }
+}
+
 export function* getUser({data}) {
     try {
         const {token} = yield select((state) => state.auth);

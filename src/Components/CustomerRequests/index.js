@@ -32,7 +32,7 @@ class CustomerRequest extends Component {
                     squareFT: '',
                     price: ''
                 }],
-                commissionFee: 2.5,
+                commissionFee: _bid.bidCommission || 2.5,
                 comment: ''
             },
             error: false
@@ -52,12 +52,12 @@ class CustomerRequest extends Component {
     }
 
     render() {
-        const {user, request, history} = this.props
+        const {user, request, history, requestFetched} = this.props
         const steps = [
             {
                 render: () => (
                     <ContactInfos
-                        user={user}
+                        user={request.user}
                         history={this.props.history}
                     />
                 )
@@ -105,6 +105,7 @@ class CustomerRequest extends Component {
                 )
             }
         ]
+        if(!requestFetched) return <div></div>
         return (
             <Layout isLanding={false}>
                 <div className="request-details">
@@ -113,7 +114,9 @@ class CustomerRequest extends Component {
                             <label className="label-header">Customer Request</label>
                             <div className="divider"></div>
                             <label className="mr-auto label-detail">
-                                Buy a new house
+                                {
+                                    request.isEstate ? 'Buy a new house' : request.mortgageType === 0 ? 'Renew Mortgage' : 'Refinance Mortgage'
+                                }
                             </label>
                             <label className="status" style={{marginRight: '0'}}>Status: <strong>Open to receive
                                 quotes</strong></label>
@@ -122,11 +125,12 @@ class CustomerRequest extends Component {
                     <div className="menu-line"></div>
 
                     <div className="container">
-                        {this.props.token && <Navigate
+                        {this.props.token && requestFetched && <Navigate
                             initStepIndex={0}
                             steps={steps}
                             user={user}
                             history={history}
+                            request={request}
                         />}
                     </div>
                 </div>
@@ -139,7 +143,8 @@ function mapStateToProps(state) {
     return {
         request: state.requests.current,
         user: state.auth.data,
-        token: state.auth.token
+        token: state.auth.token,
+        requestFetched: state.requests.detailFetched
     }
 }
 

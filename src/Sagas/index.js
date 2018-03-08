@@ -2,12 +2,13 @@ import {takeLatest, all, fork} from 'redux-saga/effects';
 import Types from '../Actions/Types';
 
 
-import {signUp, login, getUser, putProfile} from "./AuthSaga"
+import {signUp, login, getUser, putProfile, loginFacebook} from "./AuthSaga"
 import {getSetting} from "./SettingSaga";
 // import {putProfile} from "./ProfileSaga";
 import {getQuestions} from "./QuestionSaga"
 import {postRequest, getRequest, putRequest, getRequestById, matchRequest} from "./RequestSaga";
 import {bidRequest, getBidRequest} from "./BidSaga";
+import {changePassword} from "./ProfileSaga";
 
 export default function* root() {
     yield all([
@@ -25,5 +26,7 @@ export default function* root() {
         takeLatest(Types.GET_REQUEST_BY_ID, getRequestById),
         takeLatest(Types.BID_REQUEST, bidRequest),
         takeLatest(Types.GET_BID_REQUEST, getBidRequest),
+        takeLatest(Types.CHANGE_PASSWORD, changePassword),
+        takeLatest(Types.LOGIN_FACEBOOK, loginFacebook),
     ])
 }

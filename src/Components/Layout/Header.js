@@ -104,6 +104,8 @@ class Header extends Component {
                                                     <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                                         <a className="dropdown-item" href="/my-profiles"
                                                         >My Profile</a>
+                                                        <a className="dropdown-item" href="/change-password"
+                                                        >Change Password</a>
                                                         <a className="dropdown-item"
                                                            onClick={() => {
                                                                this.props.dispatch(Actions.signOut(token))

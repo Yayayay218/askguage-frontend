@@ -62,6 +62,14 @@ const getBidRequest = (data) => createAction(Types.GET_BID_REQUEST, {data})
 const getBidRequestSuccess = (response) => createAction(Types.GET_BID_REQUEST_SUCCESS, {response})
 const getBidRequestFailure = (errCode) => createAction(Types.GET_BID_REQUEST_FAILURE, {errCode})
 
+const changePassword = (data) => createAction(Types.CHANGE_PASSWORD, {data})
+const changePasswordSuccess = (response) => createAction(Types.CHANGE_PASSWORD_SUCCESS, {response})
+const changePasswordFailure = (errCode) => createAction(Types.CHANGE_PASSWORD_FAILURE, {errCode})
+
+const loginFacebook = (data) => createAction(Types.LOGIN_FACEBOOK, {data})
+const loginFacebookSuccess = (response) => createAction(Types.LOGIN_FACEBOOK_SUCCESS, {response})
+
+
 // const removeMatchingRequest = (data) => createAction(Types.REMOVE_MATCHING_REQUEST, {data})
 // const removeMatchingRequestSuccess = (response) => createAction(Types.REMOVE_MATCHING_REQUEST_SUCCESS, {response})
 // const removeMatchingRequestFailure = (errCode) => createAction(Types.REMOVE_MATCHING_REQUEST_FAILURE, {errCode})
@@ -122,4 +130,11 @@ export default {
     getBidRequest,
     getBidRequestSuccess,
     getBidRequestFailure,
+
+    changePassword,
+    changePasswordSuccess,
+    changePasswordFailure,
+
+    loginFacebook,
+    loginFacebookSuccess,
 }

@@ -9,7 +9,7 @@ class FlipWizard extends Component {
     }
 
     render() {
-        const {steps} = this.props;
+        const {steps, request} = this.props;
         const {currentStepIndex} = this.state;
         let currentStep = steps[currentStepIndex];
         return (
@@ -26,7 +26,7 @@ class FlipWizard extends Component {
                                 <div
                                     className={currentStepIndex === 1 ? 'navigate-item active' : 'navigate-item'}
                                     onClick={() => this.setState({currentStepIndex: 1})}
-                                >Preference
+                                >{request.isEstate ? 'Preference' : 'Property Details'}
                                 </div>
                                 {
                                     <div

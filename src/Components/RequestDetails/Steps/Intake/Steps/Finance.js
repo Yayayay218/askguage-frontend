@@ -5,7 +5,7 @@ import {BooleanType} from "../../../Intake/TransferType";
 
 
 const Info = ({request}) => {
-    return(
+    return (
         <div>
             {
                 request.budget.min !== '' && <div className="row intake-details">
@@ -39,18 +39,65 @@ const Info = ({request}) => {
                 answer={BooleanType(request.areQualified)}
             />
 
+            {
+                request.isEstate && <IntakeDetails
+                    question="Down Payment"
+                    answer={request.downPayment}
+                    isCurrency={true}
+                />
+            }
+
             <IntakeDetails
-                question="Down Payment"
-                answer={request.downPayment}
+                question="Value of Home"
+                answer={request.homeValue}
                 isCurrency={true}
             />
 
             <IntakeDetails
-                question="Estimated Affordability"
-                answer={request.monthlyLiability / request.houseHold}
+                question="Monthly Liability"
+                answer={request.monthlyLiability}
                 isCurrency={true}
-                isTooltip={true}
             />
+
+            <IntakeDetails
+                question="Net Asset"
+                answer={request.netAsset}
+                isCurrency={true}
+            />
+            {
+                !request.isEstate &&
+                    <div>
+                        <IntakeDetails
+                            question="Current Mortgage Amount "
+                            answer={request.mortgageAmount}
+                            isCurrency={true}
+                        />
+
+                        {
+                            request.needMore !== '' &&
+                            <IntakeDetails
+                                question="Additional Amount"
+                                answer={request.needMore}
+                                isCurrency={true}
+                            />
+                        }
+                        <IntakeDetails
+                            question="Your / HouseHold Income"
+                            answer={request.houseHold}
+                            isCurrency={true}
+                        />
+                    </div>
+            }
+
+            {
+                request.isEstate &&
+                <IntakeDetails
+                    question="Estimated Affordability"
+                    answer={request.monthlyLiability / request.houseHold}
+                    isCurrency={true}
+                    isTooltip={true}
+                />
+            }
         </div>
     )
 }

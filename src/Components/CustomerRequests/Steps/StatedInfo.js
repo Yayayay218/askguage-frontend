@@ -5,7 +5,7 @@ import NumberFormat from 'react-number-format';
 
 class StatedInfo extends Component {
     render() {
-        const {request} = this.props
+        const {user, request} = this.props
         return (
             <div>
                 {
@@ -39,12 +39,57 @@ class StatedInfo extends Component {
                     question="Do you know if you are qualified for the amount above?"
                     answer={BooleanType(request.areQualified)}
                 />
+                {
+                    request.isEstate && <Intake
+                        question="Down Payment"
+                        answer={request.downPayment}
+                        isCurrency={true}
+                    />
+                }
 
-                <Intake
-                    question="Down Payment"
-                    answer={request.downPayment}
-                    isCurrency={true}
-                />
+                {
+                    (user.profiles.kindOfService == 1 || user.profiles.kindOfService == 4)
+                    &&
+                    <div>
+                        {
+                            !request.isEstate &&
+                            <div>
+                                <Intake
+                                    question="Current Mortgage Amount "
+                                    answer={request.mortgageAmount}
+                                    isCurrency={true}
+                                />
+
+                                {
+                                    request.needMore !== '' &&
+                                    <Intake
+                                        question="Additional Amount"
+                                        answer={request.needMore}
+                                        isCurrency={true}
+                                    />
+                                }
+                            </div>
+                        }
+
+                        <Intake
+                            question="Your / Household income"
+                            answer={request.houseHold}
+                            isCurrency={true}
+                        />
+
+                        <Intake
+                            question="Monthly Liability"
+                            answer={request.monthlyLiability}
+                            isCurrency={true}
+                        />
+
+                        <Intake
+                            question="Net Assets"
+                            answer={request.netAsset}
+                            isCurrency={true}
+                        />
+                    </div>
+                }
 
                 <Intake
                     question="Estimated Affordability"

@@ -49,13 +49,13 @@ const Footer = ({isLanding}) => {
                         <a href="">© 2018 Ask Gauge</a>
                     </div>
                     <div className="item">
-                        <a href="">Privacy Policy</a>
+                        <a href="https://askgauge.ca/privacy-policy/">Privacy Policy</a>
                     </div>
                     <div className="item">
-                        <a href="">Terms & Condition</a>
+                        <a href="https://askgauge.ca/terms-condition/">Terms & Condition</a>
                     </div>
                     <div className="item">
-                        <a href="">Contact Us</a>
+                        <a href="https://askgauge.ca/contact-us/">Contact Us</a>
                     </div>
                     {/*<div className="item">*/}
                         {/*<a href="">Support</a>*/}

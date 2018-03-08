@@ -11,6 +11,7 @@ export const INITIAL_STATE = Immutable({
     hasProfile: false,
     isSignup: false,
     signUpDone: false,
+    isFacebook: false
 });
 
 const signOut = (state, action) => {
@@ -66,7 +67,8 @@ const loginSuccess = (state, action) =>
         isLogin: false,
         signInType: Types.LOG_IN,
         token: action.response.id,
-        userId: action.response.userId
+        userId: action.response.userId,
+        isFacebook: false
     });
 
 const loginFailure = (state, action) =>
@@ -76,6 +78,17 @@ const loginFailure = (state, action) =>
         error: action.errCode.error,
         editing: false,
     });
+
+const loginFacebookSuccess = (state, action) =>
+    state.merge({
+        data: action.response.user,
+        isLogged: true,
+        isLogin: false,
+        signInType: Types.LOG_IN,
+        token: action.response.access_token,
+        userId: action.response.userId,
+        isFacebook: true
+    })
 
 const getUser = (state, action) =>
     state.merge({
@@ -137,7 +150,11 @@ const ACTION_HANDLERS = {
 
     [Types.PUT_PROFILES]: putProfile,
     [Types.PUT_PROFILES_SUCCESS]: putProfileSuccess,
-    [Types.PUT_PROFILES_FAILURE]: putProfileFailure
+    [Types.PUT_PROFILES_FAILURE]: putProfileFailure,
+
+    [Types.LOGIN_FACEBOOK]: login,
+    [Types.LOGIN_FACEBOOK_SUCCESS]: loginFacebookSuccess,
+    [Types.LOGIN_FACEBOOK_FAILURE]: loginFailure
 };
 
 export default createReducer(INITIAL_STATE, ACTION_HANDLERS);

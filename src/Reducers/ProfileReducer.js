@@ -69,10 +69,34 @@ const putProfileFailure = (state, action) =>
         error: action.errCode.error,
     });
 
+const changePassword = (state, action) =>
+    state.merge({
+        isFetching: true,
+        isFetched: false,
+        error: null,
+    });
+const changePasswordSuccess = (state, action) =>
+    state.merge({
+        isFetching: false,
+        isFetched: true,
+        error: null,
+    });
+
+const changePasswordFailure = (state, action) =>
+    state.merge({
+        isFetching: false,
+        isFetched: false,
+        error: action.errCode,
+    });
+
 const ACTION_HANDLERS = {
     [Types.PUT_PROFILES]: putProfile,
     [Types.PUT_PROFILES_SUCCESS]: putProfileSuccess,
     [Types.PUT_PROFILES_FAILURE]: putProfileFailure,
+
+    [Types.CHANGE_PASSWORD]: changePassword,
+    [Types.CHANGE_PASSWORD_SUCCESS]: changePasswordSuccess,
+    [Types.CHANGE_PASSWORD_FAILURE]: changePasswordFailure,
 };
 
 export default createReducer(INITIAL_STATE, ACTION_HANDLERS);

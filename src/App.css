@@ -55,7 +55,7 @@ body {
   }
 }
 .page-wrapper {
-  min-height: calc(60vh);
+  min-height: calc(66vh);
 }
 .content {
   background: url(Assets/images/landing/shutterstock_227591032.jpg) no-repeat;
@@ -263,9 +263,6 @@ body {
 header .dropdown:hover > .dropdown-menu {
   display: block;
 }
-header .dropdown-menu {
-  left: -43px;
-}
 header .navbar-dark .navbar-nav .nav-item {
   margin-right: 10px;
 }
@@ -293,6 +290,10 @@ header .navbar-dark .navbar-nav .nav-link {
   }
   header .navbar-dark .navbar-brand img {
     width: 175px;
+  }
+  header .dropdown-menu {
+    left: -90px;
+    width: 180px;
   }
 }
 footer {
@@ -605,6 +606,17 @@ footer .footer-bottom .copyright {
   height: 29px;
   background-color: #e6eaee;
   opacity: 0.5;
+}
+.my-request .top-wrapper .custom-select {
+  font-size: 0.9375rem;
+  font-weight: 300;
+  color: #54657e;
+  background: #fff url(Assets/images/icons/arrow-down.svg) no-repeat right 1rem center;
+  background-size: 14px 6px;
+}
+.my-request .top-wrapper .custom-select:focus {
+  box-shadow: none;
+  border: solid 1px #54657e;
 }
 @media (min-width: 768px) {
   .my-request .top-wrapper {
@@ -1253,7 +1265,7 @@ a:hover {
   color: #8493A8;
 }
 .create-request-form .other {
-  background: url(Assets/images/icons/mortgage.svg) center 26px no-repeat;
+  background: url(Assets/images/icons/town.svg) center 26px no-repeat;
 }
 .create-request-form .other label {
   color: #8493A8;
@@ -1283,7 +1295,7 @@ a:hover {
   color: #374355;
 }
 .create-request-form .other-active {
-  background: url(Assets/images/icons/mortgage-normal.svg) center 26px no-repeat;
+  background: url(Assets/images/icons/town-active.svg) center 26px no-repeat;
   border-radius: 5px;
   border: solid 2px #0082d5 !important;
 }
@@ -1396,6 +1408,7 @@ a:hover {
   }
   .create-request-form .social-box {
     height: 60px;
+    border: none;
   }
 }
 /* Absolute Center Spinner */
@@ -1594,6 +1607,17 @@ a:hover {
 .experts-view .provider-avatar {
   width: 100%;
   height: 170px;
+}
+.experts-view .custom-select {
+  font-size: 0.9375rem;
+  font-weight: 300;
+  color: #54657e;
+  background: #fff url(Assets/images/icons/arrow-down.svg) no-repeat right 1rem center;
+  background-size: 14px 6px;
+}
+.experts-view .custom-select:focus {
+  box-shadow: none;
+  border: solid 1px #54657e;
 }
 .experts-view .provider-info .intro {
   font-size: 1.125rem;

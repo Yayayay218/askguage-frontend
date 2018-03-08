@@ -26,7 +26,7 @@ class Income extends Component {
                     <div className="col-md-6">
                         <div className="row">
                             <label className="col-md-12 custom-label">
-                                {requestType === 0 ? 'Your / Household Income' : 'Gross Household Income'}
+                                Your / Household Income
                             </label>
                             <div className="col-md-12">
                                 <NumberFormat

@@ -97,13 +97,39 @@ class RequestBox extends Component {
             .then(() => history.push('/'))
     }
 
+    componentWillReceiveProps(newProps) {
+    }
+
     render() {
-        // console.log(this)
-        const {user, requests} = this.props
+        const {user, requests, requestStatus} = this.props
+        let filter = requests
+        switch (requestStatus) {
+            case "":
+                break
+            case "0":
+                filter = requests.filter(req => req.status == requestStatus && req.isBid === false)
+                break
+            case "1":
+                filter = requests.filter(req => req.bidStatus == 0)
+                break
+            case "2":
+                filter = requests.filter(req => req.status == 4)
+                break
+            case "3":
+                filter = requests.filter(req => req.bidStatus == 1)
+                break
+            case "4":
+                filter = requests.filter(req => req.bidStatus == 2)
+                break
+            case "5":
+                filter = requests.filter(req => req.bidStatus == 3)
+                break
+        }
+        console.log(filter)
         return (
             <div>
                 {
-                    requests.map((item, key) => {
+                    filter.map((item, key) => {
                         if (user.role === 0)
                             return (
                                 <div key={key}>
@@ -205,6 +231,7 @@ class RequestBox extends Component {
                                                                     isCallback: true
                                                                 })}
                                                                 doComplete={this.doComplete.bind(this, item.bidId)}
+                                                                remove={this.doRemove.bind(this, item.id)}
                                                             />
                                                             :
                                                             <BidActionWrapped
@@ -254,12 +281,11 @@ function StatusDetails({status}) {
         statusClass = 'selected'
     }
     if (status == 3) {
-        status = 'Your quote was completed'
+        status = 'The request was closed'
         statusClass = 'selected'
     }
     return <p className={`request-status ${statusClass}`}>{status}</p>
 }
-
 
 function RequestStatus({status, role}) {
     let statusClass = 'open'

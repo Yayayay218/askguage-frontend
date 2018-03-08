@@ -3,10 +3,16 @@ import IntakeDetails from '../../../Intake'
 import {KindOfHome} from "../../../Intake/TransferType";
 
 const Profile = ({request}) => {
-    return(
+    const address = request.homeAddress.address.split(',')
+    return (
         <div>
             <IntakeDetails
-                question="Property Type"
+                question="Renew Or Refinance"
+                answer={request.mortgageType === 0 ? 'Renew' : 'Refinance'}
+            />
+
+            <IntakeDetails
+                question={request.isEstate ? "Property Type" : "Kind Of Home"}
                 answer={KindOfHome(request.kindOfHome)}
             />
 
@@ -22,7 +28,7 @@ const Profile = ({request}) => {
 
             <IntakeDetails
                 question="City"
-                answer={request.homeAddress.address}
+                answer={address[0]}
             />
         </div>
     )

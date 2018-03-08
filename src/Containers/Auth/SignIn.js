@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import Actions from '../../Actions/Creators'
 import Layout from '../App'
 import moment from 'moment';
+import FacebookLogin from 'react-facebook-login';
 
 
 const Error = ({message, field}) => {
@@ -17,7 +18,7 @@ const Error = ({message, field}) => {
 }
 
 class SignIn extends Component {
-    constructor(props, context) {
+    constructor(props) {
         super(props);
         this.state = {
             email: '',
@@ -53,6 +54,9 @@ class SignIn extends Component {
             this.setState({
                 error: newProps.error,
             })
+    }
+    responseFacebook = (response) => {
+        this.props.dispatch(Actions.loginFacebook({accessToken: response.accessToken}))
     }
 
     doLogin() {
@@ -113,7 +117,7 @@ class SignIn extends Component {
                                 </div>
                             </div>
                             <div className="form-group row">
-                                <a href="" className="col-sm-6">Forgot Password?</a>
+                                <a href="/reset-password" className="col-sm-6">Forgot Password?</a>
                             </div>
                             <div className="form-group row">
                                 <div className="col-md-12">
@@ -142,7 +146,16 @@ class SignIn extends Component {
                             </div>
                             <div className="form-group row">
                                 <div className="col-md-12 col-12">
-                                    <div className="social-box facebook"></div>
+                                    <FacebookLogin
+                                        appId="336894240165471"
+                                        autoLoad={false}
+                                        fields="name,email,picture"
+                                        cssClass="social-box facebook"
+                                        scope="public_profile, email"
+                                        textButton=""
+                                        callback={this.responseFacebook}
+                                    />
+                                    {/*<div className="social-box facebook"></div>*/}
                                 </div>
                                 {/*<div className="col-md-6 col-6">*/}
                                 {/*<div className="social-box linkedin"></div>*/}

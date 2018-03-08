@@ -4,6 +4,7 @@ import Actions from '../../Actions/Creators'
 import Layout from '../App'
 import moment from 'moment';
 import NumberFormat from 'react-number-format'
+import FacebookLogin from 'react-facebook-login';
 
 const Error = ({message, field}) => {
     if (message && message.message)
@@ -30,22 +31,6 @@ function Input(props) {
     )
 }
 
-function FormErrors({formErrors}) {
-    return (
-        <div className='formErrors'>
-            {Object.keys(formErrors).map((fieldName, i) => {
-                if(formErrors[fieldName].length > 0){
-                    return (
-                        <p key={i} className="error-text">{formErrors[fieldName]}</p>
-                    )
-                } else {
-                    return '';
-                }
-            })}
-        </div>
-    )
-}
-
 class SignUp extends Component {
     constructor(props) {
         super(props);
@@ -64,6 +49,10 @@ class SignUp extends Component {
         }
         this.doSignUp = this.doSignUp.bind(this)
         this.handleUserInput = this.handleUserInput.bind(this)
+    }
+
+    responseFacebook = (response) => {
+        this.props.dispatch(Actions.loginFacebook({accessToken: response.accessToken}))
     }
 
     componentWillReceiveProps(newProps) {
@@ -85,6 +74,8 @@ class SignUp extends Component {
                 errors: newProps.errors,
                 errorField: newProps.errors.param
             })
+        if (newProps.token)
+            history.push('/')
     }
 
     handleUserInput(e) {
@@ -260,7 +251,16 @@ class SignUp extends Component {
                             </div>
                             <div className="form-group row">
                                 <div className="col-md-12 col-12">
-                                    <div className="social-box facebook"></div>
+                                    <FacebookLogin
+                                        appId="336894240165471"
+                                        autoLoad={false}
+                                        fields="name,email,picture"
+                                        cssClass="social-box facebook"
+                                        scope="public_profile, email"
+                                        textButton=""
+                                        callback={this.responseFacebook}
+                                    />
+                                    {/*<div className="social-box facebook"></div>*/}
                                 </div>
                                 {/*<div className="col-md-6 col-6">*/}
                                 {/*<div className="social-box linkedin"></div>*/}
@@ -280,7 +280,8 @@ function mapStateToProps(state) {
         isSignup: state.auth.isSignup,
         signUpDone: state.auth.signUpDone,
         userId: state.auth.userId,
-        requestTmp: state.requestTmp
+        requestTmp: state.requestTmp,
+        token: state.auth.token
     }
 }
 

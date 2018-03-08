@@ -157,7 +157,7 @@ export default class AdvanceInfo extends Component {
                     <div className="col-md-6 col-12">
                         <div className="row">
                             <div className="col-md-4 m-auto">
-                                <label className="col-form-label">DOB</label>
+                                <label className="col-form-label">Birthday</label>
                             </div>
                             <div className="col-md-8">
                                 <DatePicker

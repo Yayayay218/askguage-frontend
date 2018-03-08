@@ -132,11 +132,11 @@ class PickHome extends Component {
                             <div className="col-md-3 col-12">
                                 {
                                     condo ? (
-                                        <div className="service-box condo condo-active">
+                                        <div className="service-box other other-active">
                                             <label htmlFor="">Town House</label>
                                         </div>
                                     ) : (
-                                        <div className="service-box condo"
+                                        <div className="service-box other"
                                              onClick={() => {
                                                  this.setState({
                                                      detached: false,

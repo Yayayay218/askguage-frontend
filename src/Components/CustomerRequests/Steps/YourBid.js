@@ -59,18 +59,18 @@ class YourBid extends Component {
     }
 
     render() {
-        const {user, _bid, onChange} = this.props
+        const {user, _bid, onChange, request} = this.props
         const {state} = this.props.history.location
-        const bind = (field) => ({
-            value: _bid[field],
-            onChange: (e) => onChange({..._bid, [field]: e.target.value})
-        })
+        // const bind = (field) => ({
+        //     value: _bid[field],
+        //     onChange: (e) => onChange({..._bid, [field]: e.target.value})
+        // })
         return (
             <div className="bid-form">
                 <div className="row">
                     <div className="col-12">
                         <h4 style={{marginBottom: '30px'}}>
-                            Based on customer's request, please provide your recommendation.
+                            Based on customer's request, please provide your quote and recommendations.
                         </h4>
                     </div>
                 </div>
@@ -87,12 +87,20 @@ class YourBid extends Component {
                                         <NumberFormat
                                             thousandSeparator={true}
                                             suffix={'%'}
-                                            value={2.5}
+                                            value={_bid.commissionFee}
                                             className="form-control"
-                                            disabled={true}
+                                            onValueChange={(values) => {
+                                                onChange({..._bid, commissionFee: values.value})
+                                            }}
                                         />
-                                        : <input type="text" className="form-control"
-                                                 {...bind('mortgageAmount')}
+                                        :   <NumberFormat
+                                            thousandSeparator={true}
+                                            prefix={'$'}
+                                            value={_bid.mortgageAmount!=='' ? _bid.mortgageAmount : request.mortgageAmount + request.needMore}
+                                            className="form-control"
+                                            onValueChange={(values) => {
+                                                onChange({..._bid, mortgageAmount: values.value})
+                                            }}
                                         />
                                 }
 
@@ -117,14 +125,14 @@ class YourBid extends Component {
                 }
                 {
                     _bid.error && <div className="col-12 offset-md-3">
-                        <p style={{color: 'red'}}>Cannot Bid</p>
+                        <p style={{color: 'red'}}>Cannot Submit</p>
                     </div>
                 }
                 {
                     typeof state === 'undefined' || !state._bid.isBid && <div className="form-group row">
                         <div className="col-md-9 offset-md-3">
                             <button className="btn btn-add" onClick={this.addMoreOption}>Add more options</button>
-                            <button className="btn btn-submit" onClick={this.doBid}>Submit the bid</button>
+                            <button className="btn btn-submit" onClick={this.doBid}>Submit the quote</button>
                         </div>
                     </div>
                 }

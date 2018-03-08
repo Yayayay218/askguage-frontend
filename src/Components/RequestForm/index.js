@@ -242,8 +242,7 @@ class CreateRequest extends Component {
                                 <div className="flip-panel">
                                     <div className="request-intro">
                                         <h3>Need help</h3>
-                                        <p>If you are having trouble or have some question, please contact us at
-                                            support@askguage.com
+                                        <p>if you are having trouble or have some question, please <a href="https://askgauge.ca/contact-us/">contact us</a>.
                                         </p>
                                     </div>
                                 </div>

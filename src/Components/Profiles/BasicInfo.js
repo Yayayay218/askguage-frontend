@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import NumberFormat from 'react-number-format'
 
 export default class BasicInfo extends Component {
     render() {
@@ -31,6 +32,9 @@ export default class BasicInfo extends Component {
                                 <input type="text" className="form-control"
                                        {...bind("lastName")}
                                 />
+                                {
+                                    user.lastName === '' && <p className="error-text">Required</p>
+                                }
                             </div>
                         </div>
                     </div>
@@ -53,11 +57,18 @@ export default class BasicInfo extends Component {
                     <div className="col-md-6 col-12">
                         <div className="row">
                             <div className="col-md-4 m-auto">
-                                <label className="col-form-label">Phone Number</label>
+                                <label className="col-form-label">Phone Number *</label>
                             </div>
                             <div className="col-md-8">
-                                <input type="text" className="form-control"
-                                       {...bind("phoneNumber")}
+                                {/*<input type="text" className="form-control"*/}
+                                       {/*{...bind("phoneNumber")}*/}
+                                {/*/>*/}
+                                <NumberFormat
+                                    format="##########"
+                                    mask="_"
+                                    className="form-control"
+                                    onValueChange={(values) => onChange({...user, phoneNumber: values.value})}
+                                    value={user.phoneNumber}
                                 />
                             </div>
                         </div>

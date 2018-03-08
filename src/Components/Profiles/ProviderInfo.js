@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Autocomplete from 'react-google-autocomplete'
+import NumberFormat from 'react-number-format'
 
 export default class ProviderInfo extends Component {
     render() {
@@ -107,8 +108,15 @@ export default class ProviderInfo extends Component {
                                 <label className="col-form-label">Business Phone Number</label>
                             </div>
                             <div className="col-md-8">
-                                <input type="text" className="form-control"
-                                       {...bind("businessPhoneNumber")}
+                                {/*<input type="text" className="form-control"*/}
+                                       {/*{...bind("businessPhoneNumber")}*/}
+                                {/*/>*/}
+                                <NumberFormat
+                                    format="##########"
+                                    mask="_"
+                                    className="form-control"
+                                    onValueChange={(values) => onChange({...user, profiles: {...user.profiles, businessPhoneNumber: values.value}})}
+                                    value={user.profiles.businessPhoneNumber}
                                 />
                             </div>
                         </div>
@@ -169,8 +177,15 @@ export default class ProviderInfo extends Component {
                                     <label className="col-form-label">Brokerage Phone Number</label>
                                 </div>
                                 <div className="col-md-8">
-                                    <input type="text" className="form-control"
-                                           {...bind("brokeragePhoneNumber")}
+                                    {/*<input type="text" className="form-control"*/}
+                                           {/*{...bind("brokeragePhoneNumber")}*/}
+                                    {/*/>*/}
+                                    <NumberFormat
+                                        format="##########"
+                                        mask="_"
+                                        className="form-control"
+                                        onValueChange={(values) => onChange({...user, profiles: {...user.profiles, brokeragePhoneNumber: values.value}})}
+                                        value={user.profiles.brokeragePhoneNumber}
                                     />
                                 </div>
                             </div>

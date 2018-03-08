@@ -25,7 +25,8 @@ class MyRequest extends Component {
         this.state = {
             modalIsOpen: false,
             estate: false,
-            mortgage: false
+            mortgage: false,
+            requestStatus: ''
         }
 
         this.openModal = this.openModal.bind(this);
@@ -67,6 +68,22 @@ class MyRequest extends Component {
             history.push('/')
     }
 
+    // componentWillUpdate(newsProps, newState) {
+    //     let subQuery = this.props.user.profiles.kindOfService === 0 ? '&filter[where][isEstate]=true' : ''
+    //     let query = ''
+    //     if(newState.requestStatus !== this.state.requestStatus && this.props.user.role === 1) {
+    //         if(newState.requestStatus == 0) {
+    //             query = 'userId=' + this.props.user.id +
+    //                 `&filter[order]=createdAt%20DESC&filter[include]=user&filter[where][and][0][status]=${newState.requestStatus}&filter[where][and][1][isBid]=false` + subQuery
+    //         }
+    //         if(newState.requestStatus == 1) {
+    //             query = 'userId=' + this.props.user.id +
+    //                 `&filter[order]=createdAt%20DESC&filter[include]=user&filter[where][bidStatus]=0` + subQuery
+    //         }
+    //         this.props.dispatch(Actions.matchRequest(query))
+    //     }
+    // }
+
     render() {
         const {user, history} = this.props
         const {estate, mortgage} = this.state
@@ -89,6 +106,22 @@ class MyRequest extends Component {
                                 user.role === 0 ? 'My Request' : 'Customer Requests'
                             }
                             </h1>
+                            {
+                                user.role === 1 &&
+                                    <select className="custom-select" style={{marginLeft: '15px'}}
+                                                          value={this.state.requestStatus}
+                                                          onChange={(e) => this.setState({requestStatus: e.target.value})}
+                                    >
+                                        <option value="">---Select Status---</option>
+                                        <option value="0">Open</option>
+                                        <option value="1">Sent</option>
+                                        <option value="2">Completed</option>
+                                        <option value="3">Rejected</option>
+                                        <option value="4">Selected</option>
+                                        <option value="5">Closed</option>
+                                    </select>
+
+                            }
                             <button
                                 className={user.role === 0 ? 'btn btn-new-request' : 'btn btn-new-request hidden-btn'}
                                 onClick={this.openModal}
@@ -175,7 +208,10 @@ class MyRequest extends Component {
                     )}
                     {user.role === 1 && (
                         <div className="container">
-                            <RequestBox {...this.props}/>
+                            <RequestBox
+                                {...this.props}
+                                requestStatus={this.state.requestStatus}
+                            />
                         </div>
                     )}
                 </div>
