@@ -19,6 +19,7 @@ import MortgageLocateHome from './Steps/Mortgage/LocateHome'
 class CreateRequest extends Component {
     constructor(props) {
         super(props)
+        console.log(props)
         this.state = {
             isLanding: false,
             _request: {
@@ -54,13 +55,13 @@ class CreateRequest extends Component {
                 mortgageType: ''
             }
         }
-        if (props.app.requestType === -1)
+        if (props.app.requestType === -1 && props.location.search === '')
             props.history.push('/')
     }
 
     render() {
-        const {app, history} = this.props
-
+        const {app, history, location} = this.props
+        // console.log(this)
         const {_request} = this.state
         const estateSteps = [
             {
@@ -225,7 +226,7 @@ class CreateRequest extends Component {
             }
         ]
 
-        let steps = app.requestType.estate ? estateSteps : mortgageSteps
+        let steps = (app.requestType.estate || location.search === '?type=0') ? estateSteps : mortgageSteps
         return (
             <Layout {...this.state}>
                 <div className="container create-request-form">
@@ -242,7 +243,8 @@ class CreateRequest extends Component {
                                 <div className="flip-panel">
                                     <div className="request-intro">
                                         <h3>Need help</h3>
-                                        <p>if you are having trouble or have some question, please <a href="https://askgauge.ca/contact-us/">contact us</a>.
+                                        <p>if you are having trouble or have some question, please <a
+                                            href="https://askgauge.ca/contact-us/">contact us</a>.
                                         </p>
                                     </div>
                                 </div>

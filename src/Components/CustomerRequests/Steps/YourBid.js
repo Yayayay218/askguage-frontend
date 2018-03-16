@@ -79,11 +79,11 @@ class YourBid extends Component {
                         <div className="row">
                             <div className="col-md-3 m-auto">
                                 <label htmlFor=""
-                                       className="col-form-label">{user.profiles.kindOfService == 0 ? 'Realtor Commission Fee' : 'Mortgage Amount'}</label>
+                                       className="col-form-label">{(user.profiles.kindOfService == 0 || user.profiles.kindOfService == 2 || user.profiles.kindOfService == 3) ? 'Realtor Commission Fee' : 'Mortgage Amount'}</label>
                             </div>
                             <div className="col-md-9">
                                 {
-                                    user.profiles.kindOfService == 0 ?
+                                    (user.profiles.kindOfService == 0 || user.profiles.kindOfService == 2 || user.profiles.kindOfService == 3) ?
                                         <NumberFormat
                                             thousandSeparator={true}
                                             suffix={'%'}
@@ -92,6 +92,7 @@ class YourBid extends Component {
                                             onValueChange={(values) => {
                                                 onChange({..._bid, commissionFee: values.value})
                                             }}
+                                            disabled={_bid.disabled}
                                         />
                                         :   <NumberFormat
                                             thousandSeparator={true}
@@ -101,6 +102,7 @@ class YourBid extends Component {
                                             onValueChange={(values) => {
                                                 onChange({..._bid, mortgageAmount: values.value})
                                             }}
+                                            disabled={_bid.disabled}
                                         />
                                 }
 
@@ -144,7 +146,7 @@ class YourBid extends Component {
 }
 
 function RenderOption({item, index, bid, bindOption, serviceType, _this}) {
-    if (serviceType == 0)
+    if (serviceType == 0 || serviceType == 2 || serviceType == 3)
         return (
             <div>
                 <h3 style={{marginLeft: '-2px'}}>Option {index + 1}</h3>
@@ -159,6 +161,7 @@ function RenderOption({item, index, bid, bindOption, serviceType, _this}) {
                                 <select className="custom-select"
                                         onChange={bindOption(index, 'propertyType')}
                                         value={bid.options[index].propertyType}
+                                        disabled={bid.disabled}
                                 >
                                     <option value=""></option>
                                     <option value="0">Detached House</option>
@@ -181,6 +184,8 @@ function RenderOption({item, index, bid, bindOption, serviceType, _this}) {
                                 <input type="text" className="form-control"
                                        onChange={bindOption(index, 'squareFT')}
                                        value={bid.options[index].squareFT}
+                                       disabled={bid.disabled}
+
                                 />
                             </div>
                         </div>
@@ -207,6 +212,8 @@ function RenderOption({item, index, bid, bindOption, serviceType, _this}) {
                                             options
                                         })
                                     }}
+                                    disabled={bid.disabled}
+
                                 />
                             </div>
                         </div>
@@ -232,6 +239,8 @@ function RenderOption({item, index, bid, bindOption, serviceType, _this}) {
                                            name={index}
                                            defaultChecked={item.mortgageType == 0}
                                            onClick={bindOption(index, 'mortgageType')}
+                                           disabled={bid.disabled}
+
                                     />
                                     <span className="custom-control-indicator"></span>
                                     <span className="custom-control-description custom-label">Variable</span>
@@ -242,6 +251,8 @@ function RenderOption({item, index, bid, bindOption, serviceType, _this}) {
                                            name={index}
                                            defaultChecked={item.mortgageType == 1}
                                            onClick={bindOption(index, 'mortgageType')}
+                                           disabled={bid.disabled}
+
                                     />
                                     <span className="custom-control-indicator"></span>
                                     <span
@@ -263,6 +274,8 @@ function RenderOption({item, index, bid, bindOption, serviceType, _this}) {
                             <select className="custom-select"
                                     onChange={bindOption(index, 'mortgageTerm')}
                                     value={bid.options[index].mortgageTerm}
+                                    disabled={bid.disabled}
+
                             >
                                 <option value=""></option>
                                 <option value="0">1 Year</option>
@@ -284,6 +297,8 @@ function RenderOption({item, index, bid, bindOption, serviceType, _this}) {
                             <input type="text" className="form-control"
                                    onChange={bindOption(index, 'interestRate')}
                                    value={bid.options[index].interestRate}
+                                   disabled={bid.disabled}
+
                             />
                         </div>
                     </div>
@@ -300,6 +315,8 @@ function RenderOption({item, index, bid, bindOption, serviceType, _this}) {
                             <select className="custom-select"
                                     onChange={bindOption(index, 'amortization')}
                                     value={bid.options[index].amortization}
+                                    disabled={bid.disabled}
+
                             >
                                 <option value=""></option>
                                 <option value="0">10 Years</option>

@@ -150,6 +150,14 @@ export default class Parse {
         }).then(response => response.json()); //204
     }
 
+    getAddresses() {
+        return this._fetch({
+            method: 'GET',
+            url: '/addresses',
+            timeout: 10000
+        }).then(response => response.json());
+    }
+
     _fetch(opts) {
         opts = _.extend({
             method: 'GET',

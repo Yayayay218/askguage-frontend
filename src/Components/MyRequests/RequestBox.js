@@ -125,7 +125,6 @@ class RequestBox extends Component {
                 filter = requests.filter(req => req.bidStatus == 3)
                 break
         }
-        console.log(filter)
         return (
             <div>
                 {

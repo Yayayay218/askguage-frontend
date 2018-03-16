@@ -5,10 +5,8 @@ import Layout from '../../Containers/App'
 import Navigate from './Navigate'
 import ContactInfos from './Steps/ContactInfos'
 import Preferences from './Steps/Preferences'
-import OccupationInfos from './Steps/OccupationInfos'
 import AdditionalInfos from './Steps/AdditionalInfos'
 import StatedInfo from './Steps/StatedInfo'
-import CalculateValue from './Steps/CalculateValue'
 import YourBid from './Steps/YourBid'
 import Callback from './Steps/Callback'
 
@@ -20,6 +18,7 @@ class CustomerRequest extends Component {
         const {_bid} = props.history.location.state
         this.state = {
             bid: {
+                disabled: _bid.bidOptions ? true : false,
                 mortgageAmount: _bid.bidAmount || '',
                 options: _bid.bidOptions ? _bid.bidOptions : props.user.profiles.kindOfService == 1 ? [{
                     mortgageType: 0,

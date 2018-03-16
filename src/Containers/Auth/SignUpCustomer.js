@@ -6,16 +6,6 @@ import moment from 'moment';
 import NumberFormat from 'react-number-format'
 import FacebookLogin from 'react-facebook-login';
 
-const Error = ({message, field}) => {
-    if (message && message.message)
-        return (
-            <p className="error-text">
-                {message.message}
-            </p>
-        )
-    else return (<div></div>)
-}
-
 function Input(props) {
     return (
         <div className="col-md-6">
@@ -40,12 +30,14 @@ class SignUp extends Component {
             firstName: '',
             phoneNumber: '',
             role: '0',
+            kindOfService: '',
             emailValid: false,
             passwordValid: false,
             firstNameValid: false,
             phoneValid: false,
             formValid: false,
             formErrors: {email: '', password: '', firstName: '', phoneNumber: ''},
+            error: ''
         }
         this.doSignUp = this.doSignUp.bind(this)
         this.handleUserInput = this.handleUserInput.bind(this)
@@ -69,10 +61,9 @@ class SignUp extends Component {
             else
                 history.push('/login', {signup: true})
         }
-        if (!this.props.errors && newProps.errors)
+        if (!this.props.error && newProps.error)
             this.setState({
-                errors: newProps.errors,
-                errorField: newProps.errors.param
+                error: newProps.error,
             })
         if (newProps.token)
             history.push('/')
@@ -85,8 +76,26 @@ class SignUp extends Component {
     }
 
     doSignUp() {
-        const {state} = this
-        this.props.dispatch(Actions.signUp(state));
+        const {email, password, firstName, phoneNumber, role, kindOfService} = this.state
+        let data = {};
+        if (role == 0)
+            data = {
+                email: email,
+                password: password,
+                firstName: firstName,
+                phoneNumber: phoneNumber,
+                role: role,
+            }
+        else
+            data = {
+                email: email,
+                password: password,
+                firstName: firstName,
+                phoneNumber: phoneNumber,
+                profiles: {kindOfService: kindOfService},
+                role: role,
+            }
+        this.props.dispatch(Actions.signUp(data));
     }
 
     validateField(fieldName, value) {
@@ -126,8 +135,17 @@ class SignUp extends Component {
         }, this.validateForm);
     }
 
+    checkService(role, service) {
+        if (role === 1)
+            return service !== ''
+        return true
+    }
+
     validateForm() {
-        this.setState({formValid: this.state.emailValid && this.state.passwordValid && this.state.firstNameValid && this.state.phoneValid});
+        this.setState({
+            formValid: this.state.emailValid && this.state.passwordValid && this.state.firstNameValid && this.state.phoneValid
+            && this.checkService(this.state.role, this.state.kindOfService)
+        });
     }
 
     render() {
@@ -162,7 +180,9 @@ class SignUp extends Component {
                                                    value='0'
                                                    name='role'
                                                    defaultChecked={true}
-                                                   onChange={() => this.setState({role: 0})}
+                                                   onChange={() => this.setState({
+                                                       role: 0,
+                                                   })}
                                             />
                                             <span className="custom-control-indicator"></span>
                                             <span className="custom-control-description custom-label-signup">As a customer</span>
@@ -171,7 +191,9 @@ class SignUp extends Component {
                                             <input type="radio" className="custom-control-input"
                                                    value='1'
                                                    name='role'
-                                                   onChange={() => this.setState({role: 1})}
+                                                   onChange={() => this.setState({
+                                                       role: 1,
+                                                   })}
                                             />
                                             <span className="custom-control-indicator"></span>
                                             <span className="custom-control-description custom-label-signup">As service provider</span>
@@ -187,7 +209,8 @@ class SignUp extends Component {
                                            {...bind("firstName")}
                                     />
                                     {
-                                        this.state.formErrors.firstName !== '' && <p className="error-text">{this.state.formErrors.firstName}</p>
+                                        this.state.formErrors.firstName !== '' &&
+                                        <p className="error-text">{this.state.formErrors.firstName}</p>
                                     }
                                 </Input>
                                 <Input
@@ -197,7 +220,11 @@ class SignUp extends Component {
                                            {...bind("email")}
                                     />
                                     {
-                                        this.state.formErrors.email !== '' && <p className="error-text">{this.state.formErrors.email}</p>
+                                        this.state.formErrors.email !== '' &&
+                                        <p className="error-text">{this.state.formErrors.email}</p>
+                                    }
+                                    {
+                                        this.state.error !== '' && <p className="error-text">Email is already exist</p>
                                     }
                                 </Input>
                             </div>
@@ -214,7 +241,8 @@ class SignUp extends Component {
                                         }, this.validateField('phone', values.value))}
                                     />
                                     {
-                                        this.state.formErrors.phoneNumber !== '' && <p className="error-text">{this.state.formErrors.phoneNumber}</p>
+                                        this.state.formErrors.phoneNumber !== '' &&
+                                        <p className="error-text">{this.state.formErrors.phoneNumber}</p>
                                     }
                                 </Input>
                                 <Input
@@ -224,9 +252,34 @@ class SignUp extends Component {
                                            {...bind("password")}
                                     />
                                     {
-                                        this.state.formErrors.password !== '' && <p className="error-text">{this.state.formErrors.password}</p>
+                                        this.state.formErrors.password !== '' &&
+                                        <p className="error-text">{this.state.formErrors.password}</p>
                                     }
                                 </Input>
+                            </div>
+                            {
+                                this.state.role == 1 &&
+                                <div className="form-group row">
+                                    <Input label="What service do you provide? *">
+                                        <select className="custom-select"
+                                                {...bind('kindOfService')}
+                                        >
+                                            <option value=""></option>
+                                            <option value="1">Mortgage Agent</option>
+                                            <option value="4">Mobile Mortgage Advisor</option>
+                                            <option value="0">Real Estate Agent</option>
+                                            <option value="3">Real Estate Lawyer</option>
+                                            <option value="2">Home Inspector</option>
+                                        </select>
+                                    </Input>
+                                </div>
+                            }
+
+                            <div className="terms-conditions">
+                                <p>
+                                    By Signing Up, You agree to Ask Gauge <a href="https://askgauge.ca/terms-condition/"
+                                                                             target="_blank">Terms and Conditions</a>
+                                </p>
                             </div>
                             {
                                 isSignup ?

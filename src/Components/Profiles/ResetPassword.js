@@ -18,7 +18,8 @@ class ResetPassword extends Component {
             formValid: false,
             formErrors: {email: '', newPassword: '', confirmPassword: ''},
             error: '',
-            message: ''
+            message: '',
+            isClicked: false
 
         }
         this.doSave = this.doSave.bind(this)
@@ -73,14 +74,18 @@ class ResetPassword extends Component {
         let data = {
             newPassword: newPassword
         }
-        Axios.post(Config.URL + '/users/reset-password'+search, data).then(res => history.push('/login'))
+        Axios.post(Config.URL + '/users/reset-password' + search, data).then(res => history.push('/login'))
     }
 
     doSent() {
+        this.setState({isClicked: true})
         Axios.post(Config.URL + '/users/reset', {
             email: this.state.email
         })
-            .then(res => this.setState({message: 'A reset password token was sent to your email. Please check your email'}))
+            .then(res => this.setState({
+                message: "We've sent you a link to reset your password. Click the link in the email and enter a new password.",
+                isClicked: false
+            }))
             .catch(err => console.log(err))
     }
 
@@ -144,28 +149,33 @@ class ResetPassword extends Component {
                                 <div className="col-md-8">
                                     <div className="flip-panel">
                                         <div className="request-intro">
-                                            <h3>Reset Your Password</h3>
+                                            <h3>Forgot Password?</h3>
                                         </div>
                                     </div>
                                     <div className="form-group row first-row">
-                                        <label className="col-md-12 custom-label">Your Email</label>
+                                        <label className="col-md-12 custom-label">We'll send you a link to reset it</label>
                                         <div className="col-md-12">
                                             <input type="text" className="form-control"
                                                    {...bind('email')}
+                                                   placeholder="Registered Email"
                                             />
                                             {
-                                                !this.state.emailValid && <p className="error-text">{this.state.formErrors.email}</p>
+                                                !this.state.emailValid &&
+                                                <p className="error-text">{this.state.formErrors.email}</p>
                                             }
                                             {
-                                                this.state.message !== '' && <p style={{marginTop: '15px'}}>{this.state.message}</p>
+                                                this.state.message !== '' &&
+                                                <p style={{marginTop: '15px'}}>{this.state.message}</p>
                                             }
                                         </div>
                                     </div>
-                                    <button className="btn btn-next sign-up"
-                                            onClick={this.doSent}
-                                            disabled={!this.state.emailValid}
-                                    >Sent
-                                    </button>
+                                    {this.state.isClicked ? <button className="btn btn-next sign-up m-progress"
+                                                                    onClick={this.doSent}
+                                                                    disabled={!this.state.emailValid}>Reset</button> :
+                                        <button className="btn btn-next sign-up"
+                                                onClick={this.doSent}
+                                                disabled={!this.state.emailValid}>Reset</button>
+                                    }
                                 </div>
                             </div>
                         </div>

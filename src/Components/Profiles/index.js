@@ -13,7 +13,8 @@ class Profiles extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            user: props.user.profiles ? props.user : props.user.role === 0 ? {
+            disabled: props.user.profiles.kindOfService,
+            user: (props.user.profiles && props.user.profiles.languages) ? props.user : props.user.role === 0 ? {
                 ...props.user,
                 lastName: props.user.lastName || '',
                 profiles: {
@@ -52,7 +53,7 @@ class Profiles extends Component {
                         lat: '',
                         lng: ''
                     },
-                    kindOfService: -1,
+                    kindOfService: props.user.profiles.kindOfService || -1,
                     businessName: '',
                     website: '',
                     businessAddress: {
@@ -80,9 +81,7 @@ class Profiles extends Component {
             file: [],
             isUploading: false,
             lastNameValid: false,
-            passwordValid: false,
             firstNameValid: false,
-            phoneValid: false,
             formValid: false,
             formErrors: {lastName: '', password: '', firstName: '', phoneNumber: ''},
         }
@@ -116,7 +115,6 @@ class Profiles extends Component {
     }
 
     componentDidMount() {
-        // this.props.dispatch(Actions.getUser(this.props.user.id))
     }
 
     responseFacebook = (response) => {
@@ -181,7 +179,7 @@ class Profiles extends Component {
                 this.setState({user})
             }
         }
-        console.log(this)
+        // console.log(this)
         return (
             <Layout islanding={false}>
                 <div className="container user-profile">
@@ -217,6 +215,7 @@ class Profiles extends Component {
                             <ProviderInfo
                                 user={user}
                                 onChange={(user) => this.setState({user})}
+                                disabled={this.state.disabled}
                             />
                         )}
 
@@ -235,7 +234,7 @@ class Profiles extends Component {
                                             isPosting ?
                                                 <button className="btn btn-save m-progress">Save</button>
                                                 :
-                                                <button className="btn btn-save" onClick={this.doSave} disabled={!this.state.formValid}>Save</button>
+                                                <button className="btn btn-save" onClick={this.doSave}>Save</button>
                                         }
                                     </div>
                                 </div>

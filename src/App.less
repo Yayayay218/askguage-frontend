@@ -79,7 +79,7 @@ body {
 }
 
 .content {
-  background: url(Assets/images/landing/shutterstock_227591032.jpg) no-repeat;
+  background: url(Assets/images/landing/landing.jpg) no-repeat;
   height: 100vh;
   width: 100%;
   background-size: 100% 100%;
@@ -148,7 +148,7 @@ body {
   .right-wrapper {
     padding-left: 30px;
     padding-right: 30px;
-    height: 535px;
+    //height: 535px;
     border-radius: 5px;
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
@@ -237,6 +237,7 @@ body {
       background-color: #dddddd !important;
     }
     .btn-submit {
+      margin-bottom: 55px;
       border-radius: 5px;
       background-color: #ff5600;
       margin-top: 30px;
@@ -645,7 +646,10 @@ footer {
       color: @gray-light;
       background: #fff url(Assets/images/icons/arrow-down.svg) no-repeat right 1rem center;
       background-size: 14px 6px;
-
+      &:disabled {
+        color: #868e96;
+        background-color: #e9ecef;
+      }
       &:focus {
         box-shadow: none;
         border: solid 1px #54657e;
@@ -721,7 +725,7 @@ footer {
       font-size: 0.9375rem;
       font-weight: 300;
       color: #54657e;
-      background: #fff url(Assets/images/icons/arrow-down.svg) no-repeat right 1rem center;
+      background: #fff url(Assets/images/icons/arrow-down.svg) no-repeat right 9px center;
       background-size: 14px 6px;
       &:focus {
         box-shadow: none;
@@ -1350,6 +1354,25 @@ a:hover {
 }
 
 .create-request-form {
+  .terms-conditions {
+    p {
+      font-size: 1rem;
+      font-weight: 300;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.45;
+      letter-spacing: normal;
+      text-align: left;
+      color: #374355;
+      margin-bottom: 0;
+      margin-top: 25px;
+
+      a {
+        color: #374355;
+        font-weight: bold;
+      }
+    }
+  }
   .label-mini {
     label {
       font-size: @font-16;
@@ -1447,7 +1470,6 @@ a:hover {
       margin-top: 88px;
     }
   }
-
   .flip-panel {
     .request-intro {
       h3 {
@@ -1485,14 +1507,12 @@ a:hover {
       color: #8493A8
     }
   }
-
   .semi {
     background: url(Assets/images/icons/semi-normal.svg) center 26px no-repeat;
     label {
       color: #8493A8
     }
   }
-
   .condo {
     background: url(Assets/images/icons/condo-normal.svg) center 26px no-repeat;
     label {

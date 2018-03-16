@@ -65,7 +65,6 @@ class SignIn extends Component {
     }
 
     render() {
-        // console.log(this)
         const {history, error, isLogin, location} = this.props
         const bind = (field) => ({
             value: this.state[field],

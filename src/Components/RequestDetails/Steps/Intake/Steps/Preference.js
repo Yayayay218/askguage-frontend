@@ -6,10 +6,13 @@ const Profile = ({request}) => {
     const address = request.homeAddress.address.split(',')
     return (
         <div>
-            <IntakeDetails
-                question="Renew Or Refinance"
-                answer={request.mortgageType === 0 ? 'Renew' : 'Refinance'}
-            />
+            {
+                !request.isEstate &&
+                <IntakeDetails
+                    question="Renew Or Refinance"
+                    answer={request.mortgageType === 0 ? 'Renew' : 'Refinance'}
+                />
+            }
 
             <IntakeDetails
                 question={request.isEstate ? "Property Type" : "Kind Of Home"}

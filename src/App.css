@@ -58,7 +58,7 @@ body {
   min-height: calc(66vh);
 }
 .content {
-  background: url(Assets/images/landing/shutterstock_227591032.jpg) no-repeat;
+  background: url(Assets/images/landing/landing.jpg) no-repeat;
   height: 100vh;
   width: 100%;
   background-size: 100% 100%;
@@ -115,7 +115,6 @@ body {
 .content .right-wrapper {
   padding-left: 30px;
   padding-right: 30px;
-  height: 535px;
   border-radius: 5px;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
@@ -205,6 +204,7 @@ body {
   background-color: #dddddd !important;
 }
 .content .right-wrapper .btn-submit {
+  margin-bottom: 55px;
   border-radius: 5px;
   background-color: #ff5600;
   margin-top: 30px;
@@ -544,6 +544,10 @@ footer .footer-bottom .copyright {
   background: #fff url(Assets/images/icons/arrow-down.svg) no-repeat right 1rem center;
   background-size: 14px 6px;
 }
+.user-profile .login-form .custom-select:disabled {
+  color: #868e96;
+  background-color: #e9ecef;
+}
 .user-profile .login-form .custom-select:focus {
   box-shadow: none;
   border: solid 1px #54657e;
@@ -611,7 +615,7 @@ footer .footer-bottom .copyright {
   font-size: 0.9375rem;
   font-weight: 300;
   color: #54657e;
-  background: #fff url(Assets/images/icons/arrow-down.svg) no-repeat right 1rem center;
+  background: #fff url(Assets/images/icons/arrow-down.svg) no-repeat right 9px center;
   background-size: 14px 6px;
 }
 .my-request .top-wrapper .custom-select:focus {
@@ -1129,6 +1133,22 @@ a:hover {
 }
 .error {
   border-color: red !important;
+}
+.create-request-form .terms-conditions p {
+  font-size: 1rem;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.45;
+  letter-spacing: normal;
+  text-align: left;
+  color: #374355;
+  margin-bottom: 0;
+  margin-top: 25px;
+}
+.create-request-form .terms-conditions p a {
+  color: #374355;
+  font-weight: bold;
 }
 .create-request-form .label-mini label {
   font-size: 1rem;

@@ -46,12 +46,14 @@ const Info = ({request}) => {
                     isCurrency={true}
                 />
             }
-
-            <IntakeDetails
-                question="Value of Home"
-                answer={request.homeValue}
-                isCurrency={true}
-            />
+            {
+                !request.isEstate &&
+                <IntakeDetails
+                    question="Value of Home"
+                    answer={request.homeValue}
+                    isCurrency={true}
+                />
+            }
 
             <IntakeDetails
                 question="Monthly Liability"
@@ -62,6 +64,11 @@ const Info = ({request}) => {
             <IntakeDetails
                 question="Net Asset"
                 answer={request.netAsset}
+                isCurrency={true}
+            />
+            <IntakeDetails
+                question="Your / HouseHold Income"
+                answer={request.houseHold}
                 isCurrency={true}
             />
             {
@@ -81,22 +88,7 @@ const Info = ({request}) => {
                                 isCurrency={true}
                             />
                         }
-                        <IntakeDetails
-                            question="Your / HouseHold Income"
-                            answer={request.houseHold}
-                            isCurrency={true}
-                        />
                     </div>
-            }
-
-            {
-                request.isEstate &&
-                <IntakeDetails
-                    question="Estimated Affordability"
-                    answer={request.monthlyLiability / request.houseHold}
-                    isCurrency={true}
-                    isTooltip={true}
-                />
             }
         </div>
     )

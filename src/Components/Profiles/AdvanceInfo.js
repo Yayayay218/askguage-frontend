@@ -99,33 +99,33 @@ export default class AdvanceInfo extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="form-group row">
-                    <div className="col-md-6 col-12">
-                        <div className="row">
-                            <div className="col-md-4 m-auto">
-                                <label className="col-form-label">Job Title</label>
-                            </div>
-                            <div className="col-md-8">
-                                <input type="text" className="form-control"
-                                       {...bind("jobTitle")}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-6 col-12">
-                        <div className="row">
-                            <div className="col-md-4 m-auto">
-                                <label className="col-form-label">Employer</label>
-                            </div>
-                            <div className="col-md-8">
-                                <input type="text" className="form-control"
-                                       {...bind("employer")}
-                                />
-                            </div>
-                        </div>
-                    </div>
+                {/*<div className="form-group row">*/}
+                    {/*<div className="col-md-6 col-12">*/}
+                        {/*<div className="row">*/}
+                            {/*<div className="col-md-4 m-auto">*/}
+                                {/*<label className="col-form-label">Job Title</label>*/}
+                            {/*</div>*/}
+                            {/*<div className="col-md-8">*/}
+                                {/*<input type="text" className="form-control"*/}
+                                       {/*{...bind("jobTitle")}*/}
+                                {/*/>*/}
+                            {/*</div>*/}
+                        {/*</div>*/}
+                    {/*</div>*/}
+                    {/*<div className="col-md-6 col-12">*/}
+                        {/*<div className="row">*/}
+                            {/*<div className="col-md-4 m-auto">*/}
+                                {/*<label className="col-form-label">Employer</label>*/}
+                            {/*</div>*/}
+                            {/*<div className="col-md-8">*/}
+                                {/*<input type="text" className="form-control"*/}
+                                       {/*{...bind("employer")}*/}
+                                {/*/>*/}
+                            {/*</div>*/}
+                        {/*</div>*/}
+                    {/*</div>*/}
 
-                </div>
+                {/*</div>*/}
                 <div className="form-group row">
                     <div className="col-md-6 col-12">
                         <div className="row">
@@ -139,19 +139,45 @@ export default class AdvanceInfo extends Component {
                             </div>
                         </div>
                     </div>
-
                     <div className="col-md-6 col-12">
                         <div className="row">
                             <div className="col-md-4 m-auto">
-                                <label className="col-form-label">Industry</label>
+                                <label className="col-form-label">Address</label>
                             </div>
                             <div className="col-md-8">
-                                <input type="text" className="form-control"
-                                       {...bind("industry")}
-                                />
+                                <Autocomplete className="form-control"
+                                              onPlaceSelected={(place) => {
+                                                  onChange({
+                                                      ...user,
+                                                      profiles: {
+                                                          ...user.profiles,
+                                                          userAddress: {
+                                                              address: place.formatted_address,
+                                                              lat: place.geometry.location.lat(),
+                                                              lng: place.geometry.location.lng()
+                                                          }
+                                                      },
+                                                  })
+                                              }}
+                                              types={['(regions)']}
+                                              defaultValue={user['profiles']['userAddress']['address']}
+                                >
+                                </Autocomplete>
                             </div>
                         </div>
                     </div>
+                    {/*<div className="col-md-6 col-12">*/}
+                        {/*<div className="row">*/}
+                            {/*<div className="col-md-4 m-auto">*/}
+                                {/*<label className="col-form-label">Industry</label>*/}
+                            {/*</div>*/}
+                            {/*<div className="col-md-8">*/}
+                                {/*<input type="text" className="form-control"*/}
+                                       {/*{...bind("industry")}*/}
+                                {/*/>*/}
+                            {/*</div>*/}
+                        {/*</div>*/}
+                    {/*</div>*/}
                 </div>
                 <div className="form-group row">
                     <div className="col-md-6 col-12">
@@ -191,26 +217,26 @@ export default class AdvanceInfo extends Component {
                     </div>
                 </div>
                 <div className="form-group row">
-                    <div className="col-md-6 col-12">
-                        <div className="row">
-                            <div className="col-md-4 m-auto">
-                                <label className="col-form-label">Marital Status</label>
-                            </div>
-                            <div className="col-md-8">
-                                <select className="custom-select"
-                                        {...bind("civilStatus")}
-                                >
-                                    <option value=""></option>
-                                    <option value="0">Married</option>
-                                    <option value="1">Common Law</option>
-                                    <option value="2">Single</option>
-                                    <option value="3">Separated</option>
-                                    <option value="4">Divorced</option>
-                                    <option value="5">Widowed</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+                    {/*<div className="col-md-6 col-12">*/}
+                        {/*<div className="row">*/}
+                            {/*<div className="col-md-4 m-auto">*/}
+                                {/*<label className="col-form-label">Marital Status</label>*/}
+                            {/*</div>*/}
+                            {/*<div className="col-md-8">*/}
+                                {/*<select className="custom-select"*/}
+                                        {/*{...bind("civilStatus")}*/}
+                                {/*>*/}
+                                    {/*<option value=""></option>*/}
+                                    {/*<option value="0">Married</option>*/}
+                                    {/*<option value="1">Common Law</option>*/}
+                                    {/*<option value="2">Single</option>*/}
+                                    {/*<option value="3">Separated</option>*/}
+                                    {/*<option value="4">Divorced</option>*/}
+                                    {/*<option value="5">Widowed</option>*/}
+                                {/*</select>*/}
+                            {/*</div>*/}
+                        {/*</div>*/}
+                    {/*</div>*/}
 
                     <div className="col-md-6 col-12">
                         <div className="row">
@@ -229,36 +255,36 @@ export default class AdvanceInfo extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="form-group row">
-                    <div className="col-md-6 col-12">
-                        <div className="row">
-                            <div className="col-md-4 m-auto">
-                                <label className="col-form-label">Address</label>
-                            </div>
-                            <div className="col-md-8">
-                                <Autocomplete className="form-control"
-                                              onPlaceSelected={(place) => {
-                                                  onChange({
-                                                      ...user,
-                                                      profiles: {
-                                                          ...user.profiles,
-                                                          userAddress: {
-                                                              address: place.formatted_address,
-                                                              lat: place.geometry.location.lat(),
-                                                              lng: place.geometry.location.lng()
-                                                          }
-                                                      },
-                                                  })
-                                              }}
-                                              types={['(regions)']}
-                                              defaultValue={user['profiles']['userAddress']['address']}
-                                >
-                                </Autocomplete>
-                            </div>
-                        </div>
-                    </div>
+                {/*<div className="form-group row">*/}
+                    {/*<div className="col-md-6 col-12">*/}
+                        {/*<div className="row">*/}
+                            {/*<div className="col-md-4 m-auto">*/}
+                                {/*<label className="col-form-label">Address</label>*/}
+                            {/*</div>*/}
+                            {/*<div className="col-md-8">*/}
+                                {/*<Autocomplete className="form-control"*/}
+                                              {/*onPlaceSelected={(place) => {*/}
+                                                  {/*onChange({*/}
+                                                      {/*...user,*/}
+                                                      {/*profiles: {*/}
+                                                          {/*...user.profiles,*/}
+                                                          {/*userAddress: {*/}
+                                                              {/*address: place.formatted_address,*/}
+                                                              {/*lat: place.geometry.location.lat(),*/}
+                                                              {/*lng: place.geometry.location.lng()*/}
+                                                          {/*}*/}
+                                                      {/*},*/}
+                                                  {/*})*/}
+                                              {/*}}*/}
+                                              {/*types={['(geocode)']}*/}
+                                              {/*defaultValue={user['profiles']['userAddress']['address']}*/}
+                                {/*>*/}
+                                {/*</Autocomplete>*/}
+                            {/*</div>*/}
+                        {/*</div>*/}
+                    {/*</div>*/}
 
-                </div>
+                {/*</div>*/}
 
             </div>
         )

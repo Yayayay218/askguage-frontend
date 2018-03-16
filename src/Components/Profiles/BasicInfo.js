@@ -32,9 +32,6 @@ export default class BasicInfo extends Component {
                                 <input type="text" className="form-control"
                                        {...bind("lastName")}
                                 />
-                                {
-                                    user.lastName === '' && <p className="error-text">Required</p>
-                                }
                             </div>
                         </div>
                     </div>

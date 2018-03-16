@@ -4,7 +4,7 @@ import NumberFormat from 'react-number-format'
 
 export default class ProviderInfo extends Component {
     render() {
-        const {user, onChange} = this.props
+        const {user, onChange, disabled} = this.props
         const bind = (field) => ({
             value: user["profiles"][field],
             onChange: (e) => onChange({...user, profiles: {...user["profiles"], [field]: e.target.value}})
@@ -20,10 +20,9 @@ export default class ProviderInfo extends Component {
                             <div className="col-md-8">
                                 <select className="custom-select"
                                         {...bind("kindOfService")}
+                                        disabled={disabled}
                                 >
                                     <option value="-1"></option>
-                                    {/*<option value="0">Estate</option>*/}
-                                    {/*<option value="1">Mortgage</option>*/}
                                     <option value="1">Mortgage Agent</option>
                                     <option value="4">Mobile Mortgage Advisor</option>
                                     <option value="0">Real Estate Agent</option>
@@ -109,13 +108,16 @@ export default class ProviderInfo extends Component {
                             </div>
                             <div className="col-md-8">
                                 {/*<input type="text" className="form-control"*/}
-                                       {/*{...bind("businessPhoneNumber")}*/}
+                                {/*{...bind("businessPhoneNumber")}*/}
                                 {/*/>*/}
                                 <NumberFormat
                                     format="##########"
                                     mask="_"
                                     className="form-control"
-                                    onValueChange={(values) => onChange({...user, profiles: {...user.profiles, businessPhoneNumber: values.value}})}
+                                    onValueChange={(values) => onChange({
+                                        ...user,
+                                        profiles: {...user.profiles, businessPhoneNumber: values.value}
+                                    })}
                                     value={user.profiles.businessPhoneNumber}
                                 />
                             </div>
@@ -178,13 +180,16 @@ export default class ProviderInfo extends Component {
                                 </div>
                                 <div className="col-md-8">
                                     {/*<input type="text" className="form-control"*/}
-                                           {/*{...bind("brokeragePhoneNumber")}*/}
+                                    {/*{...bind("brokeragePhoneNumber")}*/}
                                     {/*/>*/}
                                     <NumberFormat
                                         format="##########"
                                         mask="_"
                                         className="form-control"
-                                        onValueChange={(values) => onChange({...user, profiles: {...user.profiles, brokeragePhoneNumber: values.value}})}
+                                        onValueChange={(values) => onChange({
+                                            ...user,
+                                            profiles: {...user.profiles, brokeragePhoneNumber: values.value}
+                                        })}
                                         value={user.profiles.brokeragePhoneNumber}
                                     />
                                 </div>

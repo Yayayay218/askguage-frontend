@@ -108,18 +108,18 @@ class MyRequest extends Component {
                             </h1>
                             {
                                 user.role === 1 &&
-                                    <select className="custom-select" style={{marginLeft: '15px'}}
-                                                          value={this.state.requestStatus}
-                                                          onChange={(e) => this.setState({requestStatus: e.target.value})}
-                                    >
-                                        <option value="">---Select Status---</option>
-                                        <option value="0">Open</option>
-                                        <option value="1">Sent</option>
-                                        <option value="2">Completed</option>
-                                        <option value="3">Rejected</option>
-                                        <option value="4">Selected</option>
-                                        <option value="5">Closed</option>
-                                    </select>
+                                <select className="custom-select" style={{marginLeft: '15px'}}
+                                        value={this.state.requestStatus}
+                                        onChange={(e) => this.setState({requestStatus: e.target.value})}
+                                >
+                                    <option value="">---Select Status---</option>
+                                    <option value="0">Open</option>
+                                    <option value="1">Sent</option>
+                                    <option value="2">Completed</option>
+                                    <option value="3">Rejected</option>
+                                    <option value="4">Selected</option>
+                                    <option value="5">Closed</option>
+                                </select>
 
                             }
                             <button
@@ -208,6 +208,19 @@ class MyRequest extends Component {
                     )}
                     {user.role === 1 && (
                         <div className="container">
+                            {
+                                user.isApprove == 0 &&
+                                <p>
+                                    Thank you for signing up and completing your profile with Ask Gauge. Your
+                                    professional verification is pending, once verification is complete and approved you
+                                    will start to receve requests.
+                                    <br/>
+                                    <br/>
+                                    Thank you,
+                                    <br/>
+                                    Ask Gauge Team.
+                                </p>
+                            }
                             <RequestBox
                                 {...this.props}
                                 requestStatus={this.state.requestStatus}
