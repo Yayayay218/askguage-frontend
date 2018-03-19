@@ -359,7 +359,12 @@ footer .footer-bottom .copyright {
   background-color: #374355 !important;
 }
 .bg-base-custom {
-  background-color: transparent !important;
+  background-color: #374355 !important;
+}
+@media (min-width: 768px) {
+  .bg-base-custom {
+    background-color: transparent !important;
+  }
 }
 .login-header h1 {
   font-size: 1.5rem;

@@ -44,16 +44,16 @@ class Home extends Component {
                                         Looking to buy a new home? Make faster, smarter and informed decisions.
                                     </div>
                                     {/*<div className="txt-1">*/}
-                                        {/*growing old*/}
+                                    {/*growing old*/}
                                     {/*</div>*/}
                                     {/*<div className="txt-2">*/}
-                                        {/*The Store Where Generous <br/> Matter More*/}
+                                    {/*The Store Where Generous <br/> Matter More*/}
                                     {/*</div>*/}
                                     {/*<div className="txt-3">*/}
-                                        {/*The store where generous deeds buys*/}
+                                    {/*The store where generous deeds buys*/}
                                     {/*</div>*/}
                                     {/*<button className="btn btn-learn">*/}
-                                        {/*Learn more*/}
+                                    {/*Learn more*/}
                                     {/*</button>*/}
                                 </div>
                             </div>

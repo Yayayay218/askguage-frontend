@@ -433,7 +433,11 @@ footer {
 }
 
 .bg-base-custom {
-  background-color: transparent !important;
+  background-color: @gray-base !important;
+
+  @media (min-width: 768px) {
+    background-color: transparent !important;
+  }
 }
 
 .login-header {
