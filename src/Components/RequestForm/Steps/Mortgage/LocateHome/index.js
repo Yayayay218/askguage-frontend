@@ -1,11 +1,20 @@
 import React, {Component} from 'react'
 import Autocomplete from 'react-google-autocomplete'
 import StepLayout from '../../StepLayout'
+import _ from 'lodash';
+function reducePlaces(memo, item) {
+    return {
+        ...memo,
+        [item.types[0]]: {
+            long_name: item.long_name,
+            short_name: item.short_name
+        }
+    };
+}
 
 class LocateHome extends Component {
     constructor(props) {
         super(props)
-        this.state = {}
     }
 
     render() {
@@ -34,7 +43,7 @@ class LocateHome extends Component {
                                     }
                                 })
                             }}
-                            types={['(regions)']}
+                            types={['geocode']}
                             defaultValue={_request['homeAddress']['address']}
                         />
                     </div>

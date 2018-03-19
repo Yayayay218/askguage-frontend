@@ -256,11 +256,11 @@ class BidInfo extends Component {
                                     }}>({item.provider.profiles.yearOfExperience}
                                     &nbsp;years of experience)</span>
                             </div>
-                            <p>{item.provider.profiles.kindOfService == 0 ? 'Real Estate Agent' : 'Mortgage Advisor'}</p>
+                            <p>{(item.provider.profiles.kindOfService == 0 || item.provider.profiles.kindOfService == 2 || item.provider.profiles.kindOfService == 3) ? 'Real Estate Agent' : 'Mortgage Advisor'}</p>
                         </div>
                     </div>
                     {
-                        item.provider.profiles.kindOfService == 0 ? <EstateView item={item}/>
+                        (item.provider.profiles.kindOfService == 0 || item.provider.profiles.kindOfService == 2 || item.provider.profiles.kindOfService == 3) ? <EstateView item={item}/>
                             : <MortgageView
                                 item={item}
                             />

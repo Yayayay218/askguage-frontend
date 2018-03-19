@@ -280,7 +280,7 @@ function StatusDetails({status}) {
         statusClass = 'selected'
     }
     if (status == 3) {
-        status = 'The request was closed'
+        status = 'The callback was closed'
         statusClass = 'selected'
     }
     return <p className={`request-status ${statusClass}`}>{status}</p>
@@ -303,7 +303,7 @@ function RequestStatus({status, role}) {
         statusClass = 'enough'
     }
     if (status == 4) {
-        status = 'Completed'
+        status = 'The request was closed'
         statusClass = 'completed'
     }
     if (role === 0)

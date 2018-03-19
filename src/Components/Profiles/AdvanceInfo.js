@@ -159,7 +159,7 @@ export default class AdvanceInfo extends Component {
                                                       },
                                                   })
                                               }}
-                                              types={['(regions)']}
+                                              types={['geocode']}
                                               defaultValue={user['profiles']['userAddress']['address']}
                                 >
                                 </Autocomplete>

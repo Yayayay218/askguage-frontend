@@ -13,7 +13,7 @@ class Profiles extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            disabled: props.user.profiles.kindOfService,
+            disabled: props.user.profiles,
             user: (props.user.profiles && props.user.profiles.languages) ? props.user : props.user.role === 0 ? {
                 ...props.user,
                 lastName: props.user.lastName || '',

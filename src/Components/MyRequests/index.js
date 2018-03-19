@@ -31,7 +31,10 @@ class MyRequest extends Component {
 
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
-        if (!props.user.profiles)
+        console.log(props)
+        if (props.user.role == 1 && !props.user.profiles.languages)
+            props.history.push('/my-profiles')
+        if (props.user.role == 0 && !props.user.profiles)
             props.history.push('/my-profiles')
     }
 

@@ -67,7 +67,6 @@ export default class ProviderInfo extends Component {
                             <div className="col-md-8">
                                 <Autocomplete
                                     className="form-control"
-                                    types={['(regions)']}
                                     onPlaceSelected={(place) => {
                                         onChange({
                                             ...user,
@@ -81,6 +80,7 @@ export default class ProviderInfo extends Component {
                                             },
                                         })
                                     }}
+                                    types={['geocode']}
                                     defaultValue={user['profiles']['businessAddress']['address']}
                                 />
                             </div>
@@ -161,7 +161,7 @@ export default class ProviderInfo extends Component {
                                                 },
                                             })
                                         }}
-                                        types={['(regions)']}
+                                        types={['geocode']}
                                         defaultValue={user['profiles']['brokerageAddress']['address']}
                                     />
                                 </div>
