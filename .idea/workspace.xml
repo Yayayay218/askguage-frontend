@@ -6,10 +6,6 @@
       <change beforePath="$PROJECT_DIR$/src/App.css" afterPath="$PROJECT_DIR$/src/App.css" />
       <change beforePath="$PROJECT_DIR$/src/App.css.map" afterPath="$PROJECT_DIR$/src/App.css.map" />
       <change beforePath="$PROJECT_DIR$/src/App.less" afterPath="$PROJECT_DIR$/src/App.less" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Profiles/AdvanceInfo.js" afterPath="$PROJECT_DIR$/src/Components/Profiles/AdvanceInfo.js" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Profiles/BasicInfo.js" afterPath="$PROJECT_DIR$/src/Components/Profiles/BasicInfo.js" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Profiles/ProviderInfo.js" afterPath="$PROJECT_DIR$/src/Components/Profiles/ProviderInfo.js" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Profiles/index.js" afterPath="$PROJECT_DIR$/src/Components/Profiles/index.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -23,14 +19,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="App.less" pinned="false" current-in-tab="false">
+      <file leaf-file-name="App.less" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/App.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="139">
-              <caret line="2188" column="5" lean-forward="false" selection-start-line="2188" selection-start-column="5" selection-end-line="2188" selection-end-column="5" />
-              <folding>
-                <marker date="1521520349831" expanded="true" signature="1082:1126" ph="{...}" />
-              </folding>
+            <state relative-caret-position="552">
+              <caret line="2207" column="1" lean-forward="false" selection-start-line="2207" selection-start-column="1" selection-end-line="2207" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Containers/Home/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1018">
+              <caret line="71" column="57" lean-forward="false" selection-start-line="71" selection-start-column="57" selection-end-line="71" selection-end-column="57" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -65,7 +69,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Components/Profiles/index.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="546">
@@ -195,11 +199,11 @@
         <option value="$PROJECT_DIR$/src/Components/RequestForm/Steps/Mortgage/LocateHome/index.js" />
         <option value="$PROJECT_DIR$/src/Components/MyRequests/index.js" />
         <option value="$PROJECT_DIR$/src/Containers/Home/index.js" />
-        <option value="$PROJECT_DIR$/src/App.less" />
         <option value="$PROJECT_DIR$/src/Components/Profiles/BasicInfo.js" />
         <option value="$PROJECT_DIR$/src/Components/Profiles/AdvanceInfo.js" />
         <option value="$PROJECT_DIR$/src/Components/Profiles/ProviderInfo.js" />
         <option value="$PROJECT_DIR$/src/Components/Profiles/index.js" />
+        <option value="$PROJECT_DIR$/src/App.less" />
       </list>
     </option>
   </component>
@@ -281,6 +285,13 @@
               <item name="Containers" type="462c0819:PsiDirectoryNode" />
               <item name="Auth" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="askguage-frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="askguage-frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Containers" type="462c0819:PsiDirectoryNode" />
+              <item name="Home" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -292,7 +303,7 @@
   <component name="PropertiesComponent">
     <property name="nodejs_interpreter_path" value="node" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../02_Turbodl" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../askguage-webapp" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
@@ -504,12 +515,12 @@
       <workItem from="1521447288126" duration="4338000" />
       <workItem from="1521469939323" duration="21000" />
       <workItem from="1521502325758" duration="678000" />
-      <workItem from="1521508822704" duration="11939000" />
+      <workItem from="1521508822704" duration="12157000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="957655000" />
+    <option name="totallyTimeSpent" value="957873000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -884,29 +895,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Containers/Home/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1491">
-          <caret line="71" column="57" lean-forward="false" selection-start-line="71" selection-start-column="57" selection-end-line="71" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/RequestDetails/Steps/Experts/BidInfo.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="197">
           <caret line="270" column="46" lean-forward="true" selection-start-line="270" selection-start-column="46" selection-end-line="270" selection-end-column="46" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="2188" column="5" lean-forward="false" selection-start-line="2188" selection-start-column="5" selection-end-line="2188" selection-end-column="5" />
-          <folding>
-            <marker date="1521520349831" expanded="true" signature="1082:1126" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -960,6 +953,22 @@
             <element signature="n#!!block;n#componentWillReceiveProps#0;n#Profiles#0" expanded="false" />
             <element signature="n#!!block;n#checkBasicInfoValid#0;n#Profiles#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Containers/Home/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1018">
+          <caret line="71" column="57" lean-forward="false" selection-start-line="71" selection-start-column="57" selection-end-line="71" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="552">
+          <caret line="2207" column="1" lean-forward="false" selection-start-line="2207" selection-start-column="1" selection-end-line="2207" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
