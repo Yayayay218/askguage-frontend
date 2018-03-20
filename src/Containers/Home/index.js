@@ -35,7 +35,7 @@ class Home extends Component {
                 <Layout {...this.state}>
                     <div className="container-fluid">
                         <div className="row">
-                            <div className="col-md-7" style={{height: '80vh'}}>
+                            <div className="col-md-7">
                                 <div className="left-wrapper">
                                     <div className="txt-2">
                                         HOME BUYING MADE SIMPLE.
@@ -57,7 +57,7 @@ class Home extends Component {
                                     {/*</button>*/}
                                 </div>
                             </div>
-                            <div className="col-md-5" style={{height: '80vh'}}>
+                            <div className="col-md-5">
                                 <div className="right-wrapper">
                                     <div className="txt-1">
                                         Start your Journey.

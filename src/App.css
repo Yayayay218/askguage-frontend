@@ -54,14 +54,20 @@ body {
     font-size: 14px;
   }
 }
+@media (max-width: 1439px) {
+  .content {
+    height: 100% !important;
+    padding-bottom: 30px;
+  }
+}
 .page-wrapper {
   min-height: calc(66vh);
 }
 .content {
   background: url(Assets/images/landing/landing.jpg) no-repeat;
+  background-position: center center;
+  background-size: cover;
   height: 100vh;
-  width: 100%;
-  background-size: 100% 100%;
 }
 .content .left-wrapper {
   padding-left: 15px;
@@ -237,7 +243,6 @@ body {
   }
   .content .right-wrapper {
     margin-right: 15px;
-    margin-top: 150px;
   }
   .content .right-wrapper .estate label {
     text-align: center;
@@ -282,12 +287,6 @@ header .navbar-dark .navbar-nav .nav-link {
   text-align: center;
 }
 @media (min-width: 768px) {
-  header .navbar-dark .navbar-nav {
-    margin-left: 104px;
-  }
-  header .navbar-dark .navbar-nav .sign-up {
-    width: 115px;
-  }
   header .navbar-dark .navbar-brand img {
     width: 175px;
   }
@@ -361,7 +360,7 @@ footer .footer-bottom .copyright {
 .bg-base-custom {
   background-color: #374355 !important;
 }
-@media (min-width: 768px) {
+@media (min-width: 769px) {
   .bg-base-custom {
     background-color: transparent !important;
   }
@@ -1844,4 +1843,41 @@ a:hover {
 .error-text {
   color: red;
   padding-top: 10px;
+}
+@media (max-width: 425px) {
+  .content .left-wrapper {
+    margin-top: 30px !important;
+  }
+  .content .right-wrapper {
+    margin-top: 40px!important;
+  }
+}
+@media (min-width: 768px) {
+  .content .right-wrapper {
+    margin-top: 40px!important;
+  }
+  .content .right-wrapper .service-box label {
+    font-size: 0.6rem;
+  }
+}
+@media (max-width: 425px) {
+  .estate label {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    left: 0px;
+    font-size: 0.77rem !important;
+  }
+  .mortgage label {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    left: 0px;
+    font-size: 0.77rem !important;
+  }
+}
+@media (max-width: 1024px) {
+  .page-wrapper {
+    padding-bottom: 30px;
+  }
 }
