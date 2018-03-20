@@ -61,11 +61,14 @@
 //  Main CSS
 html,
 body {
-  height: 100vh;
+  // height: 100vh;
   font-family: 'Roboto', sans-serif;
   position: relative;
   //font-size: 18px
 }
+// #root{
+//   height: 100vh;
+// }
 
 @media (max-width: 767px) {
   html,
@@ -74,22 +77,29 @@ body {
   }
 
 }
-@media (max-width:1439px) {
+@media screen and (min-width:768px) and (max-width:900px){
+  .content .right-wrapper .service-box label{
+    font-size: 0.6rem !important;
+  }
+}
+@media (min-width:768px) {
+
   .content{
-    height: 100% !important;
+    height: 100vh!important;
     padding-bottom: 30px;
   }
 }
 
-.page-wrapper {
-  min-height: calc(100vh - 34px);
-}
+// .page-wrapper {
+//   min-height: calc(100vh - 34px);
+// }
 
 .content {
   background: url(Assets/images/landing/landing.jpg) no-repeat;
   background-position: center center;
   background-size: cover;
-  height:100vh;
+  // height:100vh;
+  height:100%;
   .left-wrapper {
     //&:after {
     //  display: block;
@@ -2168,9 +2178,9 @@ a:hover {
     .content .right-wrapper{
       margin-top: 40px!important;
     }
-    .content .right-wrapper .service-box label{
-      font-size: 0.6rem;
-    }
+    // .content .right-wrapper .service-box label{
+    //   font-size: 0.6rem;
+    // }
   }
 
 
