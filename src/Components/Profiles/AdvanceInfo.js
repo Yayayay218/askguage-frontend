@@ -16,10 +16,10 @@ export default class AdvanceInfo extends Component {
                 <div className="form-group row">
                     <div className="col-md-6 col-12">
                         <div className="row">
-                            <div className="col-md-4 m-auto">
+                            <div className="col-md-4 ">
                                 <label className="col-form-label">What languages do you speak?</label>
                             </div>
-                            <div className="col-md-8 m-auto">
+                            <div className="col-md-8 ">
                                 <div className="group-check-boxes">
                                     <label className="col-md-4 custom-control custom-checkbox">
                                         <input type="checkbox" className="custom-control-input"
@@ -61,9 +61,9 @@ export default class AdvanceInfo extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-6 col-12 m-auto">
+                    <div className="col-md-6 col-12 ">
                         <div className="row">
-                            <div className="col-md-4 m-auto">
+                            <div className="col-md-4 ">
                                 <label className="col-form-label">Opt In</label>
                             </div>
                             <div className="col-md-8">
@@ -102,7 +102,7 @@ export default class AdvanceInfo extends Component {
                 {/*<div className="form-group row">*/}
                     {/*<div className="col-md-6 col-12">*/}
                         {/*<div className="row">*/}
-                            {/*<div className="col-md-4 m-auto">*/}
+                            {/*<div className="col-md-4 ">*/}
                                 {/*<label className="col-form-label">Job Title</label>*/}
                             {/*</div>*/}
                             {/*<div className="col-md-8">*/}
@@ -114,7 +114,7 @@ export default class AdvanceInfo extends Component {
                     {/*</div>*/}
                     {/*<div className="col-md-6 col-12">*/}
                         {/*<div className="row">*/}
-                            {/*<div className="col-md-4 m-auto">*/}
+                            {/*<div className="col-md-4 ">*/}
                                 {/*<label className="col-form-label">Employer</label>*/}
                             {/*</div>*/}
                             {/*<div className="col-md-8">*/}
@@ -129,7 +129,7 @@ export default class AdvanceInfo extends Component {
                 <div className="form-group row">
                     <div className="col-md-6 col-12">
                         <div className="row">
-                            <div className="col-md-4 m-auto">
+                            <div className="col-md-4 ">
                                 <label className="col-form-label">Length of Employment</label>
                             </div>
                             <div className="col-md-8">
@@ -141,7 +141,7 @@ export default class AdvanceInfo extends Component {
                     </div>
                     <div className="col-md-6 col-12">
                         <div className="row">
-                            <div className="col-md-4 m-auto">
+                            <div className="col-md-4 ">
                                 <label className="col-form-label">Address</label>
                             </div>
                             <div className="col-md-8">
@@ -168,7 +168,7 @@ export default class AdvanceInfo extends Component {
                     </div>
                     {/*<div className="col-md-6 col-12">*/}
                         {/*<div className="row">*/}
-                            {/*<div className="col-md-4 m-auto">*/}
+                            {/*<div className="col-md-4 ">*/}
                                 {/*<label className="col-form-label">Industry</label>*/}
                             {/*</div>*/}
                             {/*<div className="col-md-8">*/}
@@ -182,7 +182,7 @@ export default class AdvanceInfo extends Component {
                 <div className="form-group row">
                     <div className="col-md-6 col-12">
                         <div className="row">
-                            <div className="col-md-4 m-auto">
+                            <div className="col-md-4 ">
                                 <label className="col-form-label">Birthday</label>
                             </div>
                             <div className="col-md-8">
@@ -201,7 +201,7 @@ export default class AdvanceInfo extends Component {
 
                     <div className="col-md-6 col-12">
                         <div className="row">
-                            <div className="col-md-4 m-auto">
+                            <div className="col-md-4 ">
                                 <label className="col-form-label">Gender</label>
                             </div>
                             <div className="col-md-8">
@@ -219,7 +219,7 @@ export default class AdvanceInfo extends Component {
                 <div className="form-group row">
                     {/*<div className="col-md-6 col-12">*/}
                         {/*<div className="row">*/}
-                            {/*<div className="col-md-4 m-auto">*/}
+                            {/*<div className="col-md-4 ">*/}
                                 {/*<label className="col-form-label">Marital Status</label>*/}
                             {/*</div>*/}
                             {/*<div className="col-md-8">*/}
@@ -240,7 +240,7 @@ export default class AdvanceInfo extends Component {
 
                     <div className="col-md-6 col-12">
                         <div className="row">
-                            <div className="col-md-4 m-auto">
+                            <div className="col-md-4 ">
                                 <label className="col-form-label">Canadian Citizen</label>
                             </div>
                             <div className="col-md-8">
@@ -258,7 +258,7 @@ export default class AdvanceInfo extends Component {
                 {/*<div className="form-group row">*/}
                     {/*<div className="col-md-6 col-12">*/}
                         {/*<div className="row">*/}
-                            {/*<div className="col-md-4 m-auto">*/}
+                            {/*<div className="col-md-4 ">*/}
                                 {/*<label className="col-form-label">Address</label>*/}
                             {/*</div>*/}
                             {/*<div className="col-md-8">*/}

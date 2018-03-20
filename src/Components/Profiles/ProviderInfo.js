@@ -14,7 +14,7 @@ export default class ProviderInfo extends Component {
                 <div className="form-group row">
                     <div className="col-md-6 col-12">
                         <div className="row">
-                            <div className="col-md-4 m-auto">
+                            <div className="col-md-4 ">
                                 <label className="col-form-label">What service do you provide?</label>
                             </div>
                             <div className="col-md-8">
@@ -34,7 +34,7 @@ export default class ProviderInfo extends Component {
                     </div>
                     <div className="col-md-6 col-12">
                         <div className="row">
-                            <div className="col-md-4 m-auto">
+                            <div className="col-md-4 ">
                                 <label className="col-form-label">Business Name</label>
                             </div>
                             <div className="col-md-8">
@@ -49,7 +49,7 @@ export default class ProviderInfo extends Component {
                 <div className="form-group row">
                     <div className="col-md-6 col-12">
                         <div className="row">
-                            <div className="col-md-4 m-auto">
+                            <div className="col-md-4 ">
                                 <label className="col-form-label">Website</label>
                             </div>
                             <div className="col-md-8">
@@ -61,7 +61,7 @@ export default class ProviderInfo extends Component {
                     </div>
                     <div className="col-md-6 col-12">
                         <div className="row">
-                            <div className="col-md-4 m-auto">
+                            <div className="col-md-4 ">
                                 <label className="col-form-label">Business Address</label>
                             </div>
                             <div className="col-md-8">
@@ -91,7 +91,7 @@ export default class ProviderInfo extends Component {
                 <div className="form-group row">
                     <div className="col-md-6 col-12">
                         <div className="row">
-                            <div className="col-md-4 m-auto">
+                            <div className="col-md-4 ">
                                 <label className="col-form-label">Business Email</label>
                             </div>
                             <div className="col-md-8">
@@ -103,7 +103,7 @@ export default class ProviderInfo extends Component {
                     </div>
                     <div className="col-md-6 col-12">
                         <div className="row">
-                            <div className="col-md-4 m-auto">
+                            <div className="col-md-4 ">
                                 <label className="col-form-label">Business Phone Number</label>
                             </div>
                             <div className="col-md-8">
@@ -130,7 +130,7 @@ export default class ProviderInfo extends Component {
                     <div className="form-group row">
                         <div className="col-md-6 col-12">
                             <div className="row">
-                                <div className="col-md-4 m-auto">
+                                <div className="col-md-4 ">
                                     <label className="col-form-label">Brokerage Name</label>
                                 </div>
                                 <div className="col-md-8">
@@ -142,7 +142,7 @@ export default class ProviderInfo extends Component {
                         </div>
                         <div className="col-md-6 col-12">
                             <div className="row">
-                                <div className="col-md-4 m-auto">
+                                <div className="col-md-4 ">
                                     <label className="col-form-label">Brokerage Address</label>
                                 </div>
                                 <div className="col-md-8">
@@ -175,7 +175,7 @@ export default class ProviderInfo extends Component {
                         (user.profiles.kindOfService == 0 || user.profiles.kindOfService == 1)
                         && <div className="col-md-6 col-12">
                             <div className="row">
-                                <div className="col-md-4 m-auto">
+                                <div className="col-md-4 ">
                                     <label className="col-form-label">Brokerage Phone Number</label>
                                 </div>
                                 <div className="col-md-8">
@@ -200,7 +200,7 @@ export default class ProviderInfo extends Component {
                         user.profiles.kindOfService == 4
                         && <div className="col-md-6 col-12">
                             <div className="row">
-                                <div className="col-md-4 m-auto">
+                                <div className="col-md-4 ">
                                     <label className="col-form-label">Which Bank do you work for?</label>
                                 </div>
                                 <div className="col-md-8">
@@ -226,7 +226,7 @@ export default class ProviderInfo extends Component {
                         user.profiles.kindOfService == 1
                         && <div className="col-md-6 col-12">
                             <div className="row">
-                                <div className="col-md-4 m-auto">
+                                <div className="col-md-4 ">
                                     <label className="col-form-label">Which Lenders do you work with?</label>
                                 </div>
                                 <div className="col-md-8">
@@ -246,7 +246,7 @@ export default class ProviderInfo extends Component {
 
                     <div className="col-md-6 col-12">
                         <div className="row">
-                            <div className="col-md-4 m-auto">
+                            <div className="col-md-4 ">
                                 <label className="col-form-label">Years of Experience</label>
                             </div>
                             <div className="col-md-8">
@@ -261,7 +261,7 @@ export default class ProviderInfo extends Component {
                 <div className="form-group row">
                     <div className="col-md-6 col-12">
                         <div className="row">
-                            <div className="col-md-4 m-auto">
+                            <div className="col-md-4 ">
                                 <label className="col-form-label">Licence #</label>
                             </div>
                             <div className="col-md-8">
@@ -273,7 +273,7 @@ export default class ProviderInfo extends Component {
                     </div>
                     <div className="col-md-6 col-12">
                         <div className="row">
-                            <div className="col-md-4 m-auto">
+                            <div className="col-md-4 ">
                                 <label className="col-form-label">Are you Mobile? </label>
                             </div>
                             <div className="col-md-8">
@@ -292,7 +292,7 @@ export default class ProviderInfo extends Component {
                 <div className="form-group row">
                     <div className="col-md-6 col-12">
                         <div className="row">
-                            <div className="col-md-4 m-auto">
+                            <div className="col-md-4 ">
                                 <label className="col-form-label">Do you provide your services ?</label>
                             </div>
                             <div className="col-md-8">

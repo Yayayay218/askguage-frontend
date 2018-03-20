@@ -80,38 +80,31 @@ class Profiles extends Component {
             },
             file: [],
             isUploading: false,
-            lastNameValid: false,
-            firstNameValid: false,
-            formValid: false,
-            formErrors: {lastName: '', password: '', firstName: '', phoneNumber: ''},
+            basicInfoValid: {
+                lastNameValid: true,
+                firstNameValid: true,
+                phoneValid: true
+            },
+            basicValid: false,
+            advanceValid: false,
+            advanceInfoValid: {
+                addressValid: true,
+                lengthOfEmpValid: true
+            },
+            providerValid: false,
+            providerInfoValid: {
+                businessNameValid: true,
+                websiteValid: true,
+                businessAddressValid: true,
+                businessEmailValid: true,
+                businessPhoneValid: true
+            }
         }
         this.doSave = this.doSave.bind(this)
         this.onChangeImage = this.onChangeImage.bind(this)
+        this.checkBasicInfoValid = this.checkBasicInfoValid.bind(this)
         if (!props.token)
             props.history.push('/')
-    }
-
-    validateField(fieldName, value) {
-        let fieldValidationErrors = this.state.formErrors;
-        let lastNameValid = this.state.lastNameValid;
-
-        switch (fieldName) {
-            case 'lastName':
-                lastNameValid = value.length !== 0;
-                fieldValidationErrors.lastName = lastNameValid ? '' : 'Required'
-                break;
-
-            default:
-                break;
-        }
-        this.setState({
-            formErrors: fieldValidationErrors,
-            lastNameValid: lastNameValid
-        }, this.validateForm);
-    }
-
-    validateForm() {
-        this.setState({formValid: this.state.lastNameValid});
     }
 
     componentDidMount() {
@@ -134,25 +127,138 @@ class Profiles extends Component {
             this.props.history.push('/')
     }
 
-    doSave() {
-        this.setState({isUploading: true})
-        uploadFile(this.state.file)
-            .then(params => {
-                this.props.dispatch(Actions.putProfile({
-                    id: this.props.user.id,
-                    user: {
-                        firstName: this.state.user.firstName,
-                        lastName: this.state.user.lastName,
-                        phoneNumber: this.state.user.phoneNumber,
-                        profiles: {
-                            ...this.state.user.profiles,
-                            dob: moment.utc(this.state.user.profiles.dob).format()
-                        },
-                        avatarUrl: params.avatarUrl
-                    }
-                }))
+    checkBasicInfoValid(info) {
+        let firstNameValid = '';
+        let lastNameValid = '';
+        let phoneNumberValid = ''
+        Object.entries(info).map(obj => {
+            switch (obj[0]) {
+                case 'firstName':
+                    firstNameValid = obj[1] !== ''
+                    break
+                case 'lastName':
+                    lastNameValid = obj[1] !== ''
+                    break
+                case 'phoneNumber':
+                    phoneNumberValid = obj[1] !== ''
+            }
+        })
+        this.setState({
+            basicInfoValid: {
+                firstNameValid: firstNameValid,
+                lastNameValid: lastNameValid,
+                phoneValid: phoneNumberValid
+            }
+        }, () => {
+            this.setState({
+                basicValid: this.state.basicInfoValid.firstNameValid && this.state.basicInfoValid.lastNameValid && this.state.basicInfoValid.phoneValid
             })
-            .catch(err => console.log(err))
+        })
+    }
+
+    checkAdvanceInfoValid(info) {
+        let addressValid = '';
+        let lengthOfEmpValid = '';
+        Object.entries(info).map(obj => {
+            switch (obj[0]) {
+                case 'address':
+                    addressValid = obj[1] !== ''
+                    break
+                case 'lengthOfEmployment':
+                    lengthOfEmpValid = obj[1] !== ''
+            }
+        })
+        this.setState({
+            advanceInfoValid: {
+                addressValid: addressValid,
+                lengthOfEmpValid: lengthOfEmpValid,
+            }
+        }, () => {
+            this.setState({
+                advanceValid: this.state.advanceInfoValid.addressValid && this.state.basicInfoValid.lastNameValid && this.state.advanceInfoValid.lengthOfEmpValid
+            })
+        })
+    }
+
+    checkProviderInfoValid(info) {
+        let businessNameValid = true;
+        let websiteValid = true
+        let businessAddressValid = true
+        let businessEmailValid = true
+        let businessPhoneValid = true
+
+        Object.entries(info).map(obj => {
+            switch (obj[0]) {
+                case 'businessName':
+                    businessNameValid = obj[1] !== ''
+                    break
+                case 'website':
+                    websiteValid = obj[1] !== ''
+                    break
+                case 'businessAddress':
+                    businessAddressValid = obj[1] !== ''
+                    break
+                case 'businessEmail':
+                    businessEmailValid = obj[1] !== ''
+                    break
+                case 'businessPhone':
+                    businessPhoneValid = obj[1] !== ''
+            }
+        })
+
+        this.setState({
+            providerInfoValid: {
+                businessNameValid: businessNameValid,
+                websiteValid: websiteValid,
+                businessAddressValid: businessAddressValid,
+                businessEmailValid: businessEmailValid,
+                businessPhoneValid: businessPhoneValid
+            }
+        }, () => {
+            this.setState({
+                providerValid: this.state.providerInfoValid.businessNameValid && this.state.providerInfoValid.websiteValid
+                && this.state.providerInfoValid.businessAddressValid && this.state.providerInfoValid.businessEmailValid && this.state.providerInfoValid.businessPhoneValid
+            })
+        })
+    }
+
+    doSave() {
+        const {basicValid, advanceValid} = this.state
+        const {lastName, firstName, phoneNumber} = this.state.user
+        const {userAddress, lengthOfEmployment} = this.state.user.profiles
+        let basicInfo = {
+            firstName: firstName,
+            lastName: lastName,
+            phoneNumber: phoneNumber
+        }
+        let advanceInfo = {
+            address: userAddress.address,
+            lengthOfEmployment: lengthOfEmployment
+        }
+        if (!basicValid || !advanceValid) {
+            this.checkBasicInfoValid(basicInfo)
+            this.checkAdvanceInfoValid(advanceInfo)
+        }
+        else {
+            this.setState({isUploading: true})
+            uploadFile(this.state.file)
+                .then(params => {
+                    this.props.dispatch(Actions.putProfile({
+                        id: this.props.user.id,
+                        user: {
+                            firstName: this.state.user.firstName,
+                            lastName: this.state.user.lastName,
+                            phoneNumber: this.state.user.phoneNumber,
+                            profiles: {
+                                ...this.state.user.profiles,
+                                dob: moment.utc(this.state.user.profiles.dob).format()
+                            },
+                            avatarUrl: params.avatarUrl
+                        }
+                    }))
+                })
+                .catch(err => console.log(err))
+        }
     }
 
     onChangeImage(file) {
@@ -160,7 +266,8 @@ class Profiles extends Component {
     }
 
     render() {
-        const {user, isPosting} = this.state
+        console.log(this.state)
+        const {user, isPosting, basicInfoValid} = this.state
         let onChangeLanguage = (e) => {
             if (user.profiles.languages.indexOf(e.target.value) === -1) {
                 let newLanguages = user.profiles.languages.concat([e.target.value])
@@ -206,9 +313,8 @@ class Profiles extends Component {
                         </div>
                         <BasicInfo
                             user={user}
-                            onChange={(user) => this.setState({user},
-                                this.setState({formValid: this.state.user.lastName !== ''})
-                            )}
+                            onChange={(user) => this.setState({user})}
+                            formFields={basicInfoValid}
 
                         />
                         {user.role === 1 && (
