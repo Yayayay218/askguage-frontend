@@ -32,6 +32,19 @@ class ExpertsContainer extends Component {
                 })
                 break
         }
+        if (tmp.length === 0)
+            return (
+                <div className="experts-view">
+                    <p>
+                        Waiting for response from experts
+                        <br/>
+                        <br/>
+                        We have send your request to our service providers in your area and we are waiting on them to
+                        respond. We will get you multiple quotes for each service category along with recommendations
+                        for you to compare tailored to your situation and preference.
+                    </p>
+                </div>
+            )
         return (
             <div className="experts-view">
                 <select className="custom-select" style={{marginBottom: '15px'}}

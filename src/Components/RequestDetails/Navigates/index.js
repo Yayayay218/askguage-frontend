@@ -39,23 +39,23 @@ class FlipWizard extends Component {
                                             >
                                                 Intake</label>
                                         </div>
+                                        {/*<div className="menu-item">*/}
+                                            {/*<label className={this.state.currentStepIndex === 1 ? 'active' : ''}*/}
+                                                   {/*onClick={() => this.setState({currentStepIndex: 1})}*/}
+
+                                            {/*>*/}
+                                                {/*Insights</label>*/}
+                                        {/*</div>*/}
                                         <div className="menu-item">
                                             <label className={this.state.currentStepIndex === 1 ? 'active' : ''}
                                                    onClick={() => this.setState({currentStepIndex: 1})}
-
-                                            >
-                                                Insights</label>
-                                        </div>
-                                        <div className="menu-item">
-                                            <label className={this.state.currentStepIndex === 2 ? 'active' : ''}
-                                                   onClick={() => this.setState({currentStepIndex: 2})}
 
                                             >Experts
                                             </label>
                                         </div>
                                         <div className="menu-item">
-                                            <label className={this.state.currentStepIndex === 3 ? 'active' : ''}
-                                                   onClick={() => this.setState({currentStepIndex: 3})}
+                                            <label className={this.state.currentStepIndex === 2 ? 'active' : ''}
+                                                   onClick={() => this.setState({currentStepIndex: 2})}
                                             >Review & Close
                                             </label>
                                         </div>

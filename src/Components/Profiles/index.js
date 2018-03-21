@@ -223,42 +223,42 @@ class Profiles extends Component {
     }
 
     doSave() {
-        const {basicValid, advanceValid} = this.state
-        const {lastName, firstName, phoneNumber} = this.state.user
-        const {userAddress, lengthOfEmployment} = this.state.user.profiles
-        let basicInfo = {
-            firstName: firstName,
-            lastName: lastName,
-            phoneNumber: phoneNumber
-        }
-        let advanceInfo = {
-            address: userAddress.address,
-            lengthOfEmployment: lengthOfEmployment
-        }
-        if (!basicValid || !advanceValid) {
-            this.checkBasicInfoValid(basicInfo)
-            this.checkAdvanceInfoValid(advanceInfo)
-        }
-        else {
-            this.setState({isUploading: true})
-            uploadFile(this.state.file)
-                .then(params => {
-                    this.props.dispatch(Actions.putProfile({
-                        id: this.props.user.id,
-                        user: {
-                            firstName: this.state.user.firstName,
-                            lastName: this.state.user.lastName,
-                            phoneNumber: this.state.user.phoneNumber,
-                            profiles: {
-                                ...this.state.user.profiles,
-                                dob: moment.utc(this.state.user.profiles.dob).format()
-                            },
-                            avatarUrl: params.avatarUrl
-                        }
-                    }))
-                })
-                .catch(err => console.log(err))
-        }
+        // const {basicValid, advanceValid} = this.state
+        // const {lastName, firstName, phoneNumber} = this.state.user
+        // const {userAddress, lengthOfEmployment} = this.state.user.profiles
+        // let basicInfo = {
+        //     firstName: firstName,
+        //     lastName: lastName,
+        //     phoneNumber: phoneNumber
+        // }
+        // let advanceInfo = {
+        //     address: userAddress.address,
+        //     lengthOfEmployment: lengthOfEmployment
+        // }
+        // if (!basicValid || !advanceValid) {
+        //     this.checkBasicInfoValid(basicInfo)
+        //     this.checkAdvanceInfoValid(advanceInfo)
+        // }
+        // else {
+        this.setState({isUploading: true})
+        uploadFile(this.state.file)
+            .then(params => {
+                this.props.dispatch(Actions.putProfile({
+                    id: this.props.user.id,
+                    user: {
+                        firstName: this.state.user.firstName,
+                        lastName: this.state.user.lastName,
+                        phoneNumber: this.state.user.phoneNumber,
+                        profiles: {
+                            ...this.state.user.profiles,
+                            dob: moment.utc(this.state.user.profiles.dob).format()
+                        },
+                        avatarUrl: params.avatarUrl
+                    }
+                }))
+            })
+            .catch(err => console.log(err))
+        // }
     }
 
     onChangeImage(file) {

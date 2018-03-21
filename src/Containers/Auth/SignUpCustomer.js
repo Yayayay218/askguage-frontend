@@ -224,7 +224,7 @@ class SignUp extends Component {
                                         <p className="error-text">{this.state.formErrors.email}</p>
                                     }
                                     {
-                                        this.state.error !== '' && <p className="error-text">Email is already exist</p>
+                                        this.state.error !== '' && <p className="error-text">Email already exists</p>
                                     }
                                 </Input>
                             </div>

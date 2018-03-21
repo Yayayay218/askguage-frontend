@@ -35,20 +35,6 @@ class Header extends Component {
                                     <ul className="mr-auto">
 
                                     </ul>
-                                    {/*<ul className="navbar-nav mr-auto">*/}
-                                        {/*<li className="nav-item">*/}
-                                            {/*<a className="nav-link" href="#">Design</a>*/}
-                                        {/*</li>*/}
-                                        {/*<li className="nav-item">*/}
-                                            {/*<a className="nav-link" href="#">CMS</a>*/}
-                                        {/*</li>*/}
-                                        {/*<li className="nav-item">*/}
-                                            {/*<a className="nav-link" href="#">Cases</a>*/}
-                                        {/*</li>*/}
-                                        {/*<li className="nav-item">*/}
-                                            {/*<a className="nav-link" href="#">More</a>*/}
-                                        {/*</li>*/}
-                                    {/*</ul>*/}
                                     <ul className="navbar-nav">
                                         <li className="nav-item">
                                             <a className="nav-link" href="/login">Login</a>
@@ -76,24 +62,25 @@ class Header extends Component {
                                     className={!token ? 'collapse navbar-collapse hidden-nav' : 'collapse navbar-collapse'}
                                     id="navbarSupportedContent"
                                 >
-                                    {
-                                        !token ? <div></div> :
-                                            <ul className="navbar-nav mr-auto" style={{marginLeft: 'auto'}}>
-                                                <li className="nav-item" style={{marginRight: '7rem'}}>
-                                                    {
-                                                        user.role === 0 ?
-                                                            <a className="nav-link" href="/my-requests">My Request</a>
-                                                            :
-                                                            <a className="nav-link" href="/customer-requests">Customer
-                                                                Request</a>
-                                                    }
-                                                </li>
-                                                <li className="nav-item">
-                                                    <a className="nav-link" href="#">How It Works</a>
-                                                </li>
-                                            </ul>
+                                    {/*{*/}
+                                        {/*!token ? <div></div> :*/}
+                                            {/*<ul className="navbar-nav mr-auto" style={{marginLeft: 'auto'}}>*/}
+                                                {/*<li className="nav-item" style={{marginRight: '7rem'}}>*/}
+                                                    {/*{*/}
+                                                        {/*user.role === 0 ?*/}
+                                                            {/*<a className="nav-link" href="/my-requests">My Request</a>*/}
+                                                            {/*:*/}
+                                                            {/*<a className="nav-link" href="/customer-requests">Customer*/}
+                                                                {/*Request</a>*/}
+                                                    {/*}*/}
+                                                {/*</li>*/}
+                                                {/*<li className="nav-item">*/}
+                                                    {/*<a className="nav-link" href="#">How It Works</a>*/}
+                                                {/*</li>*/}
+                                            {/*</ul>*/}
 
-                                    }
+                                    {/*}*/}
+                                    <ul className="nav-bar mr-auto"></ul>
                                     <ul className="navbar-nav">
                                         {
                                             !token ? <li></li>

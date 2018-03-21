@@ -153,7 +153,7 @@ class RequestBox extends Component {
                                                             <div className="d-flex flex-column col-4">
                                                                 <label className="label-header">Location</label>
                                                                 <label
-                                                                    className="label-header content">{item.homeAddress.address}</label>
+                                                                    className="label-header content1">{item.homeAddress.address}</label>
                                                             </div>
                                                             <div className="d-flex flex-column col-4">
                                                                 <label className="label-header">Status</label>
@@ -194,7 +194,7 @@ class RequestBox extends Component {
                                                     }
                                                     <label className="label-header">Posted
                                                         on {moment(item.createdAt).format("MMM Do YY")}</label>
-                                                    <p className="content">Ask Gauge has identified you as a
+                                                    <p className="content1">Ask Gauge has identified you as a
                                                         match for this request and <strong
                                                             className="user-name">{item.user.firstName}</strong> is
                                                         looking to {
@@ -263,7 +263,7 @@ function PropertyTypes({type}) {
         type = 'Town House'
     if (type == 3)
         type = 'Condo'
-    return <label className="label-header content">{type}</label>
+    return <label className="label-header content1">{type}</label>
 
 }
 
@@ -307,9 +307,9 @@ function RequestStatus({status, role}) {
         statusClass = 'completed'
     }
     if (role === 0)
-        return <label className={`label-header content ${statusClass}`}>{status}</label>
+        return <label className={`label-header content1 ${statusClass}`}>{status}</label>
     else
-        return <p className={`label-header content ${statusClass}`} style={{fontWeight: 'bold'}}>{status}</p>
+        return <p className={`label-header content1 ${statusClass}`} style={{fontWeight: 'bold'}}>{status}</p>
 
 }
 

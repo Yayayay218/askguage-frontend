@@ -62,11 +62,6 @@ class RequestDetails extends Component {
             },
             {
                 render: () => (
-                    <div></div>
-                )
-            },
-            {
-                render: () => (
                     <ExpertsContainer
                         bids={bids}
                         bidFetched={this.props.bidFetched}

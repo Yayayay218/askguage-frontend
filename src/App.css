@@ -796,7 +796,7 @@ footer .footer-bottom .copyright {
   text-align: left;
   color: #adb9ca;
 }
-.request-item .content {
+.request-item .content1 {
   font-size: 0.9375rem;
   font-weight: 300;
   text-align: left;
@@ -843,7 +843,7 @@ footer .footer-bottom .copyright {
   color: #ffffff;
   margin-bottom: 15px;
 }
-.request-item .content {
+.request-item .content1 {
   font-size: 0.9375rem;
   font-weight: 300;
   text-align: left;
@@ -1152,7 +1152,7 @@ a:hover {
   margin-top: 25px;
 }
 .create-request-form .terms-conditions p a {
-  color: #374355;
+  color: #007bff;
   font-weight: bold;
 }
 .create-request-form .label-mini label {
@@ -1850,12 +1850,12 @@ a:hover {
     margin-top: 30px !important;
   }
   .content .right-wrapper {
-    margin-top: 40px !important;
+    margin-top: 40px!important;
   }
 }
 @media (min-width: 768px) {
   .content .right-wrapper {
-    margin-top: 40px !important;
+    margin-top: 40px!important;
   }
 }
 @media (max-width: 425px) {
@@ -1874,6 +1874,9 @@ a:hover {
     font-size: 0.77rem !important;
   }
 }
+.page-wrapper {
+  min-height: 66vh;
+}
 @media (max-width: 1024px) {
   .page-wrapper {
     padding-bottom: 30px;
@@ -1881,4 +1884,7 @@ a:hover {
 }
 .no-margin {
   margin-left: 0 !important;
+}
+.no-height {
+  height: auto !important;
 }

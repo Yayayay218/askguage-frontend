@@ -42,7 +42,7 @@ export default class AdvanceInfo extends Component {
                                         />
                                         <span className="custom-control-indicator"></span>
                                         <span className="custom-control-description custom-label"
-                                              style={{marginTop: '3px'}}>Spanish</span>
+                                              style={{marginTop: '3px'}}>French</span>
                                     </label>
                                     <label className="col-md-4 custom-control custom-checkbox">
                                         <input type="checkbox" className="custom-control-input"
@@ -54,7 +54,7 @@ export default class AdvanceInfo extends Component {
                                         />
                                         <span className="custom-control-indicator"></span>
                                         <span className="custom-control-description custom-label"
-                                              style={{marginTop: '3px'}}>French</span>
+                                              style={{marginTop: '3px'}}>Others</span>
                                     </label>
                                 </div>
 

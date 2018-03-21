@@ -108,7 +108,7 @@ function EstateView({item}) {
 
                 <div className="row">
                     <div className="col-md-3 col-6">
-                        <p className="title">Price:</p>
+                        <p className="title">Avg Price:</p>
                     </div>
                     <div className="col-md-9 col-6">
                         {
