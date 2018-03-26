@@ -1915,3 +1915,35 @@ a:hover {
     margin-left: -15px;
   }
 }
+.Select-arrow {
+  display: none;
+}
+.Select-control {
+  font-size: 0.9375rem;
+  font-weight: 300;
+  color: #54657e;
+  background: #fff url(Assets/images/icons/arrow-down.svg) no-repeat right 1rem center;
+  background-size: 14px 6px;
+  cursor: default;
+  display: table;
+  border-spacing: 0;
+  border-collapse: separate;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+.Select-control:disabled {
+  color: #868e96;
+  background-color: #e9ecef;
+}
+.Select-control:focus {
+  box-shadow: none;
+  border: solid 1px #54657e;
+}
+@media (min-width: 768px) {
+  .Select-control {
+    width: 310px;
+    height: 45px;
+  }
+}

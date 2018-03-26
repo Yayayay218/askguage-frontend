@@ -76,6 +76,7 @@ class Profiles extends Component {
                     licence: '',
                     areMobile: '',
                     provideService: '',
+                    arrLenders: [{}]
                 },
             },
             file: [],

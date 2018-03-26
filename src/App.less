@@ -1329,10 +1329,12 @@ a:hover {
         }
       }
     }
+
     .top-wrapper {
       margin-left: 16px;
       margin-right: 16px;
     }
+
     padding-left: 0;
     .menu-wrapper {
       .menu-item {
@@ -2246,7 +2248,7 @@ a:hover {
   margin-left: 0;
   top: 7px;
 
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     right: 0;
     top: 9px
   }
@@ -2259,7 +2261,43 @@ a:hover {
 
 .txt-notice {
   margin-bottom: 20px;
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     margin-left: -15px;
+  }
+}
+
+.Select-arrow {
+  display: none;
+}
+
+//.Select-clear {
+//  display: none;
+//}
+
+.Select-control {
+  font-size: 0.9375rem;
+  font-weight: 300;
+  color: @gray-light;
+  background: #fff url(Assets/images/icons/arrow-down.svg) no-repeat right 1rem center;
+  background-size: 14px 6px;
+  cursor: default;
+  display: table;
+  border-spacing: 0;
+  border-collapse: separate;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  &:disabled {
+    color: #868e96;
+    background-color: #e9ecef;
+  }
+  &:focus {
+    box-shadow: none;
+    border: solid 1px #54657e;
+  }
+  @media (min-width: 768px) {
+    width: 310px;
+    height: 45px;
   }
 }
