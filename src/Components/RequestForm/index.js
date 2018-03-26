@@ -46,7 +46,7 @@ class CreateRequest extends Component {
                 monthlyLiability: '',
                 downPayment: '',
                 netAsset: '',
-                birthDay: moment.utc("1993"),
+                birthDay: moment("1993"),
                 occupationType: '',
                 citizenType: '',
                 homeValue: '',

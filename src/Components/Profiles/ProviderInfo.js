@@ -24,7 +24,7 @@ export default class ProviderInfo extends Component {
                                 >
                                     <option value="-1"></option>
                                     <option value="1">Mortgage Agent</option>
-                                    <option value="4">Mobile Mortgage Advisor</option>
+                                    <option value="4">Mortgage Advisor</option>
                                     <option value="0">Real Estate Agent</option>
                                     <option value="3">Real Estate Lawyer</option>
                                     <option value="2">Home Inspector</option>
@@ -198,7 +198,8 @@ export default class ProviderInfo extends Component {
                     }
                     {
                         user.profiles.kindOfService == 4
-                        && <div className="col-md-6 col-12">
+                        &&
+                        <div className="col-md-6 col-12">
                             <div className="row">
                                 <div className="col-md-4 ">
                                     <label className="col-form-label">Which Bank do you work for?</label>
@@ -217,7 +218,6 @@ export default class ProviderInfo extends Component {
                                 </div>
                             </div>
                         </div>
-
                     }
                 </div>
 

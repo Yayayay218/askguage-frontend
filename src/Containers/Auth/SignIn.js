@@ -61,7 +61,11 @@ class SignIn extends Component {
 
     doLogin() {
         const {state} = this
-        this.props.dispatch(Actions.login(state));
+        let data = {
+            email: state.email.toLowerCase(),
+            password: state.password
+        }
+        this.props.dispatch(Actions.login(data));
     }
 
     render() {
@@ -147,6 +151,8 @@ class SignIn extends Component {
                                 <div className="col-md-12 col-12">
                                     <FacebookLogin
                                         appId="336894240165471"
+                                        isMobile={true}
+                                        disableMobileRedirect={true}
                                         autoLoad={false}
                                         fields="name,email,picture"
                                         cssClass="social-box facebook"

@@ -16,7 +16,7 @@ class ExpertsContainer extends Component {
     }
 
     render() {
-        const {bids, bidFetched, isBid} = this.props
+        const {bids, bidFetched, isBid, request} = this.props
         let tmp = bids
         switch (this.state.providerType) {
             case '':
@@ -63,6 +63,7 @@ class ExpertsContainer extends Component {
                                 item={item}
                                 key={item.id}
                                 isBid={isBid}
+                                request={request}
                             />
                         )
                     )

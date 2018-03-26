@@ -289,7 +289,7 @@ function StatusDetails({status}) {
 function RequestStatus({status, role}) {
     let statusClass = 'open'
     if (status == 0)
-        status = 'Open to received quotes'
+        status = 'Open to receive quotes'
     if (status == 1) {
         status = 'Quotes received enough from Mortgage Agents'
         statusClass = 'enoughMortgage'

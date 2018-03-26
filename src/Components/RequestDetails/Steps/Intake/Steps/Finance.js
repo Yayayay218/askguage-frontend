@@ -34,17 +34,21 @@ const Info = ({request}) => {
                 </div>
             }
 
-            <IntakeDetails
-                question="Do you know if you are qualified for the amount above?"
-                answer={BooleanType(request.areQualified)}
-            />
 
             {
-                request.isEstate && <IntakeDetails
-                    question="Down Payment"
-                    answer={request.downPayment}
-                    isCurrency={true}
-                />
+                request.isEstate &&
+                <div>
+                    <IntakeDetails
+                        question="Do you know if you are qualified for the amount above?"
+                        answer={BooleanType(request.areQualified)}
+                    />
+                    <IntakeDetails
+                        question="Down Payment"
+                        answer={request.downPayment}
+                        isCurrency={true}
+                    />
+                </div>
+
             }
             {
                 !request.isEstate &&
@@ -73,22 +77,22 @@ const Info = ({request}) => {
             />
             {
                 !request.isEstate &&
-                    <div>
+                <div>
+                    <IntakeDetails
+                        question="Current Mortgage Amount "
+                        answer={request.mortgageAmount}
+                        isCurrency={true}
+                    />
+
+                    {
+                        request.needMore !== '' &&
                         <IntakeDetails
-                            question="Current Mortgage Amount "
-                            answer={request.mortgageAmount}
+                            question="Additional Amount"
+                            answer={request.needMore}
                             isCurrency={true}
                         />
-
-                        {
-                            request.needMore !== '' &&
-                            <IntakeDetails
-                                question="Additional Amount"
-                                answer={request.needMore}
-                                isCurrency={true}
-                            />
-                        }
-                    </div>
+                    }
+                </div>
             }
         </div>
     )

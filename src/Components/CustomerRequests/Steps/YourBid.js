@@ -61,10 +61,10 @@ class YourBid extends Component {
     render() {
         const {user, _bid, onChange, request} = this.props
         const {state} = this.props.history.location
-        // const bind = (field) => ({
-        //     value: _bid[field],
-        //     onChange: (e) => onChange({..._bid, [field]: e.target.value})
-        // })
+        const bind = (field) => ({
+            value: _bid[field],
+            onChange: (e) => onChange({..._bid, [field]: e.target.value})
+        })
         return (
             <div className="bid-form">
                 <div className="row">
@@ -84,20 +84,22 @@ class YourBid extends Component {
                             <div className="col-md-9">
                                 {
                                     (user.profiles.kindOfService == 0 || user.profiles.kindOfService == 2 || user.profiles.kindOfService == 3) ?
-                                        <NumberFormat
-                                            thousandSeparator={true}
-                                            suffix={'%'}
-                                            value={_bid.commissionFee}
-                                            className="form-control"
-                                            onValueChange={(values) => {
-                                                onChange({..._bid, commissionFee: values.value})
-                                            }}
-                                            disabled={_bid.disabled}
-                                        />
-                                        :   <NumberFormat
+                                        <div>
+                                            <NumberFormat
+                                                thousandSeparator={true}
+                                                suffix={'%'}
+                                                value={_bid.commissionFee}
+                                                className="form-control"
+                                                onValueChange={(values) => {
+                                                    onChange({..._bid, commissionFee: values.value})
+                                                }}
+                                                disabled={_bid.disabled}
+                                            />
+                                        </div>
+                                        : <NumberFormat
                                             thousandSeparator={true}
                                             prefix={'$'}
-                                            value={_bid.mortgageAmount!=='' ? _bid.mortgageAmount : request.mortgageAmount + request.needMore}
+                                            value={_bid.mortgageAmount !== '' ? _bid.mortgageAmount : request.mortgageAmount + request.needMore}
                                             className="form-control"
                                             onValueChange={(values) => {
                                                 onChange({..._bid, mortgageAmount: values.value})
@@ -110,6 +112,7 @@ class YourBid extends Component {
                         </div>
                     </div>
                 </div>
+
                 {
                     _bid.options.map((item, index) => {
                         return (
@@ -150,6 +153,24 @@ function RenderOption({item, index, bid, bindOption, serviceType, _this}) {
         return (
             <div>
                 <h3 style={{marginLeft: '-2px'}}>Option {index + 1}</h3>
+
+                <div className="form-group row">
+                    <div className="col-12">
+                        <div className="row">
+                            <div className="col-md-3 m-auto">
+                                <label htmlFor="" className="col-form-label">Neighbourhood</label>
+                            </div>
+                            <div className="col-md-9">
+                                <input type="text" className="form-control"
+                                       onChange={bindOption(index, 'neighbourhood')}
+                                       value={bid.options[index].neighbourhood}
+                                       disabled={bid.disabled}
+
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div className="form-group row">
                     <div className="col-12">

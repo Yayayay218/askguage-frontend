@@ -9,7 +9,7 @@ class ContactInfos extends Component {
             <div>
                <div className="row">
                    <div className="col-12">
-                       <h4 style={{marginLeft: '-15px', marginBottom: '20px'}}>
+                       <h4 className="txt-notice">
                            The contact info will be visible when customer request for call back.
                        </h4>
                    </div>

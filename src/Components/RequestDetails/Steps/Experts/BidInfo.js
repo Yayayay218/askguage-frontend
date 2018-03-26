@@ -1,11 +1,24 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import NumberFormat from 'react-number-format';
-import Icon from '../../../../Assets/images/tmp-icon.png'
+import Icon from '../../../../Assets/images/avatar.svg'
 import Config from '../../../../Configs/AppSetting'
 import Rating from 'react-rating'
 import StarEmpty from '../../../../Assets/images/icons/star-empty.svg'
 import StarFull from '../../../../Assets/images/icons/star-full.svg'
+
+function Input(props) {
+    return (
+        <div className="row">
+            <div className="col-md-3 col-6">
+                <p className="title">{props.label}</p>
+            </div>
+            <div className="col-md-9 col-6">
+                {props.children}
+            </div>
+        </div>
+    )
+}
 
 function MortgageView({item}) {
     return (
@@ -71,60 +84,59 @@ function EstateView({item}) {
                 square feet and average home price for you to consider based on your preference and situation
             </p>
             <div className="options">
-                <div className="row">
-                    <div className="col-md-3 col-6">
-                        <p className="title">Commission Fee:</p>
-                    </div>
-                    <div className="col-md-9 col-6">
-                        <p className="description">{item.commissionFee}%</p>
-                    </div>
-                </div>
+                <Input
+                    label="Commission Fee:"
+                >
+                    <p className="description">{item.commissionFee}%</p>
+                </Input>
 
-                <div className="row">
-                    <div className="col-md-3 col-6">
-                        <p className="title">Property Type:</p>
-                    </div>
-                    <div className="col-md-9 col-6">
-                        {
-                            item.options.map((opt, i) => (
-                                <p className="description" key={i}><CheckPropertyType item={opt.propertyType}/></p>
-                            ))
-                        }
-                    </div>
-                </div>
+                <Input
+                    label="Property Type:"
+                >
+                    {
+                        item.options.map((opt, i) => (
+                            <p className="description" key={i}><CheckPropertyType item={opt.propertyType}/></p>
+                        ))
+                    }
+                </Input>
 
-                <div className="row">
-                    <div className="col-md-3 col-6">
-                        <p className="title">Square Ft:</p>
-                    </div>
-                    <div className="col-md-9 col-6">
-                        {
-                            item.options.map((opt, i) => (
-                                <p className="description" key={i}>{opt.squareFT}</p>
-                            ))
-                        }
-                    </div>
-                </div>
+                <Input
+                    label="Neighbourhood:"
+                >
+                    {
+                        item.options.map((opt, i) => (
+                            <p className="description" key={i}><CheckPropertyType item={opt.neighbourhood}/></p>
+                        ))
+                    }
+                </Input>
 
-                <div className="row">
-                    <div className="col-md-3 col-6">
-                        <p className="title">Avg Price:</p>
-                    </div>
-                    <div className="col-md-9 col-6">
-                        {
-                            item.options.map((opt, i) => (
-                                <p className="description" key={i}>
-                                    <NumberFormat
-                                        displayType={'text'}
-                                        thousandSeparator={true}
-                                        prefix={'$'}
-                                        value={opt.price}
-                                    />
-                                </p>
-                            ))
-                        }
-                    </div>
-                </div>
+                <Input
+                    label="Square Ft:"
+                >
+                    {
+                        item.options.map((opt, i) => (
+                            <p className="description" key={i}>{opt.squareFT}</p>
+                        ))
+                    }
+                </Input>
+
+                <Input
+                    label="Avg Price:"
+                >
+                    {
+                        item.options.map((opt, i) => (
+                            <p className="description" key={i}>
+                                <NumberFormat
+                                    displayType={'text'}
+                                    thousandSeparator={true}
+                                    prefix={'$'}
+                                    value={opt.price}
+                                />
+                            </p>
+                        ))
+                    }
+                </Input>
+
             </div>
         </div>
     )
@@ -182,13 +194,14 @@ class BidInfo extends Component {
     }
 
     doBid(item, myBid, isBid) {
+        isBid({isBid: true})
         let data = {
             ...myBid,
             status: 2
         }
         axios.patch(Config.URL + `/bids/${item.id}`, data)
             .then((res) => {
-                isBid({isBid: true})
+                isBid({isBid: false})
             })
     }
 
@@ -199,15 +212,20 @@ class BidInfo extends Component {
             })
     }
 
-    doComplete(item, isBid) {
+    doComplete(item, isBid, request) {
+        isBid({isBid: true})
         axios.patch(Config.URL + `/bids/${item.id}`, {status: 3})
             .then((res) => {
-                isBid({isBid: true})
+                axios.patch(Config.URL + `/customerRequests/${request.id}`, {status: 4})
+                    .then((res) => {
+                        isBid({isBid: false})
+                    })
             })
     }
 
     render() {
-        const {item, isBid} = this.props
+        console.log(this)
+        const {item, isBid, request} = this.props
         const {myBid} = this.state
         const bind = (field) => ({
             onChange: (e) => this.setState({
@@ -227,9 +245,10 @@ class BidInfo extends Component {
                     !this.props.bidFetched && <div className="loading">Loading&#8230;</div>
                 }
                 <div className="col-md-2">
-                    <img src={item.provider.avatarUrl ? Config.URL + `/containers/images/download/${item.provider.avatarUrl}`: Icon}
-                         alt=""
-                         className="provider-avatar"
+                    <img
+                        src={item.provider.avatarUrl ? Config.URL + `/containers/images/download/${item.provider.avatarUrl}` : Icon}
+                        alt=""
+                        className="provider-avatar"
                     />
                 </div>
                 <div className="col-md-7">
@@ -260,7 +279,8 @@ class BidInfo extends Component {
                         </div>
                     </div>
                     {
-                        (item.provider.profiles.kindOfService == 0 || item.provider.profiles.kindOfService == 2 || item.provider.profiles.kindOfService == 3) ? <EstateView item={item}/>
+                        (item.provider.profiles.kindOfService == 0 || item.provider.profiles.kindOfService == 2 || item.provider.profiles.kindOfService == 3) ?
+                            <EstateView item={item}/>
                             : <MortgageView
                                 item={item}
                             />
@@ -321,7 +341,7 @@ class BidInfo extends Component {
                                 <div className="row">
                                     <div className="col-12">
                                         <button className="btn btn-reject"
-                                                onClick={this.doComplete.bind(this, item, isBid)}
+                                                onClick={this.doComplete.bind(this, item, isBid, request)}
                                         >
                                             Mark as complete
                                         </button>

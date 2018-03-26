@@ -1,6 +1,30 @@
 import React, {Component} from 'react'
 import Layout from '../../../Containers/App'
 
+function RequestStatus({status}) {
+    let statusClass = 'open'
+    if (status == 0)
+        status = 'Open to receive quotes'
+    if (status == 1) {
+        status = 'Quotes received enough from Mortgage Agents'
+        statusClass = 'enoughMortgage'
+    }
+    if (status == 2) {
+        status = 'Quotes received enough from Real Estate Agents'
+        statusClass = 'enoughEstate'
+    }
+    if (status == 3) {
+        status = 'Quotes received enough'
+        statusClass = 'enough'
+    }
+    if (status == 4) {
+        status = 'The request was closed'
+        statusClass = 'completed'
+    }
+    return <strong className={`label-header content1 ${statusClass}`}>{status}</strong>
+
+}
+
 class FlipWizard extends Component {
     constructor(props, context) {
         super(props, context);
@@ -15,7 +39,7 @@ class FlipWizard extends Component {
         const {currentStepIndex} = this.state;
         let currentStep = steps[currentStepIndex];
 
-        if(!isFetched) return null
+        if (!isFetched) return null
         return (
             <Layout isLanding={false}>
                 <div className="request-details">
@@ -26,8 +50,9 @@ class FlipWizard extends Component {
                             <RenderStatus
                                 status={request.isEstate ? 0 : request.mortgageType === 0 ? 1 : 2}
                             />
-                            <label className="status">Status: <strong>Open to receive bids</strong></label>
-                            <button className="btn btn-cancel">Cancel This Request</button>
+                            <label className="status">Status: <RequestStatus status={request.status}/>
+                            </label>
+                            {/*<button className="btn btn-cancel">Cancel This Request</button>*/}
                         </div>
                         <div className="container menu-wrapper">
                             <div className="row">
@@ -40,11 +65,11 @@ class FlipWizard extends Component {
                                                 Intake</label>
                                         </div>
                                         {/*<div className="menu-item">*/}
-                                            {/*<label className={this.state.currentStepIndex === 1 ? 'active' : ''}*/}
-                                                   {/*onClick={() => this.setState({currentStepIndex: 1})}*/}
+                                        {/*<label className={this.state.currentStepIndex === 1 ? 'active' : ''}*/}
+                                        {/*onClick={() => this.setState({currentStepIndex: 1})}*/}
 
-                                            {/*>*/}
-                                                {/*Insights</label>*/}
+                                        {/*>*/}
+                                        {/*Insights</label>*/}
                                         {/*</div>*/}
                                         <div className="menu-item">
                                             <label className={this.state.currentStepIndex === 1 ? 'active' : ''}

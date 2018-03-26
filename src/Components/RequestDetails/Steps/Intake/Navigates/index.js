@@ -48,7 +48,7 @@ class FlipWizard extends Component {
                     </div>
                 </div>
                 <div className="col-md-8 col-12">
-                    <div style={{marginLeft: '-5px'}}>
+                    <div className="intake-content">
                         {currentStep.render()}
                     </div>
                 </div>

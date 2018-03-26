@@ -63,6 +63,55 @@ class FlipWizard extends Component {
                             </div>
                         </div>
                     </div>
+                    <div className="d-block d-md-none">
+                        <div className="navigate mobile">
+                            <div className="d-flex flex-row">
+                                <div
+                                    className={currentStepIndex === 0 ? 'navigate-item active' : 'navigate-item'}
+                                    onClick={() => this.setState({currentStepIndex: 0})}
+                                >Profile
+                                </div>
+                                <div
+                                    className={currentStepIndex === 1 ? 'navigate-item active' : 'navigate-item'}
+                                    onClick={() => this.setState({currentStepIndex: 1})}
+                                >{request.isEstate ? 'Preference' : 'Property Details'}
+                                </div>
+
+                                {
+                                    user.profiles.kindOfService &&
+                                    <div
+                                        className={currentStepIndex === 2 ? 'navigate-item active' : 'navigate-item'}
+                                        onClick={() => this.setState({currentStepIndex: 2})}
+                                    >Info
+                                    </div>
+                                }
+
+                                {
+                                    user.profiles.kindOfService &&
+                                    <div
+                                        className={currentStepIndex === 3 ? 'navigate-item active' : 'navigate-item'}
+                                        onClick={() => this.setState({currentStepIndex: 3})}
+                                    >Finance
+                                    </div>
+                                }
+
+                                <div
+                                    className={currentStepIndex === 4 ? 'navigate-item active' : 'navigate-item'}
+                                    onClick={() => this.setState({currentStepIndex: 4})}
+                                    style={{whiteSpace: 'nowrap'}}
+                                >Provide a Quote
+                                </div>
+                                {
+                                    history.location.state.isCallback &&
+                                    <div
+                                        className={currentStepIndex === 5 ? 'navigate-item active' : 'navigate-item'}
+                                        onClick={() => this.setState({currentStepIndex: 5})}
+                                    >Callback
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div className="col-md-8 col-12">
                     <div>

@@ -26,12 +26,14 @@ class CustomerRequest extends Component {
                     interestRate: '',
                     amortization: ''
                 }] : [{
+                    neighbourhood: '',
                     area: '',
                     propertyType: '',
                     squareFT: '',
                     price: ''
                 }],
                 commissionFee: _bid.bidCommission || 2.5,
+                neighbourhood: _bid.bidNeighbourhood || '',
                 comment: ''
             },
             error: false
@@ -104,7 +106,7 @@ class CustomerRequest extends Component {
                 )
             }
         ]
-        if(!requestFetched) return <div></div>
+        if (!requestFetched) return <div></div>
         return (
             <Layout isLanding={false}>
                 <div className="request-details">

@@ -60,12 +60,12 @@ body {
 }
 @media (min-width: 768px) {
   .content {
-    height: 100vh!important;
+    height: 100vh !important;
     padding-bottom: 30px;
   }
 }
 .content {
-  background: url(Assets/images/landing/landing.jpg) no-repeat;
+  background: url(Assets/images/landing/app_baground.jpg) no-repeat;
   background-position: center center;
   background-size: cover;
   height: 100%;
@@ -76,7 +76,7 @@ body {
 .content .left-wrapper .txt-1 {
   opacity: 0.7;
   font-size: 0.75rem;
-  font-weight: 500;
+  font-weight: normal;
   font-style: normal;
   font-stretch: normal;
   line-height: 1;
@@ -87,16 +87,16 @@ body {
 }
 .content .left-wrapper .txt-2 {
   font-size: 3.25rem;
-  font-weight: 300;
+  font-weight: bold;
   font-style: normal;
   font-stretch: normal;
   line-height: 58px;
   letter-spacing: -2px;
   text-align: left;
   color: #ffffff;
+  margin-bottom: 0;
 }
 .content .left-wrapper .txt-3 {
-  opacity: 0.8;
   font-size: 1.375rem;
   font-weight: 300;
   font-style: normal;
@@ -235,9 +235,6 @@ body {
   }
   .content .left-wrapper .txt-1 {
     margin-bottom: 17px;
-  }
-  .content .left-wrapper .txt-2 {
-    margin-bottom: 18px;
   }
   .content .left-wrapper .txt-3 {
     margin-bottom: 38px;
@@ -960,10 +957,6 @@ a:hover {
 .request-details {
   margin-top: -8px;
 }
-.request-details .top-wrapper {
-  margin-left: 16px;
-  margin-right: 16px;
-}
 .request-details .top-wrapper .label-header {
   font-size: 0.875rem;
   text-align: left;
@@ -983,7 +976,6 @@ a:hover {
   margin-top: -4px;
 }
 .request-details .top-wrapper .status {
-  margin-right: 29px;
   font-size: 0.875rem;
   text-align: left;
   color: #8493a8;
@@ -1015,6 +1007,9 @@ a:hover {
   text-align: center;
   color: #54657e;
   margin-top: -7px;
+}
+.request-details .menu-wrapper {
+  padding-left: 0;
 }
 .request-details .menu-wrapper .menu-item {
   position: relative;
@@ -1061,8 +1056,7 @@ a:hover {
   background-color: rgba(132, 147, 168, 0.05);
 }
 .request-details .navigate .navigate-item {
-  height: 36px;
-  margin-left: 30px;
+  margin-right: 15px;
   font-size: 1.125rem;
   font-weight: 300;
   line-height: 2;
@@ -1071,12 +1065,13 @@ a:hover {
   margin-bottom: 15px;
   cursor: pointer;
 }
-.request-details .navigate .navigate-item:first-child {
-  margin-top: 30px;
-}
 .request-details .navigate .active {
   font-weight: bold;
   color: #54657e;
+}
+.request-details .mobile {
+  background-color: transparent;
+  overflow: auto;
 }
 .request-details .menu-line {
   width: 100%;
@@ -1096,6 +1091,17 @@ a:hover {
 @media (min-width: 768px) {
   .request-details {
     padding-left: 0;
+  }
+  .request-details .navigate .navigate-item {
+    margin-left: 30px;
+    height: 36px;
+  }
+  .request-details .navigate .navigate-item:first-child {
+    margin-top: 30px;
+  }
+  .request-details .top-wrapper {
+    margin-left: 16px;
+    margin-right: 16px;
   }
   .request-details .menu-wrapper .menu-item {
     margin-right: 43px;
@@ -1850,12 +1856,12 @@ a:hover {
     margin-top: 30px !important;
   }
   .content .right-wrapper {
-    margin-top: 40px!important;
+    margin-top: 40px !important;
   }
 }
 @media (min-width: 768px) {
   .content .right-wrapper {
-    margin-top: 40px!important;
+    margin-top: 40px !important;
   }
 }
 @media (max-width: 425px) {
@@ -1887,4 +1893,25 @@ a:hover {
 }
 .no-height {
   height: auto !important;
+}
+.opt-in {
+  margin-right: 9px;
+}
+.opt-in-mark {
+  margin-left: 0;
+  top: 7px;
+}
+@media (min-width: 768px) {
+  .opt-in-mark {
+    right: 0;
+    top: 9px;
+  }
+}
+.txt-notice {
+  margin-bottom: 20px;
+}
+@media (min-width: 768px) {
+  .txt-notice {
+    margin-left: -15px;
+  }
 }

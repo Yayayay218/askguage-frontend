@@ -19,12 +19,12 @@ class Profiles extends Component {
                 lastName: props.user.lastName || '',
                 profiles: {
                     languages: [0],
-                    optIn: '',
+                    optIn: 1,
                     jobTitle: '',
                     employer: '',
                     lengthOfEmployment: '',
                     industry: '',
-                    dob: moment("1993"),
+                    dob: '',
                     sex: '',
                     civilStatus: '',
                     citizenship: '',
@@ -36,15 +36,15 @@ class Profiles extends Component {
                 },
             } : {
                 ...props.user,
-                lastName: '',
+                lastName: props.user.lastName || '',
                 profiles: {
                     languages: [0],
-                    optIn: '',
+                    optIn: 1,
                     jobTitle: '',
                     employer: '',
                     lengthOfEmployment: '',
                     industry: '',
-                    dob: moment("1993"),
+                    dob: '',
                     sex: '',
                     civilStatus: '',
                     citizenship: '',
@@ -103,6 +103,8 @@ class Profiles extends Component {
         this.doSave = this.doSave.bind(this)
         this.onChangeImage = this.onChangeImage.bind(this)
         this.checkBasicInfoValid = this.checkBasicInfoValid.bind(this)
+        this.checkAdvanceInfoValid = this.checkAdvanceInfoValid.bind(this)
+
         if (!props.token)
             props.history.push('/')
     }
@@ -266,8 +268,11 @@ class Profiles extends Component {
     }
 
     render() {
-        console.log(this.state)
-        const {user, isPosting, basicInfoValid} = this.state
+        const {user, isPosting, basicInfoValid, advanceInfoValid} = this.state
+        // console.log('-------------', this)
+
+        const {lastName, firstName, phoneNumber} = this.state.user
+        const {userAddress, lengthOfEmployment} = this.state.user.profiles
         let onChangeLanguage = (e) => {
             if (user.profiles.languages.indexOf(e.target.value) === -1) {
                 let newLanguages = user.profiles.languages.concat([e.target.value])
@@ -286,7 +291,6 @@ class Profiles extends Component {
                 this.setState({user})
             }
         }
-        // console.log(this)
         return (
             <Layout islanding={false}>
                 <div className="container user-profile">
@@ -329,6 +333,7 @@ class Profiles extends Component {
                             user={user}
                             onChange={(user) => this.setState({user})}
                             onChangeLanguage={onChangeLanguage}
+                            formFields={advanceInfoValid}
                         />
                         <div className="profile-line"></div>
 

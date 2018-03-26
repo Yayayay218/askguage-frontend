@@ -28,9 +28,10 @@ class RequestDetails extends Component {
     }
 
     componentWillReceiveProps(newProps) {
-        const {history} = this.props
-
+        const {history, user} = this.props
         if (!newProps.token)
+            history.push('/')
+        if(newProps.detailFetched && user.id !== newProps.request.user.id)
             history.push('/')
     }
 
@@ -43,7 +44,7 @@ class RequestDetails extends Component {
     componentWillUpdate(nextProps, nextState) {
         const {params} = this.props.match
         let query = `filter[where][requestId]=${params.id}&filter[include]=provider&filter[include]=request`
-        if (nextState.isBid && !this.state.isBid) {
+        if (nextState.isBid !== this.state.isBid) {
             this.props.dispatch(Actions.getBidRequest(query))
         }
     }
@@ -66,6 +67,7 @@ class RequestDetails extends Component {
                         bids={bids}
                         bidFetched={this.props.bidFetched}
                         isBid={(isBid) => this.setState({isBid})}
+                        request={request}
                     />
                 )
             },

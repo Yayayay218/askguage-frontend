@@ -14,8 +14,8 @@ export default (onComplete) => {
 
     const sagaMiddleware = createSagaMiddleware();
     middleware.push(sagaMiddleware);
-    const logger = createLogger();
-    middleware.push(logger);
+    // const logger = createLogger();
+    // middleware.push(logger);
 
     /* ------------- Assemble Middleware ------------- */
     enhancers.push(applyMiddleware(...middleware))

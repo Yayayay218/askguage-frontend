@@ -7,6 +7,8 @@ import Config from '../../../../Configs/AppSetting'
 import Rating from 'react-rating'
 import StarEmpty from '../../../../Assets/images/icons/star-empty.svg'
 import StarFull from '../../../../Assets/images/icons/star-full.svg'
+import Icon from '../../../../Assets/images/avatar.svg'
+
 import Actions from "../../../../Actions/Creators";
 
 function MortgageView({item}) {
@@ -175,7 +177,7 @@ class ReviewInfo extends Component {
             modalIsOpen: false,
             review: {
                 comment: '',
-                rating: 1,
+                rating: 5,
                 reviewerId: props.user.id
             }
         }
@@ -205,7 +207,6 @@ class ReviewInfo extends Component {
     }
 
     render() {
-        console.log(this)
         const {item, isBid} = this.props
         return (
             <div className="row">
@@ -213,9 +214,10 @@ class ReviewInfo extends Component {
                     !this.props.bidFetched && <div className="loading">Loading&#8230;</div>
                 }
                 <div className="col-md-2">
-                    <img src={Config.URL + `/containers/images/download/${item.provider.avatarUrl}`}
-                         alt=""
-                         className="provider-avatar"
+                    <img
+                        src={item.provider.avatarUrl ? Config.URL + `/containers/images/download/${item.provider.avatarUrl}` : Icon}
+                        alt=""
+                        className="provider-avatar"
                     />
                 </div>
                 <div className="col-md-7">
@@ -297,7 +299,7 @@ class ReviewInfo extends Component {
                             <div className="row">
                                 <label htmlFor="" className="col-12">Rate for this service provider</label>
                                 <div className="x-icon"
-                                    onClick={this.closeModal}
+                                     onClick={this.closeModal}
                                 ></div>
                             </div>
                             <div className="row">
@@ -308,7 +310,7 @@ class ReviewInfo extends Component {
                                     />
                                 </div>
                             </div>
-                            <div className="row" >
+                            <div className="row">
                                 <div className="col-12">
                                     <Rating
                                         fullSymbol={<img src={StarFull} alt=""/>}
@@ -330,12 +332,12 @@ class ReviewInfo extends Component {
                                     <div className="form-group">
                                         <label style={{fontSize: '0.9375rem'}}>Write your review</label>
                                         <textarea className="form-control" rows="3"
-                                            onChange={(e) => this.setState({
-                                                review: {
-                                                    ...this.state.review,
-                                                    comment: e.target.value
-                                                }
-                                            })}
+                                                  onChange={(e) => this.setState({
+                                                      review: {
+                                                          ...this.state.review,
+                                                          comment: e.target.value
+                                                      }
+                                                  })}
                                         ></textarea>
                                     </div>
                                 </div>
@@ -343,11 +345,13 @@ class ReviewInfo extends Component {
                             <div className="row" style={{marginTop: '15px'}}>
                                 <div className="col-12">
                                     <button className="btn btn-reject"
-                                        onClick={this.closeModal}
-                                    >Cancel</button>
+                                            onClick={this.closeModal}
+                                    >Cancel
+                                    </button>
                                     <button className="btn btn-submit"
-                                        onClick={this.doSubmit.bind(this, item, this.state.review, isBid)}
-                                    >Submit</button>
+                                            onClick={this.doSubmit.bind(this, item, this.state.review, isBid)}
+                                    >Submit
+                                    </button>
                                 </div>
                             </div>
                         </div>

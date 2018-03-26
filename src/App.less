@@ -66,6 +66,7 @@ body {
   position: relative;
   //font-size: 18px
 }
+
 // #root{
 //   height: 100vh;
 // }
@@ -77,15 +78,17 @@ body {
   }
 
 }
-@media screen and (min-width:768px) and (max-width:900px){
-  .content .right-wrapper .service-box label{
+
+@media screen and (min-width: 768px) and (max-width: 900px) {
+  .content .right-wrapper .service-box label {
     font-size: 0.6rem !important;
   }
 }
-@media (min-width:768px) {
 
-  .content{
-    height: 100vh!important;
+@media (min-width: 768px) {
+
+  .content {
+    height: 100vh !important;
     padding-bottom: 30px;
   }
 }
@@ -95,11 +98,11 @@ body {
 // }
 
 .content {
-  background: url(Assets/images/landing/landing.jpg) no-repeat;
+  background: url(Assets/images/landing/app_baground.jpg) no-repeat;
   background-position: center center;
   background-size: cover;
   // height:100vh;
-  height:100%;
+  height: 100%;
   .left-wrapper {
     //&:after {
     //  display: block;
@@ -115,7 +118,7 @@ body {
     .txt-1 {
       opacity: 0.7;
       font-size: @font-12;
-      font-weight: 500;
+      font-weight: normal;
       font-style: normal;
       font-stretch: normal;
       line-height: 1;
@@ -127,17 +130,19 @@ body {
 
     .txt-2 {
       font-size: @font-52;
-      font-weight: 300;
+      font-weight: bold;
       font-style: normal;
       font-stretch: normal;
       line-height: 58px;
       letter-spacing: -2px;
       text-align: left;
       color: #ffffff;
+      margin-bottom: 0;
+
     }
 
     .txt-3 {
-      opacity: 0.8;
+      //opacity: 0.8;
       font-size: @font-22;
       font-weight: 300;
       font-style: normal;
@@ -279,14 +284,10 @@ body {
       .txt-1 {
         margin-bottom: 17px;
       }
-      .txt-2 {
-        margin-bottom: 18px;
-      }
       .txt-3 {
         margin-bottom: 38px;
       }
     }
-
 
     .right-wrapper {
       margin-right: 15px;
@@ -371,6 +372,7 @@ header {
         }
       }
     }
+
     .dropdown-menu {
       left: -90px;
       width: 180px;
@@ -1166,8 +1168,7 @@ a:hover {
 .request-details {
   margin-top: -8px;
   .top-wrapper {
-    margin-left: 16px;
-    margin-right: 16px;
+
     .label-header {
       font-size: 0.875rem;
       text-align: left;
@@ -1187,7 +1188,7 @@ a:hover {
       margin-top: -4px;
     }
     .status {
-      margin-right: 29px;
+      //margin-right: 29px;
       font-size: 0.875rem;
       text-align: left;
       color: #8493a8;
@@ -1222,6 +1223,8 @@ a:hover {
     }
   }
   .menu-wrapper {
+    padding-left: 0;
+
     .d-flex {
     }
     .menu-item {
@@ -1278,8 +1281,7 @@ a:hover {
     background-color: rgba(132, 147, 168, 0.05);
     //height: 250px;
     .navigate-item {
-      height: 36px;
-      margin-left: 30px;
+      margin-right: 15px;
       font-size: 1.125rem;
       font-weight: 300;
       line-height: 2;
@@ -1287,15 +1289,16 @@ a:hover {
       color: #8493a8;
       margin-bottom: 15px;
       cursor: pointer;
-      &:first-child {
-        margin-top: 30px;
-      }
     }
 
     .active {
       font-weight: bold;
       color: #54657e;
     }
+  }
+  .mobile {
+    background-color: transparent;
+    overflow: auto;
   }
   .profile-line {
   }
@@ -1317,6 +1320,19 @@ a:hover {
     }
   }
   @media (min-width: 768px) {
+    .navigate {
+      .navigate-item {
+        margin-left: 30px;
+        height: 36px;
+        &:first-child {
+          margin-top: 30px;
+        }
+      }
+    }
+    .top-wrapper {
+      margin-left: 16px;
+      margin-right: 16px;
+    }
     padding-left: 0;
     .menu-wrapper {
       .menu-item {
@@ -2165,34 +2181,37 @@ a:hover {
   padding-top: 10px;
 }
 
-@media (max-width: 425px){
-  .content .left-wrapper{
+@media (max-width: 425px) {
+  .content .left-wrapper {
     margin-top: 30px !important;
   }
-  .content .right-wrapper{
-    margin-top: 40px!important;
+
+  .content .right-wrapper {
+    margin-top: 40px !important;
   }
 }
-@media (min-width: 768px){
 
-  .content .right-wrapper{
-    margin-top: 40px!important;
+@media (min-width: 768px) {
+
+  .content .right-wrapper {
+    margin-top: 40px !important;
   }
+
   // .content .right-wrapper .service-box label{
   //   font-size: 0.6rem;
   // }
 }
 
-
-@media (max-width: 425px){
-  .estate label{
+@media (max-width: 425px) {
+  .estate label {
     position: absolute;
     bottom: 0px;
     width: 100%;
     left: 0px;
     font-size: 0.77rem !important;
   }
-  .mortgage label{
+
+  .mortgage label {
     position: absolute;
     bottom: 0px;
     width: 100%;
@@ -2200,11 +2219,13 @@ a:hover {
     font-size: 0.77rem !important;
   }
 }
+
 .page-wrapper {
   min-height: 66vh;
 }
-@media (max-width: 1024px){
-  .page-wrapper{
+
+@media (max-width: 1024px) {
+  .page-wrapper {
     padding-bottom: 30px;
   }
 }
@@ -2215,4 +2236,30 @@ a:hover {
 
 .no-height {
   height: auto !important;
+}
+
+.opt-in {
+  margin-right: 9px;
+}
+
+.opt-in-mark {
+  margin-left: 0;
+  top: 7px;
+
+  @media(min-width: 768px) {
+    right: 0;
+    top: 9px
+  }
+}
+
+.intake-content {
+  @media (min-width: 768px) {
+  }
+}
+
+.txt-notice {
+  margin-bottom: 20px;
+  @media(min-width: 768px) {
+    margin-left: -15px;
+  }
 }

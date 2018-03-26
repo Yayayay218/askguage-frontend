@@ -78,19 +78,28 @@ class SignUp extends Component {
     doSignUp() {
         const {email, password, firstName, phoneNumber, role, kindOfService} = this.state
         let data = {};
+        let _firstName = firstName.split(' ')[0]
+        let _lastName = ''
+        if (firstName.split(' ').length > 1) {
+            let tmp = firstName.split(' ')
+            tmp.shift()
+            _lastName = tmp.join(' ')
+        }
         if (role == 0)
             data = {
-                email: email,
+                email: email.toLowerCase(),
                 password: password,
-                firstName: firstName,
+                firstName: _firstName,
+                lastName: _lastName,
                 phoneNumber: phoneNumber,
                 role: role,
             }
         else
             data = {
-                email: email,
+                email: email.toLowerCase(),
                 password: password,
-                firstName: firstName,
+                firstName: _firstName,
+                lastName: _lastName,
                 phoneNumber: phoneNumber,
                 profiles: {kindOfService: kindOfService},
                 role: role,
@@ -266,7 +275,7 @@ class SignUp extends Component {
                                         >
                                             <option value=""></option>
                                             <option value="1">Mortgage Agent</option>
-                                            <option value="4">Mobile Mortgage Advisor</option>
+                                            <option value="4">Mortgage Advisor</option>
                                             <option value="0">Real Estate Agent</option>
                                             <option value="3">Real Estate Lawyer</option>
                                             <option value="2">Home Inspector</option>
@@ -277,8 +286,11 @@ class SignUp extends Component {
 
                             <div className="terms-conditions">
                                 <p>
-                                    By Signing Up, You agree to Ask Gauge <a href="https://askgauge.ca/terms-condition/"
-                                                                             target="_blank">Terms and Conditions</a>
+                                    By signing up, you acknowledge and agree to Ask Gauge's <a
+                                    href="https://askgauge.ca/terms-condition/"
+                                    target="_blank">Terms & Conditions</a> and
+                                    <a href="https://askgauge.ca/privacy-policy/" target="_blank"> Privacy Policy</a>
+
                                 </p>
                             </div>
                             {
@@ -306,6 +318,8 @@ class SignUp extends Component {
                                 <div className="col-md-12 col-12">
                                     <FacebookLogin
                                         appId="336894240165471"
+                                        isMobile={true}
+                                        disableMobileRedirect={true}
                                         autoLoad={false}
                                         fields="name,email,picture"
                                         cssClass="social-box facebook"
