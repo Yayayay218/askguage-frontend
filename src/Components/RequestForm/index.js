@@ -19,11 +19,10 @@ import MortgageLocateHome from './Steps/Mortgage/LocateHome'
 class CreateRequest extends Component {
     constructor(props) {
         super(props)
-        console.log(props)
         this.state = {
             isLanding: false,
             _request: {
-                isEstate: props.app.requestType.estate === true,
+                isEstate: (props.app.requestType.estate === true || props.location.search === '?type=0'),
                 kindOfHome: -1,
                 numberOfBedRoom: -1,
                 squareFT: -1,
@@ -61,7 +60,7 @@ class CreateRequest extends Component {
 
     render() {
         const {app, history, location} = this.props
-        // console.log(this)
+        console.log(this)
         const {_request} = this.state
         const estateSteps = [
             {

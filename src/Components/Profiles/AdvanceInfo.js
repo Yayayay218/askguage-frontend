@@ -30,7 +30,7 @@ export default class AdvanceInfo extends Component {
             value: user['profiles'][field],
             onChange: (e) => onChange({...user, profiles: {...user['profiles'], [field]: e.target.value}})
         })
-        console.log(this)
+        // console.log(this)
 
         return (
             <div>
@@ -118,9 +118,12 @@ export default class AdvanceInfo extends Component {
                     <Input
                         label="Length of Employment"
                     >
-                        <input type="text" className="form-control"
+                        <input type="number" className="form-control"
                                {...bind("lengthOfEmployment")}
                         />
+                        {
+                            !formFields.lengthOfEmpValid && <p className="error-text no-margin">is required</p>
+                        }
                     </Input>
 
                     <Input
@@ -155,7 +158,9 @@ export default class AdvanceInfo extends Component {
                                       defaultValue={user['profiles']['userAddress']['address']}
                         >
                         </Autocomplete>
-
+                        {
+                            !formFields.addressValid && <p className="error-text no-margin">is required</p>
+                        }
                     </Input>
                 </div>
                 <div className="form-group row">

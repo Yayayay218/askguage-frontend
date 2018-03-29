@@ -22,23 +22,62 @@ function Input(props) {
 export default class ProviderInfo extends Component {
     constructor(props) {
         super(props)
-
         this.state = {
-            value: (props.user.profiles.arrLenders && props.user.profiles.arrLenders.length !== 0) ? props.user.profiles.arrLenders : []
+            value: (props.user.profiles.arrLenders && props.user.profiles.arrLenders.length !== 0) ? props.user.profiles.arrLenders : [],
+            options: [
+                {value: '0', label: 'A Lenders'},
+                {value: '1', label: 'B Lenders'},
+                {value: '2', label: 'C Lenders'},
+                {value: '3', label: 'Private Investors'},
+                {value: '4', label: 'All of the Above'}
+            ]
+
+        }
+    }
+
+    isAllOfAbove(arr) {
+        if (arr.length === 0)
+            return false
+        else {
+            let pos = arr.map(e => {
+                return e.value
+            }).indexOf('4')
+            if (pos === -1)
+                return false
+            return true
         }
     }
 
     handleSelectChange(value) {
         const {user, onChange, disabled} = this.props
-        this.setState({value}, () => onChange({
-            ...user,
-            profiles: {...user["profiles"], arrLenders: this.state.value}
-        }));
+        if (this.isAllOfAbove(value)) {
+            this.setState({
+                value: [{value: '4', label: 'All of the Above'}],
+                options: [{value: '4', label: 'All of the Above'}],
+            }, () => onChange({
+                ...user,
+                profiles: {...user["profiles"], arrLenders: this.state.value}
+            }))
+        }
+        else
+            this.setState({
+                value: value,
+                options: [
+                    {value: '0', label: 'A Lenders'},
+                    {value: '1', label: 'B Lenders'},
+                    {value: '2', label: 'C Lenders'},
+                    {value: '3', label: 'Private Investors'},
+                    {value: '4', label: 'All of the Above'}
+                ]
+            }, () => onChange({
+                ...user,
+                profiles: {...user["profiles"], arrLenders: this.state.value}
+            }));
     }
 
     render() {
-        console.log(this.props)
-        const {user, onChange, disabled} = this.props
+        // console.log(this.props)
+        const {user, onChange, disabled, formFields} = this.props
         const bind = (field) => ({
             value: user["profiles"][field],
             onChange: (e) => onChange({...user, profiles: {...user["profiles"], [field]: e.target.value}})
@@ -68,6 +107,9 @@ export default class ProviderInfo extends Component {
                         <input type="text" className="form-control"
                                {...bind("businessName")}
                         />
+                        {
+                            !formFields.businessNameValid && <p className="error-text no-margin">is required</p>
+                        }
                     </Input>
 
                 </div>
@@ -79,6 +121,9 @@ export default class ProviderInfo extends Component {
                         <input type="text" className="form-control"
                                {...bind("website")}
                         />
+                        {
+                            !formFields.websiteValid && <p className="error-text no-margin">is required</p>
+                        }
                     </Input>
 
                     <Input
@@ -99,9 +144,23 @@ export default class ProviderInfo extends Component {
                                     },
                                 })
                             }}
+                            onChange={(e) => onChange({
+                                ...user,
+                                profiles: {
+                                    ...user.profiles,
+                                    businessAddress: {
+                                        address: e.target.value,
+                                        lat: '',
+                                        lng: ''
+                                    }
+                                },
+                            })}
                             types={['geocode']}
                             defaultValue={user['profiles']['businessAddress']['address']}
                         />
+                        {
+                            !formFields.businessAddressValid && <p className="error-text no-margin">is required</p>
+                        }
                     </Input>
 
                 </div>
@@ -113,6 +172,9 @@ export default class ProviderInfo extends Component {
                         <input type="text" className="form-control"
                                {...bind("businessEmail")}
                         />
+                        {
+                            !formFields.businessEmailValid && <p className="error-text no-margin">is required</p>
+                        }
                     </Input>
 
                     <Input
@@ -128,6 +190,9 @@ export default class ProviderInfo extends Component {
                             })}
                             value={user.profiles.businessPhoneNumber}
                         />
+                        {
+                            !formFields.businessPhoneValid && <p className="error-text no-margin">is required</p>
+                        }
                     </Input>
 
                 </div>
@@ -220,12 +285,7 @@ export default class ProviderInfo extends Component {
                                 // options={[
                                 //     {className: 'custom-select'}
                                 // ]}
-                                options={[
-                                    {value: '0', label: 'A Lenders'},
-                                    {value: '1', label: 'B Lenders'},
-                                    {value: '2', label: 'C Lenders'},
-                                    {value: '3', label: 'Private Investors'},
-                                ]}
+                                options={this.state.options}
                                 multi={true}
                                 value={this.state.value}
                                 onChange={this.handleSelectChange.bind(this)}
@@ -249,6 +309,9 @@ export default class ProviderInfo extends Component {
                         <input type="text" className="form-control"
                                {...bind("licence")}
                         />
+                        {
+                            !formFields.licenceValid && <p className="error-text no-margin">is required</p>
+                        }
                     </Input>
 
                     <Input

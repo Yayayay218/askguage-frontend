@@ -92,19 +92,21 @@ class Profiles extends Component {
                 addressValid: true,
                 lengthOfEmpValid: true
             },
-            providerValid: false,
+            providerValid: props.user.role === 0,
             providerInfoValid: {
                 businessNameValid: true,
                 websiteValid: true,
                 businessAddressValid: true,
                 businessEmailValid: true,
-                businessPhoneValid: true
+                businessPhoneValid: true,
+                licenceValid: true
             }
         }
         this.doSave = this.doSave.bind(this)
         this.onChangeImage = this.onChangeImage.bind(this)
         this.checkBasicInfoValid = this.checkBasicInfoValid.bind(this)
         this.checkAdvanceInfoValid = this.checkAdvanceInfoValid.bind(this)
+        this.checkProviderInfoValid = this.checkProviderInfoValid.bind(this)
 
         if (!props.token)
             props.history.push('/')
@@ -131,9 +133,10 @@ class Profiles extends Component {
     }
 
     checkBasicInfoValid(info) {
-        let firstNameValid = '';
-        let lastNameValid = '';
-        let phoneNumberValid = ''
+        const {basicInfoValid} = this.state
+        let firstNameValid = basicInfoValid.firstNameValid;
+        let lastNameValid = basicInfoValid.lastNameValid;
+        let phoneNumberValid = basicInfoValid.phoneValid;
         Object.entries(info).map(obj => {
             switch (obj[0]) {
                 case 'firstName':
@@ -160,8 +163,9 @@ class Profiles extends Component {
     }
 
     checkAdvanceInfoValid(info) {
-        let addressValid = '';
-        let lengthOfEmpValid = '';
+        const {advanceInfoValid} = this.state
+        let addressValid = advanceInfoValid.addressValid;
+        let lengthOfEmpValid = advanceInfoValid.lengthOfEmpValid;
         Object.entries(info).map(obj => {
             switch (obj[0]) {
                 case 'address':
@@ -184,11 +188,13 @@ class Profiles extends Component {
     }
 
     checkProviderInfoValid(info) {
-        let businessNameValid = true;
-        let websiteValid = true
-        let businessAddressValid = true
-        let businessEmailValid = true
-        let businessPhoneValid = true
+        const {providerInfoValid} = this.state
+        let businessNameValid = providerInfoValid.businessEmailValid;
+        let websiteValid = providerInfoValid.websiteValid;
+        let businessAddressValid = providerInfoValid.businessAddressValid;
+        let businessEmailValid = providerInfoValid.businessEmailValid;
+        let businessPhoneValid = providerInfoValid.businessPhoneValid;
+        let licenceValid = providerInfoValid.licenceValid
 
         Object.entries(info).map(obj => {
             switch (obj[0]) {
@@ -204,8 +210,11 @@ class Profiles extends Component {
                 case 'businessEmail':
                     businessEmailValid = obj[1] !== ''
                     break
-                case 'businessPhone':
+                case 'businessPhoneNumber':
                     businessPhoneValid = obj[1] !== ''
+                    break
+                case 'licence':
+                    licenceValid = obj[1] !== ''
             }
         })
 
@@ -215,53 +224,76 @@ class Profiles extends Component {
                 websiteValid: websiteValid,
                 businessAddressValid: businessAddressValid,
                 businessEmailValid: businessEmailValid,
-                businessPhoneValid: businessPhoneValid
+                businessPhoneValid: businessPhoneValid,
+                licenceValid: licenceValid
             }
         }, () => {
             this.setState({
                 providerValid: this.state.providerInfoValid.businessNameValid && this.state.providerInfoValid.websiteValid
-                && this.state.providerInfoValid.businessAddressValid && this.state.providerInfoValid.businessEmailValid && this.state.providerInfoValid.businessPhoneValid
+                && this.state.providerInfoValid.businessAddressValid && this.state.providerInfoValid.businessEmailValid && this.state.providerInfoValid.businessPhoneValid && this.state.providerInfoValid.licenceValid
             })
         })
     }
 
+    checkFormValid() {
+        const {basicValid, advanceValid, providerValid} = this.state
+
+        return new Promise((resolve, reject) => {
+            if (!basicValid || !advanceValid || !providerValid)
+                reject()
+            resolve()
+        })
+    }
+
     doSave() {
-        // const {basicValid, advanceValid} = this.state
-        // const {lastName, firstName, phoneNumber} = this.state.user
-        // const {userAddress, lengthOfEmployment} = this.state.user.profiles
-        // let basicInfo = {
-        //     firstName: firstName,
-        //     lastName: lastName,
-        //     phoneNumber: phoneNumber
-        // }
-        // let advanceInfo = {
-        //     address: userAddress.address,
-        //     lengthOfEmployment: lengthOfEmployment
-        // }
-        // if (!basicValid || !advanceValid) {
-        //     this.checkBasicInfoValid(basicInfo)
-        //     this.checkAdvanceInfoValid(advanceInfo)
-        // }
-        // else {
-        this.setState({isUploading: true})
-        uploadFile(this.state.file)
-            .then(params => {
-                this.props.dispatch(Actions.putProfile({
-                    id: this.props.user.id,
-                    user: {
-                        firstName: this.state.user.firstName,
-                        lastName: this.state.user.lastName,
-                        phoneNumber: this.state.user.phoneNumber,
-                        profiles: {
-                            ...this.state.user.profiles,
-                            dob: moment.utc(this.state.user.profiles.dob).format()
-                        },
-                        avatarUrl: params.avatarUrl
-                    }
-                }))
+        const {lastName, firstName, phoneNumber} = this.state.user
+        const {userAddress, lengthOfEmployment, licence, website, businessEmail, businessAddress, businessPhoneNumber, businessName} = this.state.user.profiles
+        let basicInfo = {
+            firstName: firstName,
+            lastName: lastName,
+            phoneNumber: phoneNumber
+        }
+        let advanceInfo = {
+            address: userAddress.address,
+            lengthOfEmployment: lengthOfEmployment
+        }
+        let providerInfo = this.props.user.role !== 0 ? {
+            licence: licence,
+            website: website,
+            businessEmail: businessEmail,
+            businessAddress: businessAddress.address,
+            businessPhoneNumber: businessPhoneNumber,
+            businessName: businessName
+        } : ''
+        this.checkFormValid()
+            .then(() => {
+                this.setState({isUploading: true})
+                uploadFile(this.state.file)
+                    .then(params => {
+                        this.props.dispatch(Actions.putProfile({
+                            id: this.props.user.id,
+                            user: {
+                                firstName: this.state.user.firstName,
+                                lastName: this.state.user.lastName,
+                                phoneNumber: this.state.user.phoneNumber,
+                                profiles: {
+                                    ...this.state.user.profiles,
+                                    dob: moment.utc(this.state.user.profiles.dob).format()
+                                },
+                                avatarUrl: params.avatarUrl
+                            }
+                        }))
+                    })
+                    .catch(err => console.log(err))
             })
-            .catch(err => console.log(err))
-        // }
+            .catch(() => {
+                this.checkBasicInfoValid(basicInfo)
+                this.checkAdvanceInfoValid(advanceInfo)
+                {
+                    this.props.user.role !== 0 && this.checkProviderInfoValid(providerInfo)
+
+                }
+            })
     }
 
     onChangeImage(file) {
@@ -269,11 +301,11 @@ class Profiles extends Component {
     }
 
     render() {
-        const {user, isPosting, basicInfoValid, advanceInfoValid} = this.state
-        // console.log('-------------', this)
+        const {user, isPosting, basicInfoValid, advanceInfoValid, providerInfoValid} = this.state
 
         const {lastName, firstName, phoneNumber} = this.state.user
-        const {userAddress, lengthOfEmployment} = this.state.user.profiles
+        const {userAddress, lengthOfEmployment, licence, website, businessEmail, businessAddress, businessPhoneNumber, businessName} = this.state.user.profiles
+
         let onChangeLanguage = (e) => {
             if (user.profiles.languages.indexOf(e.target.value) === -1) {
                 let newLanguages = user.profiles.languages.concat([e.target.value])
@@ -318,21 +350,46 @@ class Profiles extends Component {
                         </div>
                         <BasicInfo
                             user={user}
-                            onChange={(user) => this.setState({user})}
+                            onChange={(user) => this.setState({user}, () => {
+                                let basicInfo = {
+                                    firstName: firstName,
+                                    lastName: lastName,
+                                    phoneNumber: phoneNumber
+                                }
+                                this.checkBasicInfoValid(basicInfo)
+                            })}
                             formFields={basicInfoValid}
 
                         />
                         {user.role === 1 && (
                             <ProviderInfo
                                 user={user}
-                                onChange={(user) => this.setState({user})}
+                                onChange={(user) => this.setState({user}, () => {
+                                    let providerInfo = {
+                                        licence: licence,
+                                        website: website,
+                                        businessEmail: businessEmail,
+                                        businessAddress: businessAddress,
+                                        businessPhoneNumber: businessPhoneNumber,
+                                        businessName: businessName
+                                    }
+                                    this.checkProviderInfoValid(providerInfo)
+                                })}
                                 disabled={this.state.disabled}
+                                formFields={providerInfoValid}
+
                             />
                         )}
 
                         <AdvanceInfo
                             user={user}
-                            onChange={(user) => this.setState({user})}
+                            onChange={(user) => this.setState({user}, () => {
+                                let advanceInfo = {
+                                    address: userAddress.address,
+                                    lengthOfEmployment: lengthOfEmployment
+                                }
+                                this.checkAdvanceInfoValid(advanceInfo)
+                            })}
                             onChangeLanguage={onChangeLanguage}
                             formFields={advanceInfoValid}
                         />
