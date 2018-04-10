@@ -2,9 +2,24 @@ import React, {Component} from 'react'
 import Intake from '../../RequestDetails/Intake'
 import {BooleanType} from '../../RequestDetails/Intake/TransferType'
 import NumberFormat from 'react-number-format';
+import {estimateAfford} from '../../../Utils/Calculate'
 
 class StatedInfo extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            afford: 0
+        }
+    }
+    componentDidMount() {
+        const {downPayment, houseHold, monthlyLiability} = this.props.request
+        estimateAfford(houseHold, monthlyLiability, downPayment)
+            .then(res => this.setState({afford: res}))
+    }
+
     render() {
+        // console.log(estimateAfford(100000, 400, 70000))
+
         const {user, request} = this.props
         return (
             <div>
@@ -89,6 +104,17 @@ class StatedInfo extends Component {
                             answer={request.netAsset}
                             isCurrency={true}
                         />
+
+                        {
+                            (user.profiles.kindOfService == 1 || user.profiles.kindOfService == 4)
+                            && request.isEstate
+                            &&
+                            <Intake
+                                question="Estimated Affordability"
+                                answer={this.state.afford}
+                                isCurrency={true}
+                            />
+                        }
                     </div>
                 }
             </div>

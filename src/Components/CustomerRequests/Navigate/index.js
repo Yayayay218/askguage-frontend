@@ -74,6 +74,7 @@ class FlipWizard extends Component {
                                 <div
                                     className={currentStepIndex === 1 ? 'navigate-item active' : 'navigate-item'}
                                     onClick={() => this.setState({currentStepIndex: 1})}
+                                    style={{whiteSpace: 'nowrap'}}
                                 >{request.isEstate ? 'Preference' : 'Property Details'}
                                 </div>
 

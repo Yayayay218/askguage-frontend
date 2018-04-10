@@ -13,10 +13,10 @@ class AdditionalInfos extends Component {
                     answer={request.ownership == 1 ? 'single' : 'joint'}
                 />
 
-                <Intake
-                    question="Birth Day"
-                    answer={moment(request.user.profiles.dob).format('LL')}
-                />
+                {/*<Intake*/}
+                    {/*question="Birth Day"*/}
+                    {/*answer={moment(request.user.profiles.dob).format('LL')}*/}
+                {/*/>*/}
 
                 <Intake
                     question="Canadian Citizen"

@@ -31,7 +31,6 @@ export default class ProviderInfo extends Component {
                 {value: '3', label: 'Private Investors'},
                 {value: '4', label: 'All of the Above'}
             ]
-
         }
     }
 

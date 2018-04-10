@@ -66,14 +66,6 @@ export default class Parse {
         }).then(response => response.json());
     }
 
-    getSettings(data) {
-        return this._fetch({
-            method: 'GET',
-            url: '/settings',
-            timeout: 10000
-        }).then(response => response.json());
-    }
-
     getQuestions(data) {
         return this._fetch({
             method: 'GET',
@@ -154,6 +146,14 @@ export default class Parse {
         return this._fetch({
             method: 'GET',
             url: '/addresses',
+            timeout: 10000
+        }).then(response => response.json());
+    }
+
+    getSettings() {
+        return this._fetch({
+            method: 'GET',
+            url: '/settings',
             timeout: 10000
         }).then(response => response.json());
     }

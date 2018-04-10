@@ -60,7 +60,6 @@ class CreateRequest extends Component {
 
     render() {
         const {app, history, location} = this.props
-        console.log(this)
         const {_request} = this.state
         const estateSteps = [
             {
