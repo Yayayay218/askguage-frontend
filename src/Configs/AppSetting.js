@@ -6,3 +6,6 @@ const config = {
 
 
 export default config
+
+
+// db.CustomUser.update({'id':ObjectId("5ab65d2840fccd000e93dd4a")},{$set:{'email':'suthagar@gmail.com'}},{multi:true})

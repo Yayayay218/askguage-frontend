@@ -21,7 +21,6 @@ class LocateHome extends Component {
 
     render() {
         const {onGoNext, onGoBack, _request, onChange, isValid} = this.props
-        console.log(this)
         return (
             <div>
                 <div className="request-intro">
@@ -50,6 +49,8 @@ class LocateHome extends Component {
                                 ..._request,
                                 homeAddress: {
                                     address: e.target.value,
+                                    lat: 0,
+                                    lng: 0
                                 }
                             })}
                             onSelect={(value, item) => {

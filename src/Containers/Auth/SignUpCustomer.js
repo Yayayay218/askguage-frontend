@@ -37,7 +37,8 @@ class SignUp extends Component {
             phoneValid: false,
             formValid: false,
             formErrors: {email: '', password: '', firstName: '', phoneNumber: ''},
-            error: ''
+            error: '',
+            tos: 0
         }
         this.doSignUp = this.doSignUp.bind(this)
         this.handleUserInput = this.handleUserInput.bind(this)
@@ -153,7 +154,7 @@ class SignUp extends Component {
     validateForm() {
         this.setState({
             formValid: this.state.emailValid && this.state.passwordValid && this.state.firstNameValid && this.state.phoneValid
-            && this.checkService(this.state.role, this.state.kindOfService)
+            && this.checkService(this.state.role, this.state.kindOfService) && this.state.tos == 1
         });
     }
 
@@ -285,13 +286,21 @@ class SignUp extends Component {
                             }
 
                             <div className="terms-conditions">
-                                <p>
-                                    By signing up, you acknowledge and agree to Ask Gauge's <a
-                                    href="https://askgauge.ca/terms-condition/"
-                                    target="_blank">Terms & Conditions</a> and
-                                    <a href="https://askgauge.ca/privacy-policy/" target="_blank"> Privacy Policy</a>
-
-                                </p>
+                                <label className="col-12 custom-control custom-checkbox">
+                                    <input type="checkbox" className="custom-control-input"
+                                           name="tos"
+                                           value="1"
+                                           defaultChecked={false}
+                                           onClick={() => this.setState({
+                                               tos: this.state.tos === 0 ? '1' : 0,
+                                           }, this.validateForm)}
+                                    />
+                                    <span className="custom-control-indicator"></span>
+                                    <span className="custom-control-description custom-label tos">By signing up, you acknowledge and agree to Ask Gauge's <a
+                                        href="https://askgauge.ca/terms-condition/"
+                                        target="_blank">Terms & Conditions</a> and
+                                    <a href="https://askgauge.ca/privacy-policy/" target="_blank"> Privacy Policy</a></span>
+                                </label>
                             </div>
                             {
                                 isSignup ?

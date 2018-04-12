@@ -80,7 +80,7 @@ class ResetPassword extends Component {
     doSent() {
         this.setState({isClicked: true})
         Axios.post(Config.URL + '/users/reset', {
-            email: this.state.email
+            email: this.state.email.toLowerCase()
         })
             .then(res => this.setState({
                 message: "We've sent you a link to reset your password. Click the link in the email and enter a new password.",
@@ -159,10 +159,6 @@ class ResetPassword extends Component {
                                                    {...bind('email')}
                                                    placeholder="Registered Email"
                                             />
-                                            {
-                                                !this.state.emailValid &&
-                                                <p className="error-text">{this.state.formErrors.email}</p>
-                                            }
                                             {
                                                 this.state.message !== '' &&
                                                 <p style={{marginTop: '15px'}}>{this.state.message}</p>

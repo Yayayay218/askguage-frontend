@@ -55,6 +55,7 @@ class SignIn extends Component {
                 error: newProps.error,
             })
     }
+
     responseFacebook = (response) => {
         this.props.dispatch(Actions.loginFacebook({accessToken: response.accessToken}))
     }
@@ -69,7 +70,7 @@ class SignIn extends Component {
     }
 
     render() {
-        const {history, error, isLogin, location} = this.props
+        const {history, isLogin, location} = this.props
         const bind = (field) => ({
             value: this.state[field],
             onChange: (e) => this.setState({[field]: e.target.value})
@@ -99,6 +100,14 @@ class SignIn extends Component {
                                                 logging in
                                             </div>
                                             : <div></div>
+                                    }
+
+                                    {
+                                        location.search &&
+                                        <div className="alert alert-success" role="alert">
+                                            Thank you, your email have been validated and your account is now active.
+                                            You can login to "View Quotes" OR "Submit New Requests".
+                                        </div>
                                     }
 
                                 </div>
@@ -160,11 +169,7 @@ class SignIn extends Component {
                                         textButton=""
                                         callback={this.responseFacebook}
                                     />
-                                    {/*<div className="social-box facebook"></div>*/}
                                 </div>
-                                {/*<div className="col-md-6 col-6">*/}
-                                {/*<div className="social-box linkedin"></div>*/}
-                                {/*</div>*/}
                             </div>
                         </div>
                     </div>

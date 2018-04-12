@@ -174,6 +174,20 @@ class RequestBox extends Component {
                                                             </button>
                                                         </div>
                                                     }
+
+                                                    {
+                                                        item.homeAddress.lat == 0 &&
+                                                        <div className="col-sm-4">
+                                                            <p className="txt-unsupported">
+                                                                Sorry we currently support GTA area only.
+                                                                <br/>
+                                                                We will
+                                                                continue to all more location soon.
+                                                                <br/>
+                                                                Please check back.
+                                                            </p>
+                                                        </div>
+                                                    }
                                                 </div>
                                             </div>
                                         </Link>
