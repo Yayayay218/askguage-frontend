@@ -1,4 +1,4 @@
-import config from '../Configs/AppSetting'
+import config from '../configs/AppSetting'
 
 export const uploadFile = (params) => {
     console.log("Promise uploadFile: ", params);

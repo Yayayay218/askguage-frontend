@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Actions from '../../actions/Creators'
-import Layout from '../../Containers/App'
+import Layout from '../../containers/App'
 import BasicInfo from './BasicInfo'
 import AdvanceInfo from './AdvanceInfo'
 import ProviderInfo from './ProviderInfo'
 import UploadImage from '../UploadImage'
-import {uploadFile} from '../../Services/UploadService'
+import {uploadFile} from '../../services/UploadService'
 import moment from 'moment'
 
 class Profiles extends Component {

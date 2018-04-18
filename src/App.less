@@ -98,7 +98,7 @@ body {
 // }
 
 .content {
-  background: url(Assets/images/landing/app_baground.jpg) no-repeat;
+  background: url(assets/images/landing/app_baground.jpg) no-repeat;
   background-position: center center;
   background-size: cover;
   // height:100vh;
@@ -228,13 +228,13 @@ body {
       }
     }
     .estate {
-      background: url(Assets/images/icons/estate-normal.svg) center 26px no-repeat;
+      background: url(assets/images/icons/estate-normal.svg) center 26px no-repeat;
       label {
         color: #8493A8
       }
     }
     .estate-active {
-      background: url(Assets/images/icons/estate.svg) center 26px no-repeat;
+      background: url(assets/images/icons/estate.svg) center 26px no-repeat;
       border-radius: 5px;
       border: solid 2px #0082d5 !important;
       label {
@@ -242,13 +242,13 @@ body {
       }
     }
     .mortgage {
-      background: url(Assets/images/icons/mortgage.svg) center 26px no-repeat;
+      background: url(assets/images/icons/mortgage.svg) center 26px no-repeat;
       label {
         color: #8493A8
       }
     }
     .mortgage-active {
-      background: url(Assets/images/icons/mortgage-normal.svg) center 26px no-repeat;
+      background: url(assets/images/icons/mortgage-normal.svg) center 26px no-repeat;
       border-radius: 5px;
       border: solid 2px #0082d5 !important;
       label {
@@ -624,7 +624,7 @@ footer {
   width: 16px;
   height: 16px;
   background-size: 100%;
-  background-image: url(Assets/images/icons/facebook.svg);
+  background-image: url(assets/images/icons/facebook.svg);
   display: block;
   margin: 14px auto;
 }
@@ -633,7 +633,7 @@ footer {
   width: 16px;
   height: 16px;
   background-size: 100%;
-  background-image: url(Assets/images/icons/linkedin.svg);
+  background-image: url(assets/images/icons/linkedin.svg);
   display: block;
   margin: 14px auto;
 }
@@ -668,7 +668,7 @@ footer {
       font-size: 0.9375rem;
       font-weight: 300;
       color: @gray-light;
-      background: #fff url(Assets/images/icons/arrow-down.svg) no-repeat right 1rem center;
+      background: #fff url(assets/images/icons/arrow-down.svg) no-repeat right 1rem center;
       background-size: 14px 6px;
       &:disabled {
         color: #868e96;
@@ -735,7 +735,7 @@ footer {
       line-height: 1.36;
       //text-align: right;
       color: #ffffff;
-      background: #ff5600 url(Assets/images/icons/add.svg) no-repeat left 1rem center;
+      background: #ff5600 url(assets/images/icons/add.svg) no-repeat left 1rem center;
       background-size: 10px 10px;
       padding-left: 34px;
     }
@@ -749,7 +749,7 @@ footer {
       font-size: 0.9375rem;
       font-weight: 300;
       color: #54657e;
-      background: #fff url(Assets/images/icons/arrow-down.svg) no-repeat right 9px center;
+      background: #fff url(assets/images/icons/arrow-down.svg) no-repeat right 9px center;
       background-size: 14px 6px;
       &:focus {
         box-shadow: none;
@@ -828,7 +828,7 @@ footer {
           //content :'';
           //width: 19px;
           //height: 19px;
-          //background-image: url(./Assets/images/icons/tab-success.svg);
+          //background-image: url(./assets/images/icons/tab-success.svg);
           //background-size: 19px 19px;
           //border: solid 1px #ffffff;
           //border-radius: 50%;
@@ -842,7 +842,7 @@ footer {
   margin: 17px auto;
   width: 19px;
   height: 19px;
-  background-image: url(Assets/images/icons/tab-success.svg);
+  background-image: url(assets/images/icons/tab-success.svg);
   background-size: 19px 19px;
   display: block;
 }
@@ -891,7 +891,7 @@ footer {
     font-size: 0.9375rem;
     font-weight: 300;
     color: @gray-light;
-    background: #fff url(Assets/images/icons/arrow-down.svg) no-repeat right 1rem center;
+    background: #fff url(assets/images/icons/arrow-down.svg) no-repeat right 1rem center;
     background-size: 14px 6px;
     &:focus {
       box-shadow: none;
@@ -1281,7 +1281,7 @@ a:hover {
     background-color: rgba(132, 147, 168, 0.05);
     //height: 250px;
     .navigate-item {
-      margin-right: 15px;
+      //margin-right: 15px;
       font-size: 1.125rem;
       font-weight: 300;
       line-height: 2;
@@ -1299,6 +1299,46 @@ a:hover {
   .mobile {
     background-color: transparent;
     overflow: auto;
+    .tab {
+      width: 100px;
+      height: 50px;
+    }
+
+    .txt-tab {
+      position: absolute;
+      width: 100%;
+      bottom: -10px;
+      text-align: center;
+      margin-bottom: 0;
+      height: 25px;
+    }
+    .profile-tab {
+      background: transparent url(assets/images/avatar.svg) no-repeat top -2px center/40px 40px;
+      position: relative;
+    }
+
+    .property-tab {
+      background: transparent url(assets/images/detail.svg) no-repeat top 3px center/30px 30px;
+      position: relative;
+    }
+
+    .info-tab {
+      background: transparent url(assets/images/information.svg) no-repeat top 4px center/30px 30px;
+      position: relative;
+    }
+
+    .finance-tab {
+      background: transparent url(assets/images/hand-shake.svg) no-repeat top 4px center/30px 30px;
+      position: relative;
+    }
+    .quote-tab {
+      background: transparent url(assets/images/documents.svg) no-repeat top 4px center/30px 30px;
+      position: relative;
+    }
+    .callback-tab {
+      background: transparent url(assets/images/phone-call.svg) no-repeat top 4px center/30px 30px;
+      position: relative;
+    }
   }
   .profile-line {
   }
@@ -1308,7 +1348,6 @@ a:hover {
     opacity: 0.1;
     background-color: #374355;
     margin-top: 10px;
-    margin-bottom: 30px;
   }
   .intake-details {
     .profile-line {
@@ -1320,6 +1359,9 @@ a:hover {
     }
   }
   @media (min-width: 768px) {
+    .menu-line {
+      margin-bottom: 30px;
+    }
     .navigate {
       .navigate-item {
         margin-left: 30px;
@@ -1440,7 +1482,7 @@ a:hover {
 
   .custom-select {
     width: 100%;
-    background: #fff url(Assets/images/icons/arrow-down.svg) no-repeat right 1rem center;
+    background: #fff url(assets/images/icons/arrow-down.svg) no-repeat right 1rem center;
     background-size: 14px 6px;
     &:focus {
       box-shadow: none;
@@ -1542,33 +1584,33 @@ a:hover {
     }
   }
   .detached {
-    background: url(Assets/images/icons/estate-normal.svg) center 26px no-repeat;
+    background: url(assets/images/icons/estate-normal.svg) center 26px no-repeat;
     label {
       color: #8493A8
     }
   }
   .semi {
-    background: url(Assets/images/icons/semi-normal.svg) center 26px no-repeat;
+    background: url(assets/images/icons/semi-normal.svg) center 26px no-repeat;
     label {
       color: #8493A8
     }
   }
   .condo {
-    background: url(Assets/images/icons/condo-normal.svg) center 26px no-repeat;
+    background: url(assets/images/icons/condo-normal.svg) center 26px no-repeat;
     label {
       color: #8493A8
     }
   }
 
   .other {
-    background: url(Assets/images/icons/town.svg) center 26px no-repeat;
+    background: url(assets/images/icons/town.svg) center 26px no-repeat;
     label {
       color: #8493A8
     }
   }
 
   .detached-active {
-    background: url(Assets/images/icons/estate.svg) center 26px no-repeat;
+    background: url(assets/images/icons/estate.svg) center 26px no-repeat;
     border-radius: 5px;
     border: solid 2px #0082d5 !important;
     label {
@@ -1577,7 +1619,7 @@ a:hover {
   }
 
   .semi-active {
-    background: url(Assets/images/icons/semi.svg) center 26px no-repeat;
+    background: url(assets/images/icons/semi.svg) center 26px no-repeat;
     border-radius: 5px;
     border: solid 2px #0082d5 !important;
     label {
@@ -1586,7 +1628,7 @@ a:hover {
   }
 
   .condo-active {
-    background: url(Assets/images/icons/condo.svg) center 26px no-repeat;
+    background: url(assets/images/icons/condo.svg) center 26px no-repeat;
     border-radius: 5px;
     border: solid 2px #0082d5 !important;
     label {
@@ -1595,7 +1637,7 @@ a:hover {
   }
 
   .other-active {
-    background: url(Assets/images/icons/town-active.svg) center 26px no-repeat;
+    background: url(assets/images/icons/town-active.svg) center 26px no-repeat;
     border-radius: 5px;
     border: solid 2px #0082d5 !important;
     label {
@@ -1678,11 +1720,11 @@ a:hover {
     cursor: pointer;
   }
   .facebook {
-    background: #4460a0 url(Assets/images/icons/shape-copy-2.svg) center no-repeat;
+    background: #4460a0 url(assets/images/icons/shape-copy-2.svg) center no-repeat;
     border-radius: 5px;
   }
   .linkedin {
-    background: #007ebb url(Assets/images/icons/linked-in.svg) center no-repeat;
+    background: #007ebb url(assets/images/icons/linked-in.svg) center no-repeat;
     border-radius: 5px;
     //background-size: 10px 19px;
   }
@@ -1880,7 +1922,7 @@ a:hover {
     font-size: 0.9375rem;
     font-weight: 300;
     color: @gray-light;
-    background: #fff url(Assets/images/icons/arrow-down.svg) no-repeat right 1rem center;
+    background: #fff url(assets/images/icons/arrow-down.svg) no-repeat right 1rem center;
     background-size: 14px 6px;
     &:focus {
       box-shadow: none;
@@ -1947,7 +1989,7 @@ a:hover {
     font-size: 0.9375rem;
     font-weight: 300;
     color: #54657e;
-    background: #fff url(Assets/images/icons/arrow-down.svg) no-repeat right 1rem center;
+    background: #fff url(assets/images/icons/arrow-down.svg) no-repeat right 1rem center;
     background-size: 14px 6px;
     &:focus {
       box-shadow: none;
@@ -2064,7 +2106,7 @@ a:hover {
       line-height: normal;
       letter-spacing: normal;
       color: #54657e;
-      background: #fff url(Assets/images/icons/arrow-down.svg) no-repeat right 1rem center;
+      background: #fff url(assets/images/icons/arrow-down.svg) no-repeat right 1rem center;
       background-size: 14px 6px;
       &:focus {
         box-shadow: none;
@@ -2160,7 +2202,7 @@ a:hover {
     width: 18px;
     height: 18px;
     background-size: 100%;
-    background-image: url(Assets/images/icons/access-denied.svg);
+    background-image: url(assets/images/icons/access-denied.svg);
     display: block;
     position: absolute;
     right: 15px;
@@ -2172,7 +2214,7 @@ a:hover {
   width: 18px;
   height: 18px;
   background-size: 100%;
-  background-image: url(Assets/images/icons/question-mark.svg);
+  background-image: url(assets/images/icons/question-mark.svg);
   position: absolute;
   top: 9px;
   margin-left: 9px;
@@ -2278,7 +2320,7 @@ a:hover {
   font-size: 0.9375rem;
   font-weight: 300;
   color: @gray-light;
-  background: #fff url(Assets/images/icons/arrow-down.svg) no-repeat right 1rem center;
+  background: #fff url(assets/images/icons/arrow-down.svg) no-repeat right 1rem center;
   background-size: 14px 6px;
   cursor: default;
   display: table;
@@ -2310,4 +2352,13 @@ a:hover {
 .tos {
   text-transform: none;
   line-height: normal;
+}
+
+.ag-tab {
+  background-color: rgba(132, 147, 168, 0.3);
+  margin-bottom: 15px;
+  @media(min-width: 768px) {
+    background-color: #ffffff;
+    margin-bottom: 0;
+  }
 }

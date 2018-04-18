@@ -6,7 +6,7 @@ import Actions from '../../actions/Creators'
 import RequestBox from '../MyRequests/RequestBox'
 import RequestLoading from '../Loading/Request'
 import RequestTop from '../Loading/RequestTop'
-import Layout from '../../Containers/App'
+import Layout from '../../containers/App'
 
 const customStyles = {
     content: {
@@ -327,7 +327,7 @@ class MyRequest extends Component {
     }
 }
 
-// Maps state from Store to props
+// Maps state from store to props
 const mapStateToProps = (state) => {
     return {
         user: state.auth.data,

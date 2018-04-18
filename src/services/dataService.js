@@ -1,4 +1,4 @@
-import config from '../Configs/AppSetting'
+import config from '../configs/AppSetting'
 import _ from 'lodash'
 
 export default class Parse {
@@ -9,8 +9,8 @@ export default class Parse {
         }
         this._sessionToken =
             _.isNull(token) ?  null : token;
-        // this._applicationId = Configs.PARSE_ID;
-        // this._restAPIKey = Configs.PARSE_API_KEY;
+        // this._applicationId = configs.PARSE_ID;
+        // this._restAPIKey = configs.PARSE_API_KEY;
         // this._masterKey = null;
 
         this.API_BASE_URL = config.URL;

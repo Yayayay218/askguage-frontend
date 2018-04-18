@@ -14,7 +14,7 @@ import CreateRequest from '../components/RequestForm'
 import CustomerRequests from '../components/CustomerRequests'
 import ResetPassword from '../components/Profiles/ResetPassword'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
-import configureStore from '../Store/Store';
+import configureStore from '../store/Store';
 
 class Root extends Component {
     constructor(props) {
@@ -50,25 +50,5 @@ class Root extends Component {
         )
     }
 }
-function redirect(location) {
-    return class RedirectRoute extends Component {
-        constructor(props, context) {
-            super(props, context);
 
-            props.history.push(location);
-        }
-        render() {
-            return null;
-        }
-    }
-}
-
-Root.propTypes = {}
-
-function mapStateToProps(state) {
-    return {
-        app: state.app
-    }
-
-}
 export default Root

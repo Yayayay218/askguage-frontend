@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Actions from '../../actions/Creators'
-import Layout from '../../Containers/App'
+import Layout from '../../containers/App'
 import Axios from 'axios'
-import Config from '../../Configs/AppSetting'
+import Config from '../../configs/AppSetting'
 
 class ResetPassword extends Component {
     constructor(props) {

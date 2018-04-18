@@ -4,7 +4,7 @@ import Modal from 'react-modal'
 import {confirmAlert} from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 import Axios from 'axios'
-import Config from '../../Configs/AppSetting'
+import Config from '../../configs/AppSetting'
 
 import {Link} from 'react-router-dom'
 import moment from 'moment'

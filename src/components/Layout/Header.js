@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux';
 import Actions from '../../actions/Creators'
-import logo from '../../Assets/images/logo.svg'
+import logo from '../../assets/images/logo.svg'
 
 class Header extends Component {
     constructor(props) {
@@ -111,7 +111,7 @@ class Header extends Component {
     }
 };
 
-// Maps state from Store to props
+// Maps state from store to props
 const mapStateToProps = (state, ownProps) => {
     return {
         user: state.auth.data,

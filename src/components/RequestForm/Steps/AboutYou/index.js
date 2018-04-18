@@ -123,7 +123,7 @@ class AboutYou extends Component {
     }
 }
 
-// Maps state from Store to props
+// Maps state from store to props
 const mapStateToProps = (state) => {
     return {
         user: state.auth.data,

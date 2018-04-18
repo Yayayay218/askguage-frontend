@@ -79,22 +79,22 @@ class YourBid extends Component {
                         <div className="row">
                             <div className="col-md-3 m-auto">
                                 <label htmlFor=""
-                                       className="col-form-label">{(user.profiles.kindOfService == 0 || user.profiles.kindOfService == 2 || user.profiles.kindOfService == 3) ? 'Realtor Commission Fee' : 'Mortgage Amount'}</label>
+                                       className="col-form-label">{(user.profiles.kindOfService == 0 || user.profiles.kindOfService == 2 || user.profiles.kindOfService == 3) ? '' : 'Mortgage Amount'}</label>
                             </div>
                             <div className="col-md-9">
                                 {
                                     (user.profiles.kindOfService == 0 || user.profiles.kindOfService == 2 || user.profiles.kindOfService == 3) ?
                                         <div>
-                                            <NumberFormat
-                                                thousandSeparator={true}
-                                                suffix={'%'}
-                                                value={_bid.commissionFee}
-                                                className="form-control"
-                                                onValueChange={(values) => {
-                                                    onChange({..._bid, commissionFee: values.value})
-                                                }}
-                                                disabled={_bid.disabled}
-                                            />
+                                            {/*<NumberFormat*/}
+                                                {/*thousandSeparator={true}*/}
+                                                {/*suffix={'%'}*/}
+                                                {/*value={_bid.commissionFee}*/}
+                                                {/*className="form-control"*/}
+                                                {/*onValueChange={(values) => {*/}
+                                                    {/*onChange({..._bid, commissionFee: values.value})*/}
+                                                {/*}}*/}
+                                                {/*disabled={_bid.disabled}*/}
+                                            {/*/>*/}
                                         </div>
                                         : <NumberFormat
                                             thousandSeparator={true}

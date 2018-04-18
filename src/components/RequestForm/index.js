@@ -5,7 +5,7 @@ import {withRouter} from 'react-router'
 
 import 'react-datepicker/dist/react-datepicker.css';
 import FlipWizard from '../FlipPanel/index'
-import Layout from '../../Containers/App'
+import Layout from '../../containers/App'
 import PickHome from './Steps/Estate/PickHome'
 import LocateHome from './Steps/Estate/LocateHome'
 import Budget from './Steps/Estate/Budget'

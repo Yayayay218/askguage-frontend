@@ -1,5 +1,5 @@
-import immutablePersistenceTransform from '../Store/ImmutablePersistenceTransform'
-import { persistentStoreBlacklist } from '../Reducers/'
+import immutablePersistenceTransform from '../store/ImmutablePersistenceTransform'
+import { persistentStoreBlacklist } from '../reducers/'
 
 const REDUX_PERSIST = {
   active: true,

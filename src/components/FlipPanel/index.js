@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import FlipPanel from './FlipPanel'
-// import StepLayout from '../RequestForm/Steps/StepLayout'
 
 class FlipWizard extends Component {
     constructor(props, context) {
@@ -12,10 +11,9 @@ class FlipWizard extends Component {
     }
 
     render() {
-        const {steps, renderFinishButtons} = this.props;
+        const {steps} = this.props;
         const {currentStepIndex} = this.state;
 
-        let nextStep = steps[currentStepIndex + 1];
         let goBack = () => this.setState({currentStepIndex: currentStepIndex - 1});
         let goNext = () => this.setState({currentStepIndex: currentStepIndex + 1});
         let currentStep = steps[currentStepIndex];

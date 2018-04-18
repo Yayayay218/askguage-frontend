@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import Intake from '../../RequestDetails/Intake'
 import {BooleanType} from '../../RequestDetails/Intake/TransferType'
 import NumberFormat from 'react-number-format';
-import {estimateAfford} from '../../../Utils/Calculate'
+import {estimateAfford} from '../../../utils/Calculate'
 
 class StatedInfo extends Component {
     constructor(props) {

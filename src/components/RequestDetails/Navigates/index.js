@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import Layout from '../../../Containers/App'
+import Layout from '../../../containers/App'
 
 function RequestStatus({status}) {
     let statusClass = 'open'

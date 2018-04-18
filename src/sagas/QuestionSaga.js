@@ -1,6 +1,6 @@
 import {take, call, put, select} from 'redux-saga/effects';
 import Actions from '../actions/Creators'
-import Api from '../Services/dataService'
+import Api from '../services/dataService'
 // import createHistory from 'history/createBrowserHistory'
 //
 // const history = createHistory({forceRefresh: true});

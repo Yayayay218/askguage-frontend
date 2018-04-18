@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Actions from '../../actions/Creators'
-import Layout from '../../Containers/App'
+import Layout from '../../containers/App'
 import Navigate from './Navigate'
 import ContactInfos from './Steps/ContactInfos'
 import Preferences from './Steps/Preferences'

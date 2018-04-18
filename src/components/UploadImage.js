@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import Dropzone from 'react-dropzone'
-import Config from '../Configs/AppSetting'
-import Icon from '../Assets/images/avatar.svg'
+import Config from '../configs/AppSetting'
+import Icon from '../assets/images/avatar.svg'
 
 export default class UploadImage extends Component {
     constructor(props) {

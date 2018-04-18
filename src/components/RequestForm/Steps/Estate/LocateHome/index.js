@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import Autocomplete from 'react-google-autocomplete'
 import StepLayout from '../../StepLayout'
-import Api from '../../../../../Services/dataService'
+import Api from '../../../../../services/dataService'
 import AutoComplete from 'react-autocomplete';
 
 class LocateHome extends Component {

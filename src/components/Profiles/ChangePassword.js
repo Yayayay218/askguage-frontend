@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Actions from '../../actions/Creators'
-import Layout from '../../Containers/App'
+import Layout from '../../containers/App'
 
 
 class ChangePassword extends Component {

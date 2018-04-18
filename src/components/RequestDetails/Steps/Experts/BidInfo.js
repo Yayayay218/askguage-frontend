@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import NumberFormat from 'react-number-format';
-import Icon from '../../../../Assets/images/avatar.svg'
-import Config from '../../../../Configs/AppSetting'
+import Icon from '../../../../assets/images/avatar.svg'
+import Config from '../../../../configs/AppSetting'
 import Rating from 'react-rating'
-import StarEmpty from '../../../../Assets/images/icons/star-empty.svg'
-import StarFull from '../../../../Assets/images/icons/star-full.svg'
+import StarEmpty from '../../../../assets/images/icons/star-empty.svg'
+import StarFull from '../../../../assets/images/icons/star-full.svg'
 
 function Input(props) {
     return (
